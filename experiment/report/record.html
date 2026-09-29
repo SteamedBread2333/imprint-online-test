@@ -84,10 +84,11 @@ p { margin: 0 0 14px; }
 .desk-graph-block { margin: 14px 0 18px; }
 .desk-graph-block .graph-caption { font-size: 12px; color: var(--muted); margin: 0 0 8px; }
 .desk-graph-stage {
-  position: relative; height: 280px; border: 1px solid #2a241c;
+  position: relative; height: 280px; min-height: 280px; border: 1px solid #2a241c;
   border-radius: 10px; overflow: hidden;
   background: radial-gradient(900px 500px at 50% 40%, #1b1712 0%, #100e0c 70%);
 }
+.desk-graph-stage:has(svg[data-graph-h="320"]) { height: 320px; }
 .desk-graph-stage::before {
   content: ""; position: absolute; inset: 0; pointer-events: none; opacity: 0.35;
   background-image:
@@ -117,12 +118,54 @@ p { margin: 0 0 14px; }
 .desk-graph-block .d3-link.supersedes { stroke: #e07060; stroke-width: 2; opacity: 0.9; }
 .desk-graph-block .d3-link.conflicts_with { stroke: #e0a04a; stroke-width: 2.2; opacity: 0.9; }
 .desk-graph-block .d3-link.sources { stroke: #6ec4c0; stroke-width: 1.8; opacity: 0.85; }
-.desk-graph-block .d3-node.doc-node circle { stroke-dasharray: 3 2; fill: #141a19; }
+.desk-graph-block .d3-node.doc-node circle:not(.d3-hit) {
+  stroke-dasharray: 3 2; fill: #141a19;
+}
 .desk-graph-block .d3-label {
   font: 10px "Helvetica Neue", Helvetica, Arial, sans-serif; fill: #f0e7d8;
   text-anchor: middle; paint-order: stroke; stroke: #100e0c; stroke-width: 3px;
   pointer-events: none;
 }
+.desk-graph-block .d3-node { cursor: pointer; }
+.desk-graph-block .d3-hit { cursor: pointer; outline: none; }
+.desk-graph-block .d3-hit:focus { outline: none; }
+.desk-graph-block .d3-hit:focus-visible {
+  stroke: rgba(110, 196, 192, 0.85); stroke-width: 2;
+}
+.desk-graph-block .d3-node.is-hot circle:not(.d3-hit) {
+  stroke: #f0e7d8; stroke-width: 3;
+}
+.desk-graph-block .d3-node.superseded .d3-label { fill: #b8c8dc; }
+#graph-node-tip {
+  position: fixed; z-index: 9999; max-width: min(380px, calc(100vw - 24px));
+  padding: 12px 14px; border-radius: 10px;
+  border: 1px solid #3a342c; background: rgba(24, 21, 17, 0.96);
+  color: #f0e7d8; font-size: 13px; line-height: 1.45;
+  box-shadow: 0 8px 28px rgba(0, 0, 0, 0.45);
+  pointer-events: none;
+}
+#graph-node-tip[hidden] { display: none !important; }
+#graph-node-tip:not(.on) { opacity: 0; }
+#graph-node-tip.on { opacity: 1; }
+#graph-node-tip .gt-kicker {
+  font-size: 11px; text-transform: uppercase; letter-spacing: 0.08em;
+  color: #a89f92; margin: 0 0 6px;
+}
+#graph-node-tip .gt-claim {
+  font-family: Georgia, "Times New Roman", serif; font-size: 14px;
+  line-height: 1.35;
+}
+#graph-node-tip .gt-text {
+  font-size: 13px; line-height: 1.45; color: #e8dcc8;
+}
+#graph-node-tip dl {
+  display: grid; grid-template-columns: 72px 1fr; gap: 2px 8px;
+  margin: 0 0 8px; font-size: 12px;
+}
+#graph-node-tip dt { color: #a89f92; margin: 0; }
+#graph-node-tip dd { margin: 0; word-break: break-word; }
+#graph-node-tip .gt-id { margin: 0; font-size: 11px; color: #c4a574; }
+#graph-node-tip code { font-size: 11px; color: #e8c99a; }
 .table-scroll {
   display: block;
   overflow-x: auto;
@@ -816,19 +859,19 @@ a { color: var(--ink); }
   
 <div class="desk-graph-block">
   <p class="graph-caption">imprint desk 统一视图风格 · 仅 deployment 有 sources；error/review 为 grep 宽命中、图中无 vault 边</p>
-  <div class="desk-graph-stage"><svg class="desk-graph-svg" viewBox="0 0 560 280" width="100%" height="100%" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="关联图 case_a">
+  <div class="desk-graph-stage"><svg class="desk-graph-svg" viewBox="0 0 560 280" width="100%" height="100%" preserveAspectRatio="xMidYMid meet" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="关联图 case_a" data-graph-h="280" data-graph-rev="5" data-graph-built="2026-09-29T05:34Z">
   <defs>
-    <marker id="arrow-super" viewBox="0 -4 8 8" refX="14" refY="0" markerWidth="6" markerHeight="6" orient="auto">
+    <marker id="arrow-super-case-a" viewBox="0 -4 8 8" refX="8" refY="0" markerWidth="6" markerHeight="6" orient="auto">
       <path d="M0,-4L8,0L0,4" fill="#e07060"/>
     </marker>
   </defs>
-  <line class="d3-link supersedes" x1="294.6" y1="117.4" x2="283.7" y2="40.0" fill="none" stroke="#e07060" stroke-width="2" marker-end="url(#arrow-super)"/>
-<line class="d3-link sources" x1="294.6" y1="117.4" x2="368.3" y2="143.3" fill="none" stroke="#6ec4c0" stroke-width="1.8" opacity="0.85"/>
-<g class="d3-node"><circle cx="294.6" cy="117.4" r="14" fill="#e8c99a" stroke="#e8c99a" stroke-width="2"/><text class="d3-label" x="294.6" y="142.4" text-anchor="middle">r-canary-v2</text></g>
-<g class="d3-node"><circle cx="283.7" cy="40.0" r="10" fill="#e8c99a" stroke="#7aa0c8" stroke-width="2"/><text class="d3-label" x="283.7" y="61.0" text-anchor="middle">r-canary-v1</text></g>
-<g class="d3-node doc-node"><circle cx="368.3" cy="143.3" r="11" fill="#141a19" stroke="#6ec4c0" stroke-width="2" stroke-dasharray="3 2"/><text class="d3-label" x="368.3" y="165.3" text-anchor="middle">08-deployment</text></g>
-<g class="d3-node doc-node"><circle cx="284.6" cy="240.0" r="11" fill="#141a19" stroke="#6ec4c0" stroke-width="2" stroke-dasharray="3 2"/><text class="d3-label" x="284.6" y="262.0" text-anchor="middle">03-error-handlin</text></g>
-<g class="d3-node doc-node"><circle cx="191.7" cy="147.1" r="11" fill="#141a19" stroke="#6ec4c0" stroke-width="2" stroke-dasharray="3 2"/><text class="d3-label" x="191.7" y="169.1" text-anchor="middle">13-review</text></g>
+  <g class="d3-node" data-node-tip="{&quot;id&quot;: &quot;r-new&quot;, &quot;kind&quot;: &quot;rule&quot;, &quot;label&quot;: &quot;r-canary-v2&quot;, &quot;claim&quot;: &quot;Define canary rollback auto-triggers and approval per deployment gray-release section&quot;, &quot;text&quot;: &quot;上次灰度拖了四十分钟才回滚。以后失败必须自动回滚，触发条件和审批写清楚；权威出处只认 deployment 灰度发布节。&quot;, &quot;status&quot;: &quot;active&quot;, &quot;scope&quot;: [&quot;aurora&quot;, &quot;ops&quot;]}"><circle class="d3-hit" cx="156.8" cy="65.0" r="22.0" fill="transparent" tabindex="0" role="button" aria-label="r-canary-v2"/><circle cx="156.8" cy="65.0" r="14.0" fill="#e8c99a" stroke="#e8c99a" stroke-width="2" pointer-events="none"/><text class="d3-label" x="156.8" y="91.0" text-anchor="middle" pointer-events="none">r-canary-v2</text></g>
+<g class="d3-node superseded" data-node-tip="{&quot;id&quot;: &quot;r-old&quot;, &quot;kind&quot;: &quot;rule&quot;, &quot;label&quot;: &quot;r-canary-v1&quot;, &quot;claim&quot;: &quot;Roll back canary manually via review checklist (superseded)&quot;, &quot;text&quot;: &quot;灰度出问题就人工回滚，在 review 清单里勾一下就行。&quot;, &quot;status&quot;: &quot;superseded&quot;, &quot;scope&quot;: [&quot;aurora&quot;, &quot;ops&quot;]}"><circle class="d3-hit" cx="258.9" cy="61.8" r="22.0" fill="transparent" tabindex="0" role="button" aria-label="r-canary-v1"/><circle cx="258.9" cy="61.8" r="14.0" fill="#e8c99a" stroke="#7aa0c8" stroke-width="2" fill-opacity="0.55" pointer-events="none"/><text class="d3-label" x="258.9" y="87.8" text-anchor="middle" pointer-events="none">r-canary-v1</text></g>
+<g class="d3-node doc-node" data-node-tip="{&quot;id&quot;: &quot;doc-dep&quot;, &quot;kind&quot;: &quot;document&quot;, &quot;label&quot;: &quot;08-deployment&quot;, &quot;path&quot;: &quot;docs/08-deployment.md&quot;, &quot;heading&quot;: &quot;灰度发布&quot;}"><circle class="d3-hit" cx="44.0" cy="214.8" r="19.0" fill="transparent" tabindex="0" role="button" aria-label="08-deployment"/><circle cx="44.0" cy="214.8" r="11.0" fill="#141a19" stroke="#6ec4c0" stroke-width="2" stroke-dasharray="3 2" pointer-events="none"/><text class="d3-label" x="44.0" y="237.8" text-anchor="middle" pointer-events="none">08-deployment</text></g>
+<g class="d3-node doc-node" data-node-tip="{&quot;id&quot;: &quot;doc-err&quot;, &quot;kind&quot;: &quot;document&quot;, &quot;label&quot;: &quot;03-error-handling&quot;, &quot;path&quot;: &quot;docs/03-error-handling.md&quot;}"><circle class="d3-hit" cx="243.9" cy="218.2" r="19.0" fill="transparent" tabindex="0" role="button" aria-label="03-error-handling"/><circle cx="243.9" cy="218.2" r="11.0" fill="#141a19" stroke="#6ec4c0" stroke-width="2" stroke-dasharray="3 2" pointer-events="none"/><text class="d3-label" x="243.9" y="241.2" text-anchor="middle" pointer-events="none">03-error-handlin</text></g>
+<g class="d3-node doc-node" data-node-tip="{&quot;id&quot;: &quot;doc-rev&quot;, &quot;kind&quot;: &quot;document&quot;, &quot;label&quot;: &quot;13-review&quot;, &quot;path&quot;: &quot;docs/13-review.md&quot;}"><circle class="d3-hit" cx="516.0" cy="218.2" r="19.0" fill="transparent" tabindex="0" role="button" aria-label="13-review"/><circle cx="516.0" cy="218.2" r="11.0" fill="#141a19" stroke="#6ec4c0" stroke-width="2" stroke-dasharray="3 2" pointer-events="none"/><text class="d3-label" x="516.0" y="241.2" text-anchor="middle" pointer-events="none">13-review</text></g>
+<path class="d3-link supersedes" d="M171.7,64.6 Q205.0,67.2 237.9,62.5" fill="none" stroke-linecap="round" stroke="#e07060" stroke-width="2" marker-end="url(#arrow-super-case-a)"/>
+<path class="d3-link sources" d="M147.7,77.0 Q63.6,114.1 51.2,205.2" fill="none" stroke-linecap="round" stroke="#6ec4c0" stroke-width="1.8" opacity="0.85"/>
 </svg></div>
   
 <div class="desk-graph-legend">
@@ -851,23 +894,23 @@ a { color: var(--ink); }
   
 <div class="desk-graph-block">
   <p class="graph-caption">desk /unified：conflicts_with 橙实线 · related 金虚线 · 各规则 sources 到 doc</p>
-  <div class="desk-graph-stage"><svg class="desk-graph-svg" viewBox="0 0 560 280" width="100%" height="100%" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="关联图 case_b">
+  <div class="desk-graph-stage"><svg class="desk-graph-svg" viewBox="0 0 560 320" width="100%" height="100%" preserveAspectRatio="xMidYMid meet" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="关联图 case_b" data-graph-h="320" data-graph-rev="5" data-graph-built="2026-09-29T05:34Z">
   <defs>
-    <marker id="arrow-super" viewBox="0 -4 8 8" refX="14" refY="0" markerWidth="6" markerHeight="6" orient="auto">
+    <marker id="arrow-super-case-b" viewBox="0 -4 8 8" refX="8" refY="0" markerWidth="6" markerHeight="6" orient="auto">
       <path d="M0,-4L8,0L0,4" fill="#e07060"/>
     </marker>
   </defs>
-  <line class="d3-link conflicts_with" x1="280.0" y1="182.8" x2="280.0" y2="150.0" fill="none" stroke="#e0a04a" stroke-width="2.2" opacity="0.9"/>
-<line class="d3-link related" x1="280.0" y1="150.0" x2="280.0" y2="94.2" fill="none" stroke="#d4b483" stroke-width="1.35" stroke-dasharray="5 4" opacity="0.75"/>
-<line class="d3-link sources" x1="280.0" y1="182.8" x2="280.0" y2="216.9" fill="none" stroke="#6ec4c0" stroke-width="1.8" opacity="0.85"/>
-<line class="d3-link sources" x1="280.0" y1="150.0" x2="280.0" y2="240.0" fill="none" stroke="#6ec4c0" stroke-width="1.8" opacity="0.85"/>
-<line class="d3-link sources" x1="280.0" y1="94.2" x2="280.0" y2="40.0" fill="none" stroke="#6ec4c0" stroke-width="1.8" opacity="0.85"/>
-<g class="d3-node"><circle cx="280.0" cy="182.8" r="14" fill="#e8c99a" stroke="#e8c99a" stroke-width="2"/><text class="d3-label" x="280.0" y="207.8" text-anchor="middle">r-http-retry</text></g>
-<g class="d3-node"><circle cx="280.0" cy="150.0" r="14" fill="#e8c99a" stroke="#e8c99a" stroke-width="2"/><text class="d3-label" x="280.0" y="175.0" text-anchor="middle">r-no-post-retry</text></g>
-<g class="d3-node"><circle cx="280.0" cy="94.2" r="14" fill="#e8c99a" stroke="#e8c99a" stroke-width="2"/><text class="d3-label" x="280.0" y="119.2" text-anchor="middle">r-dlq</text></g>
-<g class="d3-node doc-node"><circle cx="280.0" cy="216.9" r="11" fill="#141a19" stroke="#6ec4c0" stroke-width="2" stroke-dasharray="3 2"/><text class="d3-label" x="280.0" y="238.9" text-anchor="middle">16-http-client</text></g>
-<g class="d3-node doc-node"><circle cx="280.0" cy="240.0" r="11" fill="#141a19" stroke="#6ec4c0" stroke-width="2" stroke-dasharray="3 2"/><text class="d3-label" x="280.0" y="262.0" text-anchor="middle">05-api-design</text></g>
-<g class="d3-node doc-node"><circle cx="280.0" cy="40.0" r="11" fill="#141a19" stroke="#6ec4c0" stroke-width="2" stroke-dasharray="3 2"/><text class="d3-label" x="280.0" y="62.0" text-anchor="middle">12-concurrency</text></g>
+  <g class="d3-node" data-node-tip="{&quot;id&quot;: &quot;r-retry&quot;, &quot;kind&quot;: &quot;rule&quot;, &quot;label&quot;: &quot;r-http-retry&quot;, &quot;claim&quot;: &quot;Retry failed outbound HTTP calls up to three times&quot;, &quot;text&quot;: &quot;出站 HTTP 默认最多重试 3 次，出处按 http-client 规范。&quot;, &quot;status&quot;: &quot;active&quot;, &quot;scope&quot;: [&quot;aurora&quot;, &quot;http&quot;]}"><circle class="d3-hit" cx="407.0" cy="62.2" r="22.0" fill="transparent" tabindex="0" role="button" aria-label="r-http-retry"/><circle cx="407.0" cy="62.2" r="14.0" fill="#e8c99a" stroke="#e8c99a" stroke-width="2" pointer-events="none"/><text class="d3-label" x="407.0" y="88.2" text-anchor="middle" pointer-events="none">r-http-retry</text></g>
+<g class="d3-node" data-node-tip="{&quot;id&quot;: &quot;r-post&quot;, &quot;kind&quot;: &quot;rule&quot;, &quot;label&quot;: &quot;r-no-post-retry&quot;, &quot;claim&quot;: &quot;Never retry non-idempotent POST requests&quot;, &quot;text&quot;: &quot;非幂等 POST 禁止自动重试，和通用重试策略冲突时要先问清楚场景。&quot;, &quot;status&quot;: &quot;active&quot;, &quot;scope&quot;: [&quot;aurora&quot;, &quot;http&quot;]}"><circle class="d3-hit" cx="308.6" cy="65.3" r="22.0" fill="transparent" tabindex="0" role="button" aria-label="r-no-post-retry"/><circle cx="308.6" cy="65.3" r="14.0" fill="#e8c99a" stroke="#e8c99a" stroke-width="2" pointer-events="none"/><text class="d3-label" x="308.6" y="91.3" text-anchor="middle" pointer-events="none">r-no-post-retry</text></g>
+<g class="d3-node" data-node-tip="{&quot;id&quot;: &quot;r-dlq&quot;, &quot;kind&quot;: &quot;rule&quot;, &quot;label&quot;: &quot;r-dlq&quot;, &quot;claim&quot;: &quot;Route async consumer failures to DLQ with visibility timeout above worst-case handler time&quot;, &quot;text&quot;: &quot;异步消费失败进 DLQ，可见性超时必须大于最坏处理时间。&quot;, &quot;status&quot;: &quot;active&quot;, &quot;scope&quot;: [&quot;aurora&quot;, &quot;http&quot;]}"><circle class="d3-hit" cx="232.7" cy="65.7" r="22.0" fill="transparent" tabindex="0" role="button" aria-label="r-dlq"/><circle cx="232.7" cy="65.7" r="14.0" fill="#e8c99a" stroke="#e8c99a" stroke-width="2" pointer-events="none"/><text class="d3-label" x="232.7" y="91.7" text-anchor="middle" pointer-events="none">r-dlq</text></g>
+<g class="d3-node doc-node" data-node-tip="{&quot;id&quot;: &quot;doc-http&quot;, &quot;kind&quot;: &quot;document&quot;, &quot;label&quot;: &quot;16-http-client&quot;, &quot;path&quot;: &quot;docs/16-http-client.md&quot;}"><circle class="d3-hit" cx="322.6" cy="257.8" r="19.0" fill="transparent" tabindex="0" role="button" aria-label="16-http-client"/><circle cx="322.6" cy="257.8" r="11.0" fill="#141a19" stroke="#6ec4c0" stroke-width="2" stroke-dasharray="3 2" pointer-events="none"/><text class="d3-label" x="322.6" y="280.8" text-anchor="middle" pointer-events="none">16-http-client</text></g>
+<g class="d3-node doc-node" data-node-tip="{&quot;id&quot;: &quot;doc-api&quot;, &quot;kind&quot;: &quot;document&quot;, &quot;label&quot;: &quot;05-api-design&quot;, &quot;path&quot;: &quot;docs/05-api-design.md&quot;}"><circle class="d3-hit" cx="153.0" cy="254.5" r="19.0" fill="transparent" tabindex="0" role="button" aria-label="05-api-design"/><circle cx="153.0" cy="254.5" r="11.0" fill="#141a19" stroke="#6ec4c0" stroke-width="2" stroke-dasharray="3 2" pointer-events="none"/><text class="d3-label" x="153.0" y="277.5" text-anchor="middle" pointer-events="none">05-api-design</text></g>
+<g class="d3-node doc-node" data-node-tip="{&quot;id&quot;: &quot;doc-q&quot;, &quot;kind&quot;: &quot;document&quot;, &quot;label&quot;: &quot;12-concurrency&quot;, &quot;path&quot;: &quot;docs/12-concurrency.md&quot;}"><circle class="d3-hit" cx="396.8" cy="254.0" r="19.0" fill="transparent" tabindex="0" role="button" aria-label="12-concurrency"/><circle cx="396.8" cy="254.0" r="11.0" fill="#141a19" stroke="#6ec4c0" stroke-width="2" stroke-dasharray="3 2" pointer-events="none"/><text class="d3-label" x="396.8" y="277.0" text-anchor="middle" pointer-events="none">12-concurrency</text></g>
+<path class="d3-link conflicts_with" d="M392.0,62.7 Q357.7,60.9 323.6,64.9" fill="none" stroke-linecap="round" stroke="#e0a04a" stroke-width="2.2" opacity="0.9"/>
+<path class="d3-link related" d="M293.6,65.4 Q270.7,70.0 247.7,65.6" fill="none" stroke-linecap="round" stroke="#d4b483" stroke-width="1.35" stroke-dasharray="5 4" opacity="0.75"/>
+<path class="d3-link sources" d="M401.0,76.0 Q320.1,142.4 327.4,246.8" fill="none" stroke-linecap="round" stroke="#6ec4c0" stroke-width="1.8" opacity="0.85"/>
+<path class="d3-link sources" d="M299.1,76.9 Q266.9,191.6 160.6,245.2" fill="none" stroke-linecap="round" stroke="#6ec4c0" stroke-width="1.8" opacity="0.85"/>
+<path class="d3-link sources" d="M242.5,77.0 Q279.5,192.5 388.9,245.0" fill="none" stroke-linecap="round" stroke="#6ec4c0" stroke-width="1.8" opacity="0.85"/>
 </svg></div>
   
 <div class="desk-graph-legend">
@@ -895,19 +938,19 @@ a { color: var(--ink); }
   
 <div class="desk-graph-block">
   <p class="graph-caption">supersedes 箭头 · 新规则双 sources（database + api）</p>
-  <div class="desk-graph-stage"><svg class="desk-graph-svg" viewBox="0 0 560 280" width="100%" height="100%" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="关联图 case_c">
+  <div class="desk-graph-stage"><svg class="desk-graph-svg" viewBox="0 0 560 280" width="100%" height="100%" preserveAspectRatio="xMidYMid meet" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="关联图 case_c" data-graph-h="280" data-graph-rev="5" data-graph-built="2026-09-29T05:34Z">
   <defs>
-    <marker id="arrow-super" viewBox="0 -4 8 8" refX="14" refY="0" markerWidth="6" markerHeight="6" orient="auto">
+    <marker id="arrow-super-case-c" viewBox="0 -4 8 8" refX="8" refY="0" markerWidth="6" markerHeight="6" orient="auto">
       <path d="M0,-4L8,0L0,4" fill="#e07060"/>
     </marker>
   </defs>
-  <line class="d3-link supersedes" x1="279.9" y1="165.3" x2="280.0" y2="40.0" fill="none" stroke="#e07060" stroke-width="2" marker-end="url(#arrow-super)"/>
-<line class="d3-link sources" x1="279.9" y1="165.3" x2="380.4" y2="239.8" fill="none" stroke="#6ec4c0" stroke-width="1.8" opacity="0.85"/>
-<line class="d3-link sources" x1="279.9" y1="165.3" x2="179.6" y2="240.0" fill="none" stroke="#6ec4c0" stroke-width="1.8" opacity="0.85"/>
-<g class="d3-node"><circle cx="279.9" cy="165.3" r="14" fill="#e8c99a" stroke="#e8c99a" stroke-width="2"/><text class="d3-label" x="279.9" y="190.3" text-anchor="middle">r-ts-tz</text></g>
-<g class="d3-node"><circle cx="280.0" cy="40.0" r="10" fill="#e8c99a" stroke="#7aa0c8" stroke-width="2"/><text class="d3-label" x="280.0" y="61.0" text-anchor="middle">r-ts-iso</text></g>
-<g class="d3-node doc-node"><circle cx="380.4" cy="239.8" r="11" fill="#141a19" stroke="#6ec4c0" stroke-width="2" stroke-dasharray="3 2"/><text class="d3-label" x="380.4" y="261.8" text-anchor="middle">04-database</text></g>
-<g class="d3-node doc-node"><circle cx="179.6" cy="240.0" r="11" fill="#141a19" stroke="#6ec4c0" stroke-width="2" stroke-dasharray="3 2"/><text class="d3-label" x="179.6" y="262.0" text-anchor="middle">05-api-design</text></g>
+  <g class="d3-node" data-node-tip="{&quot;id&quot;: &quot;r-new&quot;, &quot;kind&quot;: &quot;rule&quot;, &quot;label&quot;: &quot;r-ts-tz&quot;, &quot;claim&quot;: &quot;Store timestamps as timestamptz in DB; expose UTC ISO8601 in JSON APIs&quot;, &quot;text&quot;: &quot;对外 JSON 仍用 ISO8601，但库内改为 timestamptz + ORM 自动转，别再用字符串字段存时间。&quot;, &quot;status&quot;: &quot;active&quot;, &quot;scope&quot;: [&quot;aurora&quot;, &quot;interface&quot;]}"><circle class="d3-hit" cx="288.6" cy="62.6" r="22.0" fill="transparent" tabindex="0" role="button" aria-label="r-ts-tz"/><circle cx="288.6" cy="62.6" r="14.0" fill="#e8c99a" stroke="#e8c99a" stroke-width="2" pointer-events="none"/><text class="d3-label" x="288.6" y="88.6" text-anchor="middle" pointer-events="none">r-ts-tz</text></g>
+<g class="d3-node superseded" data-node-tip="{&quot;id&quot;: &quot;r-old&quot;, &quot;kind&quot;: &quot;rule&quot;, &quot;label&quot;: &quot;r-ts-iso&quot;, &quot;claim&quot;: &quot;Store timestamps as UTC ISO8601 strings (superseded)&quot;, &quot;text&quot;: &quot;数据库时间戳统一存 UTC 的 ISO8601 字符串，不要存本地时间也不要存整数。&quot;, &quot;status&quot;: &quot;superseded&quot;, &quot;scope&quot;: [&quot;aurora&quot;, &quot;interface&quot;]}"><circle class="d3-hit" cx="393.7" cy="55.0" r="22.0" fill="transparent" tabindex="0" role="button" aria-label="r-ts-iso"/><circle cx="393.7" cy="55.0" r="14.0" fill="#e8c99a" stroke="#7aa0c8" stroke-width="2" fill-opacity="0.55" pointer-events="none"/><text class="d3-label" x="393.7" y="81.0" text-anchor="middle" pointer-events="none">r-ts-iso</text></g>
+<g class="d3-node doc-node" data-node-tip="{&quot;id&quot;: &quot;doc-db&quot;, &quot;kind&quot;: &quot;document&quot;, &quot;label&quot;: &quot;04-database&quot;, &quot;path&quot;: &quot;docs/04-database.md&quot;}"><circle class="d3-hit" cx="417.1" cy="225.0" r="19.0" fill="transparent" tabindex="0" role="button" aria-label="04-database"/><circle cx="417.1" cy="225.0" r="11.0" fill="#141a19" stroke="#6ec4c0" stroke-width="2" stroke-dasharray="3 2" pointer-events="none"/><text class="d3-label" x="417.1" y="248.0" text-anchor="middle" pointer-events="none">04-database</text></g>
+<g class="d3-node doc-node" data-node-tip="{&quot;id&quot;: &quot;doc-api&quot;, &quot;kind&quot;: &quot;document&quot;, &quot;label&quot;: &quot;05-api-design&quot;, &quot;path&quot;: &quot;docs/05-api-design.md&quot;}"><circle class="d3-hit" cx="142.9" cy="224.1" r="19.0" fill="transparent" tabindex="0" role="button" aria-label="05-api-design"/><circle cx="142.9" cy="224.1" r="11.0" fill="#141a19" stroke="#6ec4c0" stroke-width="2" stroke-dasharray="3 2" pointer-events="none"/><text class="d3-label" x="142.9" y="247.1" text-anchor="middle" pointer-events="none">05-api-design</text></g>
+<path class="d3-link supersedes" d="M303.5,61.6 Q338.4,62.9 372.7,56.5" fill="none" stroke-linecap="round" stroke="#e07060" stroke-width="2" marker-end="url(#arrow-super-case-c)"/>
+<path class="d3-link sources" d="M297.9,74.4 Q316.1,174.8 409.7,215.6" fill="none" stroke-linecap="round" stroke="#6ec4c0" stroke-width="1.8" opacity="0.85"/>
+<path class="d3-link sources" d="M278.5,73.8 Q250.4,176.6 150.9,215.2" fill="none" stroke-linecap="round" stroke="#6ec4c0" stroke-width="1.8" opacity="0.85"/>
 </svg></div>
   
 <div class="desk-graph-legend">
@@ -929,20 +972,20 @@ a { color: var(--ink); }
   
 <div class="desk-graph-block">
   <p class="graph-caption">sources 锚定 performance · related 连 config 规则 · deployment 仅 grep 噪声（无边）</p>
-  <div class="desk-graph-stage"><svg class="desk-graph-svg" viewBox="0 0 560 280" width="100%" height="100%" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="关联图 case_d">
+  <div class="desk-graph-stage"><svg class="desk-graph-svg" viewBox="0 0 560 280" width="100%" height="100%" preserveAspectRatio="xMidYMid meet" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="关联图 case_d" data-graph-h="280" data-graph-rev="5" data-graph-built="2026-09-29T05:34Z">
   <defs>
-    <marker id="arrow-super" viewBox="0 -4 8 8" refX="14" refY="0" markerWidth="6" markerHeight="6" orient="auto">
+    <marker id="arrow-super-case-d" viewBox="0 -4 8 8" refX="8" refY="0" markerWidth="6" markerHeight="6" orient="auto">
       <path d="M0,-4L8,0L0,4" fill="#e07060"/>
     </marker>
   </defs>
-  <line class="d3-link sources" x1="295.8" y1="183.5" x2="351.4" y2="230.7" fill="none" stroke="#6ec4c0" stroke-width="1.8" opacity="0.85"/>
-<line class="d3-link related" x1="280.7" y1="112.6" x2="295.8" y2="183.5" fill="none" stroke="#d4b483" stroke-width="1.35" stroke-dasharray="5 4" opacity="0.75"/>
-<line class="d3-link sources" x1="280.7" y1="112.6" x2="284.8" y2="40.0" fill="none" stroke="#6ec4c0" stroke-width="1.8" opacity="0.85"/>
-<g class="d3-node"><circle cx="295.8" cy="183.5" r="14" fill="#e8c99a" stroke="#e8c99a" stroke-width="2"/><text class="d3-label" x="295.8" y="208.5" text-anchor="middle">r-cache-auth</text></g>
-<g class="d3-node"><circle cx="280.7" cy="112.6" r="14" fill="#e8c99a" stroke="#e8c99a" stroke-width="2"/><text class="d3-label" x="280.7" y="137.6" text-anchor="middle">r-feature-exp</text></g>
-<g class="d3-node doc-node"><circle cx="351.4" cy="230.7" r="11" fill="#141a19" stroke="#6ec4c0" stroke-width="2" stroke-dasharray="3 2"/><text class="d3-label" x="351.4" y="252.7" text-anchor="middle">10-performance</text></g>
-<g class="d3-node doc-node"><circle cx="284.8" cy="40.0" r="11" fill="#141a19" stroke="#6ec4c0" stroke-width="2" stroke-dasharray="3 2"/><text class="d3-label" x="284.8" y="62.0" text-anchor="middle">14-config</text></g>
-<g class="d3-node doc-node"><circle cx="208.6" cy="240.0" r="11" fill="#141a19" stroke="#6ec4c0" stroke-width="2" stroke-dasharray="3 2"/><text class="d3-label" x="208.6" y="262.0" text-anchor="middle">08-deployment</text></g>
+  <g class="d3-node" data-node-tip="{&quot;id&quot;: &quot;r-cache&quot;, &quot;kind&quot;: &quot;rule&quot;, &quot;label&quot;: &quot;r-cache-auth&quot;, &quot;claim&quot;: &quot;Define hot-data cache TTL and anti-stampede policy per performance doc cache section&quot;, &quot;text&quot;: &quot;热点数据走缓存并设合理过期，避免击穿与雪崩；以性能规范「缓存策略」节为唯一权威。&quot;, &quot;status&quot;: &quot;active&quot;, &quot;scope&quot;: [&quot;aurora&quot;, &quot;performance&quot;]}"><circle class="d3-hit" cx="241.2" cy="55.1" r="22.0" fill="transparent" tabindex="0" role="button" aria-label="r-cache-auth"/><circle cx="241.2" cy="55.1" r="14.0" fill="#e8c99a" stroke="#e8c99a" stroke-width="2" pointer-events="none"/><text class="d3-label" x="241.2" y="81.1" text-anchor="middle" pointer-events="none">r-cache-auth</text></g>
+<g class="d3-node" data-node-tip="{&quot;id&quot;: &quot;r-flag&quot;, &quot;kind&quot;: &quot;rule&quot;, &quot;label&quot;: &quot;r-feature-exp&quot;, &quot;claim&quot;: &quot;Set feature-flag expiry per config doc; relate to performance cache policy&quot;, &quot;text&quot;: &quot;功能开关要设过期日，和性能缓存策略相关但不互相替代。&quot;, &quot;status&quot;: &quot;active&quot;, &quot;scope&quot;: [&quot;aurora&quot;, &quot;config&quot;]}"><circle class="d3-hit" cx="318.5" cy="55.1" r="22.0" fill="transparent" tabindex="0" role="button" aria-label="r-feature-exp"/><circle cx="318.5" cy="55.1" r="14.0" fill="#e8c99a" stroke="#e8c99a" stroke-width="2" pointer-events="none"/><text class="d3-label" x="318.5" y="81.1" text-anchor="middle" pointer-events="none">r-feature-exp</text></g>
+<g class="d3-node doc-node" data-node-tip="{&quot;id&quot;: &quot;doc-perf&quot;, &quot;kind&quot;: &quot;document&quot;, &quot;label&quot;: &quot;10-performance&quot;, &quot;path&quot;: &quot;docs/10-performance.md&quot;, &quot;heading&quot;: &quot;缓存策略&quot;}"><circle class="d3-hit" cx="373.5" cy="221.0" r="19.0" fill="transparent" tabindex="0" role="button" aria-label="10-performance"/><circle cx="373.5" cy="221.0" r="11.0" fill="#141a19" stroke="#6ec4c0" stroke-width="2" stroke-dasharray="3 2" pointer-events="none"/><text class="d3-label" x="373.5" y="244.0" text-anchor="middle" pointer-events="none">10-performance</text></g>
+<g class="d3-node doc-node" data-node-tip="{&quot;id&quot;: &quot;doc-cfg&quot;, &quot;kind&quot;: &quot;document&quot;, &quot;label&quot;: &quot;14-config&quot;, &quot;path&quot;: &quot;docs/14-config.md&quot;}"><circle class="d3-hit" cx="186.5" cy="220.9" r="19.0" fill="transparent" tabindex="0" role="button" aria-label="14-config"/><circle cx="186.5" cy="220.9" r="11.0" fill="#141a19" stroke="#6ec4c0" stroke-width="2" stroke-dasharray="3 2" pointer-events="none"/><text class="d3-label" x="186.5" y="243.9" text-anchor="middle" pointer-events="none">14-config</text></g>
+<g class="d3-node doc-node" data-node-tip="{&quot;id&quot;: &quot;doc-dep&quot;, &quot;kind&quot;: &quot;document&quot;, &quot;label&quot;: &quot;08-deployment&quot;, &quot;path&quot;: &quot;docs/08-deployment.md&quot;}"><circle class="d3-hit" cx="279.9" cy="224.9" r="19.0" fill="transparent" tabindex="0" role="button" aria-label="08-deployment"/><circle cx="279.9" cy="224.9" r="11.0" fill="#141a19" stroke="#6ec4c0" stroke-width="2" stroke-dasharray="3 2" pointer-events="none"/><text class="d3-label" x="279.9" y="247.9" text-anchor="middle" pointer-events="none">08-deployment</text></g>
+<path class="d3-link related" d="M303.5,55.1 Q279.9,59.7 256.2,55.1" fill="none" stroke-linecap="round" stroke="#d4b483" stroke-width="1.35" stroke-dasharray="5 4" opacity="0.75"/>
+<path class="d3-link sources" d="M250.5,66.8 Q270.8,169.1 366.0,211.6" fill="none" stroke-linecap="round" stroke="#6ec4c0" stroke-width="1.8" opacity="0.85"/>
+<path class="d3-link sources" d="M309.2,66.8 Q289.1,169.1 194.0,211.5" fill="none" stroke-linecap="round" stroke="#6ec4c0" stroke-width="1.8" opacity="0.85"/>
 </svg></div>
   
 <div class="desk-graph-legend">
@@ -964,27 +1007,27 @@ a { color: var(--ink); }
   
 <div class="desk-graph-block">
   <p class="graph-caption">发版 related 子图 + 每条规则 sources 到对应 doc</p>
-  <div class="desk-graph-stage"><svg class="desk-graph-svg" viewBox="0 0 560 280" width="100%" height="100%" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="关联图 case_e">
+  <div class="desk-graph-stage"><svg class="desk-graph-svg" viewBox="0 0 560 320" width="100%" height="100%" preserveAspectRatio="xMidYMid meet" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="关联图 case_e" data-graph-h="320" data-graph-rev="5" data-graph-built="2026-09-29T05:34Z">
   <defs>
-    <marker id="arrow-super" viewBox="0 -4 8 8" refX="14" refY="0" markerWidth="6" markerHeight="6" orient="auto">
+    <marker id="arrow-super-case-e" viewBox="0 -4 8 8" refX="8" refY="0" markerWidth="6" markerHeight="6" orient="auto">
       <path d="M0,-4L8,0L0,4" fill="#e07060"/>
     </marker>
   </defs>
-  <line class="d3-link related" x1="235.6" y1="40.0" x2="316.6" y2="76.6" fill="none" stroke="#d4b483" stroke-width="1.35" stroke-dasharray="5 4" opacity="0.75"/>
-<line class="d3-link related" x1="363.7" y1="132.6" x2="363.8" y2="230.4" fill="none" stroke="#d4b483" stroke-width="1.35" stroke-dasharray="5 4" opacity="0.75"/>
-<line class="d3-link sources" x1="300.5" y1="154.0" x2="283.8" y2="240.0" fill="none" stroke="#6ec4c0" stroke-width="1.8" opacity="0.85"/>
-<line class="d3-link sources" x1="235.6" y1="40.0" x2="228.7" y2="160.2" fill="none" stroke="#6ec4c0" stroke-width="1.8" opacity="0.85"/>
-<line class="d3-link sources" x1="316.6" y1="76.6" x2="196.2" y2="99.5" fill="none" stroke="#6ec4c0" stroke-width="1.8" opacity="0.85"/>
-<line class="d3-link sources" x1="363.7" y1="132.6" x2="262.0" y2="101.0" fill="none" stroke="#6ec4c0" stroke-width="1.8" opacity="0.85"/>
-<g class="d3-node"><circle cx="300.5" cy="154.0" r="14" fill="#e8c99a" stroke="#e8c99a" stroke-width="2"/><text class="d3-label" x="300.5" y="179.0" text-anchor="middle">命名</text></g>
-<g class="d3-node"><circle cx="235.6" cy="40.0" r="14" fill="#e8c99a" stroke="#e8c99a" stroke-width="2"/><text class="d3-label" x="235.6" y="65.0" text-anchor="middle">ruff-mypy</text></g>
-<g class="d3-node"><circle cx="316.6" cy="76.6" r="14" fill="#e8c99a" stroke="#e8c99a" stroke-width="2"/><text class="d3-label" x="316.6" y="101.6" text-anchor="middle">log-redact</text></g>
-<g class="d3-node"><circle cx="363.7" cy="132.6" r="14" fill="#e8c99a" stroke="#e8c99a" stroke-width="2"/><text class="d3-label" x="363.7" y="157.6" text-anchor="middle">capacity-70</text></g>
-<g class="d3-node"><circle cx="363.8" cy="230.4" r="14" fill="#e8c99a" stroke="#e8c99a" stroke-width="2"/><text class="d3-label" x="363.8" y="255.4" text-anchor="middle">rate-limit</text></g>
-<g class="d3-node doc-node"><circle cx="283.8" cy="240.0" r="11" fill="#141a19" stroke="#6ec4c0" stroke-width="2" stroke-dasharray="3 2"/><text class="d3-label" x="283.8" y="262.0" text-anchor="middle">01-python-style</text></g>
-<g class="d3-node doc-node"><circle cx="228.7" cy="160.2" r="11" fill="#141a19" stroke="#6ec4c0" stroke-width="2" stroke-dasharray="3 2"/><text class="d3-label" x="228.7" y="182.2" text-anchor="middle">07-testing</text></g>
-<g class="d3-node doc-node"><circle cx="196.2" cy="99.5" r="11" fill="#141a19" stroke="#6ec4c0" stroke-width="2" stroke-dasharray="3 2"/><text class="d3-label" x="196.2" y="121.5" text-anchor="middle">06-logging</text></g>
-<g class="d3-node doc-node"><circle cx="262.0" cy="101.0" r="11" fill="#141a19" stroke="#6ec4c0" stroke-width="2" stroke-dasharray="3 2"/><text class="d3-label" x="262.0" y="123.0" text-anchor="middle">11-observability</text></g>
+  <g class="d3-node" data-node-tip="{&quot;id&quot;: &quot;r-name&quot;, &quot;kind&quot;: &quot;rule&quot;, &quot;label&quot;: &quot;命名&quot;, &quot;claim&quot;: &quot;Use snake_case for functions/variables and PascalCase for classes&quot;, &quot;text&quot;: &quot;函数和变量统一 snake_case，类名 PascalCase；review 时一眼能分清标识符种类。&quot;, &quot;status&quot;: &quot;active&quot;, &quot;scope&quot;: [&quot;aurora&quot;, &quot;python&quot;]}"><circle class="d3-hit" cx="342.9" cy="68.5" r="22.0" fill="transparent" tabindex="0" role="button" aria-label="命名"/><circle cx="342.9" cy="68.5" r="14.0" fill="#e8c99a" stroke="#e8c99a" stroke-width="2" pointer-events="none"/><text class="d3-label" x="342.9" y="94.5" text-anchor="middle" pointer-events="none">命名</text></g>
+<g class="d3-node" data-node-tip="{&quot;id&quot;: &quot;r-ruff&quot;, &quot;kind&quot;: &quot;rule&quot;, &quot;label&quot;: &quot;ruff-mypy&quot;, &quot;claim&quot;: &quot;Run ruff and mypy clean before every commit&quot;, &quot;text&quot;: &quot;每次提交前 ruff 和 mypy 都要全绿，带 warning 或类型错误的不进主干。&quot;, &quot;status&quot;: &quot;active&quot;, &quot;scope&quot;: [&quot;aurora&quot;, &quot;quality&quot;]}"><circle class="d3-hit" cx="410.4" cy="71.6" r="22.0" fill="transparent" tabindex="0" role="button" aria-label="ruff-mypy"/><circle cx="410.4" cy="71.6" r="14.0" fill="#e8c99a" stroke="#e8c99a" stroke-width="2" pointer-events="none"/><text class="d3-label" x="410.4" y="97.6" text-anchor="middle" pointer-events="none">ruff-mypy</text></g>
+<g class="d3-node" data-node-tip="{&quot;id&quot;: &quot;r-log&quot;, &quot;kind&quot;: &quot;rule&quot;, &quot;label&quot;: &quot;log-redact&quot;, &quot;claim&quot;: &quot;Redact secrets and PII from structured logs&quot;, &quot;text&quot;: &quot;日志里严禁输出密码、token、身份证号；结构化 JSON 统一脱敏。&quot;, &quot;status&quot;: &quot;active&quot;, &quot;scope&quot;: [&quot;aurora&quot;, &quot;logging&quot;]}"><circle class="d3-hit" cx="273.9" cy="74.3" r="22.0" fill="transparent" tabindex="0" role="button" aria-label="log-redact"/><circle cx="273.9" cy="74.3" r="14.0" fill="#e8c99a" stroke="#e8c99a" stroke-width="2" pointer-events="none"/><text class="d3-label" x="273.9" y="100.3" text-anchor="middle" pointer-events="none">log-redact</text></g>
+<g class="d3-node" data-node-tip="{&quot;id&quot;: &quot;r-cap&quot;, &quot;kind&quot;: &quot;rule&quot;, &quot;label&quot;: &quot;capacity-70&quot;, &quot;claim&quot;: &quot;Keep CPU and connection-pool utilization below 70% before release&quot;, &quot;text&quot;: &quot;上生产前 CPU 和连接池水位不能超过 70%，和限流策略一起看。&quot;, &quot;status&quot;: &quot;active&quot;, &quot;scope&quot;: [&quot;aurora&quot;, &quot;ops&quot;]}"><circle class="d3-hit" cx="44.0" cy="72.2" r="22.0" fill="transparent" tabindex="0" role="button" aria-label="capacity-70"/><circle cx="44.0" cy="72.2" r="14.0" fill="#e8c99a" stroke="#e8c99a" stroke-width="2" pointer-events="none"/><text class="d3-label" x="44.0" y="98.2" text-anchor="middle" pointer-events="none">capacity-70</text></g>
+<g class="d3-node" data-node-tip="{&quot;id&quot;: &quot;r-lim&quot;, &quot;kind&quot;: &quot;rule&quot;, &quot;label&quot;: &quot;rate-limit&quot;, &quot;claim&quot;: &quot;Apply rate limits per performance SLO doc&quot;, &quot;text&quot;: &quot;入口限流按性能 SLO 文档来，和水位告警一起审。&quot;, &quot;status&quot;: &quot;active&quot;, &quot;scope&quot;: [&quot;aurora&quot;, &quot;performance&quot;]}"><circle class="d3-hit" cx="124.3" cy="68.6" r="22.0" fill="transparent" tabindex="0" role="button" aria-label="rate-limit"/><circle cx="124.3" cy="68.6" r="14.0" fill="#e8c99a" stroke="#e8c99a" stroke-width="2" pointer-events="none"/><text class="d3-label" x="124.3" y="94.6" text-anchor="middle" pointer-events="none">rate-limit</text></g>
+<g class="d3-node doc-node" data-node-tip="{&quot;id&quot;: &quot;doc-py&quot;, &quot;kind&quot;: &quot;document&quot;, &quot;label&quot;: &quot;01-python-style&quot;, &quot;path&quot;: &quot;docs/01-python-style.md&quot;}"><circle class="d3-hit" cx="352.9" cy="251.5" r="19.0" fill="transparent" tabindex="0" role="button" aria-label="01-python-style"/><circle cx="352.9" cy="251.5" r="11.0" fill="#141a19" stroke="#6ec4c0" stroke-width="2" stroke-dasharray="3 2" pointer-events="none"/><text class="d3-label" x="352.9" y="274.5" text-anchor="middle" pointer-events="none">01-python-style</text></g>
+<g class="d3-node doc-node" data-node-tip="{&quot;id&quot;: &quot;doc-test&quot;, &quot;kind&quot;: &quot;document&quot;, &quot;label&quot;: &quot;07-testing&quot;, &quot;path&quot;: &quot;docs/07-testing.md&quot;}"><circle class="d3-hit" cx="516.0" cy="249.0" r="19.0" fill="transparent" tabindex="0" role="button" aria-label="07-testing"/><circle cx="516.0" cy="249.0" r="11.0" fill="#141a19" stroke="#6ec4c0" stroke-width="2" stroke-dasharray="3 2" pointer-events="none"/><text class="d3-label" x="516.0" y="272.0" text-anchor="middle" pointer-events="none">07-testing</text></g>
+<g class="d3-node doc-node" data-node-tip="{&quot;id&quot;: &quot;doc-log&quot;, &quot;kind&quot;: &quot;document&quot;, &quot;label&quot;: &quot;06-logging&quot;, &quot;path&quot;: &quot;docs/06-logging.md&quot;}"><circle class="d3-hit" cx="102.7" cy="245.8" r="19.0" fill="transparent" tabindex="0" role="button" aria-label="06-logging"/><circle cx="102.7" cy="245.8" r="11.0" fill="#141a19" stroke="#6ec4c0" stroke-width="2" stroke-dasharray="3 2" pointer-events="none"/><text class="d3-label" x="102.7" y="268.8" text-anchor="middle" pointer-events="none">06-logging</text></g>
+<g class="d3-node doc-node" data-node-tip="{&quot;id&quot;: &quot;doc-obs&quot;, &quot;kind&quot;: &quot;document&quot;, &quot;label&quot;: &quot;11-observability&quot;, &quot;path&quot;: &quot;docs/11-observability.md&quot;}"><circle class="d3-hit" cx="168.4" cy="248.3" r="19.0" fill="transparent" tabindex="0" role="button" aria-label="11-observability"/><circle cx="168.4" cy="248.3" r="11.0" fill="#141a19" stroke="#6ec4c0" stroke-width="2" stroke-dasharray="3 2" pointer-events="none"/><text class="d3-label" x="168.4" y="271.3" text-anchor="middle" pointer-events="none">11-observability</text></g>
+<path class="d3-link related" d="M395.4,71.9 Q342.4,83.4 288.9,74.0" fill="none" stroke-linecap="round" stroke="#d4b483" stroke-width="1.35" stroke-dasharray="5 4" opacity="0.75"/>
+<path class="d3-link related" d="M59.0,71.5 Q84.4,75.4 109.4,69.3" fill="none" stroke-linecap="round" stroke="#d4b483" stroke-width="1.35" stroke-dasharray="5 4" opacity="0.75"/>
+<path class="d3-link sources" d="M343.7,83.4 Q304.3,163.9 352.3,239.5" fill="none" stroke-linecap="round" stroke="#6ec4c0" stroke-width="1.8" opacity="0.85"/>
+<path class="d3-link sources" d="M418.0,84.5 Q505.2,137.0 509.9,238.7" fill="none" stroke-linecap="round" stroke="#6ec4c0" stroke-width="1.8" opacity="0.85"/>
+<path class="d3-link sources" d="M263.3,84.9 Q153.3,127.2 111.2,237.3" fill="none" stroke-linecap="round" stroke="#6ec4c0" stroke-width="1.8" opacity="0.85"/>
+<path class="d3-link sources" d="M52.7,84.4 Q146.3,133.8 161.5,238.5" fill="none" stroke-linecap="round" stroke="#6ec4c0" stroke-width="1.8" opacity="0.85"/>
 </svg></div>
   
 <div class="desk-graph-legend">
@@ -1005,8 +1048,108 @@ a { color: var(--ink); }
 <h2>6. 与另两项实验的关系</h2>
 <p class="meta"><a href="report.html">规范记忆</a> 测 vault 规则复用 token；<a href="retrieval.html">文档检索</a> 测 grep+find 收窄 Read（RETRIEVAL_VAULT 为空）。本页专用 <code>.imprint-link-bench</code>，在 add 时写入 sources，体现<strong>规则—文档双向可追溯</strong>，而非只比 BM25 排序。</p>
 
-<p class="footer">由 experiment/scripts/build_record_report.py 生成。</p>
+<p class="footer">由 experiment/scripts/build_record_report.py 生成 · 图 layout rev 5 · 2026-09-29 05:34 UTC</p>
 </div>
+<div id="graph-node-tip" hidden aria-live="polite"></div>
 
+<script>(function () {
+  var tip = document.getElementById("graph-node-tip");
+  if (!tip) return;
+
+  function esc(s) {
+    if (s == null || s === "") return "";
+    return String(s)
+      .replace(/&/g, "&amp;")
+      .replace(/</g, "&lt;")
+      .replace(/"/g, "&quot;");
+  }
+
+  function row(label, value, valueClass) {
+    if (value == null || value === "") return "";
+    var cls = valueClass ? " class=\"" + valueClass + "\"" : "";
+    return (
+      "<dl><dt>" +
+      esc(label) +
+      "</dt><dd" +
+      cls +
+      ">" +
+      esc(value) +
+      "</dd></dl>"
+    );
+  }
+
+  function renderTip(d) {
+    var kind = d.kind === "document" ? "文档" : "规则";
+    var rows = [];
+    rows.push("<p class=\"gt-kicker\">" + esc(kind) + " · " + esc(d.label || d.id) + "</p>");
+    if (d.kind === "rule") {
+      rows.push(row("claim", d.claim, "gt-claim"));
+      rows.push(row("用户原话", d.text, "gt-text"));
+      rows.push(row("status", d.status));
+      if (d.scope && d.scope.length) rows.push(row("scope", d.scope.join(", ")));
+    } else {
+      if (d.path) {
+        rows.push(
+          "<dl><dt>path</dt><dd><code>" + esc(d.path) + "</code></dd></dl>"
+        );
+      }
+      rows.push(row("heading", d.heading));
+    }
+    if (d.id) rows.push("<p class=\"gt-id\"><code>" + esc(d.id) + "</code></p>");
+    tip.innerHTML = rows.join("");
+  }
+
+  function place(ev) {
+    var pad = 12;
+    var x = ev.clientX + pad;
+    var y = ev.clientY + pad;
+    tip.style.left = x + "px";
+    tip.style.top = y + "px";
+    var r = tip.getBoundingClientRect();
+    if (r.right > window.innerWidth - 8) x = ev.clientX - r.width - pad;
+    if (r.bottom > window.innerHeight - 8) y = ev.clientY - r.height - pad;
+    tip.style.left = Math.max(8, x) + "px";
+    tip.style.top = Math.max(8, y) + "px";
+  }
+
+  function show(ev, g) {
+    var raw = g.getAttribute("data-node-tip");
+    if (!raw) return;
+    try {
+      renderTip(JSON.parse(raw));
+    } catch (e) {
+      return;
+    }
+    g.classList.add("is-hot");
+    tip.hidden = false;
+    tip.classList.add("on");
+    place(ev);
+  }
+
+  function hide(g) {
+    if (g) g.classList.remove("is-hot");
+    tip.classList.remove("on");
+    tip.hidden = true;
+  }
+
+  document.querySelectorAll(".desk-graph-svg .d3-hit").forEach(function (hit) {
+    var g = hit.parentElement;
+    if (!g || !g.classList.contains("d3-node")) return;
+    hit.addEventListener("mouseenter", function (ev) {
+      show(ev, g);
+    });
+    hit.addEventListener("mousemove", place);
+    hit.addEventListener("mouseleave", function () {
+      hide(g);
+    });
+    hit.addEventListener("focus", function (ev) {
+      show(ev, g);
+    });
+    hit.addEventListener("blur", function () {
+      hide(g);
+    });
+  });
+})();
+</script>
 </body>
 </html>

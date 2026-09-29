@@ -1,5 +1,7 @@
 # imprint 在线实验（token 与准确率）
 
+**在线报告（GitHub Pages）：** [https://steamedbread2333.github.io/imprint-online-test/](https://steamedbread2333.github.io/imprint-online-test/)
+
 在真实 `imprint-mcp` stdio 上对照：
 
 1. **规则记忆**：无记忆体每轮重注入规范全文 vs `add` 一次 + `find` 召回。
@@ -35,11 +37,32 @@ python3 experiment/scripts/run_all.py
 
 需要本机 PATH 中的 `imprint-mcp`，或设置 `IMPRINT_MCP`。首次运行会从 Hugging Face 拉取 tokenizer.json（约 17 MB，缓存后离线可用）。报表与数据只写二进制文件名，不写本机绝对路径。
 
-报表：
+报表（Pages 同上链接；本地路径）：
 
-- `experiment/report/index.html`
-- `experiment/report/report.html` — 规则记忆
-- `experiment/report/retrieval.html` — shelves
-- `experiment/report/record.html` — vault ↔ 文档关联
+- [index](https://steamedbread2333.github.io/imprint-online-test/) · `experiment/report/index.html`
+- [report.html](https://steamedbread2333.github.io/imprint-online-test/report.html) — 规则记忆
+- [retrieval.html](https://steamedbread2333.github.io/imprint-online-test/retrieval.html) — shelves
+- [record.html](https://steamedbread2333.github.io/imprint-online-test/record.html) — vault ↔ 文档关联
 
 原始数据在 `experiment/data/`。
+
+## GitHub Pages
+
+推送 `main` 后，Actions 工作流 **GitHub Pages — experiment reports** 会发布 `experiment/report/`（默认使用仓库内已提交的 HTML，不重新跑实验）。
+
+- 站点根 URL：[https://steamedbread2333.github.io/imprint-online-test/](https://steamedbread2333.github.io/imprint-online-test/)（需在仓库 **Settings → Pages → Build and deployment** 选 **GitHub Actions**）
+- 要 CI 重跑实验再发布：Actions → 该工作流 → **Run workflow**，勾选 **Re-run full experiment before deploy**
+
+本地安装 `imprint-mcp`（不进 git）：
+
+```bash
+bash experiment/scripts/install_imprint_bin.sh
+export IMPRINT_MCP="$PWD/experiment/bin/imprint-mcp"
+python3 experiment/scripts/run_all.py
+```
+
+## 仓库体积
+
+当前体积主要来自 **已 git 跟踪的** `experiment/bin/` 二进制（约 140MB）与各 `.imprint*` 运行时（vault、WAL、telemetry）。`.gitignore` 已排除这些路径；若要从历史中瘦身，对已跟踪文件执行 `git rm -r --cached experiment/bin/imprint experiment/bin/imprint-mcp 'experiment/bin/*.tar.gz' .imprint* …` 后再提交（二进制改由 `install_imprint_bin.sh` 或 CI 下载）。
+
+报表与 `experiment/data/*.json` 的 `meta.imprint_mcp` 只记录二进制**文件名**（如 `imprint-mcp`），不含本机绝对路径。

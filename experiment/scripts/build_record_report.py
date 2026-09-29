@@ -4,6 +4,7 @@ import html
 import json
 import os
 import sys
+from datetime import datetime, timezone
 
 sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
 from paths import DATA, REPORT_DIR
@@ -280,11 +281,15 @@ html_doc = f"""<!DOCTYPE html>
 <h2>6. 与另两项实验的关系</h2>
 <p class="meta"><a href="report.html">规范记忆</a> 测 vault 规则复用 token；<a href="retrieval.html">文档检索</a> 测 grep+find 收窄 Read（RETRIEVAL_VAULT 为空）。本页专用 <code>{html.escape(data['meta']['vault'] if data else '.imprint-link-bench')}</code>，在 add 时写入 sources，体现<strong>规则—文档双向可追溯</strong>，而非只比 BM25 排序。</p>
 
-<p class="footer">由 experiment/scripts/build_record_report.py 生成。</p>
+<p class="footer">由 experiment/scripts/build_record_report.py 生成 · 图 layout rev {html.escape(str(__import__("record_graph_svg").GRAPH_LAYOUT_REV))} · {html.escape(datetime.now(timezone.utc).strftime("%Y-%m-%d %H:%M UTC"))}</p>
 </div>
+<div id="graph-node-tip" hidden aria-live="polite"></div>
 """
 
-html_doc += """
+with open(os.path.join(SCRIPTS_DIR, "record_graph_tooltip.js"), encoding="utf-8") as _tf:
+    _tip_js = _tf.read()
+html_doc += f"""
+<script>{_tip_js}</script>
 </body>
 </html>
 """
