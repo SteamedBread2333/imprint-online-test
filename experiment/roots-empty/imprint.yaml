@@ -1,0 +1,4 @@
+shelves:
+  enabled: true
+  config:
+    roots: []

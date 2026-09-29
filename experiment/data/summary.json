@@ -1,0 +1,359 @@
+{
+  "meta": {
+    "imprint_mcp": "imprint-mcp",
+    "tokenizer": "grok-2-tokenizer（Grok 家族公开编码器；Grok 4.6 官方词表未公开）",
+    "scenario": "项目约定/规范协作",
+    "rounds": 24,
+    "vault": ".imprint-token-bench",
+    "created_at": "2026-09-28T16:12:10",
+    "comparison": {
+      "question": "vault 实验组相对什么 baseline 省 token？",
+      "baseline_arm": "无持久化记忆：每轮把 dialogues.json 里迄今全部 new_rules[].text 以「【项目规范】」编号列表全文塞进 prompt；不调用 imprint。",
+      "experiment_arm": "imprint vault（.imprint/vault.db）：新规只 add 一次；之后每轮仅计入 MCP find 请求 + 命中 rules 紧凑 JSON（及写入期 add 往返）。",
+      "excluded_from_both_arms": [
+        "Cursor alwaysApply 规则（如 .cursor/rules/imprint-memory.mdc）",
+        "AGENTS.md、imprint init 嵌入的 body.md 等编辑器级系统提示",
+        "desk / host HTTP、CLI 非 MCP 路径"
+      ],
+      "shared_in_both_arms": "同一 SYSTEM 说明 + dialogues 当轮 user_message + task（见 measure.py SYSTEM）",
+      "corpus": "experiment/dialogues.json",
+      "corpus_note": "前 8 轮建立 16 条规范；后 16 轮为遵守/复用（含改述与中文 query_local）。find scope 为 AND。",
+      "rules_source_field": "new_rules[].text（用户原话级规范正文，非 claim  alone）"
+    }
+  },
+  "samples": {
+    "last_build_round": {
+      "round": 8,
+      "phase": "build",
+      "baseline": {
+        "shared_prompt": "你是 aurora 项目的资深后端工程师。aurora 是一个 Python FastAPI 微服务。请严格遵循下方提供的项目规范完成每个任务，回答简洁、可直接落地为代码。\n\n【用户消息】\n配置规范：环境变量和功能开关。\n\n【任务】\n把超时和开关从代码里拆出去。",
+        "rules_injection": "\n\n【项目规范】\n1. 函数和变量统一用 snake_case，类名用 PascalCase。这是从项目第一天就定的风格，跟社区 PEP8 对齐，代码 review 时一眼能分清标识符是函数、变量还是类型。公开常量用全大写 SNAKE_CASE，不要混用 camelCase。\n2. services 层只允许 import domain 层，绝不能 import 其它业务模块的实现或基础设施细节。依赖方向始终向内，避免出现循环依赖和跨层意外耦合。发现反向依赖必须立刻拆，不允许用 TYPE_CHECKING 当长期借口。\n3. 所有异常统一抛出我们自定义的 AuroraError 及其子类，禁止在任何地方直接 raise Exception 或裸 raise。这样上层能统一捕获、统一映射错误码、统一记日志。第三方异常必须在边界转换成 AuroraError，不要让 SDK 类型漏进业务。\n4. 每次提交代码前必须跑 ruff 和 mypy，两个都要全绿通过才能提交。我们不接受任何带 warning 或类型错误的提交进入主干，CI 里也会强制校验。本地 pre-commit 钩子应默认开启。\n5. 数据库所有时间戳字段统一存 UTC 的 ISO8601 字符串，不要存本地时间也不要存时间戳整数。跨时区、跨服务、跨语言序列化时才不会出乱子。应用层计算一律 UTC，只在最外层渲染时转用户时区。\n6. 所有 HTTP 接口走 REST 风格，路径统一加 /api/v1 前缀，响应体统一用 {code, data, message} 三段式包裹。前端和网关都按这个约定做解析和错误处理。列表接口另须返回 page、page_size、total。\n7. 密钥、证书、数据库口令一律走密钥管理服务注入，禁止写入仓库、配置文件明文或镜像层。日志与导出不得出现 token、身份证号或银行卡号。轮换密钥时只改注入点，不改业务代码。\n8. 鉴权在网关统一执行并下发身份，服务端对写操作必须二次校验权限，不能只信网关头。状态变更接口启用 CSRF 校验或同源令牌。外部输入先校验后使用。\n9. 单元测试统一使用 pytest，文件与函数以 test_ 开头并可独立运行。核心模块行覆盖率不得低于 80%，关键路径必须覆盖分支。每次提交前本地跑通测试，CI 上单测与 lint 双重校验。\n10. 单测禁止依赖真实网络与数据库，外部依赖一律 mock 或桩替换。共用夹具放在 conftest.py。断言验证行为而非实现细节，避免 over-mocking 导致假绿。\n11. 日志统一输出结构化 JSON，禁止 print 与裸文本拼接。每个请求贯穿唯一 trace_id。严禁输出密码、token 等敏感字段。关键业务动作与外部调用必须留痕，包含入参摘要与耗时。\n12. 服务必须暴露 readiness 与 liveness 探针，失败自动摘流。探针不得走会阻塞的下游调用。发布走灰度，每次发布保留上一稳定版本以便一键回滚。\n13. 凡改动对外契约（路径、字段、错误码）的 PR 必须两名评审通过，其中一名为接口负责人。内部重构若未改变契约可一人评审。评审意见未关闭不得合并。\n14. PR 描述必须写明改动风险、灰度步骤与一键回滚办法。缺少这三项的 PR 直接退回，不进入评审队列。",
+        "tokens": {
+          "shared": 78,
+          "rules_fulltext": 838,
+          "total": 916
+        }
+      },
+      "memory_core": {
+        "shared_prompt": "你是 aurora 项目的资深后端工程师。aurora 是一个 Python FastAPI 微服务。请严格遵循下方提供的项目规范完成每个任务，回答简洁、可直接落地为代码。\n\n【用户消息】\n配置规范：环境变量和功能开关。\n\n【任务】\n把超时和开关从代码里拆出去。",
+        "find_request_json": "{\"scope\":\"aurora,config\",\"query\":\"twelve factor env feature flag\",\"query_local\":\"配置 环境变量 功能开关\",\"top_k\":5}",
+        "find_rules_json": "[]",
+        "tokens": {
+          "shared": 78,
+          "find_req": 34,
+          "find_rules": 1,
+          "add_req": 180,
+          "add_resp": 60,
+          "core_total": 353
+        }
+      }
+    },
+    "first_comply_round": {
+      "round": 9,
+      "phase": "comply",
+      "baseline": {
+        "shared_prompt": "你是 aurora 项目的资深后端工程师。aurora 是一个 Python FastAPI 微服务。请严格遵循下方提供的项目规范完成每个任务，回答简洁、可直接落地为代码。\n\n【用户消息】\n给 user_service 补类型注解。\n\n【任务】\n给 user_service.py 的所有公开函数补全类型注解。",
+        "rules_injection": "\n\n【项目规范】\n1. 函数和变量统一用 snake_case，类名用 PascalCase。这是从项目第一天就定的风格，跟社区 PEP8 对齐，代码 review 时一眼能分清标识符是函数、变量还是类型。公开常量用全大写 SNAKE_CASE，不要混用 camelCase。\n2. services 层只允许 import domain 层，绝不能 import 其它业务模块的实现或基础设施细节。依赖方向始终向内，避免出现循环依赖和跨层意外耦合。发现反向依赖必须立刻拆，不允许用 TYPE_CHECKING 当长期借口。\n3. 所有异常统一抛出我们自定义的 AuroraError 及其子类，禁止在任何地方直接 raise Exception 或裸 raise。这样上层能统一捕获、统一映射错误码、统一记日志。第三方异常必须在边界转换成 AuroraError，不要让 SDK 类型漏进业务。\n4. 每次提交代码前必须跑 ruff 和 mypy，两个都要全绿通过才能提交。我们不接受任何带 warning 或类型错误的提交进入主干，CI 里也会强制校验。本地 pre-commit 钩子应默认开启。\n5. 数据库所有时间戳字段统一存 UTC 的 ISO8601 字符串，不要存本地时间也不要存时间戳整数。跨时区、跨服务、跨语言序列化时才不会出乱子。应用层计算一律 UTC，只在最外层渲染时转用户时区。\n6. 所有 HTTP 接口走 REST 风格，路径统一加 /api/v1 前缀，响应体统一用 {code, data, message} 三段式包裹。前端和网关都按这个约定做解析和错误处理。列表接口另须返回 page、page_size、total。\n7. 密钥、证书、数据库口令一律走密钥管理服务注入，禁止写入仓库、配置文件明文或镜像层。日志与导出不得出现 token、身份证号或银行卡号。轮换密钥时只改注入点，不改业务代码。\n8. 鉴权在网关统一执行并下发身份，服务端对写操作必须二次校验权限，不能只信网关头。状态变更接口启用 CSRF 校验或同源令牌。外部输入先校验后使用。\n9. 单元测试统一使用 pytest，文件与函数以 test_ 开头并可独立运行。核心模块行覆盖率不得低于 80%，关键路径必须覆盖分支。每次提交前本地跑通测试，CI 上单测与 lint 双重校验。\n10. 单测禁止依赖真实网络与数据库，外部依赖一律 mock 或桩替换。共用夹具放在 conftest.py。断言验证行为而非实现细节，避免 over-mocking 导致假绿。\n11. 日志统一输出结构化 JSON，禁止 print 与裸文本拼接。每个请求贯穿唯一 trace_id。严禁输出密码、token 等敏感字段。关键业务动作与外部调用必须留痕，包含入参摘要与耗时。\n12. 服务必须暴露 readiness 与 liveness 探针，失败自动摘流。探针不得走会阻塞的下游调用。发布走灰度，每次发布保留上一稳定版本以便一键回滚。\n13. 凡改动对外契约（路径、字段、错误码）的 PR 必须两名评审通过，其中一名为接口负责人。内部重构若未改变契约可一人评审。评审意见未关闭不得合并。\n14. PR 描述必须写明改动风险、灰度步骤与一键回滚办法。缺少这三项的 PR 直接退回，不进入评审队列。\n15. 主机、端口、超时、连接池大小一律从环境变量或配置中心读取，禁止写死在源码或镜像层。缺省值只允许出现在本地开发样例，生产必须显式注入。\n16. 生产环境功能开关默认关闭。每个开关必须登记负责人与过期日，到期未清理视为缺陷。开关判断集中在配置层，禁止散落在业务分支深处。",
+        "tokens": {
+          "shared": 79,
+          "rules_fulltext": 940,
+          "total": 1019
+        }
+      },
+      "memory_core": {
+        "shared_prompt": "你是 aurora 项目的资深后端工程师。aurora 是一个 Python FastAPI 微服务。请严格遵循下方提供的项目规范完成每个任务，回答简洁、可直接落地为代码。\n\n【用户消息】\n给 user_service 补类型注解。\n\n【任务】\n给 user_service.py 的所有公开函数补全类型注解。",
+        "find_request_json": "{\"scope\":\"aurora,python\",\"query\":\"PascalCase identifiers snake_case helpers\",\"query_local\":\"类名 PascalCase 函数 snake_case 命名\",\"top_k\":5}",
+        "find_rules_json": "[{\"id\":\"r-2026-09-28-001\",\"claim\":\"Use snake_case for functions/variables and PascalCase for classes\",\"scope\":[\"aurora\",\"python\"],\"confidence\":0.6,\"score\":0.9339,\"status\":\"active\",\"evidence_count\":1},{\"id\":\"r-2026-09-28-002\",\"claim\":\"Services layer may only import the domain layer\",\"scope\":[\"aurora\",\"python\"],\"confidence\":0.6,\"score\":0.222,\"status\":\"active\",\"evidence_count\":1}]",
+        "tokens": {
+          "shared": 79,
+          "find_req": 37,
+          "find_rules": 126,
+          "add_req": 0,
+          "add_resp": 0,
+          "core_total": 242
+        }
+      }
+    }
+  },
+  "summary": [
+    {
+      "round": 1,
+      "phase": "build",
+      "baseline_cum": 97,
+      "memory_core_cum": 394,
+      "memory_with_shelves_cum": 506,
+      "saved_cum": -297,
+      "saving_pct": -306.19,
+      "precision": 1.0,
+      "recall": 1.0
+    },
+    {
+      "round": 2,
+      "phase": "build",
+      "baseline_cum": 310,
+      "memory_core_cum": 764,
+      "memory_with_shelves_cum": 995,
+      "saved_cum": -454,
+      "saving_pct": -146.45,
+      "precision": 1.0,
+      "recall": 1.0
+    },
+    {
+      "round": 3,
+      "phase": "build",
+      "baseline_cum": 654,
+      "memory_core_cum": 1158,
+      "memory_with_shelves_cum": 1597,
+      "saved_cum": -504,
+      "saving_pct": -77.06,
+      "precision": 1.0,
+      "recall": 1.0
+    },
+    {
+      "round": 4,
+      "phase": "build",
+      "baseline_cum": 1128,
+      "memory_core_cum": 1539,
+      "memory_with_shelves_cum": 2101,
+      "saved_cum": -411,
+      "saving_pct": -36.44,
+      "precision": 1.0,
+      "recall": 1.0
+    },
+    {
+      "round": 5,
+      "phase": "build",
+      "baseline_cum": 1719,
+      "memory_core_cum": 1898,
+      "memory_with_shelves_cum": 2697,
+      "saved_cum": -179,
+      "saving_pct": -10.41,
+      "precision": 1.0,
+      "recall": 1.0
+    },
+    {
+      "round": 6,
+      "phase": "build",
+      "baseline_cum": 2426,
+      "memory_core_cum": 2253,
+      "memory_with_shelves_cum": 3161,
+      "saved_cum": 173,
+      "saving_pct": 7.13,
+      "precision": 1.0,
+      "recall": 1.0
+    },
+    {
+      "round": 7,
+      "phase": "build",
+      "baseline_cum": 3254,
+      "memory_core_cum": 2602,
+      "memory_with_shelves_cum": 3633,
+      "saved_cum": 652,
+      "saving_pct": 20.04,
+      "precision": 1.0,
+      "recall": 1.0
+    },
+    {
+      "round": 8,
+      "phase": "build",
+      "baseline_cum": 4170,
+      "memory_core_cum": 2955,
+      "memory_with_shelves_cum": 4221,
+      "saved_cum": 1215,
+      "saving_pct": 29.14,
+      "precision": 1.0,
+      "recall": 1.0
+    },
+    {
+      "round": 9,
+      "phase": "comply",
+      "baseline_cum": 5189,
+      "memory_core_cum": 3197,
+      "memory_with_shelves_cum": 4695,
+      "saved_cum": 1992,
+      "saving_pct": 38.39,
+      "precision": 1.0,
+      "recall": 1.0
+    },
+    {
+      "round": 10,
+      "phase": "comply",
+      "baseline_cum": 6206,
+      "memory_core_cum": 3435,
+      "memory_with_shelves_cum": 5175,
+      "saved_cum": 2771,
+      "saving_pct": 44.65,
+      "precision": 1.0,
+      "recall": 1.0
+    },
+    {
+      "round": 11,
+      "phase": "comply",
+      "baseline_cum": 7221,
+      "memory_core_cum": 3671,
+      "memory_with_shelves_cum": 5630,
+      "saved_cum": 3550,
+      "saving_pct": 49.16,
+      "precision": 1.0,
+      "recall": 1.0
+    },
+    {
+      "round": 12,
+      "phase": "comply",
+      "baseline_cum": 8232,
+      "memory_core_cum": 3906,
+      "memory_with_shelves_cum": 6102,
+      "saved_cum": 4326,
+      "saving_pct": 52.55,
+      "precision": 1.0,
+      "recall": 1.0
+    },
+    {
+      "round": 13,
+      "phase": "comply",
+      "baseline_cum": 9244,
+      "memory_core_cum": 4150,
+      "memory_with_shelves_cum": 6584,
+      "saved_cum": 5094,
+      "saving_pct": 55.11,
+      "precision": 1.0,
+      "recall": 1.0
+    },
+    {
+      "round": 14,
+      "phase": "comply",
+      "baseline_cum": 10260,
+      "memory_core_cum": 4394,
+      "memory_with_shelves_cum": 7067,
+      "saved_cum": 5866,
+      "saving_pct": 57.17,
+      "precision": 1.0,
+      "recall": 1.0
+    },
+    {
+      "round": 15,
+      "phase": "comply",
+      "baseline_cum": 11280,
+      "memory_core_cum": 4640,
+      "memory_with_shelves_cum": 7794,
+      "saved_cum": 6640,
+      "saving_pct": 58.87,
+      "precision": 1.0,
+      "recall": 1.0
+    },
+    {
+      "round": 16,
+      "phase": "comply",
+      "baseline_cum": 12293,
+      "memory_core_cum": 4877,
+      "memory_with_shelves_cum": 8281,
+      "saved_cum": 7416,
+      "saving_pct": 60.33,
+      "precision": 1.0,
+      "recall": 1.0
+    },
+    {
+      "round": 17,
+      "phase": "comply",
+      "baseline_cum": 13310,
+      "memory_core_cum": 5120,
+      "memory_with_shelves_cum": 8781,
+      "saved_cum": 8190,
+      "saving_pct": 61.53,
+      "precision": 1.0,
+      "recall": 1.0
+    },
+    {
+      "round": 18,
+      "phase": "comply",
+      "baseline_cum": 14328,
+      "memory_core_cum": 5365,
+      "memory_with_shelves_cum": 9269,
+      "saved_cum": 8963,
+      "saving_pct": 62.56,
+      "precision": 1.0,
+      "recall": 1.0
+    },
+    {
+      "round": 19,
+      "phase": "comply",
+      "baseline_cum": 15341,
+      "memory_core_cum": 5600,
+      "memory_with_shelves_cum": 9743,
+      "saved_cum": 9741,
+      "saving_pct": 63.5,
+      "precision": 1.0,
+      "recall": 1.0
+    },
+    {
+      "round": 20,
+      "phase": "comply",
+      "baseline_cum": 16359,
+      "memory_core_cum": 5838,
+      "memory_with_shelves_cum": 10218,
+      "saved_cum": 10521,
+      "saving_pct": 64.31,
+      "precision": 1.0,
+      "recall": 1.0
+    },
+    {
+      "round": 21,
+      "phase": "comply",
+      "baseline_cum": 17372,
+      "memory_core_cum": 6074,
+      "memory_with_shelves_cum": 10700,
+      "saved_cum": 11298,
+      "saving_pct": 65.04,
+      "precision": 1.0,
+      "recall": 1.0
+    },
+    {
+      "round": 22,
+      "phase": "comply",
+      "baseline_cum": 18388,
+      "memory_core_cum": 6312,
+      "memory_with_shelves_cum": 11185,
+      "saved_cum": 12076,
+      "saving_pct": 65.67,
+      "precision": 1.0,
+      "recall": 1.0
+    },
+    {
+      "round": 23,
+      "phase": "comply",
+      "baseline_cum": 19407,
+      "memory_core_cum": 6556,
+      "memory_with_shelves_cum": 11916,
+      "saved_cum": 12851,
+      "saving_pct": 66.22,
+      "precision": 1.0,
+      "recall": 1.0
+    },
+    {
+      "round": 24,
+      "phase": "comply",
+      "baseline_cum": 20422,
+      "memory_core_cum": 6796,
+      "memory_with_shelves_cum": 12402,
+      "saved_cum": 13626,
+      "saving_pct": 66.72,
+      "precision": 1.0,
+      "recall": 1.0
+    }
+  ],
+  "accuracy": {
+    "all_rounds_mean_precision": 1.0,
+    "all_rounds_mean_recall": 1.0,
+    "comply_mean_precision": 1.0,
+    "comply_mean_recall": 1.0,
+    "comply_rounds": 16,
+    "perfect_comply": 16
+  },
+  "final": {
+    "baseline_total": 20422,
+    "memory_core_total": 6796,
+    "memory_with_shelves_total": 12402,
+    "saved_tokens": 13626,
+    "saving_pct": 66.72
+  }
+}

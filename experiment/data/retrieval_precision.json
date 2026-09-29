@@ -1,0 +1,1260 @@
+{
+  "meta": {
+    "queries": 36,
+    "fuzz_cases": 24,
+    "combo_cases": 16,
+    "ident_cases": 8,
+    "tokenizer": "grok-2-tokenizer（Grok 家族公开编码器；Grok 4.6 官方词表未公开）",
+    "control_search": "rg -i",
+    "find_top_k": 3
+  },
+  "canonical_precision": {
+    "precision_at_1": 36,
+    "total": 36,
+    "recall_at_k": 36
+  },
+  "canonical": [
+    {
+      "qid": 1,
+      "query": "snake_case PascalCase naming",
+      "target": "docs/01-python-style.md",
+      "rank": 1,
+      "top": [
+        {
+          "path": "docs/01-python-style.md",
+          "score": 24.113743417742565,
+          "snippet": "函数与变量统一使用 snake_case，类名使用 PascalCase，常量使用全大写 SNAKE_CASE。 本条适"
+        }
+      ]
+    },
+    {
+      "qid": 2,
+      "query": "Repository domain data access",
+      "target": "docs/02-architecture.md",
+      "rank": 1,
+      "top": [
+        {
+          "path": "docs/02-architecture.md",
+          "score": 21.78295833278771,
+          "snippet": "数据访问统一走 Repository 抽象，业务代码不直接触碰 ORM 会话。 本条适用于 分层架构，涉及「仓储模式」的"
+        }
+      ]
+    },
+    {
+      "qid": 3,
+      "query": "AuroraError exception base class",
+      "target": "docs/03-error-handling.md",
+      "rank": 1,
+      "top": [
+        {
+          "path": "docs/03-error-handling.md",
+          "score": 16.617139489326757,
+          "snippet": "每个 AuroraError 子类绑定唯一错误码，便于网关统一映射与监控告警。 本条适用于 异常处理，涉及「错误码」的实"
+        }
+      ]
+    },
+    {
+      "qid": 4,
+      "query": "ISO8601 UTC timestamp storage",
+      "target": "docs/04-database.md",
+      "rank": 1,
+      "top": [
+        {
+          "path": "docs/04-database.md",
+          "score": 18.77689557558654,
+          "snippet": "所有时间戳字段统一存 UTC 的 ISO8601 字符串，禁止存本地时间或整数。 本条适用于 数据库，涉及「时间戳存储」"
+        }
+      ]
+    },
+    {
+      "qid": 5,
+      "query": "REST api prefix version",
+      "target": "docs/05-api-design.md",
+      "rank": 1,
+      "top": [
+        {
+          "path": "docs/05-api-design.md",
+          "score": 16.96325223289032,
+          "snippet": "所有 HTTP 接口统一加 /api/v1 前缀，版本升级走整段版本号。 本条适用于 REST API，涉及「路径前缀」"
+        }
+      ]
+    },
+    {
+      "qid": 6,
+      "query": "trace_id structured logging",
+      "target": "docs/06-logging.md",
+      "rank": 1,
+      "top": [
+        {
+          "path": "docs/06-logging.md",
+          "score": 17.69938823239654,
+          "snippet": "每个请求贯穿唯一 trace_id，日志必须携带以便链路追踪。 本条适用于 日志，涉及「trace_id」的实现必须遵守"
+        },
+        {
+          "path": "docs/03-error-handling.md",
+          "score": 16.865523445304504,
+          "snippet": "捕获异常后必须记录结构化日志并携带 trace_id，不得静默吞掉异常。 本条适用于 异常处理，涉及「日志配合」的实现必"
+        }
+      ]
+    },
+    {
+      "qid": 7,
+      "query": "pytest test framework coverage",
+      "target": "docs/07-testing.md",
+      "rank": 1,
+      "top": [
+        {
+          "path": "docs/07-testing.md",
+          "score": 14.62592133243007,
+          "snippet": "单元测试统一使用 pytest，命名以 test_ 开头并保持可独立运行。 本条适用于 测试，涉及「测试框架」的实现必须"
+        }
+      ]
+    },
+    {
+      "qid": 8,
+      "query": "readiness liveness health probe",
+      "target": "docs/08-deployment.md",
+      "rank": 1,
+      "top": [
+        {
+          "path": "docs/08-deployment.md",
+          "score": 34.80819705777706,
+          "snippet": "服务必须暴露 readiness 与 liveness 探针，失败自动摘流。 本条适用于 部署，涉及「健康检查」的实现必"
+        }
+      ]
+    },
+    {
+      "qid": 9,
+      "query": "CSRF security token",
+      "target": "docs/09-security.md",
+      "rank": 1,
+      "top": [
+        {
+          "path": "docs/09-security.md",
+          "score": 20.659439080596492,
+          "snippet": "状态变更接口启用 CSRF 校验或使用同源令牌。 本条适用于 安全，涉及「CSRF 防护」的实现必须遵守，不允许例外或临"
+        }
+      ]
+    },
+    {
+      "qid": 10,
+      "query": "rate limit degradation cache",
+      "target": "docs/10-performance.md",
+      "rank": 1,
+      "top": [
+        {
+          "path": "docs/10-performance.md",
+          "score": 16.137035101728912,
+          "snippet": "核心接口统一限流与降级，防止高峰打垮下游。 本条适用于 性能，涉及「限流降级」的实现必须遵守，不允许例外或临时绕开。\n先"
+        }
+      ]
+    },
+    {
+      "qid": 11,
+      "query": "SLO error budget freeze release",
+      "target": "docs/11-observability.md",
+      "rank": 1,
+      "top": [
+        {
+          "path": "docs/11-observability.md",
+          "score": 22.078240448626115,
+          "snippet": "核心接口必须写明 SLO 与错误预算，超预算自动冻结发布。 本条适用于 可观测性，涉及「SLO 定义」的实现必须遵守，不"
+        }
+      ]
+    },
+    {
+      "qid": 12,
+      "query": "RED rate errors duration metrics",
+      "target": "docs/11-observability.md",
+      "rank": 1,
+      "top": [
+        {
+          "path": "docs/11-observability.md",
+          "score": 20.288545896641722,
+          "snippet": "每个对外接口采集 Rate、Errors、Duration 三件套，缺一不可。 本条适用于 可观测性，涉及「RED 方法"
+        }
+      ]
+    },
+    {
+      "qid": 13,
+      "query": "dead letter queue retry three",
+      "target": "docs/12-concurrency.md",
+      "rank": 1,
+      "top": [
+        {
+          "path": "docs/12-concurrency.md",
+          "score": 20.920113074617298,
+          "snippet": "失败超过三次进入死信队列并告警，禁止无限重试。 本条适用于 并发，涉及「死信队列」的实现必须遵守，不允许例外或临时绕开。"
+        }
+      ]
+    },
+    {
+      "qid": 14,
+      "query": "idempotent consumer message_id",
+      "target": "docs/12-concurrency.md",
+      "rank": 1,
+      "top": [
+        {
+          "path": "docs/12-concurrency.md",
+          "score": 28.3795145389769,
+          "snippet": "消费者必须按 message_id 幂等，重复投递不得产生副作用。 本条适用于 并发，涉及「幂等消费」的实现必须遵守，不"
+        }
+      ]
+    },
+    {
+      "qid": 15,
+      "query": "parameterized SQL injection ORM",
+      "target": "docs/09-security.md",
+      "rank": 1,
+      "top": [
+        {
+          "path": "docs/09-security.md",
+          "score": 16.77476335578148,
+          "snippet": "查询一律使用参数化与 ORM，禁止字符串拼接 SQL。 本条适用于 安全，涉及「SQL 注入」的实现必须遵守，不允许例外"
+        }
+      ]
+    },
+    {
+      "qid": 16,
+      "query": "soft delete archive physical",
+      "target": "docs/04-database.md",
+      "rank": 1,
+      "top": [
+        {
+          "path": "docs/04-database.md",
+          "score": 22.635630736803307,
+          "snippet": "业务数据采用软删除标记，物理删除仅允许在归档流程中执行。 本条适用于 数据库，涉及「软删除」的实现必须遵守，不允许例外或"
+        }
+      ]
+    },
+    {
+      "qid": 17,
+      "query": "public function type annotations",
+      "target": "docs/01-python-style.md",
+      "rank": 1,
+      "top": [
+        {
+          "path": "docs/01-python-style.md",
+          "score": 24.43539956630408,
+          "snippet": "所有公开函数签名必须补齐完整类型注解，返回值同样不得省略。 本条适用于 Python 代码风格，涉及「类型注解」的实现必"
+        }
+      ]
+    },
+    {
+      "qid": 18,
+      "query": "list pagination page_size total",
+      "target": "docs/05-api-design.md",
+      "rank": 1,
+      "top": [
+        {
+          "path": "docs/05-api-design.md",
+          "score": 24.837200319690982,
+          "snippet": "列表接口统一支持 page 与 page_size，并返回 total 供前端分页。 本条适用于 REST API，涉及"
+        }
+      ]
+    },
+    {
+      "qid": 19,
+      "query": "database connection pool timeout",
+      "target": "docs/04-database.md",
+      "rank": 1,
+      "top": [
+        {
+          "path": "docs/04-database.md",
+          "score": 13.392399397512559,
+          "snippet": "数据库连接使用连接池并设置合理超时，禁止在循环内频繁开关连接。 本条适用于 数据库，涉及「连接管理」的实现必须遵守，不允"
+        }
+      ]
+    },
+    {
+      "qid": 20,
+      "query": "two reviewers public API contract",
+      "target": "docs/13-review.md",
+      "rank": 1,
+      "top": [
+        {
+          "path": "docs/13-review.md",
+          "score": 28.19777734302026,
+          "snippet": "对外契约变更须两名评审通过，其中一名为接口负责人。 本条适用于 代码评审，涉及「公开接口」的实现必须遵守，不允许例外或临"
+        }
+      ]
+    },
+    {
+      "qid": 21,
+      "query": "feature flag default off expiry",
+      "target": "docs/14-config.md",
+      "rank": 1,
+      "top": [
+        {
+          "path": "docs/14-config.md",
+          "score": 21.579719429983832,
+          "snippet": "生产环境功能开关默认关闭，必须登记负责人与过期日。 本条适用于 配置，涉及「功能开关」的实现必须遵守，不允许例外或临时绕"
+        }
+      ]
+    },
+    {
+      "qid": 22,
+      "query": "i18n message catalog hardcoded string",
+      "target": "docs/15-i18n.md",
+      "rank": 1,
+      "top": [
+        {
+          "path": "docs/15-i18n.md",
+          "score": 22.528990486487864,
+          "snippet": "用户可见文案一律走消息目录，禁止在代码中硬编码中英字符串。 本条适用于 国际化，涉及「文案目录」的实现必须遵守，不允许例"
+        }
+      ]
+    },
+    {
+      "qid": 23,
+      "query": "outbound HTTP connect read timeout",
+      "target": "docs/16-http-client.md",
+      "rank": 1,
+      "top": [
+        {
+          "path": "docs/16-http-client.md",
+          "score": 15.546960335828144,
+          "snippet": "出站调用必须设置连接超时与读取超时，禁止无限等待。 本条适用于 HTTP 客户端，涉及「超时设置」的实现必须遵守，不允许"
+        }
+      ]
+    },
+    {
+      "qid": 24,
+      "query": "OpenAPI document drift sync",
+      "target": "docs/05-api-design.md",
+      "rank": 1,
+      "top": [
+        {
+          "path": "docs/05-api-design.md",
+          "score": 28.89698719984218,
+          "snippet": "接口变更必须同步更新 OpenAPI 文档，禁止代码与文档长期漂移。 本条适用于 REST API，涉及「文档同步」的实"
+        }
+      ]
+    },
+    {
+      "qid": 25,
+      "query": "performance cache",
+      "target": "docs/10-performance.md",
+      "rank": 1,
+      "top": [
+        {
+          "path": "docs/10-performance.md",
+          "score": 8.922567883152372,
+          "snippet": "热点数据优先走缓存并设合理过期，避免缓存击穿与雪崩。 本条适用于 性能，涉及「缓存策略」的实现必须遵守，不允许例外或临时"
+        }
+      ]
+    },
+    {
+      "qid": 26,
+      "query": "connection pool timeout",
+      "target": "docs/04-database.md",
+      "rank": 1,
+      "top": [
+        {
+          "path": "docs/04-database.md",
+          "score": 8.362172950423139,
+          "snippet": "数据库连接使用连接池并设置合理超时，禁止在循环内频繁开关连接。 本条适用于 数据库，涉及「连接管理」的实现必须遵守，不允"
+        },
+        {
+          "path": "docs/16-http-client.md",
+          "score": 7.629536526634821,
+          "snippet": "复用 HTTP 连接池，禁止每个请求新建 Client。 本条适用于 HTTP 客户端，涉及「连接池」的实现必须遵守，不"
+        }
+      ]
+    },
+    {
+      "qid": 27,
+      "query": "canary rollback",
+      "target": "docs/08-deployment.md",
+      "rank": 1,
+      "top": [
+        {
+          "path": "docs/08-deployment.md",
+          "score": 11.750725899088588,
+          "snippet": "变更必须走灰度策略，先用小流量验证再逐步放量。 本条适用于 部署，涉及「灰度发布」的实现必须遵守，不允许例外或临时绕开。"
+        }
+      ]
+    },
+    {
+      "qid": 28,
+      "query": "secret plaintext",
+      "target": "docs/09-security.md",
+      "rank": 1,
+      "top": [
+        {
+          "path": "docs/09-security.md",
+          "score": 6.482953799934875,
+          "snippet": "密钥一律加密存储于密钥管理服务，代码与配置不得明文。 本条适用于 安全，涉及「密钥存储」的实现必须遵守，不允许例外或临时"
+        }
+      ]
+    },
+    {
+      "qid": 29,
+      "query": "idempotent retry",
+      "target": "docs/03-error-handling.md",
+      "rank": 1,
+      "top": [
+        {
+          "path": "docs/03-error-handling.md",
+          "score": 7.740917572050394,
+          "snippet": "仅对幂等操作启用重试，重试必须带退避与最大次数，禁止无脑重试。 本条适用于 异常处理，涉及「重试策略」的实现必须遵守，不"
+        },
+        {
+          "path": "docs/16-http-client.md",
+          "score": 7.665770093012294,
+          "snippet": "仅对幂等 GET 与明确可重试错误码重试，写操作默认不重试。 本条适用于 HTTP 客户端，涉及「重试边界」的实现必须遵"
+        },
+        {
+          "path": "docs/12-concurrency.md",
+          "score": 6.498253903373432,
+          "snippet": "消费者必须按 message_id 幂等，重复投递不得产生副作用。 本条适用于 并发，涉及「幂等消费」的实现必须遵守，不"
+        }
+      ]
+    },
+    {
+      "qid": 30,
+      "query": "cache expiry",
+      "target": "docs/10-performance.md",
+      "rank": 1,
+      "top": [
+        {
+          "path": "docs/10-performance.md",
+          "score": 10.337650508310311,
+          "snippet": "热点数据优先走缓存并设合理过期，避免缓存击穿与雪崩。 本条适用于 性能，涉及「缓存策略」的实现必须遵守，不允许例外或临时"
+        }
+      ]
+    },
+    {
+      "qid": 31,
+      "query": "sampling trace",
+      "target": "docs/11-observability.md",
+      "rank": 1,
+      "top": [
+        {
+          "path": "docs/11-observability.md",
+          "score": 10.493461524186467,
+          "snippet": "分布式追踪默认 10% 采样，错误请求 100% 采样。 本条适用于 可观测性，涉及「链路采样」的实现必须遵守，不允许例"
+        }
+      ]
+    },
+    {
+      "qid": 32,
+      "query": "SQL concatenation",
+      "target": "docs/09-security.md",
+      "rank": 1,
+      "top": [
+        {
+          "path": "docs/09-security.md",
+          "score": 6.856006111431492,
+          "snippet": "查询一律使用参数化与 ORM，禁止字符串拼接 SQL。 本条适用于 安全，涉及「SQL 注入」的实现必须遵守，不允许例外"
+        }
+      ]
+    },
+    {
+      "qid": 33,
+      "query": "image layer cache",
+      "target": "docs/08-deployment.md",
+      "rank": 1,
+      "top": [
+        {
+          "path": "docs/08-deployment.md",
+          "score": 9.58852539765765,
+          "snippet": "依赖安装层做缓存分层，利用镜像层缓存加速构建。 本条适用于 部署，涉及「构建缓存」的实现必须遵守，不允许例外或临时绕开。"
+        }
+      ]
+    },
+    {
+      "qid": 34,
+      "query": "batch loop query",
+      "target": "docs/10-performance.md",
+      "rank": 1,
+      "top": [
+        {
+          "path": "docs/10-performance.md",
+          "score": 6.913426618042388,
+          "snippet": "禁止在循环内逐条查询，一律改写为批量或预加载。 本条适用于 性能，涉及「批量查询」的实现必须遵守，不允许例外或临时绕开。"
+        }
+      ]
+    },
+    {
+      "qid": 35,
+      "query": "trace_id logging",
+      "target": "docs/06-logging.md",
+      "rank": 1,
+      "top": [
+        {
+          "path": "docs/06-logging.md",
+          "score": 14.410157378162182,
+          "snippet": "每个请求贯穿唯一 trace_id，日志必须携带以便链路追踪。 本条适用于 日志，涉及「trace_id」的实现必须遵守"
+        }
+      ]
+    },
+    {
+      "qid": 36,
+      "query": "ISO8601 storage",
+      "target": "docs/04-database.md",
+      "rank": 1,
+      "top": [
+        {
+          "path": "docs/04-database.md",
+          "score": 9.935150732966589,
+          "snippet": "所有时间戳字段统一存 UTC 的 ISO8601 字符串，禁止存本地时间或整数。 本条适用于 数据库，涉及「时间戳存储」"
+        },
+        {
+          "path": "docs/15-i18n.md",
+          "score": 8.9157323669056,
+          "snippet": "日期时间按用户 locale 格式化，存储仍为 UTC ISO8601。 本条适用于 国际化，涉及「日期格式」的实现必须"
+        },
+        {
+          "path": "docs/05-api-design.md",
+          "score": 8.696637158819634,
+          "snippet": "接口层时间统一输出 ISO8601 UTC 字符串，与数据库存储保持一致。 本条适用于 REST API，涉及「时间格式"
+        }
+      ]
+    }
+  ],
+  "fuzz": [
+    {
+      "kind": "combo",
+      "guess": "性能 缓存",
+      "query_local": null,
+      "note": "性能与缓存分属多篇，目标在缓存策略",
+      "target": "docs/10-performance.md",
+      "search_patterns": [
+        "性能[\\s_\\-]*缓存",
+        "性能",
+        "缓存"
+      ],
+      "grep_files": [
+        "docs/10-performance.md",
+        "docs/06-logging.md",
+        "docs/08-deployment.md"
+      ],
+      "grep_hit_target": true,
+      "used_find_paths": false,
+      "find_paths": [
+        "docs/10-performance.md"
+      ],
+      "read_paths": [
+        "docs/10-performance.md",
+        "docs/06-logging.md",
+        "docs/08-deployment.md"
+      ],
+      "find_rank": 1,
+      "shelves_paths": [
+        "docs/10-performance.md"
+      ],
+      "shelves_rank": 1
+    },
+    {
+      "kind": "combo",
+      "guess": "连接池 超时",
+      "query_local": null,
+      "note": "连接池与超时在库、观测、出站客户端中均出现",
+      "target": "docs/04-database.md",
+      "search_patterns": [
+        "连接池[\\s_\\-]*超时",
+        "连接池",
+        "超时"
+      ],
+      "grep_files": [
+        "docs/14-config.md",
+        "docs/11-observability.md",
+        "docs/04-database.md",
+        "docs/12-concurrency.md",
+        "docs/16-http-client.md"
+      ],
+      "grep_hit_target": true,
+      "used_find_paths": true,
+      "find_paths": [
+        "docs/04-database.md",
+        "docs/16-http-client.md"
+      ],
+      "read_paths": [
+        "docs/04-database.md",
+        "docs/16-http-client.md"
+      ],
+      "find_rank": 1,
+      "shelves_paths": [
+        "docs/04-database.md",
+        "docs/16-http-client.md"
+      ],
+      "shelves_rank": 1
+    },
+    {
+      "kind": "combo",
+      "guess": "灰度发布 回滚",
+      "query_local": null,
+      "note": "问句专名是灰度发布，蒸馏保留复合词与回滚",
+      "target": "docs/08-deployment.md",
+      "search_patterns": [
+        "灰度发布[\\s_\\-]*回滚",
+        "灰度发布",
+        "回滚"
+      ],
+      "grep_files": [
+        "docs/13-review.md",
+        "docs/08-deployment.md",
+        "docs/03-error-handling.md"
+      ],
+      "grep_hit_target": true,
+      "used_find_paths": false,
+      "find_paths": [
+        "docs/08-deployment.md"
+      ],
+      "read_paths": [
+        "docs/13-review.md",
+        "docs/08-deployment.md",
+        "docs/03-error-handling.md"
+      ],
+      "find_rank": 1,
+      "shelves_paths": [
+        "docs/08-deployment.md"
+      ],
+      "shelves_rank": 1
+    },
+    {
+      "kind": "combo",
+      "guess": "密钥 明文",
+      "query_local": null,
+      "note": "密钥与明文在安全、配置、部署中均出现",
+      "target": "docs/09-security.md",
+      "search_patterns": [
+        "密钥[\\s_\\-]*明文",
+        "密钥",
+        "明文"
+      ],
+      "grep_files": [
+        "docs/09-security.md",
+        "docs/08-deployment.md",
+        "docs/14-config.md",
+        "docs/04-database.md",
+        "docs/02-architecture.md"
+      ],
+      "grep_hit_target": true,
+      "used_find_paths": true,
+      "find_paths": [
+        "docs/09-security.md"
+      ],
+      "read_paths": [
+        "docs/09-security.md"
+      ],
+      "find_rank": 1,
+      "shelves_paths": [
+        "docs/09-security.md"
+      ],
+      "shelves_rank": 1
+    },
+    {
+      "kind": "combo",
+      "guess": "幂等 重试",
+      "query_local": null,
+      "note": "幂等与重试分散在异常、队列、HTTP、API；问句对应重试策略",
+      "target": "docs/03-error-handling.md",
+      "search_patterns": [
+        "幂等[\\s_\\-]*重试",
+        "幂等",
+        "重试"
+      ],
+      "grep_files": [
+        "docs/03-error-handling.md",
+        "docs/12-concurrency.md",
+        "docs/16-http-client.md",
+        "docs/05-api-design.md"
+      ],
+      "grep_hit_target": true,
+      "used_find_paths": true,
+      "find_paths": [
+        "docs/03-error-handling.md",
+        "docs/16-http-client.md",
+        "docs/12-concurrency.md"
+      ],
+      "read_paths": [
+        "docs/03-error-handling.md",
+        "docs/16-http-client.md",
+        "docs/12-concurrency.md"
+      ],
+      "find_rank": 1,
+      "shelves_paths": [
+        "docs/03-error-handling.md",
+        "docs/16-http-client.md",
+        "docs/12-concurrency.md"
+      ],
+      "shelves_rank": 1
+    },
+    {
+      "kind": "combo",
+      "guess": "缓存 过期",
+      "query_local": null,
+      "note": "缓存与过期日分别出现在性能与功能开关",
+      "target": "docs/10-performance.md",
+      "search_patterns": [
+        "缓存[\\s_\\-]*过期",
+        "缓存",
+        "过期"
+      ],
+      "grep_files": [
+        "docs/10-performance.md",
+        "docs/14-config.md",
+        "docs/08-deployment.md"
+      ],
+      "grep_hit_target": true,
+      "used_find_paths": false,
+      "find_paths": [
+        "docs/10-performance.md"
+      ],
+      "read_paths": [
+        "docs/10-performance.md",
+        "docs/14-config.md",
+        "docs/08-deployment.md"
+      ],
+      "find_rank": 1,
+      "shelves_paths": [
+        "docs/10-performance.md"
+      ],
+      "shelves_rank": 1
+    },
+    {
+      "kind": "combo",
+      "guess": "采样 追踪",
+      "query_local": null,
+      "note": "采样与追踪在可观测性重合，日志与出站也沾边",
+      "target": "docs/11-observability.md",
+      "search_patterns": [
+        "采样[\\s_\\-]*追踪",
+        "采样",
+        "追踪"
+      ],
+      "grep_files": [
+        "docs/11-observability.md",
+        "docs/16-http-client.md",
+        "docs/06-logging.md"
+      ],
+      "grep_hit_target": true,
+      "used_find_paths": false,
+      "find_paths": [
+        "docs/11-observability.md"
+      ],
+      "read_paths": [
+        "docs/11-observability.md",
+        "docs/16-http-client.md",
+        "docs/06-logging.md"
+      ],
+      "find_rank": 1,
+      "shelves_paths": [
+        "docs/11-observability.md"
+      ],
+      "shelves_rank": 1
+    },
+    {
+      "kind": "combo",
+      "guess": "SQL 拼接",
+      "query_local": null,
+      "note": "拼接出现在风格、日志、国际化；目标为参数化 SQL",
+      "target": "docs/09-security.md",
+      "search_patterns": [
+        "SQL[\\s_\\-]*拼接",
+        "拼接"
+      ],
+      "grep_files": [
+        "docs/01-python-style.md",
+        "docs/15-i18n.md",
+        "docs/09-security.md",
+        "docs/06-logging.md"
+      ],
+      "grep_hit_target": true,
+      "used_find_paths": true,
+      "find_paths": [
+        "docs/09-security.md"
+      ],
+      "read_paths": [
+        "docs/09-security.md"
+      ],
+      "find_rank": 1,
+      "shelves_paths": [
+        "docs/09-security.md"
+      ],
+      "shelves_rank": 1
+    },
+    {
+      "kind": "combo",
+      "guess": "镜像 缓存",
+      "query_local": null,
+      "note": "镜像在部署与 i18n，缓存在性能与构建",
+      "target": "docs/08-deployment.md",
+      "search_patterns": [
+        "镜像[\\s_\\-]*缓存",
+        "镜像",
+        "缓存"
+      ],
+      "grep_files": [
+        "docs/15-i18n.md",
+        "docs/10-performance.md",
+        "docs/08-deployment.md"
+      ],
+      "grep_hit_target": true,
+      "used_find_paths": false,
+      "find_paths": [
+        "docs/08-deployment.md"
+      ],
+      "read_paths": [
+        "docs/15-i18n.md",
+        "docs/10-performance.md",
+        "docs/08-deployment.md"
+      ],
+      "find_rank": 1,
+      "shelves_paths": [
+        "docs/08-deployment.md"
+      ],
+      "shelves_rank": 1
+    },
+    {
+      "kind": "combo",
+      "guess": "批量 循环",
+      "query_local": null,
+      "note": "循环出现在风格、架构、数据库；目标为禁止逐条查询",
+      "target": "docs/10-performance.md",
+      "search_patterns": [
+        "批量[\\s_\\-]*循环",
+        "批量",
+        "循环"
+      ],
+      "grep_files": [
+        "docs/01-python-style.md",
+        "docs/10-performance.md",
+        "docs/04-database.md",
+        "docs/02-architecture.md"
+      ],
+      "grep_hit_target": true,
+      "used_find_paths": true,
+      "find_paths": [
+        "docs/10-performance.md"
+      ],
+      "read_paths": [
+        "docs/10-performance.md"
+      ],
+      "find_rank": 1,
+      "shelves_paths": [
+        "docs/10-performance.md"
+      ],
+      "shelves_rank": 1
+    },
+    {
+      "kind": "combo",
+      "guess": "trace_id 日志",
+      "query_local": null,
+      "note": "trace_id 与日志在多篇交叉",
+      "target": "docs/06-logging.md",
+      "search_patterns": [
+        "trace[\\s_\\-]*id[\\s_\\-]*日志",
+        "trace_id",
+        "日志"
+      ],
+      "grep_files": [
+        "docs/01-python-style.md",
+        "docs/09-security.md",
+        "docs/14-config.md",
+        "docs/11-observability.md",
+        "docs/03-error-handling.md",
+        "docs/04-database.md",
+        "docs/16-http-client.md",
+        "docs/06-logging.md"
+      ],
+      "grep_hit_target": true,
+      "used_find_paths": true,
+      "find_paths": [
+        "docs/06-logging.md"
+      ],
+      "read_paths": [
+        "docs/06-logging.md"
+      ],
+      "find_rank": 1,
+      "shelves_paths": [
+        "docs/06-logging.md"
+      ],
+      "shelves_rank": 1
+    },
+    {
+      "kind": "combo",
+      "guess": "ISO8601 存储",
+      "query_local": null,
+      "note": "ISO8601 同时出现在库、接口、国际化",
+      "target": "docs/04-database.md",
+      "search_patterns": [
+        "ISO8601[\\s_\\-]*存储",
+        "ISO8601",
+        "存储"
+      ],
+      "grep_files": [
+        "docs/15-i18n.md",
+        "docs/09-security.md",
+        "docs/04-database.md",
+        "docs/05-api-design.md"
+      ],
+      "grep_hit_target": true,
+      "used_find_paths": true,
+      "find_paths": [
+        "docs/04-database.md",
+        "docs/15-i18n.md",
+        "docs/05-api-design.md"
+      ],
+      "read_paths": [
+        "docs/04-database.md",
+        "docs/15-i18n.md",
+        "docs/05-api-design.md"
+      ],
+      "find_rank": 1,
+      "shelves_paths": [
+        "docs/04-database.md",
+        "docs/15-i18n.md",
+        "docs/05-api-design.md"
+      ],
+      "shelves_rank": 1
+    },
+    {
+      "kind": "combo",
+      "guess": "死信 重试",
+      "query_local": null,
+      "note": "重试出现在异常与 HTTP；目标为死信队列",
+      "target": "docs/12-concurrency.md",
+      "search_patterns": [
+        "死信[\\s_\\-]*重试",
+        "死信",
+        "重试"
+      ],
+      "grep_files": [
+        "docs/03-error-handling.md",
+        "docs/12-concurrency.md",
+        "docs/16-http-client.md"
+      ],
+      "grep_hit_target": true,
+      "used_find_paths": false,
+      "find_paths": [
+        "docs/12-concurrency.md"
+      ],
+      "read_paths": [
+        "docs/03-error-handling.md",
+        "docs/12-concurrency.md",
+        "docs/16-http-client.md"
+      ],
+      "find_rank": 1,
+      "shelves_paths": [
+        "docs/12-concurrency.md"
+      ],
+      "shelves_rank": 1
+    },
+    {
+      "kind": "combo",
+      "guess": "连接池 水位",
+      "query_local": null,
+      "note": "连接池在库与 HTTP 客户端；目标为容量水位",
+      "target": "docs/11-observability.md",
+      "search_patterns": [
+        "连接池[\\s_\\-]*水位",
+        "连接池",
+        "水位"
+      ],
+      "grep_files": [
+        "docs/11-observability.md",
+        "docs/04-database.md",
+        "docs/16-http-client.md"
+      ],
+      "grep_hit_target": true,
+      "used_find_paths": false,
+      "find_paths": [
+        "docs/11-observability.md",
+        "docs/16-http-client.md"
+      ],
+      "read_paths": [
+        "docs/11-observability.md",
+        "docs/04-database.md",
+        "docs/16-http-client.md"
+      ],
+      "find_rank": 1,
+      "shelves_paths": [
+        "docs/11-observability.md",
+        "docs/16-http-client.md"
+      ],
+      "shelves_rank": 1
+    },
+    {
+      "kind": "combo",
+      "guess": "脱敏 日志",
+      "query_local": null,
+      "note": "日志与脱敏在多篇出现；目标为日志敏感信息",
+      "target": "docs/06-logging.md",
+      "search_patterns": [
+        "脱敏[\\s_\\-]*日志",
+        "脱敏",
+        "日志"
+      ],
+      "grep_files": [
+        "docs/01-python-style.md",
+        "docs/09-security.md",
+        "docs/14-config.md",
+        "docs/11-observability.md",
+        "docs/03-error-handling.md",
+        "docs/04-database.md",
+        "docs/06-logging.md"
+      ],
+      "grep_hit_target": true,
+      "used_find_paths": true,
+      "find_paths": [
+        "docs/06-logging.md",
+        "docs/04-database.md"
+      ],
+      "read_paths": [
+        "docs/06-logging.md",
+        "docs/04-database.md"
+      ],
+      "find_rank": 1,
+      "shelves_paths": [
+        "docs/06-logging.md",
+        "docs/04-database.md"
+      ],
+      "shelves_rank": 1
+    },
+    {
+      "kind": "combo",
+      "guess": "限流 降级",
+      "query_local": null,
+      "note": "降级亦出现在队列背压",
+      "target": "docs/10-performance.md",
+      "search_patterns": [
+        "限流[\\s_\\-]*降级",
+        "限流",
+        "降级"
+      ],
+      "grep_files": [
+        "docs/10-performance.md",
+        "docs/12-concurrency.md"
+      ],
+      "grep_hit_target": true,
+      "used_find_paths": false,
+      "find_paths": [
+        "docs/10-performance.md"
+      ],
+      "read_paths": [
+        "docs/10-performance.md",
+        "docs/12-concurrency.md"
+      ],
+      "find_rank": 1,
+      "shelves_paths": [
+        "docs/10-performance.md"
+      ],
+      "shelves_rank": 1
+    },
+    {
+      "kind": "ident",
+      "guess": "repository",
+      "query_local": null,
+      "note": "大小写与文档中的 Repository 不一致",
+      "target": "docs/02-architecture.md",
+      "search_patterns": [
+        "repository"
+      ],
+      "grep_files": [
+        "docs/02-architecture.md"
+      ],
+      "grep_hit_target": true,
+      "used_find_paths": false,
+      "find_paths": [
+        "docs/02-architecture.md"
+      ],
+      "read_paths": [
+        "docs/02-architecture.md"
+      ],
+      "find_rank": 1,
+      "shelves_paths": [
+        "docs/02-architecture.md"
+      ],
+      "shelves_rank": 1
+    },
+    {
+      "kind": "ident",
+      "guess": "snake case",
+      "query_local": null,
+      "note": "空格与下划线 snake_case 不一致",
+      "target": "docs/01-python-style.md",
+      "search_patterns": [
+        "snake[\\s_\\-]*case",
+        "snake"
+      ],
+      "grep_files": [
+        "docs/01-python-style.md"
+      ],
+      "grep_hit_target": true,
+      "used_find_paths": false,
+      "find_paths": [
+        "docs/01-python-style.md"
+      ],
+      "read_paths": [
+        "docs/01-python-style.md"
+      ],
+      "find_rank": 1,
+      "shelves_paths": [
+        "docs/01-python-style.md"
+      ],
+      "shelves_rank": 1
+    },
+    {
+      "kind": "ident",
+      "guess": "messageid",
+      "query_local": null,
+      "note": "连写，文档中为 message_id",
+      "target": "docs/12-concurrency.md",
+      "search_patterns": [
+        "message[\\s_\\-]*id"
+      ],
+      "grep_files": [
+        "docs/12-concurrency.md"
+      ],
+      "grep_hit_target": true,
+      "used_find_paths": false,
+      "find_paths": [
+        "docs/12-concurrency.md"
+      ],
+      "read_paths": [
+        "docs/12-concurrency.md"
+      ],
+      "find_rank": 1,
+      "shelves_paths": [
+        "docs/12-concurrency.md"
+      ],
+      "shelves_rank": 1
+    },
+    {
+      "kind": "ident",
+      "guess": "fstring",
+      "query_local": null,
+      "note": "连写，文档中为 f-string",
+      "target": "docs/01-python-style.md",
+      "search_patterns": [
+        "f[\\s_\\-]*string"
+      ],
+      "grep_files": [
+        "docs/01-python-style.md"
+      ],
+      "grep_hit_target": true,
+      "used_find_paths": false,
+      "find_paths": [
+        "docs/01-python-style.md"
+      ],
+      "read_paths": [
+        "docs/01-python-style.md"
+      ],
+      "find_rank": 1,
+      "shelves_paths": [
+        "docs/01-python-style.md"
+      ],
+      "shelves_rank": 1
+    },
+    {
+      "kind": "ident",
+      "guess": "soft-delete",
+      "query_local": "软删除",
+      "note": "连字符与中文专名并用",
+      "target": "docs/04-database.md",
+      "search_patterns": [
+        "soft[\\s_\\-]*delete",
+        "软删除"
+      ],
+      "grep_files": [
+        "docs/04-database.md"
+      ],
+      "grep_hit_target": true,
+      "used_find_paths": false,
+      "find_paths": [
+        "docs/04-database.md"
+      ],
+      "read_paths": [
+        "docs/04-database.md"
+      ],
+      "find_rank": 1,
+      "shelves_paths": [
+        "docs/04-database.md"
+      ],
+      "shelves_rank": 1
+    },
+    {
+      "kind": "ident",
+      "guess": "DLQ",
+      "query_local": "死信队列",
+      "note": "英文缩写与中文专名并用",
+      "target": "docs/12-concurrency.md",
+      "search_patterns": [
+        "死信队列",
+        "DLQ"
+      ],
+      "grep_files": [
+        "docs/12-concurrency.md"
+      ],
+      "grep_hit_target": true,
+      "used_find_paths": false,
+      "find_paths": [
+        "docs/12-concurrency.md"
+      ],
+      "read_paths": [
+        "docs/12-concurrency.md"
+      ],
+      "find_rank": 1,
+      "shelves_paths": [
+        "docs/12-concurrency.md"
+      ],
+      "shelves_rank": 1
+    },
+    {
+      "kind": "ident",
+      "guess": "openapi",
+      "query_local": null,
+      "note": "大小写与 OpenAPI 不一致",
+      "target": "docs/05-api-design.md",
+      "search_patterns": [
+        "open[\\s_\\-]*api"
+      ],
+      "grep_files": [
+        "docs/05-api-design.md"
+      ],
+      "grep_hit_target": true,
+      "used_find_paths": false,
+      "find_paths": [
+        "docs/05-api-design.md"
+      ],
+      "read_paths": [
+        "docs/05-api-design.md"
+      ],
+      "find_rank": 1,
+      "shelves_paths": [
+        "docs/05-api-design.md"
+      ],
+      "shelves_rank": 1
+    },
+    {
+      "kind": "ident",
+      "guess": "featureflag",
+      "query_local": "功能开关",
+      "note": "英文连写与中文专名并用",
+      "target": "docs/14-config.md",
+      "search_patterns": [
+        "feature[\\s_\\-]*flag",
+        "功能开关"
+      ],
+      "grep_files": [
+        "docs/14-config.md"
+      ],
+      "grep_hit_target": true,
+      "used_find_paths": false,
+      "find_paths": [
+        "docs/14-config.md"
+      ],
+      "read_paths": [
+        "docs/14-config.md"
+      ],
+      "find_rank": 1,
+      "shelves_paths": [
+        "docs/14-config.md"
+      ],
+      "shelves_rank": 1
+    }
+  ]
+}

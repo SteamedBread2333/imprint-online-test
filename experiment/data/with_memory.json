@@ -1,0 +1,1245 @@
+{
+  "scenario": "memory",
+  "rows": [
+    {
+      "round": 1,
+      "phase": "build",
+      "shared_tokens": 97,
+      "shared_prompt_text": "你是 aurora 项目的资深后端工程师。aurora 是一个 Python FastAPI 微服务。请严格遵循下方提供的项目规范完成每个任务，回答简洁、可直接落地为代码。\n\n【用户消息】\n开始搭 user 模块，同时定两条 Python 基础规范：命名风格和分层依赖。\n\n【任务】\n给 user_service.py 写一个骨架（类名 UserService、函数 get_user_by_id）。",
+      "find_args": {
+        "scope": "aurora,python",
+        "query": "naming architecture layers",
+        "query_local": "命名 架构 分层 依赖",
+        "top_k": 5
+      },
+      "find_rules": [],
+      "rules_recalled": 0,
+      "expected_count": 0,
+      "hit_count": 0,
+      "precision": 1.0,
+      "recall": 1.0,
+      "expected_claims": [],
+      "recalled_claims": [],
+      "find_req_tokens": 32,
+      "find_rules_tokens": 1,
+      "find_shelves_tokens": 112,
+      "find_full_text_tokens": 138,
+      "add_req_tokens": 204,
+      "add_resp_tokens": 60,
+      "add_rule_ids": [
+        "r-2026-09-28-001",
+        "r-2026-09-28-002"
+      ],
+      "add_errors": [],
+      "core_input_tokens": 394,
+      "total_with_shelves": 506
+    },
+    {
+      "round": 2,
+      "phase": "build",
+      "shared_tokens": 79,
+      "shared_prompt_text": "你是 aurora 项目的资深后端工程师。aurora 是一个 Python FastAPI 微服务。请严格遵循下方提供的项目规范完成每个任务，回答简洁、可直接落地为代码。\n\n【用户消息】\n再加两条质量规范：异常处理和提交流程。\n\n【任务】\n给 PaymentService 的方法加统一错误处理。",
+      "find_args": {
+        "scope": "aurora,quality",
+        "query": "error workflow commit",
+        "query_local": "异常 提交 质量",
+        "top_k": 5
+      },
+      "find_rules": [],
+      "rules_recalled": 0,
+      "expected_count": 0,
+      "hit_count": 0,
+      "precision": 1.0,
+      "recall": 1.0,
+      "expected_claims": [],
+      "recalled_claims": [],
+      "find_req_tokens": 28,
+      "find_rules_tokens": 1,
+      "find_shelves_tokens": 119,
+      "find_full_text_tokens": 145,
+      "add_req_tokens": 202,
+      "add_resp_tokens": 60,
+      "add_rule_ids": [
+        "r-2026-09-28-003",
+        "r-2026-09-28-004"
+      ],
+      "add_errors": [],
+      "core_input_tokens": 370,
+      "total_with_shelves": 489
+    },
+    {
+      "round": 3,
+      "phase": "build",
+      "shared_tokens": 85,
+      "shared_prompt_text": "你是 aurora 项目的资深后端工程师。aurora 是一个 Python FastAPI 微服务。请严格遵循下方提供的项目规范完成每个任务，回答简洁、可直接落地为代码。\n\n【用户消息】\n接口约定：数据时间戳和 REST 信封。\n\n【任务】\n实现订单查询接口 GET /api/v1/orders 的骨架。",
+      "find_args": {
+        "scope": "aurora,interface",
+        "query": "timestamp rest api envelope",
+        "query_local": "时间戳 接口 REST API",
+        "top_k": 5
+      },
+      "find_rules": [],
+      "rules_recalled": 0,
+      "expected_count": 0,
+      "hit_count": 0,
+      "precision": 1.0,
+      "recall": 1.0,
+      "expected_claims": [],
+      "recalled_claims": [],
+      "find_req_tokens": 31,
+      "find_rules_tokens": 1,
+      "find_shelves_tokens": 208,
+      "find_full_text_tokens": 253,
+      "add_req_tokens": 217,
+      "add_resp_tokens": 60,
+      "add_rule_ids": [
+        "r-2026-09-28-005",
+        "r-2026-09-28-006"
+      ],
+      "add_errors": [],
+      "core_input_tokens": 394,
+      "total_with_shelves": 602
+    },
+    {
+      "round": 4,
+      "phase": "build",
+      "shared_tokens": 81,
+      "shared_prompt_text": "你是 aurora 项目的资深后端工程师。aurora 是一个 Python FastAPI 微服务。请严格遵循下方提供的项目规范完成每个任务，回答简洁、可直接落地为代码。\n\n【用户消息】\n安全规范：密钥和鉴权。\n\n【任务】\n给登录接口加上鉴权校验，密钥不要写进仓库。",
+      "find_args": {
+        "scope": "aurora,security",
+        "query": "secrets auth csrf",
+        "query_local": "密钥 鉴权 安全 CSRF",
+        "top_k": 5
+      },
+      "find_rules": [],
+      "rules_recalled": 0,
+      "expected_count": 0,
+      "hit_count": 0,
+      "precision": 1.0,
+      "recall": 1.0,
+      "expected_claims": [],
+      "recalled_claims": [],
+      "find_req_tokens": 32,
+      "find_rules_tokens": 1,
+      "find_shelves_tokens": 123,
+      "find_full_text_tokens": 149,
+      "add_req_tokens": 207,
+      "add_resp_tokens": 60,
+      "add_rule_ids": [
+        "r-2026-09-28-007",
+        "r-2026-09-28-008"
+      ],
+      "add_errors": [],
+      "core_input_tokens": 381,
+      "total_with_shelves": 504
+    },
+    {
+      "round": 5,
+      "phase": "build",
+      "shared_tokens": 74,
+      "shared_prompt_text": "你是 aurora 项目的资深后端工程师。aurora 是一个 Python FastAPI 微服务。请严格遵循下方提供的项目规范完成每个任务，回答简洁、可直接落地为代码。\n\n【用户消息】\n测试规范：框架和隔离。\n\n【任务】\n为 billing 模块补单测骨架。",
+      "find_args": {
+        "scope": "aurora,testing",
+        "query": "pytest coverage mock",
+        "query_local": "测试 pytest 覆盖率 mock",
+        "top_k": 5
+      },
+      "find_rules": [],
+      "rules_recalled": 0,
+      "expected_count": 0,
+      "hit_count": 0,
+      "precision": 1.0,
+      "recall": 1.0,
+      "expected_claims": [],
+      "recalled_claims": [],
+      "find_req_tokens": 29,
+      "find_rules_tokens": 1,
+      "find_shelves_tokens": 237,
+      "find_full_text_tokens": 282,
+      "add_req_tokens": 195,
+      "add_resp_tokens": 60,
+      "add_rule_ids": [
+        "r-2026-09-28-009",
+        "r-2026-09-28-010"
+      ],
+      "add_errors": [],
+      "core_input_tokens": 359,
+      "total_with_shelves": 596
+    },
+    {
+      "round": 6,
+      "phase": "build",
+      "shared_tokens": 75,
+      "shared_prompt_text": "你是 aurora 项目的资深后端工程师。aurora 是一个 Python FastAPI 微服务。请严格遵循下方提供的项目规范完成每个任务，回答简洁、可直接落地为代码。\n\n【用户消息】\n运维规范：日志和健康检查。\n\n【任务】\n给服务加上 JSON 日志和探针。",
+      "find_args": {
+        "scope": "aurora,ops",
+        "query": "logging health probe trace_id",
+        "query_local": "日志 健康检查 探针 trace_id",
+        "top_k": 5
+      },
+      "find_rules": [],
+      "rules_recalled": 0,
+      "expected_count": 0,
+      "hit_count": 0,
+      "precision": 1.0,
+      "recall": 1.0,
+      "expected_claims": [],
+      "recalled_claims": [],
+      "find_req_tokens": 34,
+      "find_rules_tokens": 1,
+      "find_shelves_tokens": 109,
+      "find_full_text_tokens": 135,
+      "add_req_tokens": 185,
+      "add_resp_tokens": 60,
+      "add_rule_ids": [
+        "r-2026-09-28-011",
+        "r-2026-09-28-012"
+      ],
+      "add_errors": [],
+      "core_input_tokens": 355,
+      "total_with_shelves": 464
+    },
+    {
+      "round": 7,
+      "phase": "build",
+      "shared_tokens": 85,
+      "shared_prompt_text": "你是 aurora 项目的资深后端工程师。aurora 是一个 Python FastAPI 微服务。请严格遵循下方提供的项目规范完成每个任务，回答简洁、可直接落地为代码。\n\n【用户消息】\n评审规范：公开接口变更和 PR 描述。\n\n【任务】\n准备把内部查询接口改成公开 API，先对齐评审要求。",
+      "find_args": {
+        "scope": "aurora,review",
+        "query": "code review public API pull request",
+        "query_local": "评审 公开接口 PR 回滚",
+        "top_k": 5
+      },
+      "find_rules": [],
+      "rules_recalled": 0,
+      "expected_count": 0,
+      "hit_count": 0,
+      "precision": 1.0,
+      "recall": 1.0,
+      "expected_claims": [],
+      "recalled_claims": [],
+      "find_req_tokens": 35,
+      "find_rules_tokens": 1,
+      "find_shelves_tokens": 123,
+      "find_full_text_tokens": 149,
+      "add_req_tokens": 168,
+      "add_resp_tokens": 60,
+      "add_rule_ids": [
+        "r-2026-09-28-013",
+        "r-2026-09-28-014"
+      ],
+      "add_errors": [],
+      "core_input_tokens": 349,
+      "total_with_shelves": 472
+    },
+    {
+      "round": 8,
+      "phase": "build",
+      "shared_tokens": 78,
+      "shared_prompt_text": "你是 aurora 项目的资深后端工程师。aurora 是一个 Python FastAPI 微服务。请严格遵循下方提供的项目规范完成每个任务，回答简洁、可直接落地为代码。\n\n【用户消息】\n配置规范：环境变量和功能开关。\n\n【任务】\n把超时和开关从代码里拆出去。",
+      "find_args": {
+        "scope": "aurora,config",
+        "query": "twelve factor env feature flag",
+        "query_local": "配置 环境变量 功能开关",
+        "top_k": 5
+      },
+      "find_rules": [],
+      "rules_recalled": 0,
+      "expected_count": 0,
+      "hit_count": 0,
+      "precision": 1.0,
+      "recall": 1.0,
+      "expected_claims": [],
+      "recalled_claims": [],
+      "find_req_tokens": 34,
+      "find_rules_tokens": 1,
+      "find_shelves_tokens": 235,
+      "find_full_text_tokens": 280,
+      "add_req_tokens": 180,
+      "add_resp_tokens": 60,
+      "add_rule_ids": [
+        "r-2026-09-28-015",
+        "r-2026-09-28-016"
+      ],
+      "add_errors": [],
+      "core_input_tokens": 353,
+      "total_with_shelves": 588
+    },
+    {
+      "round": 9,
+      "phase": "comply",
+      "shared_tokens": 79,
+      "shared_prompt_text": "你是 aurora 项目的资深后端工程师。aurora 是一个 Python FastAPI 微服务。请严格遵循下方提供的项目规范完成每个任务，回答简洁、可直接落地为代码。\n\n【用户消息】\n给 user_service 补类型注解。\n\n【任务】\n给 user_service.py 的所有公开函数补全类型注解。",
+      "find_args": {
+        "scope": "aurora,python",
+        "query": "PascalCase identifiers snake_case helpers",
+        "query_local": "类名 PascalCase 函数 snake_case 命名",
+        "top_k": 5
+      },
+      "find_rules": [
+        {
+          "id": "r-2026-09-28-001",
+          "claim": "Use snake_case for functions/variables and PascalCase for classes",
+          "scope": [
+            "aurora",
+            "python"
+          ],
+          "confidence": 0.6,
+          "score": 0.9339,
+          "status": "active",
+          "evidence_count": 1
+        },
+        {
+          "id": "r-2026-09-28-002",
+          "claim": "Services layer may only import the domain layer",
+          "scope": [
+            "aurora",
+            "python"
+          ],
+          "confidence": 0.6,
+          "score": 0.222,
+          "status": "active",
+          "evidence_count": 1
+        }
+      ],
+      "rules_recalled": 2,
+      "expected_count": 2,
+      "hit_count": 2,
+      "precision": 1.0,
+      "recall": 1.0,
+      "expected_claims": [
+        "Services layer may only import the domain layer",
+        "Use snake_case for functions/variables and PascalCase for classes"
+      ],
+      "recalled_claims": [
+        "Use snake_case for functions/variables and PascalCase for classes",
+        "Services layer may only import the domain layer"
+      ],
+      "find_req_tokens": 37,
+      "find_rules_tokens": 126,
+      "find_shelves_tokens": 232,
+      "find_full_text_tokens": 487,
+      "add_req_tokens": 0,
+      "add_resp_tokens": 0,
+      "add_rule_ids": [],
+      "add_errors": [],
+      "core_input_tokens": 242,
+      "total_with_shelves": 474
+    },
+    {
+      "round": 10,
+      "phase": "comply",
+      "shared_tokens": 77,
+      "shared_prompt_text": "你是 aurora 项目的资深后端工程师。aurora 是一个 Python FastAPI 微服务。请严格遵循下方提供的项目规范完成每个任务，回答简洁、可直接落地为代码。\n\n【用户消息】\n拆一个跨层引用。\n\n【任务】\n把 UserService 里误 import 的 ORM session 挪到 repository。",
+      "find_args": {
+        "scope": "aurora,python",
+        "query": "service import domain only inward dependency",
+        "query_local": "分层 services 只依赖 domain 向内",
+        "top_k": 5
+      },
+      "find_rules": [
+        {
+          "id": "r-2026-09-28-002",
+          "claim": "Services layer may only import the domain layer",
+          "scope": [
+            "aurora",
+            "python"
+          ],
+          "confidence": 0.6,
+          "score": 0.9293,
+          "status": "active",
+          "evidence_count": 1
+        },
+        {
+          "id": "r-2026-09-28-001",
+          "claim": "Use snake_case for functions/variables and PascalCase for classes",
+          "scope": [
+            "aurora",
+            "python"
+          ],
+          "confidence": 0.6,
+          "score": 0.222,
+          "status": "active",
+          "evidence_count": 1
+        }
+      ],
+      "rules_recalled": 2,
+      "expected_count": 2,
+      "hit_count": 2,
+      "precision": 1.0,
+      "recall": 1.0,
+      "expected_claims": [
+        "Services layer may only import the domain layer",
+        "Use snake_case for functions/variables and PascalCase for classes"
+      ],
+      "recalled_claims": [
+        "Services layer may only import the domain layer",
+        "Use snake_case for functions/variables and PascalCase for classes"
+      ],
+      "find_req_tokens": 35,
+      "find_rules_tokens": 126,
+      "find_shelves_tokens": 242,
+      "find_full_text_tokens": 497,
+      "add_req_tokens": 0,
+      "add_resp_tokens": 0,
+      "add_rule_ids": [],
+      "add_errors": [],
+      "core_input_tokens": 238,
+      "total_with_shelves": 480
+    },
+    {
+      "round": 11,
+      "phase": "comply",
+      "shared_tokens": 75,
+      "shared_prompt_text": "你是 aurora 项目的资深后端工程师。aurora 是一个 Python FastAPI 微服务。请严格遵循下方提供的项目规范完成每个任务，回答简洁、可直接落地为代码。\n\n【用户消息】\n给 payment_service 加错误处理。\n\n【任务】\nPaymentService.charge 失败时抛领域异常。",
+      "find_args": {
+        "scope": "aurora,quality",
+        "query": "custom exception hierarchy not bare Exception",
+        "query_local": "异常 AuroraError 不要裸 raise",
+        "top_k": 5
+      },
+      "find_rules": [
+        {
+          "id": "r-2026-09-28-003",
+          "claim": "Throw AuroraError subclasses for all errors; never bare raise",
+          "scope": [
+            "aurora",
+            "quality"
+          ],
+          "confidence": 0.6,
+          "score": 0.9276,
+          "status": "active",
+          "evidence_count": 1
+        },
+        {
+          "id": "r-2026-09-28-004",
+          "claim": "Run ruff and mypy clean before every commit",
+          "scope": [
+            "aurora",
+            "quality"
+          ],
+          "confidence": 0.6,
+          "score": 0.7451,
+          "status": "active",
+          "evidence_count": 1
+        }
+      ],
+      "rules_recalled": 2,
+      "expected_count": 2,
+      "hit_count": 2,
+      "precision": 1.0,
+      "recall": 1.0,
+      "expected_claims": [
+        "Run ruff and mypy clean before every commit",
+        "Throw AuroraError subclasses for all errors; never bare raise"
+      ],
+      "recalled_claims": [
+        "Throw AuroraError subclasses for all errors; never bare raise",
+        "Run ruff and mypy clean before every commit"
+      ],
+      "find_req_tokens": 33,
+      "find_rules_tokens": 128,
+      "find_shelves_tokens": 219,
+      "find_full_text_tokens": 476,
+      "add_req_tokens": 0,
+      "add_resp_tokens": 0,
+      "add_rule_ids": [],
+      "add_errors": [],
+      "core_input_tokens": 236,
+      "total_with_shelves": 455
+    },
+    {
+      "round": 12,
+      "phase": "comply",
+      "shared_tokens": 71,
+      "shared_prompt_text": "你是 aurora 项目的资深后端工程师。aurora 是一个 Python FastAPI 微服务。请严格遵循下方提供的项目规范完成每个任务，回答简洁、可直接落地为代码。\n\n【用户消息】\n准备提 PR。\n\n【任务】\n列出提交前必须跑绿的检查命令。",
+      "find_args": {
+        "scope": "aurora,quality",
+        "query": "lint typecheck before commit ruff mypy",
+        "query_local": "提交前 ruff mypy 全绿",
+        "top_k": 5
+      },
+      "find_rules": [
+        {
+          "id": "r-2026-09-28-004",
+          "claim": "Run ruff and mypy clean before every commit",
+          "scope": [
+            "aurora",
+            "quality"
+          ],
+          "confidence": 0.6,
+          "score": 0.9208,
+          "status": "active",
+          "evidence_count": 1
+        },
+        {
+          "id": "r-2026-09-28-003",
+          "claim": "Throw AuroraError subclasses for all errors; never bare raise",
+          "scope": [
+            "aurora",
+            "quality"
+          ],
+          "confidence": 0.6,
+          "score": 0.222,
+          "status": "active",
+          "evidence_count": 1
+        }
+      ],
+      "rules_recalled": 2,
+      "expected_count": 2,
+      "hit_count": 2,
+      "precision": 1.0,
+      "recall": 1.0,
+      "expected_claims": [
+        "Run ruff and mypy clean before every commit",
+        "Throw AuroraError subclasses for all errors; never bare raise"
+      ],
+      "recalled_claims": [
+        "Run ruff and mypy clean before every commit",
+        "Throw AuroraError subclasses for all errors; never bare raise"
+      ],
+      "find_req_tokens": 37,
+      "find_rules_tokens": 127,
+      "find_shelves_tokens": 237,
+      "find_full_text_tokens": 493,
+      "add_req_tokens": 0,
+      "add_resp_tokens": 0,
+      "add_rule_ids": [],
+      "add_errors": [],
+      "core_input_tokens": 235,
+      "total_with_shelves": 472
+    },
+    {
+      "round": 13,
+      "phase": "comply",
+      "shared_tokens": 72,
+      "shared_prompt_text": "你是 aurora 项目的资深后端工程师。aurora 是一个 Python FastAPI 微服务。请严格遵循下方提供的项目规范完成每个任务，回答简洁、可直接落地为代码。\n\n【用户消息】\n订单模型加时间字段。\n\n【任务】\n新增 Order schema 的 created_at / updated_at。",
+      "find_args": {
+        "scope": "aurora,interface",
+        "query": "UTC ISO8601 created_at updated_at",
+        "query_local": "时间戳 UTC ISO8601 字段",
+        "top_k": 5
+      },
+      "find_rules": [
+        {
+          "id": "r-2026-09-28-005",
+          "claim": "Store timestamps as UTC ISO8601 strings",
+          "scope": [
+            "aurora",
+            "interface"
+          ],
+          "confidence": 0.6,
+          "score": 0.9312,
+          "status": "active",
+          "evidence_count": 1
+        },
+        {
+          "id": "r-2026-09-28-006",
+          "claim": "Use REST /api/v1 with {code,data,message} response envelope",
+          "scope": [
+            "aurora",
+            "interface"
+          ],
+          "confidence": 0.6,
+          "score": 0.222,
+          "status": "active",
+          "evidence_count": 1
+        }
+      ],
+      "rules_recalled": 2,
+      "expected_count": 2,
+      "hit_count": 2,
+      "precision": 1.0,
+      "recall": 1.0,
+      "expected_claims": [
+        "Store timestamps as UTC ISO8601 strings",
+        "Use REST /api/v1 with {code,data,message} response envelope"
+      ],
+      "recalled_claims": [
+        "Store timestamps as UTC ISO8601 strings",
+        "Use REST /api/v1 with {code,data,message} response envelope"
+      ],
+      "find_req_tokens": 41,
+      "find_rules_tokens": 131,
+      "find_shelves_tokens": 238,
+      "find_full_text_tokens": 498,
+      "add_req_tokens": 0,
+      "add_resp_tokens": 0,
+      "add_rule_ids": [],
+      "add_errors": [],
+      "core_input_tokens": 244,
+      "total_with_shelves": 482
+    },
+    {
+      "round": 14,
+      "phase": "comply",
+      "shared_tokens": 76,
+      "shared_prompt_text": "你是 aurora 项目的资深后端工程师。aurora 是一个 Python FastAPI 微服务。请严格遵循下方提供的项目规范完成每个任务，回答简洁、可直接落地为代码。\n\n【用户消息】\n订单接口规范返回结构。\n\n【任务】\n给订单接口实现统一 {code,data,message} 响应。",
+      "find_args": {
+        "scope": "aurora,interface",
+        "query": "REST envelope code data message api v1",
+        "query_local": "REST 响应包裹 /api/v1",
+        "top_k": 5
+      },
+      "find_rules": [
+        {
+          "id": "r-2026-09-28-006",
+          "claim": "Use REST /api/v1 with {code,data,message} response envelope",
+          "scope": [
+            "aurora",
+            "interface"
+          ],
+          "confidence": 0.6,
+          "score": 0.9321,
+          "status": "active",
+          "evidence_count": 1
+        },
+        {
+          "id": "r-2026-09-28-005",
+          "claim": "Store timestamps as UTC ISO8601 strings",
+          "scope": [
+            "aurora",
+            "interface"
+          ],
+          "confidence": 0.6,
+          "score": 0.222,
+          "status": "active",
+          "evidence_count": 1
+        }
+      ],
+      "rules_recalled": 2,
+      "expected_count": 2,
+      "hit_count": 2,
+      "precision": 1.0,
+      "recall": 1.0,
+      "expected_claims": [
+        "Store timestamps as UTC ISO8601 strings",
+        "Use REST /api/v1 with {code,data,message} response envelope"
+      ],
+      "recalled_claims": [
+        "Use REST /api/v1 with {code,data,message} response envelope",
+        "Store timestamps as UTC ISO8601 strings"
+      ],
+      "find_req_tokens": 37,
+      "find_rules_tokens": 131,
+      "find_shelves_tokens": 239,
+      "find_full_text_tokens": 499,
+      "add_req_tokens": 0,
+      "add_resp_tokens": 0,
+      "add_rule_ids": [],
+      "add_errors": [],
+      "core_input_tokens": 244,
+      "total_with_shelves": 483
+    },
+    {
+      "round": 15,
+      "phase": "comply",
+      "shared_tokens": 80,
+      "shared_prompt_text": "你是 aurora 项目的资深后端工程师。aurora 是一个 Python FastAPI 微服务。请严格遵循下方提供的项目规范完成每个任务，回答简洁、可直接落地为代码。\n\n【用户消息】\n有人把密码写进 yaml 了。\n\n【任务】\n说明密钥应如何注入，以及仓库里不该出现什么。",
+      "find_args": {
+        "scope": "aurora,security",
+        "query": "KMS inject secrets never commit tokens",
+        "query_local": "密钥 KMS 不要进 git",
+        "top_k": 5
+      },
+      "find_rules": [
+        {
+          "id": "r-2026-09-28-007",
+          "claim": "Never store secrets in git or container images; inject from a KMS",
+          "scope": [
+            "aurora",
+            "security"
+          ],
+          "confidence": 0.6,
+          "score": 0.9098,
+          "status": "active",
+          "evidence_count": 1
+        },
+        {
+          "id": "r-2026-09-28-008",
+          "claim": "Gateway authenticates; services re-check authorization on every write",
+          "scope": [
+            "aurora",
+            "security"
+          ],
+          "confidence": 0.6,
+          "score": 0.222,
+          "status": "active",
+          "evidence_count": 1
+        }
+      ],
+      "rules_recalled": 2,
+      "expected_count": 2,
+      "hit_count": 2,
+      "precision": 1.0,
+      "recall": 1.0,
+      "expected_claims": [
+        "Gateway authenticates; services re-check authorization on every write",
+        "Never store secrets in git or container images; inject from a KMS"
+      ],
+      "recalled_claims": [
+        "Never store secrets in git or container images; inject from a KMS",
+        "Gateway authenticates; services re-check authorization on every write"
+      ],
+      "find_req_tokens": 35,
+      "find_rules_tokens": 131,
+      "find_shelves_tokens": 481,
+      "find_full_text_tokens": 792,
+      "add_req_tokens": 0,
+      "add_resp_tokens": 0,
+      "add_rule_ids": [],
+      "add_errors": [],
+      "core_input_tokens": 246,
+      "total_with_shelves": 727
+    },
+    {
+      "round": 16,
+      "phase": "comply",
+      "shared_tokens": 73,
+      "shared_prompt_text": "你是 aurora 项目的资深后端工程师。aurora 是一个 Python FastAPI 微服务。请严格遵循下方提供的项目规范完成每个任务，回答简洁、可直接落地为代码。\n\n【用户消息】\n加一个改密码接口。\n\n【任务】\n说明网关鉴权之后服务端还要做什么。",
+      "find_args": {
+        "scope": "aurora,security",
+        "query": "recheck authorization CSRF write paths",
+        "query_local": "写接口鉴权 CSRF",
+        "top_k": 5
+      },
+      "find_rules": [
+        {
+          "id": "r-2026-09-28-008",
+          "claim": "Gateway authenticates; services re-check authorization on every write",
+          "scope": [
+            "aurora",
+            "security"
+          ],
+          "confidence": 0.6,
+          "score": 0.9105,
+          "status": "active",
+          "evidence_count": 1
+        },
+        {
+          "id": "r-2026-09-28-007",
+          "claim": "Never store secrets in git or container images; inject from a KMS",
+          "scope": [
+            "aurora",
+            "security"
+          ],
+          "confidence": 0.6,
+          "score": 0.222,
+          "status": "active",
+          "evidence_count": 1
+        }
+      ],
+      "rules_recalled": 2,
+      "expected_count": 2,
+      "hit_count": 2,
+      "precision": 1.0,
+      "recall": 1.0,
+      "expected_claims": [
+        "Gateway authenticates; services re-check authorization on every write",
+        "Never store secrets in git or container images; inject from a KMS"
+      ],
+      "recalled_claims": [
+        "Gateway authenticates; services re-check authorization on every write",
+        "Never store secrets in git or container images; inject from a KMS"
+      ],
+      "find_req_tokens": 33,
+      "find_rules_tokens": 131,
+      "find_shelves_tokens": 250,
+      "find_full_text_tokens": 510,
+      "add_req_tokens": 0,
+      "add_resp_tokens": 0,
+      "add_rule_ids": [],
+      "add_errors": [],
+      "core_input_tokens": 237,
+      "total_with_shelves": 487
+    },
+    {
+      "round": 17,
+      "phase": "comply",
+      "shared_tokens": 77,
+      "shared_prompt_text": "你是 aurora 项目的资深后端工程师。aurora 是一个 Python FastAPI 微服务。请严格遵循下方提供的项目规范完成每个任务，回答简洁、可直接落地为代码。\n\n【用户消息】\n两个 service 补测试。\n\n【任务】\n为 user_service 和 payment_service 补 pytest，覆盖核心分支。",
+      "find_args": {
+        "scope": "aurora,testing",
+        "query": "pytest coverage eighty percent",
+        "query_local": "pytest 覆盖率 80%",
+        "top_k": 5
+      },
+      "find_rules": [
+        {
+          "id": "r-2026-09-28-009",
+          "claim": "Unit tests use pytest; core modules require 80 percent line coverage",
+          "scope": [
+            "aurora",
+            "testing"
+          ],
+          "confidence": 0.6,
+          "score": 0.9125,
+          "status": "active",
+          "evidence_count": 1
+        },
+        {
+          "id": "r-2026-09-28-010",
+          "claim": "Unit tests must not hit real network or databases; mock at the boundary",
+          "scope": [
+            "aurora",
+            "testing"
+          ],
+          "confidence": 0.6,
+          "score": 0.222,
+          "status": "active",
+          "evidence_count": 1
+        }
+      ],
+      "rules_recalled": 2,
+      "expected_count": 2,
+      "hit_count": 2,
+      "precision": 1.0,
+      "recall": 1.0,
+      "expected_claims": [
+        "Unit tests must not hit real network or databases; mock at the boundary",
+        "Unit tests use pytest; core modules require 80 percent line coverage"
+      ],
+      "recalled_claims": [
+        "Unit tests use pytest; core modules require 80 percent line coverage",
+        "Unit tests must not hit real network or databases; mock at the boundary"
+      ],
+      "find_req_tokens": 32,
+      "find_rules_tokens": 134,
+      "find_shelves_tokens": 257,
+      "find_full_text_tokens": 520,
+      "add_req_tokens": 0,
+      "add_resp_tokens": 0,
+      "add_rule_ids": [],
+      "add_errors": [],
+      "core_input_tokens": 243,
+      "total_with_shelves": 500
+    },
+    {
+      "round": 18,
+      "phase": "comply",
+      "shared_tokens": 78,
+      "shared_prompt_text": "你是 aurora 项目的资深后端工程师。aurora 是一个 Python FastAPI 微服务。请严格遵循下方提供的项目规范完成每个任务，回答简洁、可直接落地为代码。\n\n【用户消息】\n有人单测连了 staging 库。\n\n【任务】\n改成边界 mock，夹具放到 conftest。",
+      "find_args": {
+        "scope": "aurora,testing",
+        "query": "mock network database unit tests",
+        "query_local": "单测 mock 禁止真库",
+        "top_k": 5
+      },
+      "find_rules": [
+        {
+          "id": "r-2026-09-28-010",
+          "claim": "Unit tests must not hit real network or databases; mock at the boundary",
+          "scope": [
+            "aurora",
+            "testing"
+          ],
+          "confidence": 0.6,
+          "score": 0.8918,
+          "status": "active",
+          "evidence_count": 1
+        },
+        {
+          "id": "r-2026-09-28-009",
+          "claim": "Unit tests use pytest; core modules require 80 percent line coverage",
+          "scope": [
+            "aurora",
+            "testing"
+          ],
+          "confidence": 0.6,
+          "score": 0.7876,
+          "status": "active",
+          "evidence_count": 1
+        }
+      ],
+      "rules_recalled": 2,
+      "expected_count": 2,
+      "hit_count": 2,
+      "precision": 1.0,
+      "recall": 1.0,
+      "expected_claims": [
+        "Unit tests must not hit real network or databases; mock at the boundary",
+        "Unit tests use pytest; core modules require 80 percent line coverage"
+      ],
+      "recalled_claims": [
+        "Unit tests must not hit real network or databases; mock at the boundary",
+        "Unit tests use pytest; core modules require 80 percent line coverage"
+      ],
+      "find_req_tokens": 32,
+      "find_rules_tokens": 135,
+      "find_shelves_tokens": 243,
+      "find_full_text_tokens": 507,
+      "add_req_tokens": 0,
+      "add_resp_tokens": 0,
+      "add_rule_ids": [],
+      "add_errors": [],
+      "core_input_tokens": 245,
+      "total_with_shelves": 488
+    },
+    {
+      "round": 19,
+      "phase": "comply",
+      "shared_tokens": 73,
+      "shared_prompt_text": "你是 aurora 项目的资深后端工程师。aurora 是一个 Python FastAPI 微服务。请严格遵循下方提供的项目规范完成每个任务，回答简洁、可直接落地为代码。\n\n【用户消息】\n给 payment_service 加日志。\n\n【任务】\n补结构化 JSON 日志，不要用 print。",
+      "find_args": {
+        "scope": "aurora,ops",
+        "query": "structured json log trace_id no print",
+        "query_local": "JSON 日志 trace_id 不要 print",
+        "top_k": 5
+      },
+      "find_rules": [
+        {
+          "id": "r-2026-09-28-011",
+          "claim": "Emit structured JSON logs with trace_id; never print",
+          "scope": [
+            "aurora",
+            "ops"
+          ],
+          "confidence": 0.6,
+          "score": 0.9276,
+          "status": "active",
+          "evidence_count": 1
+        },
+        {
+          "id": "r-2026-09-28-012",
+          "claim": "Expose readiness and liveness probes; failed probes remove traffic",
+          "scope": [
+            "aurora",
+            "ops"
+          ],
+          "confidence": 0.6,
+          "score": 0.222,
+          "status": "active",
+          "evidence_count": 1
+        }
+      ],
+      "rules_recalled": 2,
+      "expected_count": 2,
+      "hit_count": 2,
+      "precision": 1.0,
+      "recall": 1.0,
+      "expected_claims": [
+        "Emit structured JSON logs with trace_id; never print",
+        "Expose readiness and liveness probes; failed probes remove traffic"
+      ],
+      "recalled_claims": [
+        "Emit structured JSON logs with trace_id; never print",
+        "Expose readiness and liveness probes; failed probes remove traffic"
+      ],
+      "find_req_tokens": 35,
+      "find_rules_tokens": 127,
+      "find_shelves_tokens": 239,
+      "find_full_text_tokens": 495,
+      "add_req_tokens": 0,
+      "add_resp_tokens": 0,
+      "add_rule_ids": [],
+      "add_errors": [],
+      "core_input_tokens": 235,
+      "total_with_shelves": 474
+    },
+    {
+      "round": 20,
+      "phase": "comply",
+      "shared_tokens": 78,
+      "shared_prompt_text": "你是 aurora 项目的资深后端工程师。aurora 是一个 Python FastAPI 微服务。请严格遵循下方提供的项目规范完成每个任务，回答简洁、可直接落地为代码。\n\n【用户消息】\nK8s 探针怎么配。\n\n【任务】\n给服务加上 readiness 与 liveness，失败摘流。",
+      "find_args": {
+        "scope": "aurora,ops",
+        "query": "readiness liveness health probe",
+        "query_local": "readiness liveness 健康检查",
+        "top_k": 5
+      },
+      "find_rules": [
+        {
+          "id": "r-2026-09-28-012",
+          "claim": "Expose readiness and liveness probes; failed probes remove traffic",
+          "scope": [
+            "aurora",
+            "ops"
+          ],
+          "confidence": 0.6,
+          "score": 0.9166,
+          "status": "active",
+          "evidence_count": 1
+        },
+        {
+          "id": "r-2026-09-28-011",
+          "claim": "Emit structured JSON logs with trace_id; never print",
+          "scope": [
+            "aurora",
+            "ops"
+          ],
+          "confidence": 0.6,
+          "score": 0.222,
+          "status": "active",
+          "evidence_count": 1
+        }
+      ],
+      "rules_recalled": 2,
+      "expected_count": 2,
+      "hit_count": 2,
+      "precision": 1.0,
+      "recall": 1.0,
+      "expected_claims": [
+        "Emit structured JSON logs with trace_id; never print",
+        "Expose readiness and liveness probes; failed probes remove traffic"
+      ],
+      "recalled_claims": [
+        "Expose readiness and liveness probes; failed probes remove traffic",
+        "Emit structured JSON logs with trace_id; never print"
+      ],
+      "find_req_tokens": 33,
+      "find_rules_tokens": 127,
+      "find_shelves_tokens": 237,
+      "find_full_text_tokens": 493,
+      "add_req_tokens": 0,
+      "add_resp_tokens": 0,
+      "add_rule_ids": [],
+      "add_errors": [],
+      "core_input_tokens": 238,
+      "total_with_shelves": 475
+    },
+    {
+      "round": 21,
+      "phase": "comply",
+      "shared_tokens": 73,
+      "shared_prompt_text": "你是 aurora 项目的资深后端工程师。aurora 是一个 Python FastAPI 微服务。请严格遵循下方提供的项目规范完成每个任务，回答简洁、可直接落地为代码。\n\n【用户消息】\n要把内部接口公开。\n\n【任务】\n列出合并前必须满足的评审条件。",
+      "find_args": {
+        "scope": "aurora,review",
+        "query": "two reviewers public contract change",
+        "query_local": "公开接口 两名评审 负责人",
+        "top_k": 5
+      },
+      "find_rules": [
+        {
+          "id": "r-2026-09-28-013",
+          "claim": "Public API changes require two reviewers including the interface owner",
+          "scope": [
+            "aurora",
+            "review"
+          ],
+          "confidence": 0.6,
+          "score": 0.9232,
+          "status": "active",
+          "evidence_count": 1
+        },
+        {
+          "id": "r-2026-09-28-014",
+          "claim": "Every pull request must list risk, rollout, and rollback",
+          "scope": [
+            "aurora",
+            "review"
+          ],
+          "confidence": 0.6,
+          "score": 0.7518,
+          "status": "active",
+          "evidence_count": 1
+        }
+      ],
+      "rules_recalled": 2,
+      "expected_count": 2,
+      "hit_count": 2,
+      "precision": 1.0,
+      "recall": 1.0,
+      "expected_claims": [
+        "Every pull request must list risk, rollout, and rollback",
+        "Public API changes require two reviewers including the interface owner"
+      ],
+      "recalled_claims": [
+        "Public API changes require two reviewers including the interface owner",
+        "Every pull request must list risk, rollout, and rollback"
+      ],
+      "find_req_tokens": 35,
+      "find_rules_tokens": 128,
+      "find_shelves_tokens": 246,
+      "find_full_text_tokens": 503,
+      "add_req_tokens": 0,
+      "add_resp_tokens": 0,
+      "add_rule_ids": [],
+      "add_errors": [],
+      "core_input_tokens": 236,
+      "total_with_shelves": 482
+    },
+    {
+      "round": 22,
+      "phase": "comply",
+      "shared_tokens": 76,
+      "shared_prompt_text": "你是 aurora 项目的资深后端工程师。aurora 是一个 Python FastAPI 微服务。请严格遵循下方提供的项目规范完成每个任务，回答简洁、可直接落地为代码。\n\n【用户消息】\n这份 PR 描述太短。\n\n【任务】\n按规范补风险、放量和回滚说明。",
+      "find_args": {
+        "scope": "aurora,review",
+        "query": "PR risk rollout rollback description",
+        "query_local": "PR 风险 灰度 回滚",
+        "top_k": 5
+      },
+      "find_rules": [
+        {
+          "id": "r-2026-09-28-014",
+          "claim": "Every pull request must list risk, rollout, and rollback",
+          "scope": [
+            "aurora",
+            "review"
+          ],
+          "confidence": 0.6,
+          "score": 0.9024,
+          "status": "active",
+          "evidence_count": 1
+        },
+        {
+          "id": "r-2026-09-28-013",
+          "claim": "Public API changes require two reviewers including the interface owner",
+          "scope": [
+            "aurora",
+            "review"
+          ],
+          "confidence": 0.6,
+          "score": 0.7485,
+          "status": "active",
+          "evidence_count": 1
+        }
+      ],
+      "rules_recalled": 2,
+      "expected_count": 2,
+      "hit_count": 2,
+      "precision": 1.0,
+      "recall": 1.0,
+      "expected_claims": [
+        "Every pull request must list risk, rollout, and rollback",
+        "Public API changes require two reviewers including the interface owner"
+      ],
+      "recalled_claims": [
+        "Every pull request must list risk, rollout, and rollback",
+        "Public API changes require two reviewers including the interface owner"
+      ],
+      "find_req_tokens": 34,
+      "find_rules_tokens": 128,
+      "find_shelves_tokens": 247,
+      "find_full_text_tokens": 504,
+      "add_req_tokens": 0,
+      "add_resp_tokens": 0,
+      "add_rule_ids": [],
+      "add_errors": [],
+      "core_input_tokens": 238,
+      "total_with_shelves": 485
+    },
+    {
+      "round": 23,
+      "phase": "comply",
+      "shared_tokens": 79,
+      "shared_prompt_text": "你是 aurora 项目的资深后端工程师。aurora 是一个 Python FastAPI 微服务。请严格遵循下方提供的项目规范完成每个任务，回答简洁、可直接落地为代码。\n\n【用户消息】\n超时写在常量里了。\n\n【任务】\n改成从环境读取，并说明生产必须显式注入。",
+      "find_args": {
+        "scope": "aurora,config",
+        "query": "environment variables twelve-factor config",
+        "query_local": "环境变量 配置 禁止写死",
+        "top_k": 5
+      },
+      "find_rules": [
+        {
+          "id": "r-2026-09-28-015",
+          "claim": "Read runtime config from the environment; never hardcode host or timeout",
+          "scope": [
+            "aurora",
+            "config"
+          ],
+          "confidence": 0.6,
+          "score": 0.9226,
+          "status": "active",
+          "evidence_count": 1
+        },
+        {
+          "id": "r-2026-09-28-016",
+          "claim": "Feature flags default off in production and must have an expiry owner",
+          "scope": [
+            "aurora",
+            "config"
+          ],
+          "confidence": 0.6,
+          "score": 0.8158,
+          "status": "active",
+          "evidence_count": 1
+        }
+      ],
+      "rules_recalled": 2,
+      "expected_count": 2,
+      "hit_count": 2,
+      "precision": 1.0,
+      "recall": 1.0,
+      "expected_claims": [
+        "Feature flags default off in production and must have an expiry owner",
+        "Read runtime config from the environment; never hardcode host or timeout"
+      ],
+      "recalled_claims": [
+        "Read runtime config from the environment; never hardcode host or timeout",
+        "Feature flags default off in production and must have an expiry owner"
+      ],
+      "find_req_tokens": 33,
+      "find_rules_tokens": 132,
+      "find_shelves_tokens": 487,
+      "find_full_text_tokens": 799,
+      "add_req_tokens": 0,
+      "add_resp_tokens": 0,
+      "add_rule_ids": [],
+      "add_errors": [],
+      "core_input_tokens": 244,
+      "total_with_shelves": 731
+    },
+    {
+      "round": 24,
+      "phase": "comply",
+      "shared_tokens": 75,
+      "shared_prompt_text": "你是 aurora 项目的资深后端工程师。aurora 是一个 Python FastAPI 微服务。请严格遵循下方提供的项目规范完成每个任务，回答简洁、可直接落地为代码。\n\n【用户消息】\n要加一个实验开关。\n\n【任务】\n说明生产默认值、负责人和清理期限。",
+      "find_args": {
+        "scope": "aurora,config",
+        "query": "feature flag default off expiry owner",
+        "query_local": "功能开关 默认关闭 过期",
+        "top_k": 5
+      },
+      "find_rules": [
+        {
+          "id": "r-2026-09-28-016",
+          "claim": "Feature flags default off in production and must have an expiry owner",
+          "scope": [
+            "aurora",
+            "config"
+          ],
+          "confidence": 0.6,
+          "score": 0.9187,
+          "status": "active",
+          "evidence_count": 1
+        },
+        {
+          "id": "r-2026-09-28-015",
+          "claim": "Read runtime config from the environment; never hardcode host or timeout",
+          "scope": [
+            "aurora",
+            "config"
+          ],
+          "confidence": 0.6,
+          "score": 0.222,
+          "status": "active",
+          "evidence_count": 1
+        }
+      ],
+      "rules_recalled": 2,
+      "expected_count": 2,
+      "hit_count": 2,
+      "precision": 1.0,
+      "recall": 1.0,
+      "expected_claims": [
+        "Feature flags default off in production and must have an expiry owner",
+        "Read runtime config from the environment; never hardcode host or timeout"
+      ],
+      "recalled_claims": [
+        "Feature flags default off in production and must have an expiry owner",
+        "Read runtime config from the environment; never hardcode host or timeout"
+      ],
+      "find_req_tokens": 34,
+      "find_rules_tokens": 131,
+      "find_shelves_tokens": 246,
+      "find_full_text_tokens": 506,
+      "add_req_tokens": 0,
+      "add_resp_tokens": 0,
+      "add_rule_ids": [],
+      "add_errors": [],
+      "core_input_tokens": 240,
+      "total_with_shelves": 486
+    }
+  ]
+}

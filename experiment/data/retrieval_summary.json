@@ -1,0 +1,679 @@
+{
+  "meta": {
+    "imprint_mcp": "imprint-mcp",
+    "tokenizer": "grok-2-tokenizer（Grok 家族公开编码器；Grok 4.6 官方词表未公开）",
+    "protocol": "control=grep+Read; experiment=grep+find(paths)+Read",
+    "grep_tokens": "rg -l list; when indexed hits > k both arms add capped rg -n sample",
+    "experiment_extra": "find request + documents JSON on top of aligned grep",
+    "docs": 16,
+    "docs_bytes": 85048,
+    "queries": 36,
+    "find_top_k": 3,
+    "snippet_runes_cap": 80,
+    "control_max_open": 3,
+    "control_k2_max_open": 2,
+    "control_search": "rg -i",
+    "queries_with_find_paths": 14,
+    "queries_with_find_paths_k2": 23,
+    "created_at": "2026-09-28T16:12:16",
+    "comparison": {
+      "question": "文档检索实验在比什么？",
+      "baseline_arm": "对照 grep+Read（宿主默认）：rg -i -l 得完整名单；命中 > k 时另计 capped rg -n 行样本；Read grep 命中的全部文件全文。无 vault、无 find。",
+      "experiment_arm": "实验 grep+find(paths)+Read：同一 rg 与 grep token 口径；indexed > k 时计 find(paths)+documents JSON；grep∩find 非空则 Read 交集全部篇全文，否则 Read 全部 grep 命中。 k=3 仅触发 find/限制 find 文档条数，不 cap Read 篇数。",
+      "excluded_from_both_arms": [
+        "规范记忆 vault 中的 rules（本实验 RETRIEVAL_VAULT 为空，只测 shelves 文档）",
+        "Cursor alwaysApply 规则与 AGENTS.md",
+        "find 返回的 rules 段（语料无写入规则）"
+      ],
+      "shared_in_both_arms": "rg 命令字符串 + grep 名单（+ 宽查询时的行样本）",
+      "corpus": "experiment 项目 docs/*.md + measure_retrieval.QUERIES"
+    },
+    "comparison_k2": {
+      "question": "文档检索实验在比什么？",
+      "baseline_arm": "对照 grep+Read（宿主默认）：rg -i -l 得完整名单；命中 > k 时另计 capped rg -n 行样本；Read grep 命中的全部文件全文。无 vault、无 find。",
+      "experiment_arm": "实验 grep+find(paths)+Read：同一 rg 与 grep token 口径；indexed > k 时计 find(paths)+documents JSON；grep∩find 非空则 Read 交集全部篇全文，否则 Read 全部 grep 命中。 k=2 仅触发 find/限制 find 文档条数，不 cap Read 篇数。",
+      "excluded_from_both_arms": [
+        "规范记忆 vault 中的 rules（本实验 RETRIEVAL_VAULT 为空，只测 shelves 文档）",
+        "Cursor alwaysApply 规则与 AGENTS.md",
+        "find 返回的 rules 段（语料无写入规则）"
+      ],
+      "shared_in_both_arms": "rg 命令字符串 + grep 名单（+ 宽查询时的行样本）",
+      "corpus": "experiment 项目 docs/*.md + measure_retrieval.QUERIES"
+    }
+  },
+  "samples": {
+    "wide_grep_query": {
+      "qid": 1,
+      "user_text": "函数变量用 snake_case、类名用 PascalCase，命名到底怎么定？",
+      "rg_command": "rg -i -l --glob *.md -e PascalCase -e snake_case -e 命名 docs",
+      "control": {
+        "grep_hits_sample": "docs/11-observability.md\ndocs/01-python-style.md\ndocs/15-i18n.md\ndocs/07-testing.md\n---\ndocs/01-python-style.md:5:## 命名约定\ndocs/01-python-style.md:7:函数与变量统一使用 snake_case，类名使用 PascalCase，常量使用全大写 SNAKE_CASE。 本条适用于 Python 代码风格，涉及「命名约定」的实现必须遵守，不允许例外或临时绕开。\ndocs/01-python-style.md:12:再次强调，本条的权威表述是：函数与变量统一使用 snake_case，类名使用 PascalCase，常量使用全大写 SNAKE_CASE。\ndocs/15-i18n.md:34:插值使用命名占位符，禁止按位置拼接以免语序错乱。 本条适用于 国际化，涉及「占位符」的实现必须遵守，不允许例外或临时绕开。\ndocs/15-i18n.md:39:再次强调，本条的权威表述是：插值使用命名占位符，禁止按位置拼接以免语序错乱。\ndocs/07-testing.md:7:单元测试统一使用 pytest，命名以 test_ 开头并保持可独立运行。 本条适用于 测试，涉及「测试框架」的实现必须遵守，不允许例外或临时绕开。\ndocs/07-testing.md:12:再次强调，本条的权威表述是：单元测试统一使用 pytest，命名以 test_ 开头并保持可独立运行。\ndocs/11-observability.md:5:## 指标命名\ndocs/11-observability.md:7:业务指标统一使用 aurora_ 前缀加蛇形命名，禁止临时拼英文缩写。 本条适用于 可观测性，涉及「指标命名」的实现必须遵守，不允许例外或临时绕开。\ndocs/11-observability.md:12:再次强调，本条的权威表述是：业务指标统一使用 aurora_ 前缀加蛇形命名，禁止临时拼英文缩写。",
+        "opened_files": [
+          "docs/11-observability.md",
+          "docs/01-python-style.md",
+          "docs/15-i18n.md",
+          "docs/07-testing.md"
+        ],
+        "tokens": {
+          "rg_cmd": 22,
+          "grep_hits": 481,
+          "read": 5538,
+          "total": 6041
+        }
+      },
+      "experiment": {
+        "grep_hits_sample": "docs/01-python-style.md\ndocs/15-i18n.md\ndocs/11-observability.md\ndocs/07-testing.md\n---\ndocs/01-python-style.md:5:## 命名约定\ndocs/01-python-style.md:7:函数与变量统一使用 snake_case，类名使用 PascalCase，常量使用全大写 SNAKE_CASE。 本条适用于 Python 代码风格，涉及「命名约定」的实现必须遵守，不允许例外或临时绕开。\ndocs/01-python-style.md:12:再次强调，本条的权威表述是：函数与变量统一使用 snake_case，类名使用 PascalCase，常量使用全大写 SNAKE_CASE。\ndocs/07-testing.md:7:单元测试统一使用 pytest，命名以 test_ 开头并保持可独立运行。 本条适用于 测试，涉及「测试框架」的实现必须遵守，不允许例外或临时绕开。\ndocs/07-testing.md:12:再次强调，本条的权威表述是：单元测试统一使用 pytest，命名以 test_ 开头并保持可独立运行。\ndocs/15-i18n.md:34:插值使用命名占位符，禁止按位置拼接以免语序错乱。 本条适用于 国际化，涉及「占位符」的实现必须遵守，不允许例外或临时绕开。\ndocs/15-i18n.md:39:再次强调，本条的权威表述是：插值使用命名占位符，禁止按位置拼接以免语序错乱。\ndocs/11-observability.md:5:## 指标命名\ndocs/11-observability.md:7:业务指标统一使用 aurora_ 前缀加蛇形命名，禁止临时拼英文缩写。 本条适用于 可观测性，涉及「指标命名」的实现必须遵守，不允许例外或临时绕开。\ndocs/11-observability.md:12:再次强调，本条的权威表述是：业务指标统一使用 aurora_ 前缀加蛇形命名，禁止临时拼英文缩写。",
+        "find_request_json": "{\"scope\":\"aurora\",\"query\":\"snake_case PascalCase naming\",\"query_local\":\"命名 snake_case PascalCase 函数 变量\",\"paths\":[\"docs/01-python-style.md\",\"docs/15-i18n.md\",\"docs/11-observability.md\",\"docs/07-testing.md\"]}",
+        "find_documents_json": "[{\"id\":\"1a05967808989c62\",\"path\":\"docs/01-python-style.md\",\"heading\":\"命名约定\",\"score\":24.113743417742565,\"snippet\":\"函数与变量统一使用 snake_case，类名使用 PascalCase，常量使用全大写 SNAKE_CASE。 本条适用于 Python 代码风格，涉及「命名…\"}]",
+        "opened_files": [
+          "docs/01-python-style.md"
+        ],
+        "tokens": {
+          "rg_cmd": 22,
+          "grep_hits": 481,
+          "find_req": 65,
+          "find_docs": 98,
+          "read": 1433,
+          "total": 2099
+        }
+      }
+    },
+    "narrow_no_find": {
+      "qid": 2,
+      "user_text": "别直接打库，仓储这一层数据访问怎么抽象？",
+      "note": "indexed ≤ k，实验不调 find；与对照同为 grep+Read",
+      "rg_command": "rg -i -l --glob *.md -e 数据访问 -e Repository -e 仓储 docs",
+      "grep_hits_sample": "docs/02-architecture.md",
+      "opened_files": [
+        "docs/02-architecture.md"
+      ],
+      "tokens_control": 1421,
+      "tokens_experiment": 1421
+    }
+  },
+  "samples_k2": {
+    "wide_grep_query": {
+      "qid": 1,
+      "user_text": "函数变量用 snake_case、类名用 PascalCase，命名到底怎么定？",
+      "rg_command": "rg -i -l --glob *.md -e PascalCase -e snake_case -e 命名 docs",
+      "control": {
+        "grep_hits_sample": "docs/01-python-style.md\ndocs/15-i18n.md\ndocs/07-testing.md\ndocs/11-observability.md\n---\ndocs/01-python-style.md:5:## 命名约定\ndocs/01-python-style.md:7:函数与变量统一使用 snake_case，类名使用 PascalCase，常量使用全大写 SNAKE_CASE。 本条适用于 Python 代码风格，涉及「命名约定」的实现必须遵守，不允许例外或临时绕开。\ndocs/01-python-style.md:12:再次强调，本条的权威表述是：函数与变量统一使用 snake_case，类名使用 PascalCase，常量使用全大写 SNAKE_CASE。\ndocs/15-i18n.md:34:插值使用命名占位符，禁止按位置拼接以免语序错乱。 本条适用于 国际化，涉及「占位符」的实现必须遵守，不允许例外或临时绕开。\ndocs/15-i18n.md:39:再次强调，本条的权威表述是：插值使用命名占位符，禁止按位置拼接以免语序错乱。\ndocs/07-testing.md:7:单元测试统一使用 pytest，命名以 test_ 开头并保持可独立运行。 本条适用于 测试，涉及「测试框架」的实现必须遵守，不允许例外或临时绕开。\ndocs/07-testing.md:12:再次强调，本条的权威表述是：单元测试统一使用 pytest，命名以 test_ 开头并保持可独立运行。\ndocs/11-observability.md:5:## 指标命名\ndocs/11-observability.md:7:业务指标统一使用 aurora_ 前缀加蛇形命名，禁止临时拼英文缩写。 本条适用于 可观测性，涉及「指标命名」的实现必须遵守，不允许例外或临时绕开。\ndocs/11-observability.md:12:再次强调，本条的权威表述是：业务指标统一使用 aurora_ 前缀加蛇形命名，禁止临时拼英文缩写。",
+        "opened_files": [
+          "docs/01-python-style.md",
+          "docs/15-i18n.md",
+          "docs/07-testing.md",
+          "docs/11-observability.md"
+        ],
+        "tokens": {
+          "rg_cmd": 22,
+          "grep_hits": 481,
+          "read": 5538,
+          "total": 6041
+        }
+      },
+      "experiment": {
+        "grep_hits_sample": "docs/01-python-style.md\ndocs/15-i18n.md\ndocs/07-testing.md\ndocs/11-observability.md\n---\ndocs/01-python-style.md:5:## 命名约定\ndocs/01-python-style.md:7:函数与变量统一使用 snake_case，类名使用 PascalCase，常量使用全大写 SNAKE_CASE。 本条适用于 Python 代码风格，涉及「命名约定」的实现必须遵守，不允许例外或临时绕开。\ndocs/01-python-style.md:12:再次强调，本条的权威表述是：函数与变量统一使用 snake_case，类名使用 PascalCase，常量使用全大写 SNAKE_CASE。\ndocs/15-i18n.md:34:插值使用命名占位符，禁止按位置拼接以免语序错乱。 本条适用于 国际化，涉及「占位符」的实现必须遵守，不允许例外或临时绕开。\ndocs/15-i18n.md:39:再次强调，本条的权威表述是：插值使用命名占位符，禁止按位置拼接以免语序错乱。\ndocs/07-testing.md:7:单元测试统一使用 pytest，命名以 test_ 开头并保持可独立运行。 本条适用于 测试，涉及「测试框架」的实现必须遵守，不允许例外或临时绕开。\ndocs/07-testing.md:12:再次强调，本条的权威表述是：单元测试统一使用 pytest，命名以 test_ 开头并保持可独立运行。\ndocs/11-observability.md:5:## 指标命名\ndocs/11-observability.md:7:业务指标统一使用 aurora_ 前缀加蛇形命名，禁止临时拼英文缩写。 本条适用于 可观测性，涉及「指标命名」的实现必须遵守，不允许例外或临时绕开。\ndocs/11-observability.md:12:再次强调，本条的权威表述是：业务指标统一使用 aurora_ 前缀加蛇形命名，禁止临时拼英文缩写。",
+        "find_request_json": "{\"scope\":\"aurora\",\"query\":\"snake_case PascalCase naming\",\"query_local\":\"命名 snake_case PascalCase 函数 变量\",\"paths\":[\"docs/01-python-style.md\",\"docs/15-i18n.md\",\"docs/07-testing.md\",\"docs/11-observability.md\"]}",
+        "find_documents_json": "[{\"id\":\"1a05967808989c62\",\"path\":\"docs/01-python-style.md\",\"heading\":\"命名约定\",\"score\":24.113743417742565,\"snippet\":\"函数与变量统一使用 snake_case，类名使用 PascalCase，常量使用全大写 SNAKE_CASE。 本条适用于 Python 代码风格，涉及「命名…\"}]",
+        "opened_files": [
+          "docs/01-python-style.md"
+        ],
+        "tokens": {
+          "rg_cmd": 22,
+          "grep_hits": 481,
+          "find_req": 65,
+          "find_docs": 98,
+          "read": 1433,
+          "total": 2099
+        }
+      }
+    },
+    "narrow_no_find": {
+      "qid": 2,
+      "user_text": "别直接打库，仓储这一层数据访问怎么抽象？",
+      "note": "indexed ≤ k，实验不调 find；与对照同为 grep+Read",
+      "rg_command": "rg -i -l --glob *.md -e 数据访问 -e Repository -e 仓储 docs",
+      "grep_hits_sample": "docs/02-architecture.md",
+      "opened_files": [
+        "docs/02-architecture.md"
+      ],
+      "tokens_control": 1421,
+      "tokens_experiment": 1421
+    }
+  },
+  "summary": [
+    {
+      "qid": 1,
+      "narrow_cum": 2099,
+      "self_cum": 6041,
+      "saved_cum": 3942,
+      "saving_pct": 65.25
+    },
+    {
+      "qid": 2,
+      "narrow_cum": 3520,
+      "self_cum": 7462,
+      "saved_cum": 3942,
+      "saving_pct": 52.83
+    },
+    {
+      "qid": 3,
+      "narrow_cum": 6310,
+      "self_cum": 14101,
+      "saved_cum": 7791,
+      "saving_pct": 55.25
+    },
+    {
+      "qid": 4,
+      "narrow_cum": 8361,
+      "self_cum": 20038,
+      "saved_cum": 11677,
+      "saving_pct": 58.27
+    },
+    {
+      "qid": 5,
+      "narrow_cum": 11628,
+      "self_cum": 32700,
+      "saved_cum": 21072,
+      "saving_pct": 64.44
+    },
+    {
+      "qid": 6,
+      "narrow_cum": 16389,
+      "self_cum": 45347,
+      "saved_cum": 28958,
+      "saving_pct": 63.86
+    },
+    {
+      "qid": 7,
+      "narrow_cum": 20556,
+      "self_cum": 49514,
+      "saved_cum": 28958,
+      "saving_pct": 58.48
+    },
+    {
+      "qid": 8,
+      "narrow_cum": 21926,
+      "self_cum": 50884,
+      "saved_cum": 28958,
+      "saving_pct": 56.91
+    },
+    {
+      "qid": 9,
+      "narrow_cum": 23308,
+      "self_cum": 52266,
+      "saved_cum": 28958,
+      "saving_pct": 55.41
+    },
+    {
+      "qid": 10,
+      "narrow_cum": 27368,
+      "self_cum": 56326,
+      "saved_cum": 28958,
+      "saving_pct": 51.41
+    },
+    {
+      "qid": 11,
+      "narrow_cum": 28790,
+      "self_cum": 57748,
+      "saved_cum": 28958,
+      "saving_pct": 50.15
+    },
+    {
+      "qid": 12,
+      "narrow_cum": 32894,
+      "self_cum": 61852,
+      "saved_cum": 28958,
+      "saving_pct": 46.82
+    },
+    {
+      "qid": 13,
+      "narrow_cum": 37007,
+      "self_cum": 65965,
+      "saved_cum": 28958,
+      "saving_pct": 43.9
+    },
+    {
+      "qid": 14,
+      "narrow_cum": 38378,
+      "self_cum": 67336,
+      "saved_cum": 28958,
+      "saving_pct": 43.01
+    },
+    {
+      "qid": 15,
+      "narrow_cum": 40568,
+      "self_cum": 74783,
+      "saved_cum": 34215,
+      "saving_pct": 45.75
+    },
+    {
+      "qid": 16,
+      "narrow_cum": 43314,
+      "self_cum": 77529,
+      "saved_cum": 34215,
+      "saving_pct": 44.13
+    },
+    {
+      "qid": 17,
+      "narrow_cum": 44780,
+      "self_cum": 78995,
+      "saved_cum": 34215,
+      "saving_pct": 43.31
+    },
+    {
+      "qid": 18,
+      "narrow_cum": 46162,
+      "self_cum": 80377,
+      "saved_cum": 34215,
+      "saving_pct": 42.57
+    },
+    {
+      "qid": 19,
+      "narrow_cum": 48514,
+      "self_cum": 89259,
+      "saved_cum": 40745,
+      "saving_pct": 45.65
+    },
+    {
+      "qid": 20,
+      "narrow_cum": 51318,
+      "self_cum": 92063,
+      "saved_cum": 40745,
+      "saving_pct": 44.26
+    },
+    {
+      "qid": 21,
+      "narrow_cum": 54010,
+      "self_cum": 94755,
+      "saved_cum": 40745,
+      "saving_pct": 43.0
+    },
+    {
+      "qid": 22,
+      "narrow_cum": 56801,
+      "self_cum": 97546,
+      "saved_cum": 40745,
+      "saving_pct": 41.77
+    },
+    {
+      "qid": 23,
+      "narrow_cum": 58170,
+      "self_cum": 98915,
+      "saved_cum": 40745,
+      "saving_pct": 41.19
+    },
+    {
+      "qid": 24,
+      "narrow_cum": 60920,
+      "self_cum": 101665,
+      "saved_cum": 40745,
+      "saving_pct": 40.08
+    },
+    {
+      "qid": 25,
+      "narrow_cum": 64973,
+      "self_cum": 105718,
+      "saved_cum": 40745,
+      "saving_pct": 38.54
+    },
+    {
+      "qid": 26,
+      "narrow_cum": 68650,
+      "self_cum": 113163,
+      "saved_cum": 44513,
+      "saving_pct": 39.34
+    },
+    {
+      "qid": 27,
+      "narrow_cum": 72801,
+      "self_cum": 117314,
+      "saved_cum": 44513,
+      "saving_pct": 37.94
+    },
+    {
+      "qid": 28,
+      "narrow_cum": 74896,
+      "self_cum": 124661,
+      "saved_cum": 49765,
+      "saving_pct": 39.92
+    },
+    {
+      "qid": 29,
+      "narrow_cum": 80007,
+      "self_cum": 130719,
+      "saved_cum": 50712,
+      "saving_pct": 38.79
+    },
+    {
+      "qid": 30,
+      "narrow_cum": 84041,
+      "self_cum": 134753,
+      "saved_cum": 50712,
+      "saving_pct": 37.63
+    },
+    {
+      "qid": 31,
+      "narrow_cum": 88154,
+      "self_cum": 138866,
+      "saved_cum": 50712,
+      "saving_pct": 36.52
+    },
+    {
+      "qid": 32,
+      "narrow_cum": 90217,
+      "self_cum": 144885,
+      "saved_cum": 54668,
+      "saving_pct": 37.73
+    },
+    {
+      "qid": 33,
+      "narrow_cum": 94293,
+      "self_cum": 148961,
+      "saved_cum": 54668,
+      "saving_pct": 36.7
+    },
+    {
+      "qid": 34,
+      "narrow_cum": 96394,
+      "self_cum": 155089,
+      "saved_cum": 58695,
+      "saving_pct": 37.85
+    },
+    {
+      "qid": 35,
+      "narrow_cum": 99643,
+      "self_cum": 167731,
+      "saved_cum": 68088,
+      "saving_pct": 40.59
+    },
+    {
+      "qid": 36,
+      "narrow_cum": 104582,
+      "self_cum": 173645,
+      "saved_cum": 69063,
+      "saving_pct": 39.77
+    }
+  ],
+  "summary_k2": [
+    {
+      "qid": 1,
+      "narrow_cum": 2099,
+      "self_cum": 6041,
+      "saved_cum": 3942,
+      "saving_pct": 65.25
+    },
+    {
+      "qid": 2,
+      "narrow_cum": 3520,
+      "self_cum": 7462,
+      "saved_cum": 3942,
+      "saving_pct": 52.83
+    },
+    {
+      "qid": 3,
+      "narrow_cum": 6310,
+      "self_cum": 14101,
+      "saved_cum": 7791,
+      "saving_pct": 55.25
+    },
+    {
+      "qid": 4,
+      "narrow_cum": 8361,
+      "self_cum": 20038,
+      "saved_cum": 11677,
+      "saving_pct": 58.27
+    },
+    {
+      "qid": 5,
+      "narrow_cum": 11628,
+      "self_cum": 32700,
+      "saved_cum": 21072,
+      "saving_pct": 64.44
+    },
+    {
+      "qid": 6,
+      "narrow_cum": 16389,
+      "self_cum": 45347,
+      "saved_cum": 28958,
+      "saving_pct": 63.86
+    },
+    {
+      "qid": 7,
+      "narrow_cum": 18908,
+      "self_cum": 50472,
+      "saved_cum": 31564,
+      "saving_pct": 62.54
+    },
+    {
+      "qid": 8,
+      "narrow_cum": 20278,
+      "self_cum": 51842,
+      "saved_cum": 31564,
+      "saving_pct": 60.88
+    },
+    {
+      "qid": 9,
+      "narrow_cum": 21660,
+      "self_cum": 53224,
+      "saved_cum": 31564,
+      "saving_pct": 59.3
+    },
+    {
+      "qid": 10,
+      "narrow_cum": 23626,
+      "self_cum": 57700,
+      "saved_cum": 34074,
+      "saving_pct": 59.05
+    },
+    {
+      "qid": 11,
+      "narrow_cum": 25048,
+      "self_cum": 59122,
+      "saved_cum": 34074,
+      "saving_pct": 57.63
+    },
+    {
+      "qid": 12,
+      "narrow_cum": 27011,
+      "self_cum": 63595,
+      "saved_cum": 36584,
+      "saving_pct": 57.53
+    },
+    {
+      "qid": 13,
+      "narrow_cum": 28946,
+      "self_cum": 68078,
+      "saved_cum": 39132,
+      "saving_pct": 57.48
+    },
+    {
+      "qid": 14,
+      "narrow_cum": 30317,
+      "self_cum": 69449,
+      "saved_cum": 39132,
+      "saving_pct": 56.35
+    },
+    {
+      "qid": 15,
+      "narrow_cum": 32507,
+      "self_cum": 76896,
+      "saved_cum": 44389,
+      "saving_pct": 57.73
+    },
+    {
+      "qid": 16,
+      "narrow_cum": 35253,
+      "self_cum": 79642,
+      "saved_cum": 44389,
+      "saving_pct": 55.74
+    },
+    {
+      "qid": 17,
+      "narrow_cum": 36719,
+      "self_cum": 81108,
+      "saved_cum": 44389,
+      "saving_pct": 54.73
+    },
+    {
+      "qid": 18,
+      "narrow_cum": 38101,
+      "self_cum": 82490,
+      "saved_cum": 44389,
+      "saving_pct": 53.81
+    },
+    {
+      "qid": 19,
+      "narrow_cum": 40453,
+      "self_cum": 91372,
+      "saved_cum": 50919,
+      "saving_pct": 55.73
+    },
+    {
+      "qid": 20,
+      "narrow_cum": 43257,
+      "self_cum": 94176,
+      "saved_cum": 50919,
+      "saving_pct": 54.07
+    },
+    {
+      "qid": 21,
+      "narrow_cum": 45949,
+      "self_cum": 96868,
+      "saved_cum": 50919,
+      "saving_pct": 52.57
+    },
+    {
+      "qid": 22,
+      "narrow_cum": 48740,
+      "self_cum": 99659,
+      "saved_cum": 50919,
+      "saving_pct": 51.09
+    },
+    {
+      "qid": 23,
+      "narrow_cum": 50109,
+      "self_cum": 101028,
+      "saved_cum": 50919,
+      "saving_pct": 50.4
+    },
+    {
+      "qid": 24,
+      "narrow_cum": 52859,
+      "self_cum": 103778,
+      "saved_cum": 50919,
+      "saving_pct": 49.07
+    },
+    {
+      "qid": 25,
+      "narrow_cum": 56618,
+      "self_cum": 108599,
+      "saved_cum": 51981,
+      "saving_pct": 47.87
+    },
+    {
+      "qid": 26,
+      "narrow_cum": 60295,
+      "self_cum": 116044,
+      "saved_cum": 55749,
+      "saving_pct": 48.04
+    },
+    {
+      "qid": 27,
+      "narrow_cum": 62243,
+      "self_cum": 120582,
+      "saved_cum": 58339,
+      "saving_pct": 48.38
+    },
+    {
+      "qid": 28,
+      "narrow_cum": 64338,
+      "self_cum": 127929,
+      "saved_cum": 63591,
+      "saving_pct": 49.71
+    },
+    {
+      "qid": 29,
+      "narrow_cum": 69449,
+      "self_cum": 133987,
+      "saved_cum": 64538,
+      "saving_pct": 48.17
+    },
+    {
+      "qid": 30,
+      "narrow_cum": 71286,
+      "self_cum": 138326,
+      "saved_cum": 67040,
+      "saving_pct": 48.47
+    },
+    {
+      "qid": 31,
+      "narrow_cum": 73295,
+      "self_cum": 142835,
+      "saved_cum": 69540,
+      "saving_pct": 48.69
+    },
+    {
+      "qid": 32,
+      "narrow_cum": 75358,
+      "self_cum": 148854,
+      "saved_cum": 73496,
+      "saving_pct": 49.37
+    },
+    {
+      "qid": 33,
+      "narrow_cum": 77534,
+      "self_cum": 153558,
+      "saved_cum": 76024,
+      "saving_pct": 49.51
+    },
+    {
+      "qid": 34,
+      "narrow_cum": 79635,
+      "self_cum": 159686,
+      "saved_cum": 80051,
+      "saving_pct": 50.13
+    },
+    {
+      "qid": 35,
+      "narrow_cum": 82884,
+      "self_cum": 172328,
+      "saved_cum": 89444,
+      "saving_pct": 51.9
+    },
+    {
+      "qid": 36,
+      "narrow_cum": 87823,
+      "self_cum": 178242,
+      "saved_cum": 90419,
+      "saving_pct": 50.73
+    }
+  ],
+  "final": {
+    "doc_budget": 3,
+    "self_total": 173645,
+    "narrow_total": 104582,
+    "saved_tokens": 69063,
+    "saving_pct": 39.77,
+    "control_opened_target": 36,
+    "narrow_opened_target": 36,
+    "find_hit_target": 14,
+    "find_hit_heading": 13,
+    "queries_with_find_paths": 14,
+    "n_queries": 36,
+    "shelves_total": 104582
+  },
+  "final_k2": {
+    "doc_budget": 2,
+    "self_total": 178242,
+    "narrow_total": 87823,
+    "saved_tokens": 90419,
+    "saving_pct": 50.73,
+    "control_opened_target": 36,
+    "narrow_opened_target": 36,
+    "find_hit_target": 23,
+    "find_hit_heading": 22,
+    "queries_with_find_paths": 23,
+    "n_queries": 36
+  }
+}

@@ -1,0 +1,367 @@
+{
+  "meta": {
+    "project": "aurora",
+    "project_desc": "Python FastAPI 微服务",
+    "rounds": 24,
+    "build_rounds": 8,
+    "compliance_rounds": 16,
+    "rules_total": 16,
+    "themes": [
+      "python",
+      "quality",
+      "interface",
+      "security",
+      "testing",
+      "ops",
+      "review",
+      "config"
+    ],
+    "note": "前 8 轮建立 16 条规范；后 16 轮为遵守/复用（含改述与中文 query_local）。find scope 为 AND。"
+  },
+  "rounds": [
+    {
+      "round": 1,
+      "phase": "build",
+      "user_message": "开始搭 user 模块，同时定两条 Python 基础规范：命名风格和分层依赖。",
+      "task": "给 user_service.py 写一个骨架（类名 UserService、函数 get_user_by_id）。",
+      "find_scope": "aurora,python",
+      "find_query": "naming architecture layers",
+      "find_query_local": "命名 架构 分层 依赖",
+      "new_rules": [
+        {
+          "claim": "Use snake_case for functions/variables and PascalCase for classes",
+          "scope": "aurora,python",
+          "text": "函数和变量统一用 snake_case，类名用 PascalCase。这是从项目第一天就定的风格，跟社区 PEP8 对齐，代码 review 时一眼能分清标识符是函数、变量还是类型。公开常量用全大写 SNAKE_CASE，不要混用 camelCase。",
+          "query_local": "命名规范 snake_case PascalCase 函数 变量 类名"
+        },
+        {
+          "claim": "Services layer may only import the domain layer",
+          "scope": "aurora,python",
+          "text": "services 层只允许 import domain 层，绝不能 import 其它业务模块的实现或基础设施细节。依赖方向始终向内，避免出现循环依赖和跨层意外耦合。发现反向依赖必须立刻拆，不允许用 TYPE_CHECKING 当长期借口。",
+          "query_local": "架构 分层 services domain import 依赖边界"
+        }
+      ]
+    },
+    {
+      "round": 2,
+      "phase": "build",
+      "user_message": "再加两条质量规范：异常处理和提交流程。",
+      "task": "给 PaymentService 的方法加统一错误处理。",
+      "find_scope": "aurora,quality",
+      "find_query": "error workflow commit",
+      "find_query_local": "异常 提交 质量",
+      "new_rules": [
+        {
+          "claim": "Throw AuroraError subclasses for all errors; never bare raise",
+          "scope": "aurora,quality",
+          "text": "所有异常统一抛出我们自定义的 AuroraError 及其子类，禁止在任何地方直接 raise Exception 或裸 raise。这样上层能统一捕获、统一映射错误码、统一记日志。第三方异常必须在边界转换成 AuroraError，不要让 SDK 类型漏进业务。",
+          "query_local": "异常处理 AuroraError 子类 裸 raise 错误码"
+        },
+        {
+          "claim": "Run ruff and mypy clean before every commit",
+          "scope": "aurora,quality",
+          "text": "每次提交代码前必须跑 ruff 和 mypy，两个都要全绿通过才能提交。我们不接受任何带 warning 或类型错误的提交进入主干，CI 里也会强制校验。本地 pre-commit 钩子应默认开启。",
+          "query_local": "工作流 提交 ruff mypy 类型检查 主干"
+        }
+      ]
+    },
+    {
+      "round": 3,
+      "phase": "build",
+      "user_message": "接口约定：数据时间戳和 REST 信封。",
+      "task": "实现订单查询接口 GET /api/v1/orders 的骨架。",
+      "find_scope": "aurora,interface",
+      "find_query": "timestamp rest api envelope",
+      "find_query_local": "时间戳 接口 REST API",
+      "new_rules": [
+        {
+          "claim": "Store timestamps as UTC ISO8601 strings",
+          "scope": "aurora,interface",
+          "text": "数据库所有时间戳字段统一存 UTC 的 ISO8601 字符串，不要存本地时间也不要存时间戳整数。跨时区、跨服务、跨语言序列化时才不会出乱子。应用层计算一律 UTC，只在最外层渲染时转用户时区。",
+          "query_local": "时间戳 UTC ISO8601 数据库 字段"
+        },
+        {
+          "claim": "Use REST /api/v1 with {code,data,message} response envelope",
+          "scope": "aurora,interface",
+          "text": "所有 HTTP 接口走 REST 风格，路径统一加 /api/v1 前缀，响应体统一用 {code, data, message} 三段式包裹。前端和网关都按这个约定做解析和错误处理。列表接口另须返回 page、page_size、total。",
+          "query_local": "接口 REST 前缀 /api/v1 响应包裹 code data message"
+        }
+      ]
+    },
+    {
+      "round": 4,
+      "phase": "build",
+      "user_message": "安全规范：密钥和鉴权。",
+      "task": "给登录接口加上鉴权校验，密钥不要写进仓库。",
+      "find_scope": "aurora,security",
+      "find_query": "secrets auth csrf",
+      "find_query_local": "密钥 鉴权 安全 CSRF",
+      "new_rules": [
+        {
+          "claim": "Never store secrets in git or container images; inject from a KMS",
+          "scope": "aurora,security",
+          "text": "密钥、证书、数据库口令一律走密钥管理服务注入，禁止写入仓库、配置文件明文或镜像层。日志与导出不得出现 token、身份证号或银行卡号。轮换密钥时只改注入点，不改业务代码。",
+          "query_local": "密钥 KMS 明文 仓库 镜像 脱敏"
+        },
+        {
+          "claim": "Gateway authenticates; services re-check authorization on every write",
+          "scope": "aurora,security",
+          "text": "鉴权在网关统一执行并下发身份，服务端对写操作必须二次校验权限，不能只信网关头。状态变更接口启用 CSRF 校验或同源令牌。外部输入先校验后使用。",
+          "query_local": "鉴权 网关 权限 CSRF 输入校验"
+        }
+      ]
+    },
+    {
+      "round": 5,
+      "phase": "build",
+      "user_message": "测试规范：框架和隔离。",
+      "task": "为 billing 模块补单测骨架。",
+      "find_scope": "aurora,testing",
+      "find_query": "pytest coverage mock",
+      "find_query_local": "测试 pytest 覆盖率 mock",
+      "new_rules": [
+        {
+          "claim": "Unit tests use pytest; core modules require 80 percent line coverage",
+          "scope": "aurora,testing",
+          "text": "单元测试统一使用 pytest，文件与函数以 test_ 开头并可独立运行。核心模块行覆盖率不得低于 80%，关键路径必须覆盖分支。每次提交前本地跑通测试，CI 上单测与 lint 双重校验。",
+          "query_local": "测试 pytest 覆盖率 80 分支 CI"
+        },
+        {
+          "claim": "Unit tests must not hit real network or databases; mock at the boundary",
+          "scope": "aurora,testing",
+          "text": "单测禁止依赖真实网络与数据库，外部依赖一律 mock 或桩替换。共用夹具放在 conftest.py。断言验证行为而非实现细节，避免 over-mocking 导致假绿。",
+          "query_local": "单测 mock 隔离 数据库 网络 conftest"
+        }
+      ]
+    },
+    {
+      "round": 6,
+      "phase": "build",
+      "user_message": "运维规范：日志和健康检查。",
+      "task": "给服务加上 JSON 日志和探针。",
+      "find_scope": "aurora,ops",
+      "find_query": "logging health probe trace_id",
+      "find_query_local": "日志 健康检查 探针 trace_id",
+      "new_rules": [
+        {
+          "claim": "Emit structured JSON logs with trace_id; never print",
+          "scope": "aurora,ops",
+          "text": "日志统一输出结构化 JSON，禁止 print 与裸文本拼接。每个请求贯穿唯一 trace_id。严禁输出密码、token 等敏感字段。关键业务动作与外部调用必须留痕，包含入参摘要与耗时。",
+          "query_local": "日志 JSON 结构化 print trace_id 脱敏"
+        },
+        {
+          "claim": "Expose readiness and liveness probes; failed probes remove traffic",
+          "scope": "aurora,ops",
+          "text": "服务必须暴露 readiness 与 liveness 探针，失败自动摘流。探针不得走会阻塞的下游调用。发布走灰度，每次发布保留上一稳定版本以便一键回滚。",
+          "query_local": "健康检查 readiness liveness 探针 灰度 回滚"
+        }
+      ]
+    },
+    {
+      "round": 7,
+      "phase": "build",
+      "user_message": "评审规范：公开接口变更和 PR 描述。",
+      "task": "准备把内部查询接口改成公开 API，先对齐评审要求。",
+      "find_scope": "aurora,review",
+      "find_query": "code review public API pull request",
+      "find_query_local": "评审 公开接口 PR 回滚",
+      "new_rules": [
+        {
+          "claim": "Public API changes require two reviewers including the interface owner",
+          "scope": "aurora,review",
+          "text": "凡改动对外契约（路径、字段、错误码）的 PR 必须两名评审通过，其中一名为接口负责人。内部重构若未改变契约可一人评审。评审意见未关闭不得合并。",
+          "query_local": "评审 公开接口 两人 接口负责人 PR"
+        },
+        {
+          "claim": "Every pull request must list risk, rollout, and rollback",
+          "scope": "aurora,review",
+          "text": "PR 描述必须写明改动风险、灰度步骤与一键回滚办法。缺少这三项的 PR 直接退回，不进入评审队列。",
+          "query_local": "PR 风险 灰度 回滚 描述"
+        }
+      ]
+    },
+    {
+      "round": 8,
+      "phase": "build",
+      "user_message": "配置规范：环境变量和功能开关。",
+      "task": "把超时和开关从代码里拆出去。",
+      "find_scope": "aurora,config",
+      "find_query": "twelve factor env feature flag",
+      "find_query_local": "配置 环境变量 功能开关",
+      "new_rules": [
+        {
+          "claim": "Read runtime config from the environment; never hardcode host or timeout",
+          "scope": "aurora,config",
+          "text": "主机、端口、超时、连接池大小一律从环境变量或配置中心读取，禁止写死在源码或镜像层。缺省值只允许出现在本地开发样例，生产必须显式注入。",
+          "query_local": "配置 环境变量 超时 连接池 十二要素"
+        },
+        {
+          "claim": "Feature flags default off in production and must have an expiry owner",
+          "scope": "aurora,config",
+          "text": "生产环境功能开关默认关闭。每个开关必须登记负责人与过期日，到期未清理视为缺陷。开关判断集中在配置层，禁止散落在业务分支深处。",
+          "query_local": "功能开关 默认关闭 过期 负责人"
+        }
+      ]
+    },
+    {
+      "round": 9,
+      "phase": "comply",
+      "user_message": "给 user_service 补类型注解。",
+      "task": "给 user_service.py 的所有公开函数补全类型注解。",
+      "find_scope": "aurora,python",
+      "find_query": "PascalCase identifiers snake_case helpers",
+      "find_query_local": "类名 PascalCase 函数 snake_case 命名",
+      "new_rules": []
+    },
+    {
+      "round": 10,
+      "phase": "comply",
+      "user_message": "拆一个跨层引用。",
+      "task": "把 UserService 里误 import 的 ORM session 挪到 repository。",
+      "find_scope": "aurora,python",
+      "find_query": "service import domain only inward dependency",
+      "find_query_local": "分层 services 只依赖 domain 向内",
+      "new_rules": []
+    },
+    {
+      "round": 11,
+      "phase": "comply",
+      "user_message": "给 payment_service 加错误处理。",
+      "task": "PaymentService.charge 失败时抛领域异常。",
+      "find_scope": "aurora,quality",
+      "find_query": "custom exception hierarchy not bare Exception",
+      "find_query_local": "异常 AuroraError 不要裸 raise",
+      "new_rules": []
+    },
+    {
+      "round": 12,
+      "phase": "comply",
+      "user_message": "准备提 PR。",
+      "task": "列出提交前必须跑绿的检查命令。",
+      "find_scope": "aurora,quality",
+      "find_query": "lint typecheck before commit ruff mypy",
+      "find_query_local": "提交前 ruff mypy 全绿",
+      "new_rules": []
+    },
+    {
+      "round": 13,
+      "phase": "comply",
+      "user_message": "订单模型加时间字段。",
+      "task": "新增 Order schema 的 created_at / updated_at。",
+      "find_scope": "aurora,interface",
+      "find_query": "UTC ISO8601 created_at updated_at",
+      "find_query_local": "时间戳 UTC ISO8601 字段",
+      "new_rules": []
+    },
+    {
+      "round": 14,
+      "phase": "comply",
+      "user_message": "订单接口规范返回结构。",
+      "task": "给订单接口实现统一 {code,data,message} 响应。",
+      "find_scope": "aurora,interface",
+      "find_query": "REST envelope code data message api v1",
+      "find_query_local": "REST 响应包裹 /api/v1",
+      "new_rules": []
+    },
+    {
+      "round": 15,
+      "phase": "comply",
+      "user_message": "有人把密码写进 yaml 了。",
+      "task": "说明密钥应如何注入，以及仓库里不该出现什么。",
+      "find_scope": "aurora,security",
+      "find_query": "KMS inject secrets never commit tokens",
+      "find_query_local": "密钥 KMS 不要进 git",
+      "new_rules": []
+    },
+    {
+      "round": 16,
+      "phase": "comply",
+      "user_message": "加一个改密码接口。",
+      "task": "说明网关鉴权之后服务端还要做什么。",
+      "find_scope": "aurora,security",
+      "find_query": "recheck authorization CSRF write paths",
+      "find_query_local": "写接口鉴权 CSRF",
+      "new_rules": []
+    },
+    {
+      "round": 17,
+      "phase": "comply",
+      "user_message": "两个 service 补测试。",
+      "task": "为 user_service 和 payment_service 补 pytest，覆盖核心分支。",
+      "find_scope": "aurora,testing",
+      "find_query": "pytest coverage eighty percent",
+      "find_query_local": "pytest 覆盖率 80%",
+      "new_rules": []
+    },
+    {
+      "round": 18,
+      "phase": "comply",
+      "user_message": "有人单测连了 staging 库。",
+      "task": "改成边界 mock，夹具放到 conftest。",
+      "find_scope": "aurora,testing",
+      "find_query": "mock network database unit tests",
+      "find_query_local": "单测 mock 禁止真库",
+      "new_rules": []
+    },
+    {
+      "round": 19,
+      "phase": "comply",
+      "user_message": "给 payment_service 加日志。",
+      "task": "补结构化 JSON 日志，不要用 print。",
+      "find_scope": "aurora,ops",
+      "find_query": "structured json log trace_id no print",
+      "find_query_local": "JSON 日志 trace_id 不要 print",
+      "new_rules": []
+    },
+    {
+      "round": 20,
+      "phase": "comply",
+      "user_message": "K8s 探针怎么配。",
+      "task": "给服务加上 readiness 与 liveness，失败摘流。",
+      "find_scope": "aurora,ops",
+      "find_query": "readiness liveness health probe",
+      "find_query_local": "readiness liveness 健康检查",
+      "new_rules": []
+    },
+    {
+      "round": 21,
+      "phase": "comply",
+      "user_message": "要把内部接口公开。",
+      "task": "列出合并前必须满足的评审条件。",
+      "find_scope": "aurora,review",
+      "find_query": "two reviewers public contract change",
+      "find_query_local": "公开接口 两名评审 负责人",
+      "new_rules": []
+    },
+    {
+      "round": 22,
+      "phase": "comply",
+      "user_message": "这份 PR 描述太短。",
+      "task": "按规范补风险、放量和回滚说明。",
+      "find_scope": "aurora,review",
+      "find_query": "PR risk rollout rollback description",
+      "find_query_local": "PR 风险 灰度 回滚",
+      "new_rules": []
+    },
+    {
+      "round": 23,
+      "phase": "comply",
+      "user_message": "超时写在常量里了。",
+      "task": "改成从环境读取，并说明生产必须显式注入。",
+      "find_scope": "aurora,config",
+      "find_query": "environment variables twelve-factor config",
+      "find_query_local": "环境变量 配置 禁止写死",
+      "new_rules": []
+    },
+    {
+      "round": 24,
+      "phase": "comply",
+      "user_message": "要加一个实验开关。",
+      "task": "说明生产默认值、负责人和清理期限。",
+      "find_scope": "aurora,config",
+      "find_query": "feature flag default off expiry owner",
+      "find_query_local": "功能开关 默认关闭 过期",
+      "new_rules": []
+    }
+  ]
+}

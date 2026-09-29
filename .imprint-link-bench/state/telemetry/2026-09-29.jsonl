@@ -1,0 +1,8 @@
+{"ts":"2026-09-29T03:56:07Z","op":"add","scope_count":2,"latency_ms":793,"trace_id":"861527cda4bc"}
+{"ts":"2026-09-29T03:56:07Z","op":"supersede","scope_count":2,"trace_id":"014370172f08"}
+{"ts":"2026-09-29T03:56:07Z","op":"find","scope_count":2,"query_term_count":7,"rule_hit_count":1,"latency_ms":1,"trace_id":"e57230b3797c"}
+{"ts":"2026-09-29T03:56:07Z","op":"add","scope_count":2,"trace_id":"e8f6c5c3ca9b"}
+{"ts":"2026-09-29T03:56:07Z","op":"add","scope_count":2,"trace_id":"209987ee225b"}
+{"ts":"2026-09-29T03:56:07Z","op":"find","scope_count":2,"query_term_count":4,"rule_hit_count":2,"trace_id":"8d49f6f9ee0c"}
+{"ts":"2026-09-29T03:56:07Z","op":"add","scope_count":2,"trace_id":"0bcf4208a05c"}
+{"ts":"2026-09-29T03:56:07Z","op":"link","rule_hit_count":1,"trace_id":"2658db2351eb"}

@@ -1,0 +1,597 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>规范记忆对照实验</title>
+<style>
+:root {
+  --ink: #111111;
+  --muted: #555555;
+  --line: #d0d0d0;
+  --fill: #f6f6f6;
+}
+* { box-sizing: border-box; }
+html { font-size: 15px; }
+body {
+  margin: 0;
+  color: var(--ink);
+  background: #fff;
+  font-family: "Helvetica Neue", Helvetica, Arial, "PingFang SC", "Hiragino Sans GB",
+    "Noto Sans SC", sans-serif;
+  line-height: 1.6;
+}
+.wrap { max-width: 1200px; margin: 0 auto; padding: 56px 40px 80px; }
+.mast {
+  border-bottom: 1px solid var(--ink);
+  padding-bottom: 16px;
+  margin-bottom: 28px;
+}
+.mast .meta-row {
+  display: flex;
+  justify-content: space-between;
+  gap: 16px;
+  font-size: 12px;
+  color: var(--muted);
+  margin: 0 0 10px;
+}
+h1 { font-size: 22px; font-weight: 600; margin: 0 0 8px; line-height: 1.35; }
+.lede { color: var(--muted); font-size: 15px; margin: 0; max-width: 42em; }
+h2 {
+  font-size: 15px;
+  font-weight: 600;
+  margin: 36px 0 12px;
+  padding-top: 16px;
+  border-top: 1px solid var(--line);
+}
+h3 { font-size: 14px; font-weight: 600; margin: 24px 0 8px; }
+p { margin: 0 0 14px; }
+.meta { color: var(--muted); font-size: 13px; }
+.report-tabs {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 4px 20px;
+  margin: 0 0 20px;
+  font-size: 13px;
+  font-weight: 600;
+}
+.report-tabs a {
+  color: var(--muted);
+  text-decoration: none;
+  padding-bottom: 4px;
+  border-bottom: 2px solid transparent;
+}
+.report-tabs a.on {
+  color: var(--ink);
+  border-bottom-color: var(--ink);
+}
+.graph-wrap {
+  margin: 14px 0 18px;
+  padding: 12px 14px;
+  background: var(--fill);
+  border: 1px solid var(--line);
+  overflow-x: auto;
+}
+.graph-wrap .graph-caption {
+  font-size: 12px;
+  color: var(--muted);
+  margin: 0 0 8px;
+}
+.graph-wrap .mermaid {
+  font-size: 13px;
+}
+/* imprint desk–style mini graph (record.html §5) */
+.desk-graph-block { margin: 14px 0 18px; }
+.desk-graph-block .graph-caption { font-size: 12px; color: var(--muted); margin: 0 0 8px; }
+.desk-graph-stage {
+  position: relative; height: 280px; border: 1px solid #2a241c;
+  border-radius: 10px; overflow: hidden;
+  background: radial-gradient(900px 500px at 50% 40%, #1b1712 0%, #100e0c 70%);
+}
+.desk-graph-stage::before {
+  content: ""; position: absolute; inset: 0; pointer-events: none; opacity: 0.35;
+  background-image:
+    linear-gradient(rgba(196,165,116,0.05) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(196,165,116,0.05) 1px, transparent 1px);
+  background-size: 48px 48px;
+}
+.desk-graph-cy { position: absolute; inset: 0; z-index: 1; }
+.desk-graph-cy svg { width: 100%; height: 100%; display: block; cursor: grab; }
+.desk-graph-legend {
+  display: flex; flex-wrap: wrap; gap: 10px 18px; margin-top: 8px;
+  font-size: 11px; color: var(--muted);
+}
+.desk-graph-legend .edge-key { display: flex; align-items: center; gap: 6px; }
+.desk-graph-legend .swatch.line {
+  width: 22px; height: 0; border-top: 2px solid; flex: none;
+}
+.desk-graph-legend .swatch.line.super { border-color: #e07060; }
+.desk-graph-legend .swatch.line.related { border-color: #d4b483; border-top-style: dashed; }
+.desk-graph-legend .swatch.line.conflict { border-color: #e0a04a; border-top-width: 2.2px; }
+.desk-graph-legend .swatch.line.sources { border-color: #6ec4c0; }
+.desk-graph-legend .node-hint { color: var(--muted); }
+.desk-graph-block .d3-link { fill: none; }
+.desk-graph-block .d3-link.related { stroke: #d4b483; stroke-width: 1.35; stroke-dasharray: 5 4; opacity: 0.75; }
+.desk-graph-block .d3-link.supersedes { stroke: #e07060; stroke-width: 2; opacity: 0.9; }
+.desk-graph-block .d3-link.conflicts_with { stroke: #e0a04a; stroke-width: 2.2; opacity: 0.9; }
+.desk-graph-block .d3-link.sources { stroke: #6ec4c0; stroke-width: 1.8; opacity: 0.85; }
+.desk-graph-block .d3-node.doc-node circle { stroke-dasharray: 3 2; fill: #141a19; }
+.desk-graph-block .d3-label {
+  font: 10px "Helvetica Neue", Helvetica, Arial, sans-serif; fill: #f0e7d8;
+  text-anchor: middle; paint-order: stroke; stroke: #100e0c; stroke-width: 3px;
+  pointer-events: none;
+}
+.table-scroll {
+  display: block;
+  overflow-x: auto;
+  max-width: 100%;
+  margin: 12px 0 16px;
+  -webkit-overflow-scrolling: touch;
+  overscroll-behavior-x: contain;
+}
+table.kpi {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 13px;
+  margin: 12px 0 16px;
+}
+table.data {
+  width: max-content;
+  min-width: 100%;
+  border-collapse: separate;
+  border-spacing: 0;
+  font-size: 13px;
+  margin: 0;
+}
+table.kpi th, table.kpi td,
+table.data th, table.data td {
+  text-align: left;
+  padding: 8px 14px 8px 0;
+  border-bottom: 1px solid var(--line);
+  vertical-align: top;
+}
+table.kpi th, table.data th {
+  font-weight: 600;
+  color: var(--muted);
+  font-size: 12px;
+  white-space: nowrap;
+}
+table.kpi td { font-size: 15px; font-weight: 600; }
+table.kpi .sub {
+  display: block;
+  font-size: 12px;
+  font-weight: 400;
+  color: var(--muted);
+  margin-top: 2px;
+}
+table.data td.num, table.data th.num {
+  text-align: right;
+  font-variant-numeric: tabular-nums;
+  padding-left: 16px;
+  white-space: nowrap;
+}
+table.data td.clip {
+  white-space: nowrap;
+}
+table.data td.clip code {
+  white-space: nowrap;
+}
+td.arg {
+  cursor: default;
+}
+td.arg .short {
+  display: block;
+  max-width: 100%;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  border-bottom: 1px dotted var(--ink);
+  padding-bottom: 1px;
+}
+td.arg:hover .short,
+td.arg:focus-within .short {
+  border-bottom-style: solid;
+}
+.pop-src { display: none; }
+.arg-float {
+  position: fixed;
+  z-index: 80;
+  display: none;
+  pointer-events: auto;
+}
+.arg-float.on { display: block; }
+.pop-card {
+  width: 360px;
+  background: #fff;
+  color: var(--ink);
+  border: 1px solid var(--ink);
+  padding: 14px 16px 12px;
+}
+.pop-kicker {
+  margin: 0 0 10px;
+  font-size: 11px;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--muted);
+  font-weight: 600;
+}
+.pop-dl {
+  margin: 0;
+}
+.pop-dl > div {
+  display: grid;
+  grid-template-columns: 72px 1fr;
+  gap: 4px 12px;
+  padding: 7px 0;
+  border-top: 1px solid var(--line);
+  align-items: start;
+}
+.pop-dl dt {
+  margin: 0;
+  font-size: 11px;
+  color: var(--muted);
+  font-weight: 600;
+  padding-top: 2px;
+}
+.pop-dl dd {
+  margin: 0;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 4px;
+}
+.pop-dl dd code {
+  background: var(--fill);
+  padding: 2px 6px;
+  font-size: 12px;
+  line-height: 1.4;
+  white-space: pre-wrap;
+  word-break: break-word;
+}
+.pop-text {
+  margin: 0;
+  font-size: 14px;
+  line-height: 1.55;
+}
+  margin: 10px 0 0;
+  padding-top: 8px;
+  border-top: 1px solid var(--line);
+  font-size: 11px;
+  color: var(--muted);
+  line-height: 1.45;
+}
+.pop-foot code {
+  background: none;
+  padding: 0;
+  color: var(--ink);
+  font-size: 11px;
+  white-space: pre-wrap;
+  word-break: break-word;
+}
+table.data thead th.grp {
+  text-align: center;
+  color: var(--ink);
+  border-bottom: 1px solid var(--ink);
+  padding: 8px 14px 6px 0;
+}
+table.data .sep {
+  border-left: 1px solid var(--ink);
+  padding-left: 16px;
+}
+table.data.pin thead tr:first-child th:nth-child(1),
+table.data.pin tbody td:nth-child(1) {
+  position: sticky;
+  left: 0;
+  z-index: 3;
+  background: #fff;
+  width: 52px;
+  min-width: 52px;
+  max-width: 52px;
+  padding: 8px 8px 8px 0;
+  box-sizing: border-box;
+}
+table.data.pin thead tr:first-child th:nth-child(2),
+table.data.pin tbody td:nth-child(2) {
+  position: sticky;
+  left: 52px;
+  z-index: 3;
+  background: #fff;
+  width: 160px;
+  min-width: 160px;
+  max-width: 160px;
+  padding: 8px 12px 8px 8px;
+  box-sizing: border-box;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  border-right: 1px solid var(--ink);
+}
+table.data.pin thead tr:first-child th:nth-child(3),
+table.data.pin tbody td:nth-child(3) {
+  padding-left: 16px;
+  min-width: 220px;
+  max-width: 280px;
+}
+table.data.pin tbody td:nth-child(2) code {
+  display: inline-block;
+  max-width: 100%;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  vertical-align: bottom;
+}
+code {
+  font-family: "SF Mono", Menlo, Consolas, monospace;
+  font-size: 12px;
+  background: var(--fill);
+  padding: 0 3px;
+}
+.chart { margin: 8px 0 16px; }
+.legend { font-size: 12px; color: var(--muted); margin: 0 0 6px; }
+.legend span { margin-right: 16px; white-space: nowrap; }
+.sw { display: inline-block; width: 16px; height: 2px; vertical-align: middle; margin-right: 6px; }
+.sw-bar { width: 10px; height: 10px; }
+.note, .limits {
+  border-top: 1px solid var(--line);
+  border-bottom: 1px solid var(--line);
+  padding: 12px 0;
+  margin: 12px 0 16px;
+  font-size: 13px;
+}
+ul { margin: 6px 0; padding-left: 18px; }
+li { margin: 4px 0; }
+.formula {
+  font-family: "SF Mono", Menlo, Consolas, monospace;
+  font-size: 12px;
+  background: var(--fill);
+  padding: 12px 14px;
+  white-space: pre-wrap;
+  margin: 8px 0 16px;
+}
+.sample-pre {
+  font-family: "SF Mono", Menlo, Consolas, monospace;
+  font-size: 11px;
+  background: var(--fill);
+  padding: 10px 12px;
+  white-space: pre-wrap;
+  word-break: break-word;
+  margin: 6px 0 12px;
+  max-height: 320px;
+  overflow: auto;
+}
+details.sample {
+  margin: 10px 0 14px;
+  font-size: 13px;
+}
+details.sample > summary {
+  cursor: pointer;
+  font-weight: 600;
+  margin-bottom: 6px;
+}
+.comp-table td:first-child { font-weight: 600; width: 22%; }
+.footer {
+  margin-top: 40px;
+  padding-top: 12px;
+  border-top: 1px solid var(--line);
+  color: var(--muted);
+  font-size: 12px;
+}
+.pos, .neg { font-variant-numeric: tabular-nums; }
+a { color: var(--ink); }
+@media print {
+  .wrap { padding: 0; max-width: none; overflow-x: visible; }
+  .table-scroll { overflow: visible; }
+}
+</style>
+</head>
+<body>
+<div class="wrap">
+<header class="mast">
+  <p class="meta-row"><span>imprint 对照实验 · 规范记忆</span><span>2026-09-28 16:12</span></p>
+  <nav class="report-tabs" aria-label="实验报告"><a href="report.html" class="on">规范记忆</a><a href="retrieval.html">文档检索</a><a href="record.html">规则关联</a></nav>
+  <h1>规范记忆的输入成本与召回准确率</h1>
+  <p class="lede">aurora · 24 轮 · 16 条规范。对照/实验差异见 §2。</p>
+</header>
+
+<table class="kpi">
+<tr>
+  <th>累计节约<span class="sub">24 轮</span></th>
+  <th>节约率</th>
+  <th>盈亏平衡</th>
+  <th>复用期完全命中</th>
+</tr>
+<tr>
+  <td>13,626<span class="sub">对照 20,422 → 实验 6,796</span></td>
+  <td>66.7%</td>
+  <td>第 6 轮</td>
+  <td>16/16<span class="sub">精确率 100% · 召回率 100%</span></td>
+</tr>
+</table>
+
+<h2>1. 结论</h2>
+<p>第 6 轮起实验累计低于对照；终局 13,626 token（66.7%）。复用期 16/16 轮 P/R 100%（scope AND）。含 shelves 时 相对对照组仍节约 8,020 token（39.3%）（第三条曲线）。</p>
+
+
+<h2>2. 对照与样本</h2>
+<table class="data comp-table">
+<thead><tr><th>臂</th><th>计入 prompt 的规范</th></tr></thead>
+<tbody>
+<tr><td>对照</td><td>无持久化记忆：每轮把 dialogues.json 里迄今全部 new_rules[].text 以「【项目规范】」编号列表全文塞进 prompt；不调用 imprint。</td></tr>
+<tr><td>实验</td><td>imprint vault（.imprint/vault.db）：新规只 add 一次；之后每轮仅计入 MCP find 请求 + 命中 rules 紧凑 JSON（及写入期 add 往返）。</td></tr>
+<tr><td>共用</td><td>同一 SYSTEM 说明 + dialogues 当轮 user_message + task（见 measure.py SYSTEM）</td></tr>
+<tr><td>语料</td><td><code>experiment/dialogues.json</code> · <code>new_rules[].text（用户原话级规范正文，非 claim  alone）</code></td></tr>
+<tr><td>不含</td><td>Cursor alwaysApply 规则（如 .cursor/rules/imprint-memory.mdc）；AGENTS.md、imprint init 嵌入的 body.md 等编辑器级系统提示；desk / host HTTP、CLI 非 MCP 路径</td></tr>
+</tbody>
+</table>
+
+<details class="sample" open>
+  <summary>写入期结束 · 第 8 轮 · 对照 916 tok · 实验 353 tok</summary>
+  <p class="meta">对照 prompt（含【项目规范】全文块）</p>
+  <pre class="sample-pre">你是 aurora 项目的资深后端工程师。aurora 是一个 Python FastAPI 微服务。请严格遵循下方提供的项目规范完成每个任务，回答简洁、可直接落地为代码。
+
+【用户消息】
+配置规范：环境变量和功能开关。
+
+【任务】
+把超时和开关从代码里拆出去。
+
+【项目规范】
+1. 函数和变量统一用 snake_case，类名用 PascalCase。这是从项目第一天就定的风格，跟社区 PEP8 对齐，代码 review 时一眼能分清标识符是函数、变量还是类型。公开常量用全大写 SNAKE_CASE，不要混用 camelCase。
+2. services 层只允许 import domain 层，绝不能 import 其它业务模块的实现或基础设施细节。依赖方向始终向内，避免出现循环依赖和跨层意外耦合。发现反向依赖必须立刻拆，不允许用 TYPE_CHECKING 当长期借口。
+3. 所有异常统一抛出我们自定义的 AuroraError 及其子类，禁止在任何地方直接 raise Exception 或裸 raise。这样上层能统一捕获、统一映射错误码、统一记日志。第三方异常必须在边界转换成 AuroraError，不要让 SDK 类型漏进业务。
+4. 每次提交代码前必须跑 ruff 和 mypy，两个都要全绿通过才能提交。我们不接受任何带 warning 或类型错误的提交进入主干，CI 里也会强制校验。本地 pre-commit 钩子应默认开启。
+5. 数据库所有时间戳字段统一存 UTC 的 ISO8601 字符串，不要存本地时间也不要存时间戳整数。跨时区、跨服务、跨语言序列化时才不会出乱子。应用层计算一律 UTC，只在最外层渲染时转用户时区。
+6. 所有 HTTP 接口走 REST 风格，路径统一加 /api/v1 前缀，响应体统一用 {code, data, message} 三段式包裹。前端和网关都按这个约定做解析和错误处理。列表接口另须返回 page、page_size、total。
+7. 密钥、证书、数据库口令一律走密钥管理服务注入，禁止写入仓库、配置文件明文或镜像层。日志与导出不得出现 token、身份证号或银行卡号。轮换密钥时只改注入点，不改业务代码。
+8. 鉴权在网关统一执行并下发身份，服务端对写操作必须二次校验权限，不能只信网关头。状态变更接口启用 CSRF 校验或同源令牌。外部输入先校验后使用。
+9. 单元测试统一使用 pytest，文件与函数以 test_ 开头并可独立运行。核心模块行覆盖率不得低于 80%，关键路径必须覆盖分支。每次提交前本地跑通测试，CI 上单测与 lint 双重校验。
+10. 单测禁止依赖真实网络与数据库，外部依赖一律 mock 或桩替换。共用夹具放在 conftest.py。断言验证行为而非实现细节，避免 over-mocking 导致假绿。
+11. 日志统一输出结构化 JSON，禁止 print 与裸文本拼接。每个请求贯穿唯一 trace_id。严禁输出密码、token 等敏感字段。关键业务动作与外部调用必须留痕，包含入参摘要与耗时。
+12. 服务必须暴露 readiness 与 liveness 探针，失败自动摘流。探针不得走会阻塞的下游调用。发布走灰度，每次发布保留上一稳定版本以便一键回滚。
+13. 凡改动对外契约（路径、字段、错误码）的 PR 必须两名评审通过，其中一名为接口负责人。内部重构若未改变契约可一人评审。评审意见未关闭不得合并。
+14. PR 描述必须写明改动风险、灰度步骤与一键回滚办法。缺少这三项的 PR 直接退回，不进入评审队列。</pre>
+  <p class="meta">实验 find 请求</p>
+  <pre class="sample-pre">{&quot;scope&quot;:&quot;aurora,config&quot;,&quot;query&quot;:&quot;twelve factor env feature flag&quot;,&quot;query_local&quot;:&quot;配置 环境变量 功能开关&quot;,&quot;top_k&quot;:5}</pre>
+  <p class="meta">实验 find rules</p>
+  <pre class="sample-pre">[]</pre>
+</details>
+
+<details class="sample" open>
+  <summary>复用期首轮 · 第 9 轮 · 对照 1019 tok · 实验 242 tok</summary>
+  <p class="meta">对照 prompt（含【项目规范】全文块）</p>
+  <pre class="sample-pre">你是 aurora 项目的资深后端工程师。aurora 是一个 Python FastAPI 微服务。请严格遵循下方提供的项目规范完成每个任务，回答简洁、可直接落地为代码。
+
+【用户消息】
+给 user_service 补类型注解。
+
+【任务】
+给 user_service.py 的所有公开函数补全类型注解。
+
+【项目规范】
+1. 函数和变量统一用 snake_case，类名用 PascalCase。这是从项目第一天就定的风格，跟社区 PEP8 对齐，代码 review 时一眼能分清标识符是函数、变量还是类型。公开常量用全大写 SNAKE_CASE，不要混用 camelCase。
+2. services 层只允许 import domain 层，绝不能 import 其它业务模块的实现或基础设施细节。依赖方向始终向内，避免出现循环依赖和跨层意外耦合。发现反向依赖必须立刻拆，不允许用 TYPE_CHECKING 当长期借口。
+3. 所有异常统一抛出我们自定义的 AuroraError 及其子类，禁止在任何地方直接 raise Exception 或裸 raise。这样上层能统一捕获、统一映射错误码、统一记日志。第三方异常必须在边界转换成 AuroraError，不要让 SDK 类型漏进业务。
+4. 每次提交代码前必须跑 ruff 和 mypy，两个都要全绿通过才能提交。我们不接受任何带 warning 或类型错误的提交进入主干，CI 里也会强制校验。本地 pre-commit 钩子应默认开启。
+5. 数据库所有时间戳字段统一存 UTC 的 ISO8601 字符串，不要存本地时间也不要存时间戳整数。跨时区、跨服务、跨语言序列化时才不会出乱子。应用层计算一律 UTC，只在最外层渲染时转用户时区。
+6. 所有 HTTP 接口走 REST 风格，路径统一加 /api/v1 前缀，响应体统一用 {code, data, message} 三段式包裹。前端和网关都按这个约定做解析和错误处理。列表接口另须返回 page、page_size、total。
+7. 密钥、证书、数据库口令一律走密钥管理服务注入，禁止写入仓库、配置文件明文或镜像层。日志与导出不得出现 token、身份证号或银行卡号。轮换密钥时只改注入点，不改业务代码。
+8. 鉴权在网关统一执行并下发身份，服务端对写操作必须二次校验权限，不能只信网关头。状态变更接口启用 CSRF 校验或同源令牌。外部输入先校验后使用。
+9. 单元测试统一使用 pytest，文件与函数以 test_ 开头并可独立运行。核心模块行覆盖率不得低于 80%，关键路径必须覆盖分支。每次提交前本地跑通测试，CI 上单测与 lint 双重校验。
+10. 单测禁止依赖真实网络与数据库，外部依赖一律 mock 或桩替换。共用夹具放在 conftest.py。断言验证行为而非实现细节，避免 over-mocking 导致假绿。
+11. 日志统一输出结构化 JSON，禁止 print 与裸文本拼接。每个请求贯穿唯一 trace_id。严禁输出密码、token 等敏感字段。关键业务动作与外部调用必须留痕，包含入参摘要与耗时。
+12. 服务必须暴露 readiness 与 liveness 探针，失败自动摘流。探针不得走会阻塞的下游调用。发布走灰度，每次发布保留上一稳定版本以便一键回滚。
+13. 凡改动对外契约（路径、字段、错误码）的 PR 必须两名评审通过，其中一名为接口负责人。内部重构若未改变契约可一人评审。评审意见未关闭不得合并。
+14. PR 描述必须写明改动风险、灰度步骤与一键回滚办法。缺少这三项的 PR 直接退回，不进入评审队列。
+15. 主机、端口、超时、连接池大小一律从环境变量或配置中心读取，禁止写死在源码或镜像层。缺省值只允许出现在本地开发样例，生产必须显式注入。
+16. 生产环境功能开关默认关闭。每个开关必须登记负责人与过期日，到期未清理视为缺陷。开关判断集中在配置层，禁止散落在业务分支深处。</pre>
+  <p class="meta">实验 find 请求</p>
+  <pre class="sample-pre">{&quot;scope&quot;:&quot;aurora,python&quot;,&quot;query&quot;:&quot;PascalCase identifiers snake_case helpers&quot;,&quot;query_local&quot;:&quot;类名 PascalCase 函数 snake_case 命名&quot;,&quot;top_k&quot;:5}</pre>
+  <p class="meta">实验 find rules</p>
+  <pre class="sample-pre">[{&quot;id&quot;:&quot;r-2026-09-28-001&quot;,&quot;claim&quot;:&quot;Use snake_case for functions/variables and PascalCase for classes&quot;,&quot;scope&quot;:[&quot;aurora&quot;,&quot;python&quot;],&quot;confidence&quot;:0.6,&quot;score&quot;:0.9339,&quot;status&quot;:&quot;active&quot;,&quot;evidence_count&quot;:1},{&quot;id&quot;:&quot;r-2026-09-28-002&quot;,&quot;claim&quot;:&quot;Services layer may only import the domain layer&quot;,&quot;scope&quot;:[&quot;aurora&quot;,&quot;python&quot;],&quot;confidence&quot;:0.6,&quot;score&quot;:0.222,&quot;status&quot;:&quot;active&quot;,&quot;evidence_count&quot;:1}]</pre>
+</details>
+
+
+<h2>3. 环境与计量</h2>
+<table class="data">
+<thead><tr><th>项</th><th>值</th></tr></thead>
+<tbody>
+<tr><td>MCP</td><td><code>imprint-mcp</code> · <code>51b8f69e013d7010…</code></td></tr>
+<tr><td>分词</td><td>grok-2-tokenizer（Grok 家族公开编码器；Grok 4.6 官方词表未公开）</td></tr>
+<tr><td>vault</td><td><code>.imprint-token-bench</code>（跑前清空）</td></tr>
+<tr><td>设计</td><td>写入 8 轮×2 条（命名与分层、质量、接口、安全、测试、运维、评审、配置）→ 复用 16 轮 find</td></tr>
+</tbody>
+</table>
+<div class="formula">对照 = 共用 + 迄今规范全文
+实验 core = 共用 + find(req+rules) + [写入期] add(req+resp)
+含文档 = core + find.documents</div>
+
+<h2>4. 输入成本</h2>
+<h3>累计输入 token</h3>
+<p class="legend"><span><i class="sw" style="background:#1a1a1a"></i>对照：每轮注入全文</span><span><i class="sw" style="background:#5a5a5a"></i>实验：imprint</span><span><i class="sw" style="background:#9a9a9a"></i>实验：含文档摘录</span></p>
+<div class="chart"><svg viewBox="0 0 1120 300" width="100%" xmlns="http://www.w3.org/2000/svg"><line x1="64" y1="244.0" x2="1108" y2="244.0" stroke="#ececec" stroke-width="1"/>
+<text x="56" y="248.0" text-anchor="end" font-size="11" fill="#555">0</text>
+<line x1="64" y1="186.0" x2="1108" y2="186.0" stroke="#ececec" stroke-width="1"/>
+<text x="56" y="190.0" text-anchor="end" font-size="11" fill="#555">5,125</text>
+<line x1="64" y1="128.0" x2="1108" y2="128.0" stroke="#ececec" stroke-width="1"/>
+<text x="56" y="132.0" text-anchor="end" font-size="11" fill="#555">10,250</text>
+<line x1="64" y1="70.0" x2="1108" y2="70.0" stroke="#ececec" stroke-width="1"/>
+<text x="56" y="74.0" text-anchor="end" font-size="11" fill="#555">15,375</text>
+<line x1="64" y1="12.0" x2="1108" y2="12.0" stroke="#ececec" stroke-width="1"/>
+<text x="56" y="16.0" text-anchor="end" font-size="11" fill="#555">20,500</text>
+<text x="64.0" y="260.0" text-anchor="middle" font-size="11" fill="#555">1</text>
+<text x="200.2" y="260.0" text-anchor="middle" font-size="11" fill="#555">4</text>
+<text x="336.3" y="260.0" text-anchor="middle" font-size="11" fill="#555">7</text>
+<text x="472.5" y="260.0" text-anchor="middle" font-size="11" fill="#555">10</text>
+<text x="608.7" y="260.0" text-anchor="middle" font-size="11" fill="#555">13</text>
+<text x="744.9" y="260.0" text-anchor="middle" font-size="11" fill="#555">16</text>
+<text x="881.0" y="260.0" text-anchor="middle" font-size="11" fill="#555">19</text>
+<text x="1017.2" y="260.0" text-anchor="middle" font-size="11" fill="#555">22</text>
+<text x="1108.0" y="260.0" text-anchor="middle" font-size="11" fill="#555">24</text>
+<polyline points="64.0,242.9 109.4,240.5 154.8,236.6 200.2,231.2 245.6,224.5 291.0,216.5 336.3,207.2 381.7,196.8 427.1,185.3 472.5,173.8 517.9,162.3 563.3,150.8 608.7,139.4 654.1,127.9 699.5,116.3 744.9,104.9 790.3,93.4 835.7,81.8 881.0,70.4 926.4,58.9 971.8,47.4 1017.2,35.9 1062.6,24.4 1108.0,12.9" fill="none" stroke="#1a1a1a" stroke-width="1.5" stroke-linejoin="round"/>
+<polyline points="64.0,239.5 109.4,235.4 154.8,230.9 200.2,226.6 245.6,222.5 291.0,218.5 336.3,214.6 381.7,210.6 427.1,207.8 472.5,205.1 517.9,202.5 563.3,199.8 608.7,197.0 654.1,194.3 699.5,191.5 744.9,188.8 790.3,186.1 835.7,183.3 881.0,180.6 926.4,177.9 971.8,175.3 1017.2,172.6 1062.6,169.8 1108.0,167.1" fill="none" stroke="#5a5a5a" stroke-width="1.5" stroke-linejoin="round"/>
+<polyline points="64.0,238.3 109.4,232.7 154.8,225.9 200.2,220.2 245.6,213.5 291.0,208.2 336.3,202.9 381.7,196.2 427.1,190.9 472.5,185.4 517.9,180.3 563.3,174.9 608.7,169.5 654.1,164.0 699.5,155.8 744.9,150.3 790.3,144.6 835.7,139.1 881.0,133.7 926.4,128.4 971.8,122.9 1017.2,117.4 1062.6,109.1 1108.0,103.6" fill="none" stroke="#9a9a9a" stroke-width="1.5" stroke-linejoin="round"/></svg></div>
+<h3>累计节约率</h3>
+<p class="legend"><span><i class="sw" style="background:#1a1a1a"></i>相对对照的节约率</span></p>
+<div class="chart"><svg viewBox="0 0 1120 300" width="100%" xmlns="http://www.w3.org/2000/svg"><line x1="64" y1="244.0" x2="1108" y2="244.0" stroke="#ececec" stroke-width="1"/>
+<text x="56" y="248.0" text-anchor="end" font-size="11" fill="#555">-340%</text>
+<line x1="64" y1="186.0" x2="1108" y2="186.0" stroke="#ececec" stroke-width="1"/>
+<text x="56" y="190.0" text-anchor="end" font-size="11" fill="#555">-235%</text>
+<line x1="64" y1="128.0" x2="1108" y2="128.0" stroke="#ececec" stroke-width="1"/>
+<text x="56" y="132.0" text-anchor="end" font-size="11" fill="#555">-130%</text>
+<line x1="64" y1="70.0" x2="1108" y2="70.0" stroke="#ececec" stroke-width="1"/>
+<text x="56" y="74.0" text-anchor="end" font-size="11" fill="#555">-25%</text>
+<line x1="64" y1="12.0" x2="1108" y2="12.0" stroke="#ececec" stroke-width="1"/>
+<text x="56" y="16.0" text-anchor="end" font-size="11" fill="#555">80%</text>
+<line x1="64" y1="56.2" x2="1108" y2="56.2" stroke="#111" stroke-width="1"/>
+<text x="64.0" y="260.0" text-anchor="middle" font-size="11" fill="#555">1</text>
+<text x="200.2" y="260.0" text-anchor="middle" font-size="11" fill="#555">4</text>
+<text x="336.3" y="260.0" text-anchor="middle" font-size="11" fill="#555">7</text>
+<text x="472.5" y="260.0" text-anchor="middle" font-size="11" fill="#555">10</text>
+<text x="608.7" y="260.0" text-anchor="middle" font-size="11" fill="#555">13</text>
+<text x="744.9" y="260.0" text-anchor="middle" font-size="11" fill="#555">16</text>
+<text x="881.0" y="260.0" text-anchor="middle" font-size="11" fill="#555">19</text>
+<text x="1017.2" y="260.0" text-anchor="middle" font-size="11" fill="#555">22</text>
+<text x="1108.0" y="260.0" text-anchor="middle" font-size="11" fill="#555">24</text>
+<polyline points="64.0,225.3 109.4,137.1 154.8,98.8 200.2,76.3 245.6,61.9 291.0,52.3 336.3,45.1 381.7,40.1 427.1,35.0 472.5,31.5 517.9,29.0 563.3,27.2 608.7,25.7 654.1,24.6 699.5,23.7 744.9,22.9 790.3,22.2 835.7,21.6 881.0,21.1 926.4,20.7 971.8,20.3 1017.2,19.9 1062.6,19.6 1108.0,19.3" fill="none" stroke="#1a1a1a" stroke-width="1.5" stroke-linejoin="round"/></svg></div>
+<h3>分轮明细</h3>
+<div class="table-scroll">
+<table class="data">
+<thead><tr>
+<th class="num">轮次</th><th>阶段</th><th class="num">对照携带条数</th>
+<th class="num">返回条数</th><th class="num">命中 / 应召回</th>
+<th class="num">对照</th><th class="num">实验</th>
+<th class="num">检索</th><th class="num">写入</th><th class="num">累计节约</th>
+</tr></thead>
+<tbody><tr><td class='num'>1</td><td>写入期</td><td class='num'>0</td><td class='num'>0</td><td class='num'>0/0</td><td class='num'>97</td><td class='num'>394</td><td class='num'>33</td><td class='num'>264</td><td class='num neg'>-306.2%</td></tr><tr><td class='num'>2</td><td>写入期</td><td class='num'>2</td><td class='num'>0</td><td class='num'>0/0</td><td class='num'>213</td><td class='num'>370</td><td class='num'>29</td><td class='num'>262</td><td class='num neg'>-146.4%</td></tr><tr><td class='num'>3</td><td>写入期</td><td class='num'>4</td><td class='num'>0</td><td class='num'>0/0</td><td class='num'>344</td><td class='num'>394</td><td class='num'>32</td><td class='num'>277</td><td class='num neg'>-77.1%</td></tr><tr><td class='num'>4</td><td>写入期</td><td class='num'>6</td><td class='num'>0</td><td class='num'>0/0</td><td class='num'>474</td><td class='num'>381</td><td class='num'>33</td><td class='num'>267</td><td class='num neg'>-36.4%</td></tr><tr><td class='num'>5</td><td>写入期</td><td class='num'>8</td><td class='num'>0</td><td class='num'>0/0</td><td class='num'>591</td><td class='num'>359</td><td class='num'>30</td><td class='num'>255</td><td class='num neg'>-10.4%</td></tr><tr><td class='num'>6</td><td>写入期</td><td class='num'>10</td><td class='num'>0</td><td class='num'>0/0</td><td class='num'>707</td><td class='num'>355</td><td class='num'>35</td><td class='num'>245</td><td class='num pos'>+7.1%</td></tr><tr><td class='num'>7</td><td>写入期</td><td class='num'>12</td><td class='num'>0</td><td class='num'>0/0</td><td class='num'>828</td><td class='num'>349</td><td class='num'>36</td><td class='num'>228</td><td class='num pos'>+20.0%</td></tr><tr><td class='num'>8</td><td>写入期</td><td class='num'>14</td><td class='num'>0</td><td class='num'>0/0</td><td class='num'>916</td><td class='num'>353</td><td class='num'>35</td><td class='num'>240</td><td class='num pos'>+29.1%</td></tr><tr><td class='num'>9</td><td>复用期</td><td class='num'>16</td><td class='num'>2</td><td class='num'>2/2</td><td class='num'>1019</td><td class='num'>242</td><td class='num'>163</td><td class='num'>0</td><td class='num pos'>+38.4%</td></tr><tr><td class='num'>10</td><td>复用期</td><td class='num'>16</td><td class='num'>2</td><td class='num'>2/2</td><td class='num'>1017</td><td class='num'>238</td><td class='num'>161</td><td class='num'>0</td><td class='num pos'>+44.6%</td></tr><tr><td class='num'>11</td><td>复用期</td><td class='num'>16</td><td class='num'>2</td><td class='num'>2/2</td><td class='num'>1015</td><td class='num'>236</td><td class='num'>161</td><td class='num'>0</td><td class='num pos'>+49.2%</td></tr><tr><td class='num'>12</td><td>复用期</td><td class='num'>16</td><td class='num'>2</td><td class='num'>2/2</td><td class='num'>1011</td><td class='num'>235</td><td class='num'>164</td><td class='num'>0</td><td class='num pos'>+52.5%</td></tr><tr><td class='num'>13</td><td>复用期</td><td class='num'>16</td><td class='num'>2</td><td class='num'>2/2</td><td class='num'>1012</td><td class='num'>244</td><td class='num'>172</td><td class='num'>0</td><td class='num pos'>+55.1%</td></tr><tr><td class='num'>14</td><td>复用期</td><td class='num'>16</td><td class='num'>2</td><td class='num'>2/2</td><td class='num'>1016</td><td class='num'>244</td><td class='num'>168</td><td class='num'>0</td><td class='num pos'>+57.2%</td></tr><tr><td class='num'>15</td><td>复用期</td><td class='num'>16</td><td class='num'>2</td><td class='num'>2/2</td><td class='num'>1020</td><td class='num'>246</td><td class='num'>166</td><td class='num'>0</td><td class='num pos'>+58.9%</td></tr><tr><td class='num'>16</td><td>复用期</td><td class='num'>16</td><td class='num'>2</td><td class='num'>2/2</td><td class='num'>1013</td><td class='num'>237</td><td class='num'>164</td><td class='num'>0</td><td class='num pos'>+60.3%</td></tr><tr><td class='num'>17</td><td>复用期</td><td class='num'>16</td><td class='num'>2</td><td class='num'>2/2</td><td class='num'>1017</td><td class='num'>243</td><td class='num'>166</td><td class='num'>0</td><td class='num pos'>+61.5%</td></tr><tr><td class='num'>18</td><td>复用期</td><td class='num'>16</td><td class='num'>2</td><td class='num'>2/2</td><td class='num'>1018</td><td class='num'>245</td><td class='num'>167</td><td class='num'>0</td><td class='num pos'>+62.6%</td></tr><tr><td class='num'>19</td><td>复用期</td><td class='num'>16</td><td class='num'>2</td><td class='num'>2/2</td><td class='num'>1013</td><td class='num'>235</td><td class='num'>162</td><td class='num'>0</td><td class='num pos'>+63.5%</td></tr><tr><td class='num'>20</td><td>复用期</td><td class='num'>16</td><td class='num'>2</td><td class='num'>2/2</td><td class='num'>1018</td><td class='num'>238</td><td class='num'>160</td><td class='num'>0</td><td class='num pos'>+64.3%</td></tr><tr><td class='num'>21</td><td>复用期</td><td class='num'>16</td><td class='num'>2</td><td class='num'>2/2</td><td class='num'>1013</td><td class='num'>236</td><td class='num'>163</td><td class='num'>0</td><td class='num pos'>+65.0%</td></tr><tr><td class='num'>22</td><td>复用期</td><td class='num'>16</td><td class='num'>2</td><td class='num'>2/2</td><td class='num'>1016</td><td class='num'>238</td><td class='num'>162</td><td class='num'>0</td><td class='num pos'>+65.7%</td></tr><tr><td class='num'>23</td><td>复用期</td><td class='num'>16</td><td class='num'>2</td><td class='num'>2/2</td><td class='num'>1019</td><td class='num'>244</td><td class='num'>165</td><td class='num'>0</td><td class='num pos'>+66.2%</td></tr><tr><td class='num'>24</td><td>复用期</td><td class='num'>16</td><td class='num'>2</td><td class='num'>2/2</td><td class='num'>1015</td><td class='num'>240</td><td class='num'>165</td><td class='num'>0</td><td class='num pos'>+66.7%</td></tr></tbody>
+</table>
+</div>
+
+<h2>5. 召回</h2>
+<table class="data">
+<thead><tr><th>范围</th><th class="num">精确率</th><th class="num">召回率</th></tr></thead>
+<tbody>
+<tr><td>全部轮次</td><td class="num">100.0%</td><td class="num">100.0%</td></tr>
+<tr><td>复用期</td><td class="num">100.0%</td><td class="num">100.0%</td></tr>
+</tbody>
+</table>
+
+<h2>6. 写入语料</h2>
+<div class="table-scroll">
+<table class="data">
+<thead><tr><th>编号</th><th>摘要</th><th>主题标签</th><th>用户原话</th></tr></thead>
+<tbody><tr><td><code>r-2026-09-28-001</code></td><td>Use snake_case for functions/variables and PascalCase for classes</td><td><code>aurora,python</code></td><td>函数和变量统一用 snake_case，类名用 PascalCase。这是从项目第一天就定的风格，跟社区 PEP8 对齐，代码 review 时一眼能分清标识符是函数、变量还是类型。公开常量用全大写 SNAKE_CASE，不要混用 camelCase。</td></tr><tr><td><code>r-2026-09-28-002</code></td><td>Services layer may only import the domain layer</td><td><code>aurora,python</code></td><td>services 层只允许 import domain 层，绝不能 import 其它业务模块的实现或基础设施细节。依赖方向始终向内，避免出现循环依赖和跨层意外耦合。发现反向依赖必须立刻拆，不允许用 TYPE_CHECKING 当长期借口。</td></tr><tr><td><code>r-2026-09-28-003</code></td><td>Throw AuroraError subclasses for all errors; never bare raise</td><td><code>aurora,quality</code></td><td>所有异常统一抛出我们自定义的 AuroraError 及其子类，禁止在任何地方直接 raise Exception 或裸 raise。这样上层能统一捕获、统一映射错误码、统一记日志。第三方异常必须在边界转换成 AuroraError，不要让 SDK 类型漏进业务。</td></tr><tr><td><code>r-2026-09-28-004</code></td><td>Run ruff and mypy clean before every commit</td><td><code>aurora,quality</code></td><td>每次提交代码前必须跑 ruff 和 mypy，两个都要全绿通过才能提交。我们不接受任何带 warning 或类型错误的提交进入主干，CI 里也会强制校验。本地 pre-commit 钩子应默认开启。</td></tr><tr><td><code>r-2026-09-28-005</code></td><td>Store timestamps as UTC ISO8601 strings</td><td><code>aurora,interface</code></td><td>数据库所有时间戳字段统一存 UTC 的 ISO8601 字符串，不要存本地时间也不要存时间戳整数。跨时区、跨服务、跨语言序列化时才不会出乱子。应用层计算一律 UTC，只在最外层渲染时转用户时区。</td></tr><tr><td><code>r-2026-09-28-006</code></td><td>Use REST /api/v1 with {code,data,message} response envelope</td><td><code>aurora,interface</code></td><td>所有 HTTP 接口走 REST 风格，路径统一加 /api/v1 前缀，响应体统一用 {code, data, message} 三段式包裹。前端和网关都按这个约定做解析和错误处理。列表接口另须返回 page、page_size、total。</td></tr><tr><td><code>r-2026-09-28-007</code></td><td>Never store secrets in git or container images; inject from a KMS</td><td><code>aurora,security</code></td><td>密钥、证书、数据库口令一律走密钥管理服务注入，禁止写入仓库、配置文件明文或镜像层。日志与导出不得出现 token、身份证号或银行卡号。轮换密钥时只改注入点，不改业务代码。</td></tr><tr><td><code>r-2026-09-28-008</code></td><td>Gateway authenticates; services re-check authorization on every write</td><td><code>aurora,security</code></td><td>鉴权在网关统一执行并下发身份，服务端对写操作必须二次校验权限，不能只信网关头。状态变更接口启用 CSRF 校验或同源令牌。外部输入先校验后使用。</td></tr><tr><td><code>r-2026-09-28-009</code></td><td>Unit tests use pytest; core modules require 80 percent line coverage</td><td><code>aurora,testing</code></td><td>单元测试统一使用 pytest，文件与函数以 test_ 开头并可独立运行。核心模块行覆盖率不得低于 80%，关键路径必须覆盖分支。每次提交前本地跑通测试，CI 上单测与 lint 双重校验。</td></tr><tr><td><code>r-2026-09-28-010</code></td><td>Unit tests must not hit real network or databases; mock at the boundary</td><td><code>aurora,testing</code></td><td>单测禁止依赖真实网络与数据库，外部依赖一律 mock 或桩替换。共用夹具放在 conftest.py。断言验证行为而非实现细节，避免 over-mocking 导致假绿。</td></tr><tr><td><code>r-2026-09-28-011</code></td><td>Emit structured JSON logs with trace_id; never print</td><td><code>aurora,ops</code></td><td>日志统一输出结构化 JSON，禁止 print 与裸文本拼接。每个请求贯穿唯一 trace_id。严禁输出密码、token 等敏感字段。关键业务动作与外部调用必须留痕，包含入参摘要与耗时。</td></tr><tr><td><code>r-2026-09-28-012</code></td><td>Expose readiness and liveness probes; failed probes remove traffic</td><td><code>aurora,ops</code></td><td>服务必须暴露 readiness 与 liveness 探针，失败自动摘流。探针不得走会阻塞的下游调用。发布走灰度，每次发布保留上一稳定版本以便一键回滚。</td></tr><tr><td><code>r-2026-09-28-013</code></td><td>Public API changes require two reviewers including the interface owner</td><td><code>aurora,review</code></td><td>凡改动对外契约（路径、字段、错误码）的 PR 必须两名评审通过，其中一名为接口负责人。内部重构若未改变契约可一人评审。评审意见未关闭不得合并。</td></tr><tr><td><code>r-2026-09-28-014</code></td><td>Every pull request must list risk, rollout, and rollback</td><td><code>aurora,review</code></td><td>PR 描述必须写明改动风险、灰度步骤与一键回滚办法。缺少这三项的 PR 直接退回，不进入评审队列。</td></tr><tr><td><code>r-2026-09-28-015</code></td><td>Read runtime config from the environment; never hardcode host or timeout</td><td><code>aurora,config</code></td><td>主机、端口、超时、连接池大小一律从环境变量或配置中心读取，禁止写死在源码或镜像层。缺省值只允许出现在本地开发样例，生产必须显式注入。</td></tr><tr><td><code>r-2026-09-28-016</code></td><td>Feature flags default off in production and must have an expiry owner</td><td><code>aurora,config</code></td><td>生产环境功能开关默认关闭。每个开关必须登记负责人与过期日，到期未清理视为缺陷。开关判断集中在配置层，禁止散落在业务分支深处。</td></tr></tbody>
+</table>
+</div>
+
+<h2>7. 局限</h2>
+<ul class="limits">
+<li>分词：Grok-2 公开编码器，仅相对比较。</li>
+<li>写入期最大落后对照 306.2%，第 8 轮 +29.1%。</li>
+<li>应召回按 scope 标签，非人工同义表；docs/ 为合成语料。</li>
+</ul>
+
+<h2>8. 复现</h2>
+<div class="formula">cd imprint-online-test
+python3 -m pip install -r requirements.txt
+python3 experiment/scripts/run_all.py</div>
+<p class="footer">由 experiment/scripts/build_report.py 根据 experiment/data/*.json 生成。实验时间 2026-09-28 16:12。</p>
+</div>
+</body>
+</html>

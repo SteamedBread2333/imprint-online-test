@@ -1,0 +1,1012 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>规则关联对照实验</title>
+<style>
+:root {
+  --ink: #111111;
+  --muted: #555555;
+  --line: #d0d0d0;
+  --fill: #f6f6f6;
+}
+* { box-sizing: border-box; }
+html { font-size: 15px; }
+body {
+  margin: 0;
+  color: var(--ink);
+  background: #fff;
+  font-family: "Helvetica Neue", Helvetica, Arial, "PingFang SC", "Hiragino Sans GB",
+    "Noto Sans SC", sans-serif;
+  line-height: 1.6;
+}
+.wrap { max-width: 1200px; margin: 0 auto; padding: 56px 40px 80px; }
+.mast {
+  border-bottom: 1px solid var(--ink);
+  padding-bottom: 16px;
+  margin-bottom: 28px;
+}
+.mast .meta-row {
+  display: flex;
+  justify-content: space-between;
+  gap: 16px;
+  font-size: 12px;
+  color: var(--muted);
+  margin: 0 0 10px;
+}
+h1 { font-size: 22px; font-weight: 600; margin: 0 0 8px; line-height: 1.35; }
+.lede { color: var(--muted); font-size: 15px; margin: 0; max-width: 42em; }
+h2 {
+  font-size: 15px;
+  font-weight: 600;
+  margin: 36px 0 12px;
+  padding-top: 16px;
+  border-top: 1px solid var(--line);
+}
+h3 { font-size: 14px; font-weight: 600; margin: 24px 0 8px; }
+p { margin: 0 0 14px; }
+.meta { color: var(--muted); font-size: 13px; }
+.report-tabs {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 4px 20px;
+  margin: 0 0 20px;
+  font-size: 13px;
+  font-weight: 600;
+}
+.report-tabs a {
+  color: var(--muted);
+  text-decoration: none;
+  padding-bottom: 4px;
+  border-bottom: 2px solid transparent;
+}
+.report-tabs a.on {
+  color: var(--ink);
+  border-bottom-color: var(--ink);
+}
+.graph-wrap {
+  margin: 14px 0 18px;
+  padding: 12px 14px;
+  background: var(--fill);
+  border: 1px solid var(--line);
+  overflow-x: auto;
+}
+.graph-wrap .graph-caption {
+  font-size: 12px;
+  color: var(--muted);
+  margin: 0 0 8px;
+}
+.graph-wrap .mermaid {
+  font-size: 13px;
+}
+/* imprint desk–style mini graph (record.html §5) */
+.desk-graph-block { margin: 14px 0 18px; }
+.desk-graph-block .graph-caption { font-size: 12px; color: var(--muted); margin: 0 0 8px; }
+.desk-graph-stage {
+  position: relative; height: 280px; border: 1px solid #2a241c;
+  border-radius: 10px; overflow: hidden;
+  background: radial-gradient(900px 500px at 50% 40%, #1b1712 0%, #100e0c 70%);
+}
+.desk-graph-stage::before {
+  content: ""; position: absolute; inset: 0; pointer-events: none; opacity: 0.35;
+  background-image:
+    linear-gradient(rgba(196,165,116,0.05) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(196,165,116,0.05) 1px, transparent 1px);
+  background-size: 48px 48px;
+}
+.desk-graph-stage .desk-graph-svg {
+  position: absolute; inset: 0; z-index: 1;
+  width: 100%; height: 100%; display: block;
+}
+.desk-graph-legend {
+  display: flex; flex-wrap: wrap; gap: 10px 18px; margin-top: 8px;
+  font-size: 11px; color: var(--muted);
+}
+.desk-graph-legend .edge-key { display: flex; align-items: center; gap: 6px; }
+.desk-graph-legend .swatch.line {
+  width: 22px; height: 0; border-top: 2px solid; flex: none;
+}
+.desk-graph-legend .swatch.line.super { border-color: #e07060; }
+.desk-graph-legend .swatch.line.related { border-color: #d4b483; border-top-style: dashed; }
+.desk-graph-legend .swatch.line.conflict { border-color: #e0a04a; border-top-width: 2.2px; }
+.desk-graph-legend .swatch.line.sources { border-color: #6ec4c0; }
+.desk-graph-legend .node-hint { color: var(--muted); }
+.desk-graph-block .d3-link { fill: none; }
+.desk-graph-block .d3-link.related { stroke: #d4b483; stroke-width: 1.35; stroke-dasharray: 5 4; opacity: 0.75; }
+.desk-graph-block .d3-link.supersedes { stroke: #e07060; stroke-width: 2; opacity: 0.9; }
+.desk-graph-block .d3-link.conflicts_with { stroke: #e0a04a; stroke-width: 2.2; opacity: 0.9; }
+.desk-graph-block .d3-link.sources { stroke: #6ec4c0; stroke-width: 1.8; opacity: 0.85; }
+.desk-graph-block .d3-node.doc-node circle { stroke-dasharray: 3 2; fill: #141a19; }
+.desk-graph-block .d3-label {
+  font: 10px "Helvetica Neue", Helvetica, Arial, sans-serif; fill: #f0e7d8;
+  text-anchor: middle; paint-order: stroke; stroke: #100e0c; stroke-width: 3px;
+  pointer-events: none;
+}
+.table-scroll {
+  display: block;
+  overflow-x: auto;
+  max-width: 100%;
+  margin: 12px 0 16px;
+  -webkit-overflow-scrolling: touch;
+  overscroll-behavior-x: contain;
+}
+table.kpi {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 13px;
+  margin: 12px 0 16px;
+}
+table.data {
+  width: max-content;
+  min-width: 100%;
+  border-collapse: separate;
+  border-spacing: 0;
+  font-size: 13px;
+  margin: 0;
+}
+table.kpi th, table.kpi td,
+table.data th, table.data td {
+  text-align: left;
+  padding: 8px 14px 8px 0;
+  border-bottom: 1px solid var(--line);
+  vertical-align: top;
+}
+table.kpi th, table.data th {
+  font-weight: 600;
+  color: var(--muted);
+  font-size: 12px;
+  white-space: nowrap;
+}
+table.kpi td { font-size: 15px; font-weight: 600; }
+table.kpi .sub {
+  display: block;
+  font-size: 12px;
+  font-weight: 400;
+  color: var(--muted);
+  margin-top: 2px;
+}
+table.data td.num, table.data th.num {
+  text-align: right;
+  font-variant-numeric: tabular-nums;
+  padding-left: 16px;
+  white-space: nowrap;
+}
+table.data td.clip {
+  white-space: nowrap;
+}
+table.data td.clip code {
+  white-space: nowrap;
+}
+td.arg {
+  cursor: default;
+}
+td.arg .short {
+  display: block;
+  max-width: 100%;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  border-bottom: 1px dotted var(--ink);
+  padding-bottom: 1px;
+}
+td.arg:hover .short,
+td.arg:focus-within .short {
+  border-bottom-style: solid;
+}
+.pop-src { display: none; }
+.arg-float {
+  position: fixed;
+  z-index: 80;
+  display: none;
+  pointer-events: auto;
+}
+.arg-float.on { display: block; }
+.pop-card {
+  width: 360px;
+  background: #fff;
+  color: var(--ink);
+  border: 1px solid var(--ink);
+  padding: 14px 16px 12px;
+}
+.pop-kicker {
+  margin: 0 0 10px;
+  font-size: 11px;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--muted);
+  font-weight: 600;
+}
+.pop-dl {
+  margin: 0;
+}
+.pop-dl > div {
+  display: grid;
+  grid-template-columns: 72px 1fr;
+  gap: 4px 12px;
+  padding: 7px 0;
+  border-top: 1px solid var(--line);
+  align-items: start;
+}
+.pop-dl dt {
+  margin: 0;
+  font-size: 11px;
+  color: var(--muted);
+  font-weight: 600;
+  padding-top: 2px;
+}
+.pop-dl dd {
+  margin: 0;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 4px;
+}
+.pop-dl dd code {
+  background: var(--fill);
+  padding: 2px 6px;
+  font-size: 12px;
+  line-height: 1.4;
+  white-space: pre-wrap;
+  word-break: break-word;
+}
+.pop-text {
+  margin: 0;
+  font-size: 14px;
+  line-height: 1.55;
+}
+  margin: 10px 0 0;
+  padding-top: 8px;
+  border-top: 1px solid var(--line);
+  font-size: 11px;
+  color: var(--muted);
+  line-height: 1.45;
+}
+.pop-foot code {
+  background: none;
+  padding: 0;
+  color: var(--ink);
+  font-size: 11px;
+  white-space: pre-wrap;
+  word-break: break-word;
+}
+table.data thead th.grp {
+  text-align: center;
+  color: var(--ink);
+  border-bottom: 1px solid var(--ink);
+  padding: 8px 14px 6px 0;
+}
+table.data .sep {
+  border-left: 1px solid var(--ink);
+  padding-left: 16px;
+}
+table.data.pin thead tr:first-child th:nth-child(1),
+table.data.pin tbody td:nth-child(1) {
+  position: sticky;
+  left: 0;
+  z-index: 3;
+  background: #fff;
+  width: 52px;
+  min-width: 52px;
+  max-width: 52px;
+  padding: 8px 8px 8px 0;
+  box-sizing: border-box;
+}
+table.data.pin thead tr:first-child th:nth-child(2),
+table.data.pin tbody td:nth-child(2) {
+  position: sticky;
+  left: 52px;
+  z-index: 3;
+  background: #fff;
+  width: 160px;
+  min-width: 160px;
+  max-width: 160px;
+  padding: 8px 12px 8px 8px;
+  box-sizing: border-box;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  border-right: 1px solid var(--ink);
+}
+table.data.pin thead tr:first-child th:nth-child(3),
+table.data.pin tbody td:nth-child(3) {
+  padding-left: 16px;
+  min-width: 220px;
+  max-width: 280px;
+}
+table.data.pin tbody td:nth-child(2) code {
+  display: inline-block;
+  max-width: 100%;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  vertical-align: bottom;
+}
+code {
+  font-family: "SF Mono", Menlo, Consolas, monospace;
+  font-size: 12px;
+  background: var(--fill);
+  padding: 0 3px;
+}
+.chart { margin: 8px 0 16px; }
+.legend { font-size: 12px; color: var(--muted); margin: 0 0 6px; }
+.legend span { margin-right: 16px; white-space: nowrap; }
+.sw { display: inline-block; width: 16px; height: 2px; vertical-align: middle; margin-right: 6px; }
+.sw-bar { width: 10px; height: 10px; }
+.note, .limits {
+  border-top: 1px solid var(--line);
+  border-bottom: 1px solid var(--line);
+  padding: 12px 0;
+  margin: 12px 0 16px;
+  font-size: 13px;
+}
+ul { margin: 6px 0; padding-left: 18px; }
+li { margin: 4px 0; }
+.formula {
+  font-family: "SF Mono", Menlo, Consolas, monospace;
+  font-size: 12px;
+  background: var(--fill);
+  padding: 12px 14px;
+  white-space: pre-wrap;
+  margin: 8px 0 16px;
+}
+.sample-pre {
+  font-family: "SF Mono", Menlo, Consolas, monospace;
+  font-size: 11px;
+  background: var(--fill);
+  padding: 10px 12px;
+  white-space: pre-wrap;
+  word-break: break-word;
+  margin: 6px 0 12px;
+  max-height: 320px;
+  overflow: auto;
+}
+details.sample {
+  margin: 10px 0 14px;
+  font-size: 13px;
+}
+details.sample > summary {
+  cursor: pointer;
+  font-weight: 600;
+  margin-bottom: 6px;
+}
+.comp-table td:first-child { font-weight: 600; width: 22%; }
+.footer {
+  margin-top: 40px;
+  padding-top: 12px;
+  border-top: 1px solid var(--line);
+  color: var(--muted);
+  font-size: 12px;
+}
+.pos, .neg { font-variant-numeric: tabular-nums; }
+a { color: var(--ink); }
+@media print {
+  .wrap { padding: 0; max-width: none; overflow-x: visible; }
+  .table-scroll { overflow: visible; }
+}
+</style>
+</head>
+<body>
+<div class="wrap">
+<header class="mast">
+  <p class="meta-row"><span>imprint 对照实验 · 规则关联</span><span>2026-09-29 03:56</span></p>
+  <nav class="report-tabs" aria-label="实验报告"><a href="report.html">规范记忆</a><a href="retrieval.html">文档检索</a><a href="record.html" class="on">规则关联</a></nav>
+  <h1>Vault 关联：文档与规则图</h1>
+  <p class="lede">§3 规则↔文档（sources）；§4 规则↔规则（supersedes / conflicts_with / related）。与纯 BM25 检索、无 graph 的 prompt 堆叠对照。</p>
+</header>
+
+<table class="kpi">
+<tr>
+  <th>规则↔文档 · 累计节约</th>
+  <th>节约率</th>
+  <th>规则↔规则 · 断言</th>
+</tr>
+<tr>
+  <td>3,179<span class="sub">对照 6,863 → 实验 3,684</span></td>
+  <td>46.32%</td>
+  <td>3/3 通过</td>
+</tr>
+</table>
+
+<h2>1. 两类持久关联</h2>
+<h3>规则 ↔ 文档（shelves）</h3>
+<ul>
+<li><code>sources</code>：规则 → 文档；<code>get r-…</code> → <code>resolved_sources</code>。</li>
+<li><code>find.links</code>（当次）：<code>sources</code> / <code>co_search</code>；chunk <code>get</code> → <code>referenced_rules</code>。</li>
+</ul>
+<h3>规则 ↔ 规则（vault graph）</h3>
+<ul>
+<li><code>supersedes</code>：新政策 → 旧政策（旧 dormant，find 默认不召回）。</li>
+<li><code>conflicts_with</code>：相反政策共存；<code>find</code> 返回 <code>conflict_set</code>，并对较弱一侧降权。</li>
+<li><code>related</code>：相关但不替代；<code>get</code> / desk <code>/</code>、<code>/unified</code> 看图。</li>
+<li><code>referenced_by</code>：谁指向我（<code>get r-…</code> 自动）。</li>
+</ul>
+
+<h2>2. 对照定义（规则↔文档）</h2>
+<table class="data comp-table">
+<tbody>
+<tr><td>对照</td><td>无 vault 关联：用户消息 + grep 命中后 Read 规范文档全文（或宽 grep 全部命中篇）。</td></tr>
+<tr><td>实验</td><td>vault sources + shelves：一次 find(scope, query) 得 rules、documents、links；按场景仅 Read sources 指向的篇目或零 Read。</td></tr>
+<tr><td>文档链</td><td>持久 sources（规则→文档）；find.links kind=sources；get chunk → referenced_rules。</td></tr>
+<tr><td>规则图</td><td>持久 supersedes / related / conflicts_with（规则→规则）；find → conflict_set；get / desk /graph → referenced_by 等。</td></tr>
+</tbody>
+</table>
+
+<h2>3. 场景 · 规则 ↔ 文档</h2>
+
+<section class="scenario">
+  <h3>编码前：规则 claim 替代整篇风格文档</h3>
+  <p class="meta">一次 find 返回紧凑 claim，足够落地命名；vault sources 指向出处，不必先 Read 全文。</p>
+  <p><strong>用户</strong> 新增订单 API 模块，类和函数怎么命名？</p>
+  <table class="data">
+  <thead><tr>
+    <th></th><th class="num">输入 tok</th><th>Read</th><th>关联信号</th>
+  </tr></thead>
+  <tbody>
+  <tr>
+    <td>对照（无关联）</td>
+    <td class="num">1,445</td>
+    <td>01-python-style.md</td>
+    <td>—</td>
+  </tr>
+  <tr>
+    <td>实验（vault+find）</td>
+    <td class="num">263</td>
+    <td>（仅 find，无 Read）</td>
+    <td>规则 r-2026-09-29-001 · links 1（<code>sources</code>）· 召回 是</td>
+  </tr>
+  </tbody>
+  </table>
+  <p class="meta">节约 1,182 tok（81.8%）· 审计 —</p>
+  <details class='sample'><summary>find / get 样本 JSON</summary><pre class="sample-pre">{
+  &quot;find_args&quot;: {
+    &quot;scope&quot;: &quot;aurora,python&quot;,
+    &quot;query&quot;: &quot;PascalCase snake_case naming&quot;,
+    &quot;query_local&quot;: &quot;命名 PascalCase snake_case 类 函数&quot;
+  },
+  &quot;rules&quot;: [
+    {
+      &quot;id&quot;: &quot;r-2026-09-29-001&quot;,
+      &quot;claim&quot;: &quot;Use snake_case for functions/variables and PascalCase for classes&quot;,
+      &quot;scope&quot;: [
+        &quot;aurora&quot;,
+        &quot;python&quot;
+      ],
+      &quot;confidence&quot;: 0.6,
+      &quot;score&quot;: 0.8992,
+      &quot;status&quot;: &quot;active&quot;,
+      &quot;sources_count&quot;: 1,
+      &quot;evidence_count&quot;: 1
+    }
+  ],
+  &quot;documents&quot;: [
+    {
+      &quot;id&quot;: &quot;1a05967808989c62&quot;,
+      &quot;path&quot;: &quot;docs/01-python-style.md&quot;,
+      &quot;heading&quot;: &quot;命名约定&quot;,
+      &quot;score&quot;: 30.83502547501966,
+      &quot;snippet&quot;: &quot;函数与变量统一使用 snake_case，类名使用 PascalCase，常量使用全大写 SNAKE_CASE。 本条适用于 Python 代码风格，涉及「命名…&quot;
+    }
+  ],
+  &quot;links&quot;: [
+    {
+      &quot;rule_id&quot;: &quot;r-2026-09-29-001&quot;,
+      &quot;chunk_id&quot;: &quot;1a05967808989c62&quot;,
+      &quot;kind&quot;: &quot;sources&quot;,
+      &quot;score&quot;: 1
+    }
+  ],
+  &quot;audit&quot;: {}
+}</pre></details>
+</section>
+<section class="scenario">
+  <h3>宽 grep：规则 + sources 钉住权威文档</h3>
+  <p class="meta">grep 命中多篇时，规则 claim 说明「缓存策略」权威节；sources 链到 chunk，Read 只需金标一篇。</p>
+  <p><strong>用户</strong> 性能这边缓存策略怎么定？</p>
+  <table class="data">
+  <thead><tr>
+    <th></th><th class="num">输入 tok</th><th>Read</th><th>关联信号</th>
+  </tr></thead>
+  <tbody>
+  <tr>
+    <td>对照（无关联）</td>
+    <td class="num">4,018</td>
+    <td>10-performance.md, 06-logging.md, 08-deployment.md</td>
+    <td>—</td>
+  </tr>
+  <tr>
+    <td>实验（vault+find）</td>
+    <td class="num">1,783</td>
+    <td>10-performance.md</td>
+    <td>规则 r-2026-09-29-002 · links 3（<code>co_search</code>, <code>sources</code>）· 召回 是</td>
+  </tr>
+  </tbody>
+  </table>
+  <p class="meta">节约 2,235 tok（55.6%）· 审计 —</p>
+  <details class='sample'><summary>find / get 样本 JSON</summary><pre class="sample-pre">{
+  &quot;find_args&quot;: {
+    &quot;scope&quot;: &quot;aurora&quot;,
+    &quot;query&quot;: &quot;performance cache&quot;,
+    &quot;query_local&quot;: &quot;性能 缓存&quot;
+  },
+  &quot;rules&quot;: [
+    {
+      &quot;id&quot;: &quot;r-2026-09-29-002&quot;,
+      &quot;claim&quot;: &quot;Define hot-data cache TTL and anti-stampede policy per performance doc cache section&quot;,
+      &quot;scope&quot;: [
+        &quot;aurora&quot;,
+        &quot;performance&quot;
+      ],
+      &quot;confidence&quot;: 0.6,
+      &quot;score&quot;: 0.8779,
+      &quot;status&quot;: &quot;active&quot;,
+      &quot;sources_count&quot;: 1,
+      &quot;evidence_count&quot;: 1
+    },
+    {
+      &quot;id&quot;: &quot;r-2026-09-29-001&quot;,
+      &quot;claim&quot;: &quot;Use snake_case for functions/variables and PascalCase for classes&quot;,
+      &quot;scope&quot;: [
+        &quot;aurora&quot;,
+        &quot;python&quot;
+      ],
+      &quot;confidence&quot;: 0.6,
+      &quot;score&quot;: 0.222,
+      &quot;status&quot;: &quot;active&quot;,
+      &quot;sources_count&quot;: 1,
+      &quot;evidence_count&quot;: 1
+    }
+  ],
+  &quot;documents&quot;: [
+    {
+      &quot;id&quot;: &quot;151f617d980a9bb0&quot;,
+      &quot;path&quot;: &quot;docs/10-performance.md&quot;,
+      &quot;heading&quot;: &quot;缓存策略&quot;,
+      &quot;score&quot;: 8.922567883152372,
+      &quot;snippet&quot;: &quot;热点数据优先走缓存并设合理过期，避免缓存击穿与雪崩。 本条适用于 性能，涉及「缓存策略」的实现必须遵守，不允许例外或临时绕开。\n先完成主路径，再核对边界与失败分…&quot;
+    }
+  ],
+  &quot;links&quot;: [
+    {
+      &quot;rule_id&quot;: &quot;r-2026-09-29-002&quot;,
+      &quot;chunk_id&quot;: &quot;151f617d980a9bb0&quot;,
+      &quot;kind&quot;: &quot;sources&quot;,
+      &quot;score&quot;: 1
+    },
+    {
+      &quot;rule_id&quot;: &quot;r-2026-09-29-001&quot;,
+      &quot;chunk_id&quot;: &quot;1a05967808989c62&quot;,
+      &quot;kind&quot;: &quot;sources&quot;,
+      &quot;score&quot;: 1
+    },
+    {
+      &quot;rule_id&quot;: &quot;r-2026-09-29-001&quot;,
+      &quot;chunk_id&quot;: &quot;151f617d980a9bb0&quot;,
+      &quot;kind&quot;: &quot;co_search&quot;,
+      &quot;score&quot;: 4.572283941576186
+    }
+  ],
+  &quot;audit&quot;: {}
+}</pre></details>
+</section>
+<section class="scenario">
+  <h3>审计：get 规则 ↔ get chunk 双向关联</h3>
+  <p class="meta">写入期 sources 持久化；find 带 links；get 规则看 resolved_sources，get chunk 看 referenced_rules。</p>
+  <p><strong>用户</strong> 异常必须怎么抛？我要核对原文依据。</p>
+  <table class="data">
+  <thead><tr>
+    <th></th><th class="num">输入 tok</th><th>Read</th><th>关联信号</th>
+  </tr></thead>
+  <tbody>
+  <tr>
+    <td>对照（无关联）</td>
+    <td class="num">1,400</td>
+    <td>03-error-handling.md</td>
+    <td>—</td>
+  </tr>
+  <tr>
+    <td>实验（vault+find）</td>
+    <td class="num">1,638</td>
+    <td>03-error-handling.md</td>
+    <td>规则 r-2026-09-29-003 · links 1（<code>sources</code>）· 召回 是</td>
+  </tr>
+  </tbody>
+  </table>
+  <p class="meta">节约 -238 tok（-17.0%）· 审计 get 规则 · resolved_sources 1 条 · get chunk · referenced_rules 1 条</p>
+  <details class='sample'><summary>find / get 样本 JSON</summary><pre class="sample-pre">{
+  &quot;find_args&quot;: {
+    &quot;scope&quot;: &quot;aurora,quality&quot;,
+    &quot;query&quot;: &quot;AuroraError exception raise&quot;,
+    &quot;query_local&quot;: &quot;异常 AuroraError 裸 raise&quot;
+  },
+  &quot;rules&quot;: [
+    {
+      &quot;id&quot;: &quot;r-2026-09-29-003&quot;,
+      &quot;claim&quot;: &quot;Throw AuroraError subclasses for all errors; never bare raise&quot;,
+      &quot;scope&quot;: [
+        &quot;aurora&quot;,
+        &quot;quality&quot;
+      ],
+      &quot;confidence&quot;: 0.6,
+      &quot;score&quot;: 0.8914,
+      &quot;status&quot;: &quot;active&quot;,
+      &quot;sources_count&quot;: 1,
+      &quot;evidence_count&quot;: 1
+    }
+  ],
+  &quot;documents&quot;: [
+    {
+      &quot;id&quot;: &quot;edd2ef12bcf8ef1d&quot;,
+      &quot;path&quot;: &quot;docs/03-error-handling.md&quot;,
+      &quot;heading&quot;: &quot;异常基类&quot;,
+      &quot;score&quot;: 17.18459322297764,
+      &quot;snippet&quot;: &quot;所有业务异常统一派生自 AuroraError 基类，禁止直接 raise Exception。 本条适用于 异常处理，涉及「异常基类」的实现必须遵守，不允许例…&quot;
+    }
+  ],
+  &quot;links&quot;: [
+    {
+      &quot;rule_id&quot;: &quot;r-2026-09-29-003&quot;,
+      &quot;chunk_id&quot;: &quot;edd2ef12bcf8ef1d&quot;,
+      &quot;kind&quot;: &quot;sources&quot;,
+      &quot;score&quot;: 1
+    }
+  ],
+  &quot;audit&quot;: {
+    &quot;get_rule&quot;: {
+      &quot;resolved_sources&quot;: [
+        {
+          &quot;path&quot;: &quot;docs/03-error-handling.md&quot;,
+          &quot;heading&quot;: &quot;异常基类&quot;,
+          &quot;chunk_id&quot;: &quot;edd2ef12bcf8ef1d&quot;
+        }
+      ],
+      &quot;claim&quot;: &quot;Throw AuroraError subclasses for all errors; never bare raise&quot;
+    },
+    &quot;get_chunk&quot;: {
+      &quot;id&quot;: &quot;edd2ef12bcf8ef1d&quot;,
+      &quot;path&quot;: &quot;docs/03-error-handling.md&quot;,
+      &quot;heading&quot;: &quot;异常基类&quot;,
+      &quot;referenced_rules&quot;: [
+        {
+          &quot;id&quot;: &quot;r-2026-09-29-003&quot;,
+          &quot;kind&quot;: &quot;sources&quot;,
+          &quot;claim&quot;: &quot;Throw AuroraError subclasses for all errors; never bare raise&quot;
+        }
+      ]
+    }
+  }
+}</pre></details>
+</section>
+
+<h2>4. 场景 · 规则 ↔ 规则</h2>
+
+<section class="scenario">
+  <h3>政策演进：supersedes（新 → 旧）</h3>
+  <p class="meta">旧政策 dormant，find 只召回现行 claim；get 可见 supersedes 链，desk /graph 可审 lineage。</p>
+  <p><strong>用户</strong> 函数和变量怎么命名？</p>
+  <table class="data">
+  <tr><td>对照</td><td>未 supersede：旧+新两条 user text 同时进 prompt</td>
+      <td class="num">37 tok</td></tr>
+  <tr><td>实验</td><td>supersede 后单次 find</td>
+      <td class="num">96 tok</td></tr>
+  </table>
+  <p class="meta">断言 通过 · 旧规则进 find：否 · 新规则进 find：是 · get.supersedes → [&#x27;r-2026-09-29-001&#x27;]</p>
+  <details class="sample"><summary>JSON</summary><pre class="sample-pre">{
+  &quot;find_args&quot;: {
+    &quot;scope&quot;: &quot;aurora,python&quot;,
+    &quot;query&quot;: &quot;function naming snake_case&quot;,
+    &quot;query_local&quot;: &quot;函数 命名 snake_case&quot;
+  },
+  &quot;linked&quot;: {
+    &quot;description&quot;: &quot;supersede 后单次 find&quot;,
+    &quot;tokens&quot;: 96,
+    &quot;active_rule_id&quot;: &quot;r-2026-09-29-002&quot;,
+    &quot;dormant_rule_id&quot;: &quot;r-2026-09-29-001&quot;,
+    &quot;old_recalled&quot;: false,
+    &quot;new_recalled&quot;: true,
+    &quot;get_supersedes&quot;: [
+      &quot;r-2026-09-29-001&quot;
+    ],
+    &quot;rules_sample&quot;: [
+      {
+        &quot;id&quot;: &quot;r-2026-09-29-002&quot;,
+        &quot;claim&quot;: &quot;Use snake_case for functions/variables and PascalCase for classes&quot;,
+        &quot;scope&quot;: [
+          &quot;aurora&quot;,
+          &quot;python&quot;
+        ],
+        &quot;confidence&quot;: 0.6,
+        &quot;score&quot;: 0.8803,
+        &quot;status&quot;: &quot;active&quot;,
+        &quot;evidence_count&quot;: 2
+      }
+    ]
+  }
+}</pre></details>
+</section>
+<section class="scenario">
+  <h3>对立共存：conflicts_with + find conflict_set</h3>
+  <p class="meta">两条相反政策都 active 时，vault 边 + find 的 conflict_set 提醒 agent 不可盲从一端；find 会对较弱一侧降权。</p>
+  <p><strong>用户</strong> 出站 POST 失败时要不要重试？</p>
+  <table class="data">
+  <tr><td>对照</td><td>无边：两条 claim 同时召回且无 conflict_set（模拟未 link）</td>
+      <td class="num">136 tok</td></tr>
+  <tr><td>实验</td><td>add(conflicts) 后 find</td>
+      <td class="num">200 tok</td></tr>
+  </table>
+  <p class="meta">断言 通过 · conflict_set 条数 1 · A.conflicts_with []</p>
+  <details class="sample"><summary>JSON</summary><pre class="sample-pre">{
+  &quot;find_args&quot;: {
+    &quot;scope&quot;: &quot;aurora,http&quot;,
+    &quot;query&quot;: &quot;HTTP retry POST&quot;,
+    &quot;query_local&quot;: &quot;HTTP 重试 POST&quot;
+  },
+  &quot;linked&quot;: {
+    &quot;description&quot;: &quot;add(conflicts) 后 find&quot;,
+    &quot;tokens&quot;: 200,
+    &quot;rule_ids&quot;: [
+      &quot;r-2026-09-29-003&quot;,
+      &quot;r-2026-09-29-004&quot;
+    ],
+    &quot;conflict_set&quot;: [
+      {
+        &quot;a&quot;: &quot;r-2026-09-29-004&quot;,
+        &quot;b&quot;: &quot;r-2026-09-29-003&quot;
+      }
+    ],
+    &quot;get_a_conflicts&quot;: [],
+    &quot;get_b_conflicts&quot;: [
+      &quot;r-2026-09-29-003&quot;
+    ],
+    &quot;rules_sample&quot;: [
+      {
+        &quot;id&quot;: &quot;r-2026-09-29-004&quot;,
+        &quot;claim&quot;: &quot;Never retry non-idempotent POST requests&quot;,
+        &quot;scope&quot;: [
+          &quot;aurora&quot;,
+          &quot;http&quot;
+        ],
+        &quot;confidence&quot;: 0.6,
+        &quot;score&quot;: 0.8645,
+        &quot;status&quot;: &quot;active&quot;,
+        &quot;evidence_count&quot;: 1
+      },
+      {
+        &quot;id&quot;: &quot;r-2026-09-29-003&quot;,
+        &quot;claim&quot;: &quot;Retry failed outbound HTTP calls up to three times&quot;,
+        &quot;scope&quot;: [
+          &quot;aurora&quot;,
+          &quot;http&quot;
+        ],
+        &quot;confidence&quot;: 0.6,
+        &quot;score&quot;: 0.3971,
+        &quot;status&quot;: &quot;active&quot;,
+        &quot;evidence_count&quot;: 1
+      }
+    ]
+  }
+}</pre></details>
+</section>
+<section class="scenario">
+  <h3>跨主题：related 边（质量 ↔ HTTP 重试）</h3>
+  <p class="meta">相关但不替代的政策用 related 连成图；get / desk 统一视图，便于人工审规则网。</p>
+  <p><strong>用户</strong> （维护）提交门禁和出站重试政策有关吗？</p>
+  <table class="data">
+  <tr><td>对照</td><td>无 related：需分别 list/记忆两条 id</td>
+      <td class="num">0 tok</td></tr>
+  <tr><td>实验</td><td>link related 后 get</td>
+      <td class="num">106 tok</td></tr>
+  </table>
+  <p class="meta">断言 通过 · get.related → [&#x27;r-2026-09-29-003&#x27;]</p>
+  <details class="sample"><summary>JSON</summary><pre class="sample-pre">{
+  &quot;find_args&quot;: null,
+  &quot;linked&quot;: {
+    &quot;description&quot;: &quot;link related 后 get&quot;,
+    &quot;tokens&quot;: 106,
+    &quot;rule_id&quot;: &quot;r-2026-09-29-005&quot;,
+    &quot;get_related&quot;: [
+      &quot;r-2026-09-29-003&quot;
+    ]
+  }
+}</pre></details>
+</section>
+
+<h2>5. 复杂实际案例（叙事 + desk 关系图）</h2>
+<p class="meta">静态 SVG，边样式与 <code>imprint desk open → 统一</code> 一致（离线 / 直接打开 html 即可）。示意节点，非 live vault。自动化断言见 §3–§4。</p>
+
+<article class="scenario">
+  <h3>案例 A · 事故后改灰度政策（supersedes + sources + 宽 grep）</h3>
+  
+<div class="desk-graph-block">
+  <p class="graph-caption">imprint desk 统一视图风格 · 仅 deployment 有 sources；error/review 为 grep 宽命中、图中无 vault 边</p>
+  <div class="desk-graph-stage"><svg class="desk-graph-svg" viewBox="0 0 560 280" width="100%" height="100%" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="关联图 case_a">
+  <defs>
+    <marker id="arrow-super" viewBox="0 -4 8 8" refX="14" refY="0" markerWidth="6" markerHeight="6" orient="auto">
+      <path d="M0,-4L8,0L0,4" fill="#e07060"/>
+    </marker>
+  </defs>
+  <line class="d3-link supersedes" x1="294.6" y1="117.4" x2="283.7" y2="40.0" fill="none" stroke="#e07060" stroke-width="2" marker-end="url(#arrow-super)"/>
+<line class="d3-link sources" x1="294.6" y1="117.4" x2="368.3" y2="143.3" fill="none" stroke="#6ec4c0" stroke-width="1.8" opacity="0.85"/>
+<g class="d3-node"><circle cx="294.6" cy="117.4" r="14" fill="#e8c99a" stroke="#e8c99a" stroke-width="2"/><text class="d3-label" x="294.6" y="142.4" text-anchor="middle">r-canary-v2</text></g>
+<g class="d3-node"><circle cx="283.7" cy="40.0" r="10" fill="#e8c99a" stroke="#7aa0c8" stroke-width="2"/><text class="d3-label" x="283.7" y="61.0" text-anchor="middle">r-canary-v1</text></g>
+<g class="d3-node doc-node"><circle cx="368.3" cy="143.3" r="11" fill="#141a19" stroke="#6ec4c0" stroke-width="2" stroke-dasharray="3 2"/><text class="d3-label" x="368.3" y="165.3" text-anchor="middle">08-deployment</text></g>
+<g class="d3-node doc-node"><circle cx="284.6" cy="240.0" r="11" fill="#141a19" stroke="#6ec4c0" stroke-width="2" stroke-dasharray="3 2"/><text class="d3-label" x="284.6" y="262.0" text-anchor="middle">03-error-handlin</text></g>
+<g class="d3-node doc-node"><circle cx="191.7" cy="147.1" r="11" fill="#141a19" stroke="#6ec4c0" stroke-width="2" stroke-dasharray="3 2"/><text class="d3-label" x="191.7" y="169.1" text-anchor="middle">13-review</text></g>
+</svg></div>
+  
+<div class="desk-graph-legend">
+  <span class="node-hint">实点=规则 · 虚线圆=文档 · 颜色=scope</span>
+  <span class="edge-key"><span class="swatch line super"></span>supersedes</span>
+  <span class="edge-key"><span class="swatch line related"></span>related</span>
+  <span class="edge-key"><span class="swatch line conflict"></span>conflicts_with</span>
+  <span class="edge-key"><span class="swatch line sources"></span>sources</span>
+</div>
+</div>
+  <p><strong>背景</strong> 线上一次灰度回滚拖了 40 分钟。事后口头约定变了，但 <code>docs/08-deployment.md</code>、<code>docs/03-error-handling.md</code>、<code>docs/13-review.md</code> 里仍都能搜到「灰度」「回滚」。</p>
+  <p><strong>写入</strong> 对旧规则 <code>r-…-canary-v1</code> 做 <code>supersede</code>，新 claim 写清「自动回滚触发条件与审批」；<code>sources</code> 只钉 <code>08-deployment.md#灰度发布</code>（不是 review 里的 checklist）。</p>
+  <p><strong>编码前</strong> 用户：「灰度失败现在到底怎么回滚？」→ grep 3 篇 → indexed &gt; k → <code>find(paths, query=canary rollback, query_local=灰度发布 回滚)</code>。</p>
+  <p><strong>imprint 行为</strong> find 召回<strong>现行</strong>规则（旧 v1 已 dormant 不进 top）；<code>links.sources</code> 指向 deployment chunk；Read 交集往往只需 deployment 一篇。agent 按 claim 写流水线，细节以 <code>get r-…</code> 的 <code>resolved_sources</code> 核对，不必三篇全文进 context。</p>
+  <p><strong>若无关联</strong> 要么三篇全 Read，要么 BM25 把 review 放第一导致 checklist 当权威 — 和真实「部署节唯一来源」不一致。</p>
+</article>
+
+<article class="scenario">
+  <h3>案例 B · 下单链路：HTTP 重试 vs POST 幂等 vs 队列死信（conflicts + related + 多 sources）</h3>
+  
+<div class="desk-graph-block">
+  <p class="graph-caption">desk /unified：conflicts_with 橙实线 · related 金虚线 · 各规则 sources 到 doc</p>
+  <div class="desk-graph-stage"><svg class="desk-graph-svg" viewBox="0 0 560 280" width="100%" height="100%" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="关联图 case_b">
+  <defs>
+    <marker id="arrow-super" viewBox="0 -4 8 8" refX="14" refY="0" markerWidth="6" markerHeight="6" orient="auto">
+      <path d="M0,-4L8,0L0,4" fill="#e07060"/>
+    </marker>
+  </defs>
+  <line class="d3-link conflicts_with" x1="280.0" y1="182.8" x2="280.0" y2="150.0" fill="none" stroke="#e0a04a" stroke-width="2.2" opacity="0.9"/>
+<line class="d3-link related" x1="280.0" y1="150.0" x2="280.0" y2="94.2" fill="none" stroke="#d4b483" stroke-width="1.35" stroke-dasharray="5 4" opacity="0.75"/>
+<line class="d3-link sources" x1="280.0" y1="182.8" x2="280.0" y2="216.9" fill="none" stroke="#6ec4c0" stroke-width="1.8" opacity="0.85"/>
+<line class="d3-link sources" x1="280.0" y1="150.0" x2="280.0" y2="240.0" fill="none" stroke="#6ec4c0" stroke-width="1.8" opacity="0.85"/>
+<line class="d3-link sources" x1="280.0" y1="94.2" x2="280.0" y2="40.0" fill="none" stroke="#6ec4c0" stroke-width="1.8" opacity="0.85"/>
+<g class="d3-node"><circle cx="280.0" cy="182.8" r="14" fill="#e8c99a" stroke="#e8c99a" stroke-width="2"/><text class="d3-label" x="280.0" y="207.8" text-anchor="middle">r-http-retry</text></g>
+<g class="d3-node"><circle cx="280.0" cy="150.0" r="14" fill="#e8c99a" stroke="#e8c99a" stroke-width="2"/><text class="d3-label" x="280.0" y="175.0" text-anchor="middle">r-no-post-retry</text></g>
+<g class="d3-node"><circle cx="280.0" cy="94.2" r="14" fill="#e8c99a" stroke="#e8c99a" stroke-width="2"/><text class="d3-label" x="280.0" y="119.2" text-anchor="middle">r-dlq</text></g>
+<g class="d3-node doc-node"><circle cx="280.0" cy="216.9" r="11" fill="#141a19" stroke="#6ec4c0" stroke-width="2" stroke-dasharray="3 2"/><text class="d3-label" x="280.0" y="238.9" text-anchor="middle">16-http-client</text></g>
+<g class="d3-node doc-node"><circle cx="280.0" cy="240.0" r="11" fill="#141a19" stroke="#6ec4c0" stroke-width="2" stroke-dasharray="3 2"/><text class="d3-label" x="280.0" y="262.0" text-anchor="middle">05-api-design</text></g>
+<g class="d3-node doc-node"><circle cx="280.0" cy="40.0" r="11" fill="#141a19" stroke="#6ec4c0" stroke-width="2" stroke-dasharray="3 2"/><text class="d3-label" x="280.0" y="62.0" text-anchor="middle">12-concurrency</text></g>
+</svg></div>
+  
+<div class="desk-graph-legend">
+  <span class="node-hint">实点=规则 · 虚线圆=文档 · 颜色=scope</span>
+  <span class="edge-key"><span class="swatch line super"></span>supersedes</span>
+  <span class="edge-key"><span class="swatch line related"></span>related</span>
+  <span class="edge-key"><span class="swatch line conflict"></span>conflicts_with</span>
+  <span class="edge-key"><span class="swatch line sources"></span>sources</span>
+</div>
+</div>
+  <p><strong>背景</strong> 三条政策同时有效、互相牵制：</p>
+  <ul>
+    <li><code>r-http-retry</code>：出站 HTTP 默认最多重试 3 次（出处 <code>16-http-client.md</code>）</li>
+    <li><code>r-no-post-retry</code>：非幂等 POST 禁止自动重试（出处 <code>05-api-design.md</code>），<code>conflicts_with → r-http-retry</code></li>
+    <li><code>r-dlq</code>：异步消费失败进 DLQ、可见性超时 &gt; 最坏处理时间（出处 <code>12-concurrency.md</code>），<code>related → r-no-post-retry</code>（「同步 HTTP 不重试、异步走队列」）</li>
+  </ul>
+  <p><strong>用户</strong> 「支付回调 POST 超时了，客户端要自动重试吗？后台 Job 又怎么兜？」</p>
+  <p><strong>一次 find</strong> <code>scope=aurora,http</code>（或更宽）+ query → 召回 2～3 条 active 规则 + <strong><code>conflict_set</code></strong>（retry  vs no-post-retry）。agent 必须先向用户确认场景：<strong>同步 POST</strong> 走 B，<strong>已进队列</strong> 走 C；不能只看 BM25 第一条。</p>
+  <p><strong>文档</strong> 每条规则自带 <code>sources</code>；需要原文时 Read 1～2 篇金标节，而不是 grep「重试」命中的 5 篇（config / observability / http / api / concurrency）全读。</p>
+  <p><strong>desk</strong> 发版前在 <code>/unified</code> 看三角边 + 文档 cross-edge，评审是否漏链。</p>
+</article>
+
+<article class="scenario">
+  <h3>案例 C · 用户纠错 + 继承（supersede 继承 sources/query_local + 审计链）</h3>
+  
+<div class="desk-graph-block">
+  <p class="graph-caption">supersedes 箭头 · 新规则双 sources（database + api）</p>
+  <div class="desk-graph-stage"><svg class="desk-graph-svg" viewBox="0 0 560 280" width="100%" height="100%" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="关联图 case_c">
+  <defs>
+    <marker id="arrow-super" viewBox="0 -4 8 8" refX="14" refY="0" markerWidth="6" markerHeight="6" orient="auto">
+      <path d="M0,-4L8,0L0,4" fill="#e07060"/>
+    </marker>
+  </defs>
+  <line class="d3-link supersedes" x1="279.9" y1="165.3" x2="280.0" y2="40.0" fill="none" stroke="#e07060" stroke-width="2" marker-end="url(#arrow-super)"/>
+<line class="d3-link sources" x1="279.9" y1="165.3" x2="380.4" y2="239.8" fill="none" stroke="#6ec4c0" stroke-width="1.8" opacity="0.85"/>
+<line class="d3-link sources" x1="279.9" y1="165.3" x2="179.6" y2="240.0" fill="none" stroke="#6ec4c0" stroke-width="1.8" opacity="0.85"/>
+<g class="d3-node"><circle cx="279.9" cy="165.3" r="14" fill="#e8c99a" stroke="#e8c99a" stroke-width="2"/><text class="d3-label" x="279.9" y="190.3" text-anchor="middle">r-ts-tz</text></g>
+<g class="d3-node"><circle cx="280.0" cy="40.0" r="10" fill="#e8c99a" stroke="#7aa0c8" stroke-width="2"/><text class="d3-label" x="280.0" y="61.0" text-anchor="middle">r-ts-iso</text></g>
+<g class="d3-node doc-node"><circle cx="380.4" cy="239.8" r="11" fill="#141a19" stroke="#6ec4c0" stroke-width="2" stroke-dasharray="3 2"/><text class="d3-label" x="380.4" y="261.8" text-anchor="middle">04-database</text></g>
+<g class="d3-node doc-node"><circle cx="179.6" cy="240.0" r="11" fill="#141a19" stroke="#6ec4c0" stroke-width="2" stroke-dasharray="3 2"/><text class="d3-label" x="179.6" y="262.0" text-anchor="middle">05-api-design</text></g>
+</svg></div>
+  
+<div class="desk-graph-legend">
+  <span class="node-hint">实点=规则 · 虚线圆=文档 · 颜色=scope</span>
+  <span class="edge-key"><span class="swatch line super"></span>supersedes</span>
+  <span class="edge-key"><span class="swatch line related"></span>related</span>
+  <span class="edge-key"><span class="swatch line conflict"></span>conflicts_with</span>
+  <span class="edge-key"><span class="swatch line sources"></span>sources</span>
+</div>
+</div>
+  <p><strong>背景</strong> 早期规则「时间戳存 UTC ISO8601 字符串」(<code>r-ts-iso</code>)，<code>sources</code> 指向 <code>04-database.md</code> 与 <code>05-api-design.md</code> 两处。用户纠正：「对外 JSON 仍 ISO8601，但<strong>库内改为 timestamptz + ORM 自动转</strong>，别再用字符串字段了。」</p>
+  <p><strong>写入</strong> <code>supersede r-ts-iso</code>，<code>confidence 0.85</code>；未改 <code>sources</code> 时继承旧指针，再<strong>追加</strong> <code>04-database.md#时间存储</code>；<code>query_local</code> 合并 CJK 检索词（如 timestamptz、时区）。</p>
+  <p><strong>召回</strong> 之后 find「订单 created_at 存什么」→ 只应命中<strong>新</strong>规则；<code>get r-new</code> 可见 <code>supersedes: [r-ts-iso]</code> + 合并后的 <code>resolved_sources</code>。旧规则 dormant，避免 agent 仍按字符串方案建表。</p>
+  <p><strong>复杂点</strong> 同一主题跨 interface + database 两篇 doc — sources 是多指针，不是「find 排名第一 doc 即真理」；supersede 解决「政策版本」，sources 解决「出处分散」。</p>
+</article>
+
+<article class="scenario">
+  <h3>案例 D · 组合检索噪声 + 规则定锚（co_search 仅辅助）</h3>
+  
+<div class="desk-graph-block">
+  <p class="graph-caption">sources 锚定 performance · related 连 config 规则 · deployment 仅 grep 噪声（无边）</p>
+  <div class="desk-graph-stage"><svg class="desk-graph-svg" viewBox="0 0 560 280" width="100%" height="100%" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="关联图 case_d">
+  <defs>
+    <marker id="arrow-super" viewBox="0 -4 8 8" refX="14" refY="0" markerWidth="6" markerHeight="6" orient="auto">
+      <path d="M0,-4L8,0L0,4" fill="#e07060"/>
+    </marker>
+  </defs>
+  <line class="d3-link sources" x1="295.8" y1="183.5" x2="351.4" y2="230.7" fill="none" stroke="#6ec4c0" stroke-width="1.8" opacity="0.85"/>
+<line class="d3-link related" x1="280.7" y1="112.6" x2="295.8" y2="183.5" fill="none" stroke="#d4b483" stroke-width="1.35" stroke-dasharray="5 4" opacity="0.75"/>
+<line class="d3-link sources" x1="280.7" y1="112.6" x2="284.8" y2="40.0" fill="none" stroke="#6ec4c0" stroke-width="1.8" opacity="0.85"/>
+<g class="d3-node"><circle cx="295.8" cy="183.5" r="14" fill="#e8c99a" stroke="#e8c99a" stroke-width="2"/><text class="d3-label" x="295.8" y="208.5" text-anchor="middle">r-cache-auth</text></g>
+<g class="d3-node"><circle cx="280.7" cy="112.6" r="14" fill="#e8c99a" stroke="#e8c99a" stroke-width="2"/><text class="d3-label" x="280.7" y="137.6" text-anchor="middle">r-feature-exp</text></g>
+<g class="d3-node doc-node"><circle cx="351.4" cy="230.7" r="11" fill="#141a19" stroke="#6ec4c0" stroke-width="2" stroke-dasharray="3 2"/><text class="d3-label" x="351.4" y="252.7" text-anchor="middle">10-performance</text></g>
+<g class="d3-node doc-node"><circle cx="284.8" cy="40.0" r="11" fill="#141a19" stroke="#6ec4c0" stroke-width="2" stroke-dasharray="3 2"/><text class="d3-label" x="284.8" y="62.0" text-anchor="middle">14-config</text></g>
+<g class="d3-node doc-node"><circle cx="208.6" cy="240.0" r="11" fill="#141a19" stroke="#6ec4c0" stroke-width="2" stroke-dasharray="3 2"/><text class="d3-label" x="208.6" y="262.0" text-anchor="middle">08-deployment</text></g>
+</svg></div>
+  
+<div class="desk-graph-legend">
+  <span class="node-hint">实点=规则 · 虚线圆=文档 · 颜色=scope</span>
+  <span class="edge-key"><span class="swatch line super"></span>supersedes</span>
+  <span class="edge-key"><span class="swatch line related"></span>related</span>
+  <span class="edge-key"><span class="swatch line conflict"></span>conflicts_with</span>
+  <span class="edge-key"><span class="swatch line sources"></span>sources</span>
+</div>
+</div>
+  <p><strong>背景</strong> 用户口语：「性能那边缓存和过期怎么配？」grep「性能+缓存+过期」命中 performance、deployment、config 等多篇（实验里类似「性能 缓存」「缓存 过期」组合词 fuzz）。</p>
+  <p><strong>vault</strong> 已有规则「热点缓存策略以 performance 文档缓存策略节为准」，<code>sources</code> → <code>10-performance.md#缓存策略</code>；另有一条「功能开关过期日」在 config，<code>related</code> 到性能规则但不 supersede。</p>
+  <p><strong>find</strong> 同轮返回 documents（多 chunk）+ <code>links.sources</code>（规则已指向 performance chunk）+ 可能 <code>co_search</code>（规则与 config chunk 同屏出现）。协议要求：<strong>行为以 rule claim + sources 为准</strong>，co_search 不 write-back、不单独当政策。</p>
+  <p><strong>Read</strong> grep∩find 非空 → Read 交集中 performance（+ 若 claim 明确涉及开关再 Read config 一节），而不是 fuzz 表里的 3～5 篇全读。</p>
+</article>
+
+<article class="scenario">
+  <h3>案例 E · 发版门禁：规则图 + 文档交叉（related + 多 scope AND）</h3>
+  
+<div class="desk-graph-block">
+  <p class="graph-caption">发版 related 子图 + 每条规则 sources 到对应 doc</p>
+  <div class="desk-graph-stage"><svg class="desk-graph-svg" viewBox="0 0 560 280" width="100%" height="100%" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="关联图 case_e">
+  <defs>
+    <marker id="arrow-super" viewBox="0 -4 8 8" refX="14" refY="0" markerWidth="6" markerHeight="6" orient="auto">
+      <path d="M0,-4L8,0L0,4" fill="#e07060"/>
+    </marker>
+  </defs>
+  <line class="d3-link related" x1="235.6" y1="40.0" x2="316.6" y2="76.6" fill="none" stroke="#d4b483" stroke-width="1.35" stroke-dasharray="5 4" opacity="0.75"/>
+<line class="d3-link related" x1="363.7" y1="132.6" x2="363.8" y2="230.4" fill="none" stroke="#d4b483" stroke-width="1.35" stroke-dasharray="5 4" opacity="0.75"/>
+<line class="d3-link sources" x1="300.5" y1="154.0" x2="283.8" y2="240.0" fill="none" stroke="#6ec4c0" stroke-width="1.8" opacity="0.85"/>
+<line class="d3-link sources" x1="235.6" y1="40.0" x2="228.7" y2="160.2" fill="none" stroke="#6ec4c0" stroke-width="1.8" opacity="0.85"/>
+<line class="d3-link sources" x1="316.6" y1="76.6" x2="196.2" y2="99.5" fill="none" stroke="#6ec4c0" stroke-width="1.8" opacity="0.85"/>
+<line class="d3-link sources" x1="363.7" y1="132.6" x2="262.0" y2="101.0" fill="none" stroke="#6ec4c0" stroke-width="1.8" opacity="0.85"/>
+<g class="d3-node"><circle cx="300.5" cy="154.0" r="14" fill="#e8c99a" stroke="#e8c99a" stroke-width="2"/><text class="d3-label" x="300.5" y="179.0" text-anchor="middle">命名</text></g>
+<g class="d3-node"><circle cx="235.6" cy="40.0" r="14" fill="#e8c99a" stroke="#e8c99a" stroke-width="2"/><text class="d3-label" x="235.6" y="65.0" text-anchor="middle">ruff-mypy</text></g>
+<g class="d3-node"><circle cx="316.6" cy="76.6" r="14" fill="#e8c99a" stroke="#e8c99a" stroke-width="2"/><text class="d3-label" x="316.6" y="101.6" text-anchor="middle">log-redact</text></g>
+<g class="d3-node"><circle cx="363.7" cy="132.6" r="14" fill="#e8c99a" stroke="#e8c99a" stroke-width="2"/><text class="d3-label" x="363.7" y="157.6" text-anchor="middle">capacity-70</text></g>
+<g class="d3-node"><circle cx="363.8" cy="230.4" r="14" fill="#e8c99a" stroke="#e8c99a" stroke-width="2"/><text class="d3-label" x="363.8" y="255.4" text-anchor="middle">rate-limit</text></g>
+<g class="d3-node doc-node"><circle cx="283.8" cy="240.0" r="11" fill="#141a19" stroke="#6ec4c0" stroke-width="2" stroke-dasharray="3 2"/><text class="d3-label" x="283.8" y="262.0" text-anchor="middle">01-python-style</text></g>
+<g class="d3-node doc-node"><circle cx="228.7" cy="160.2" r="11" fill="#141a19" stroke="#6ec4c0" stroke-width="2" stroke-dasharray="3 2"/><text class="d3-label" x="228.7" y="182.2" text-anchor="middle">07-testing</text></g>
+<g class="d3-node doc-node"><circle cx="196.2" cy="99.5" r="11" fill="#141a19" stroke="#6ec4c0" stroke-width="2" stroke-dasharray="3 2"/><text class="d3-label" x="196.2" y="121.5" text-anchor="middle">06-logging</text></g>
+<g class="d3-node doc-node"><circle cx="262.0" cy="101.0" r="11" fill="#141a19" stroke="#6ec4c0" stroke-width="2" stroke-dasharray="3 2"/><text class="d3-label" x="262.0" y="123.0" text-anchor="middle">11-observability</text></g>
+</svg></div>
+  
+<div class="desk-graph-legend">
+  <span class="node-hint">实点=规则 · 虚线圆=文档 · 颜色=scope</span>
+  <span class="edge-key"><span class="swatch line super"></span>supersedes</span>
+  <span class="edge-key"><span class="swatch line related"></span>related</span>
+  <span class="edge-key"><span class="swatch line conflict"></span>conflicts_with</span>
+  <span class="edge-key"><span class="swatch line sources"></span>sources</span>
+</div>
+</div>
+  <p><strong>背景</strong> 发版前 checklist：命名 / 静态检查 / 可观测性水位 / 安全脱敏 — 分属 python、quality、observability、logging 多个 scope。</p>
+  <p><strong>图</strong> <code>r-ruff-mypy</code> <code>related</code> <code>r-log-redact</code>；<code>r-capacity-70</code>（CPU/连接池水位）<code>related</code> 性能限流规则；无 conflicts，但 find 时 <code>scope=aurora,quality,ops</code> AND 收窄。</p>
+  <p><strong>用户</strong> 「这轮要上生产，帮我对一下规范清单。」→ 一次 find 拉回相关 claim 子集；需要条文细节时对每条 <code>get r-…</code> 的 sources 按需 Read，而不是把 16 篇 docs 或 16 条 user text 全文灌进 prompt（对照 <a href="report.html">规范记忆</a> 实验的 baseline 臂）。</p>
+  <p><strong>价值</strong> vault↔vault 表达「一起审」；vault↔doc 表达「每条出处」；与纯 shelves 检索互补。</p>
+</article>
+
+
+<h2>6. 与另两项实验的关系</h2>
+<p class="meta"><a href="report.html">规范记忆</a> 测 vault 规则复用 token；<a href="retrieval.html">文档检索</a> 测 grep+find 收窄 Read（RETRIEVAL_VAULT 为空）。本页专用 <code>.imprint-link-bench</code>，在 add 时写入 sources，体现<strong>规则—文档双向可追溯</strong>，而非只比 BM25 排序。</p>
+
+<p class="footer">由 experiment/scripts/build_record_report.py 生成。</p>
+</div>
+
+</body>
+</html>

@@ -1,0 +1,1850 @@
+{
+  "scenario": "grep_find_read",
+  "doc_budget": 3,
+  "rows": [
+    {
+      "qid": 1,
+      "query": "snake_case PascalCase naming",
+      "query_local": "命名 snake_case PascalCase 函数 变量",
+      "text": "函数变量用 snake_case、类名用 PascalCase，命名到底怎么定？",
+      "search_patterns": [
+        "PascalCase",
+        "snake_case",
+        "命名"
+      ],
+      "rg_command": "rg -i -l --glob *.md -e PascalCase -e snake_case -e 命名 docs",
+      "search_req_tokens": 22,
+      "grep_hits_tokens": 481,
+      "grep_hits_sample": "docs/01-python-style.md\ndocs/15-i18n.md\ndocs/11-observability.md\ndocs/07-testing.md\n---\ndocs/01-python-style.md:5:## 命名约定\ndocs/01-python-style.md:7:函数与变量统一使用 snake_case，类名使用 PascalCase，常量使用全大写 SNAKE_CASE。 本条适用于 Python 代码风格，涉及「命名约定」的实现必须遵守，不允许例外或临时绕开。\ndocs/01-python-style.md:12:再次强调，本条的权威表述是：函数与变量统一使用 snake_case，类名使用 PascalCase，常量使用全大写 SNAKE_CASE。\ndocs/07-testing.md:7:单元测试统一使用 pytest，命名以 test_ 开头并保持可独立运行。 本条适用于 测试，涉及「测试框架」的实现必须遵守，不允许例外或临时绕开。\ndocs/07-testing.md:12:再次强调，本条的权威表述是：单元测试统一使用 pytest，命名以 test_ 开头并保持可独立运行。\ndocs/15-i18n.md:34:插值使用命名占位符，禁止按位置拼接以免语序错乱。 本条适用于 国际化，涉及「占位符」的实现必须遵守，不允许例外或临时绕开。\ndocs/15-i18n.md:39:再次强调，本条的权威表述是：插值使用命名占位符，禁止按位置拼接以免语序错乱。\ndocs/11-observability.md:5:## 指标命名\ndocs/11-observability.md:7:业务指标统一使用 aurora_ 前缀加蛇形命名，禁止临时拼英文缩写。 本条适用于 可观测性，涉及「指标命名」的实现必须遵守，不允许例外或临时绕开。\ndocs/11-observability.md:12:再次强调，本条的权威表述是：业务指标统一使用 aurora_ 前缀加蛇形命名，禁止临时拼英文缩写。",
+      "find_args": {
+        "scope": "aurora",
+        "query": "snake_case PascalCase naming",
+        "query_local": "命名 snake_case PascalCase 函数 变量",
+        "paths": [
+          "docs/01-python-style.md",
+          "docs/15-i18n.md",
+          "docs/11-observability.md",
+          "docs/07-testing.md"
+        ]
+      },
+      "find_documents": [
+        {
+          "id": "1a05967808989c62",
+          "path": "docs/01-python-style.md",
+          "heading": "命名约定",
+          "score": 24.113743417742565,
+          "snippet": "函数与变量统一使用 snake_case，类名使用 PascalCase，常量使用全大写 SNAKE_CASE。 本条适用于 Python 代码风格，涉及「命名…"
+        }
+      ],
+      "find_req_tokens": 65,
+      "find_docs_tokens": 98,
+      "read_files_tokens": 1433,
+      "n_hits": 4,
+      "n_files_matched": 4,
+      "n_files_opened": 1,
+      "opened_files": [
+        "docs/01-python-style.md"
+      ],
+      "used_find_paths": true,
+      "used_find": true,
+      "n_docs": 1,
+      "doc_paths": [
+        "docs/01-python-style.md"
+      ],
+      "doc_headings": [
+        "命名约定"
+      ],
+      "target_file": "docs/01-python-style.md",
+      "target_heading": "命名约定",
+      "target_rank": 1,
+      "hit_target": true,
+      "hit_heading": true,
+      "opened_target": true,
+      "too_broad": true,
+      "doc_budget": 3,
+      "total_input_tokens": 2099
+    },
+    {
+      "qid": 2,
+      "query": "Repository domain data access",
+      "query_local": "仓储 Repository 数据访问 抽象",
+      "text": "别直接打库，仓储这一层数据访问怎么抽象？",
+      "search_patterns": [
+        "数据访问",
+        "Repository",
+        "仓储"
+      ],
+      "rg_command": "rg -i -l --glob *.md -e 数据访问 -e Repository -e 仓储 docs",
+      "search_req_tokens": 22,
+      "grep_hits_tokens": 6,
+      "grep_hits_sample": "docs/02-architecture.md",
+      "find_args": null,
+      "find_documents": [],
+      "find_req_tokens": 0,
+      "find_docs_tokens": 0,
+      "read_files_tokens": 1393,
+      "n_hits": 1,
+      "n_files_matched": 1,
+      "n_files_opened": 1,
+      "opened_files": [
+        "docs/02-architecture.md"
+      ],
+      "used_find_paths": false,
+      "used_find": false,
+      "n_docs": 0,
+      "doc_paths": [],
+      "doc_headings": [],
+      "target_file": "docs/02-architecture.md",
+      "target_heading": "仓储模式",
+      "target_rank": null,
+      "hit_target": false,
+      "hit_heading": false,
+      "opened_target": true,
+      "too_broad": false,
+      "doc_budget": 3,
+      "total_input_tokens": 1421
+    },
+    {
+      "qid": 3,
+      "query": "AuroraError exception base class",
+      "query_local": "异常 AuroraError 基类 错误码",
+      "text": "异常是不是都要走 AuroraError 基类和错误码？",
+      "search_patterns": [
+        "AuroraError",
+        "错误码",
+        "异常"
+      ],
+      "rg_command": "rg -i -l --glob *.md -e AuroraError -e 错误码 -e 异常 docs",
+      "search_req_tokens": 23,
+      "grep_hits_tokens": 1202,
+      "grep_hits_sample": "docs/03-error-handling.md\ndocs/16-http-client.md\ndocs/05-api-design.md\ndocs/06-logging.md\n---\ndocs/03-error-handling.md:1:# 异常处理规范\ndocs/03-error-handling.md:3:下列条文是 aurora 服务（Python FastAPI）在「异常处理」方面的唯一权威来源，供协作与检索使用。每节首句为结论，后文为展开。\ndocs/03-error-handling.md:5:## 异常基类\ndocs/03-error-handling.md:7:所有业务异常统一派生自 AuroraError 基类，禁止直接 raise Exception。 本条适用于 异常处理，涉及「异常基类」的实现必须遵守，不允许例外或临时绕开。\ndocs/03-error-handling.md:12:再次强调，本条的权威表述是：所有业务异常统一派生自 AuroraError 基类，禁止直接 raise Exception。\ndocs/03-error-handling.md:14:## 裸异常\ndocs/03-error-handling.md:16:任何地方都禁止裸 raise 与空 except，捕获必须指定具体异常类型。 本条适用于 异常处理，涉及「裸异常」的实现必须遵守，不允许例外或临时绕开。\ndocs/03-error-handling.md:21:再次强调，本条的权威表述是：任何地方都禁止裸 raise 与空 except，捕获必须指定具体异常类型。\ndocs/03-error-handling.md:23:## 错误码\ndocs/03-error-handling.md:25:每个 AuroraError 子类绑定唯一错误码，便于网关统一映射与监控告警。 本条适用于 异常处理，涉及「错误码」的实现必须遵守，不允许例外或临时绕开。\ndocs/03-error-handling.md:30:再次强调，本条的权威表述是：每个 AuroraError 子类绑定唯一错误码，便于网关统一映射与监控告警。\ndocs/03-error-handling.md:34:捕获异常后必须记录结构化日志并携带 trace_id，不得静默吞掉异常。 本条适用于 异常处理，涉及「日志配合」的实现必须遵守，不允许例外或临时绕开。\ndocs/03-error-handling.md:39:再次强调，本条的权威表述是：捕获异常后必须记录结构化日志并携带 trace_id，不得静默吞掉异常。\ndocs/03-error-handling.md:43:外部依赖异常须在边界层转换为领域异常，避免第三方类型泄漏进业务。 本条适用于 异常处理，涉及「边界转换」的实现必须遵守，不允许例外或临时绕开。\ndocs/03-error-handling.md:48:再次强调，本条的权威表述是：外部依赖异常须在边界层转换为领域异常，避免第三方类型泄漏进业务。\ndocs/03-error-handling.md:52:仅对幂等操作启用重试，重试必须带退避与最大次数，禁止无脑重试。 本条适用于 异常处理，涉及「重试策略」的实现必须遵守，不允许例外或临时绕开。\ndocs/03-error-handling.md:61:面向用户返回友好提示，内部堆栈与敏感信息一律只进日志不出接口。 本条适用于 异常处理，涉及「用户可见」的实现必须遵守，不允许例外或临时绕开。\ndocs/03-error-handling.md:70:异常触发时事务必须回滚，禁止留下半写状态的脏数据。 本条适用于 异常处理，涉及「事务回滚」的实现必须遵守，不允许例外或临时绕开。\ndocs/03-error-handling.md:75:再次强调，本条的权威表述是：异常触发时事务必须回滚，禁止留下半写状态的脏数据。\ndocs/16-http-client.md:16:仅对幂等 GET 与明确可重试错误码重试，写操作默认不重试。 本条适用于 HTTP 客户端，涉及「重试边界」的实现必须遵守，不允许例外或临时绕开。\ndocs/16-http-client.md:21:再次强调，本条的权威表述是：仅对幂等 GET 与明确可重试错误码重试，写操作默认不重试。\ndocs/05-api-design.md:25:语义化使用 HTTP 状态码，业务错误码放在响应 body 的 code 字段。 本条适用于 REST API，涉及「状态码」的实现必须遵守，不允许例外或临时绕开。\ndocs/05-api-design.md:30:再次强调，本条的权威表述是：语义化使用 HTTP 状态码，业务错误码放在响应 body 的 code 字段。\ndocs/06-logging.md:50:## 异常日志\ndocs/06-logging.md:52:异常必须带完整堆栈与上下文，禁止只打印错误消息。 本条适用于 日志，涉及「异常日志」的实现必须遵守，不允许例外或临时绕开。\ndocs/06-logging.md:57:再次强调，本条的权威表述是：异常必须带完整堆栈与上下文，禁止只打印错误消息。",
+      "find_args": {
+        "scope": "aurora",
+        "query": "AuroraError exception base class",
+        "query_local": "异常 AuroraError 基类 错误码",
+        "paths": [
+          "docs/03-error-handling.md",
+          "docs/16-http-client.md",
+          "docs/05-api-design.md",
+          "docs/06-logging.md"
+        ]
+      },
+      "find_documents": [
+        {
+          "id": "08720c95be571217",
+          "path": "docs/03-error-handling.md",
+          "heading": "错误码",
+          "score": 16.617139489326757,
+          "snippet": "每个 AuroraError 子类绑定唯一错误码，便于网关统一映射与监控告警。 本条适用于 异常处理，涉及「错误码」的实现必须遵守，不允许例外或临时绕开。\n先完…"
+        }
+      ],
+      "find_req_tokens": 64,
+      "find_docs_tokens": 113,
+      "read_files_tokens": 1388,
+      "n_hits": 4,
+      "n_files_matched": 4,
+      "n_files_opened": 1,
+      "opened_files": [
+        "docs/03-error-handling.md"
+      ],
+      "used_find_paths": true,
+      "used_find": true,
+      "n_docs": 1,
+      "doc_paths": [
+        "docs/03-error-handling.md"
+      ],
+      "doc_headings": [
+        "错误码"
+      ],
+      "target_file": "docs/03-error-handling.md",
+      "target_heading": "异常基类",
+      "target_rank": 1,
+      "hit_target": true,
+      "hit_heading": false,
+      "opened_target": true,
+      "too_broad": true,
+      "doc_budget": 3,
+      "total_input_tokens": 2790
+    },
+    {
+      "qid": 4,
+      "query": "ISO8601 UTC timestamp storage",
+      "query_local": "时间戳 UTC ISO8601 存储",
+      "text": "时间戳入库是不是必须 UTC、ISO8601？",
+      "search_patterns": [
+        "时间戳",
+        "ISO8601",
+        "存储"
+      ],
+      "rg_command": "rg -i -l --glob *.md -e 时间戳 -e ISO8601 -e 存储 docs",
+      "search_req_tokens": 27,
+      "grep_hits_tokens": 477,
+      "grep_hits_sample": "docs/15-i18n.md\ndocs/09-security.md\ndocs/04-database.md\ndocs/05-api-design.md\n---\ndocs/15-i18n.md:43:日期时间按用户 locale 格式化，存储仍为 UTC ISO8601。 本条适用于 国际化，涉及「日期格式」的实现必须遵守，不允许例外或临时绕开。\ndocs/15-i18n.md:48:再次强调，本条的权威表述是：日期时间按用户 locale 格式化，存储仍为 UTC ISO8601。\ndocs/09-security.md:23:## 密钥存储\ndocs/09-security.md:25:密钥一律加密存储于密钥管理服务，代码与配置不得明文。 本条适用于 安全，涉及「密钥存储」的实现必须遵守，不允许例外或临时绕开。\ndocs/09-security.md:30:再次强调，本条的权威表述是：密钥一律加密存储于密钥管理服务，代码与配置不得明文。\ndocs/05-api-design.md:61:接口层时间统一输出 ISO8601 UTC 字符串，与数据库存储保持一致。 本条适用于 REST API，涉及「时间格式」的实现必须遵守，不允许例外或临时绕开。\ndocs/05-api-design.md:66:再次强调，本条的权威表述是：接口层时间统一输出 ISO8601 UTC 字符串，与数据库存储保持一致。\ndocs/04-database.md:1:# 数据库与时间戳规范\ndocs/04-database.md:5:## 时间戳存储\ndocs/04-database.md:7:所有时间戳字段统一存 UTC 的 ISO8601 字符串，禁止存本地时间或整数。 本条适用于 数据库，涉及「时间戳存储」的实现必须遵守，不允许例外或临时绕开。\ndocs/04-database.md:12:再次强调，本条的权威表述是：所有时间戳字段统一存 UTC 的 ISO8601 字符串，禁止存本地时间或整数。",
+      "find_args": {
+        "scope": "aurora",
+        "query": "ISO8601 UTC timestamp storage",
+        "query_local": "时间戳 UTC ISO8601 存储",
+        "paths": [
+          "docs/15-i18n.md",
+          "docs/09-security.md",
+          "docs/04-database.md",
+          "docs/05-api-design.md"
+        ]
+      },
+      "find_documents": [
+        {
+          "id": "eeddee939b59f844",
+          "path": "docs/04-database.md",
+          "heading": "时间戳存储",
+          "score": 18.77689557558654,
+          "snippet": "所有时间戳字段统一存 UTC 的 ISO8601 字符串，禁止存本地时间或整数。 本条适用于 数据库，涉及「时间戳存储」的实现必须遵守，不允许例外或临时绕开。\n…"
+        }
+      ],
+      "find_req_tokens": 67,
+      "find_docs_tokens": 109,
+      "read_files_tokens": 1371,
+      "n_hits": 4,
+      "n_files_matched": 4,
+      "n_files_opened": 1,
+      "opened_files": [
+        "docs/04-database.md"
+      ],
+      "used_find_paths": true,
+      "used_find": true,
+      "n_docs": 1,
+      "doc_paths": [
+        "docs/04-database.md"
+      ],
+      "doc_headings": [
+        "时间戳存储"
+      ],
+      "target_file": "docs/04-database.md",
+      "target_heading": "时间戳存储",
+      "target_rank": 1,
+      "hit_target": true,
+      "hit_heading": true,
+      "opened_target": true,
+      "too_broad": true,
+      "doc_budget": 3,
+      "total_input_tokens": 2051
+    },
+    {
+      "qid": 5,
+      "query": "REST api prefix version",
+      "query_local": "REST 接口 前缀 /api/v1 版本",
+      "text": "REST 接口路径前缀和版本号怎么写？",
+      "search_patterns": [
+        "/api/v1",
+        "接口",
+        "前缀"
+      ],
+      "rg_command": "rg -i -l --glob *.md -e /api/v1 -e 接口 -e 前缀 docs",
+      "search_req_tokens": 24,
+      "grep_hits_tokens": 1688,
+      "grep_hits_sample": "docs/10-performance.md\ndocs/09-security.md\ndocs/13-review.md\ndocs/11-observability.md\ndocs/03-error-handling.md\ndocs/04-database.md\ndocs/05-api-design.md\ndocs/02-architecture.md\n---\ndocs/09-security.md:52:状态变更接口启用 CSRF 校验或使用同源令牌。 本条适用于 安全，涉及「CSRF 防护」的实现必须遵守，不允许例外或临时绕开。\ndocs/09-security.md:57:再次强调，本条的权威表述是：状态变更接口启用 CSRF 校验或使用同源令牌。\ndocs/04-database.md:25:高频查询字段必须建立索引，复合索引遵循最左前缀原则。 本条适用于 数据库，涉及「索引设计」的实现必须遵守，不允许例外或临时绕开。\ndocs/04-database.md:30:再次强调，本条的权威表述是：高频查询字段必须建立索引，复合索引遵循最左前缀原则。\ndocs/10-performance.md:52:核心接口统一限流与降级，防止高峰打垮下游。 本条适用于 性能，涉及「限流降级」的实现必须遵守，不允许例外或临时绕开。\ndocs/10-performance.md:57:再次强调，本条的权威表述是：核心接口统一限流与降级，防止高峰打垮下游。\ndocs/10-performance.md:70:关键接口打点采集耗时与吞吐，性能回归纳入告警。 本条适用于 性能，涉及「指标监控」的实现必须遵守，不允许例外或临时绕开。\ndocs/10-performance.md:75:再次强调，本条的权威表述是：关键接口打点采集耗时与吞吐，性能回归纳入告警。\ndocs/11-observability.md:7:业务指标统一使用 aurora_ 前缀加蛇形命名，禁止临时拼英文缩写。 本条适用于 可观测性，涉及「指标命名」的实现必须遵守，不允许例外或临时绕开。\ndocs/11-observability.md:12:再次强调，本条的权威表述是：业务指标统一使用 aurora_ 前缀加蛇形命名，禁止临时拼英文缩写。\ndocs/11-observability.md:16:每个对外接口采集 Rate、Errors、Duration 三件套，缺一不可。 本条适用于 可观测性，涉及「RED 方法」的实现必须遵守，不允许例外或临时绕开。\ndocs/11-observability.md:21:再次强调，本条的权威表述是：每个对外接口采集 Rate、Errors、Duration 三件套，缺一不可。\ndocs/11-observability.md:25:核心接口必须写明 SLO 与错误预算，超预算自动冻结发布。 本条适用于 可观测性，涉及「SLO 定义」的实现必须遵守，不允许例外或临时绕开。\ndocs/11-observability.md:30:再次强调，本条的权威表述是：核心接口必须写明 SLO 与错误预算，超预算自动冻结发布。\ndocs/13-review.md:5:## 公开接口\ndocs/13-review.md:7:对外契约变更须两名评审通过，其中一名为接口负责人。 本条适用于 代码评审，涉及「公开接口」的实现必须遵守，不允许例外或临时绕开。\ndocs/13-review.md:12:再次强调，本条的权威表述是：对外契约变更须两名评审通过，其中一名为接口负责人。\ndocs/02-architecture.md:16:依赖方向始终向内，任何跨层引用都必须经过 domain 的公开接口收敛。 本条适用于 分层架构，涉及「依赖方向」的实现必须遵守，不允许例外或临时绕开。\ndocs/02-architecture.md:21:再次强调，本条的权威表述是：依赖方向始终向内，任何跨层引用都必须经过 domain 的公开接口收敛。\ndocs/02-architecture.md:23:## 接口隔离\ndocs/02-architecture.md:25:模块之间只暴露最小必要接口，内部数据结构严禁泄漏到其它层。 本条适用于 分层架构，涉及「接口隔离」的实现必须遵守，不允许例外或临时绕开。\ndocs/02-architecture.md:30:再次强调，本条的权威表述是：模块之间只暴露最小必要接口，内部数据结构严禁泄漏到其它层。\ndocs/05-api-design.md:5:## 路径前缀\ndocs/05-api-design.md:7:所有 HTTP 接口统一加 /api/v1 前缀，版本升级走整段版本号。 本条适用于 REST API，涉及「路径前缀」的实现必须遵守，不允许例外或临时绕开。\ndocs/05-api-design.md:12:再次强调，本条的权威表述是：所有 HTTP 接口统一加 /api/v1 前缀，版本升级走整段版本号。\ndocs/05-api-design.md:34:列表接口统一支持 page 与 page_size，并返回 total 供前端分页。 本条适用于 REST API，涉及「分页约定」的实现必须遵守，不允许例外或临时绕开。\ndocs/05-api-design.md:39:再次强调，本条的权威表述是：列表接口统一支持 page 与 page_size，并返回 total 供前端分页。\ndocs/05-api-design.md:52:写接口使用幂等键避免重复提交，同名键需返回一致结果。 本条适用于 REST API，涉及「幂等设计」的实现必须遵守，不允许例外或临时绕开。\ndocs/05-api-design.md:57:再次强调，本条的权威表述是：写接口使用幂等键避免重复提交，同名键需返回一致结果。\ndocs/05-api-design.md:61:接口层时间统一输出 ISO8601 UTC 字符串，与数据库存储保持一致。 本条适用于 REST API，涉及「时间格式」的实现必须遵守，不允许例外或临时绕开。\ndocs/05-api-design.md:66:再次强调，本条的权威表述是：接口层时间统一输出 ISO8601 UTC 字符串，与数据库存储保持一致。\ndocs/05-api-design.md:70:接口变更必须同步更新 OpenAPI 文档，禁止代码与文档长期漂移。 本条适用于 REST API，涉及「文档同步」的实现必须遵守，不允许例外或临时绕开。\ndocs/05-api-design.md:75:再次强调，本条的权威表述是：接口变更必须同步更新 OpenAPI 文档，禁止代码与文档长期漂移。\ndocs/03-error-handling.md:61:面向用户返回友好提示，内部堆栈与敏感信息一律只进日志不出接口。 本条适用于 异常处理，涉及「用户可见」的实现必须遵守，不允许例外或临时绕开。\ndocs/03-error-handling.md:66:再次强调，本条的权威表述是：面向用户返回友好提示，内部堆栈与敏感信息一律只进日志不出接口。",
+      "find_args": {
+        "scope": "aurora",
+        "query": "REST api prefix version",
+        "query_local": "REST 接口 前缀 /api/v1 版本",
+        "paths": [
+          "docs/10-performance.md",
+          "docs/09-security.md",
+          "docs/13-review.md",
+          "docs/11-observability.md",
+          "docs/03-error-handling.md",
+          "docs/04-database.md",
+          "docs/05-api-design.md",
+          "docs/02-architecture.md"
+        ]
+      },
+      "find_documents": [
+        {
+          "id": "2b6b0fe915200d92",
+          "path": "docs/05-api-design.md",
+          "heading": "路径前缀",
+          "score": 16.96325223289032,
+          "snippet": "所有 HTTP 接口统一加 /api/v1 前缀，版本升级走整段版本号。 本条适用于 REST API，涉及「路径前缀」的实现必须遵守，不允许例外或临时绕开。\n…"
+        }
+      ],
+      "find_req_tokens": 92,
+      "find_docs_tokens": 109,
+      "read_files_tokens": 1354,
+      "n_hits": 8,
+      "n_files_matched": 8,
+      "n_files_opened": 1,
+      "opened_files": [
+        "docs/05-api-design.md"
+      ],
+      "used_find_paths": true,
+      "used_find": true,
+      "n_docs": 1,
+      "doc_paths": [
+        "docs/05-api-design.md"
+      ],
+      "doc_headings": [
+        "路径前缀"
+      ],
+      "target_file": "docs/05-api-design.md",
+      "target_heading": "路径前缀",
+      "target_rank": 1,
+      "hit_target": true,
+      "hit_heading": true,
+      "opened_target": true,
+      "too_broad": true,
+      "doc_budget": 3,
+      "total_input_tokens": 3267
+    },
+    {
+      "qid": 6,
+      "query": "trace_id structured logging",
+      "query_local": "trace_id 结构化 日志 链路",
+      "text": "日志要不要带 trace_id，结构化怎么打？",
+      "search_patterns": [
+        "trace_id",
+        "结构化",
+        "日志"
+      ],
+      "rg_command": "rg -i -l --glob *.md -e trace_id -e 结构化 -e 日志 docs",
+      "search_req_tokens": 23,
+      "grep_hits_tokens": 1700,
+      "grep_hits_sample": "docs/01-python-style.md\ndocs/11-observability.md\ndocs/16-http-client.md\ndocs/03-error-handling.md\ndocs/14-config.md\ndocs/04-database.md\ndocs/09-security.md\ndocs/06-logging.md\n---\ndocs/01-python-style.md:61:自定义对象尽量实现 __repr__ 而非 __str__，保证调试与日志输出一致。 本条适用于 Python 代码风格，涉及「魔法方法」的实现必须遵守，不允许例外或临时绕开。\ndocs/01-python-style.md:66:再次强调，本条的权威表述是：自定义对象尽量实现 __repr__ 而非 __str__，保证调试与日志输出一致。\ndocs/09-security.md:68:## 审计日志\ndocs/09-security.md:70:敏感操作写审计日志，包含操作者、时间与对象记录。 本条适用于 安全，涉及「审计日志」的实现必须遵守，不允许例外或临时绕开。\ndocs/09-security.md:75:再次强调，本条的权威表述是：敏感操作写审计日志，包含操作者、时间与对象记录。\ndocs/14-config.md:61:生产配置变更写审计日志，包含操作者与前后值摘要。 本条适用于 配置，涉及「配置审计」的实现必须遵守，不允许例外或临时绕开。\ndocs/14-config.md:66:再次强调，本条的权威表述是：生产配置变更写审计日志，包含操作者与前后值摘要。\ndocs/11-observability.md:59:## 日志关联\ndocs/11-observability.md:61:指标、日志、追踪必须能用 trace_id 互相跳转。 本条适用于 可观测性，涉及「日志关联」的实现必须遵守，不允许例外或临时绕开。\ndocs/11-observability.md:66:再次强调，本条的权威表述是：指标、日志、追踪必须能用 trace_id 互相跳转。\ndocs/03-error-handling.md:32:## 日志配合\ndocs/03-error-handling.md:34:捕获异常后必须记录结构化日志并携带 trace_id，不得静默吞掉异常。 本条适用于 异常处理，涉及「日志配合」的实现必须遵守，不允许例外或临时绕开。\ndocs/03-error-handling.md:39:再次强调，本条的权威表述是：捕获异常后必须记录结构化日志并携带 trace_id，不得静默吞掉异常。\ndocs/03-error-handling.md:61:面向用户返回友好提示，内部堆栈与敏感信息一律只进日志不出接口。 本条适用于 异常处理，涉及「用户可见」的实现必须遵守，不允许例外或临时绕开。\ndocs/03-error-handling.md:66:再次强调，本条的权威表述是：面向用户返回友好提示，内部堆栈与敏感信息一律只进日志不出接口。\ndocs/04-database.md:70:敏感字段落库前必须加密或脱敏，日志与导出不得明文出现。 本条适用于 数据库，涉及「敏感字段」的实现必须遵守，不允许例外或临时绕开。\ndocs/04-database.md:75:再次强调，本条的权威表述是：敏感字段落库前必须加密或脱敏，日志与导出不得明文出现。\ndocs/16-http-client.md:43:出站请求传播 trace_id，禁止另起互不相干的请求标识。 本条适用于 HTTP 客户端，涉及「追踪头」的实现必须遵守，不允许例外或临时绕开。\ndocs/16-http-client.md:48:再次强调，本条的权威表述是：出站请求传播 trace_id，禁止另起互不相干的请求标识。\ndocs/06-logging.md:1:# 日志规范\ndocs/06-logging.md:3:下列条文是 aurora 服务（Python FastAPI）在「日志」方面的唯一权威来源，供协作与检索使用。每节首句为结论，后文为展开。\ndocs/06-logging.md:5:## 结构化日志\ndocs/06-logging.md:7:日志统一输出结构化 JSON 格式，禁止用 print 与裸文本拼接。 本条适用于 日志，涉及「结构化日志」的实现必须遵守，不允许例外或临时绕开。\ndocs/06-logging.md:12:再次强调，本条的权威表述是：日志统一输出结构化 JSON 格式，禁止用 print 与裸文本拼接。\ndocs/06-logging.md:14:## 日志级别\ndocs/06-logging.md:16:区分 debug/info/warn/error 四级语义，线上默认只开 info。 本条适用于 日志，涉及「日志级别」的实现必须遵守，不允许例外或临时绕开。\ndocs/06-logging.md:23:## trace_id\ndocs/06-logging.md:25:每个请求贯穿唯一 trace_id，日志必须携带以便链路追踪。 本条适用于 日志，涉及「trace_id」的实现必须遵守，不允许例外或临时绕开。\ndocs/06-logging.md:30:再次强调，本条的权威表述是：每个请求贯穿唯一 trace_id，日志必须携带以便链路追踪。\ndocs/06-logging.md:34:日志严禁输出密码、token、身份证等敏感字段，需先脱敏。 本条适用于 日志，涉及「敏感信息」的实现必须遵守，不允许例外或临时绕开。\ndocs/06-logging.md:39:再次强调，本条的权威表述是：日志严禁输出密码、token、身份证等敏感字段，需先脱敏。\ndocs/06-logging.md:43:关键业务动作与外部调用必须留痕，包含入参摘要与耗时。 本条适用于 日志，涉及「关键事件」的实现必须遵守，不允许例外或临时绕开。\ndocs/06-logging.md:50:## 异常日志\ndocs/06-logging.md:52:异常必须带完整堆栈与上下文，禁止只打印错误消息。 本条适用于 日志，涉及「异常日志」的实现必须遵守，不允许例外或临时绕开。\ndocs/06-logging.md:61:避免在热路径拼接大对象，日志参数采用惰性求值。 本条适用于 日志，涉及「性能开销」的实现必须遵守，不允许例外或临时绕开。\ndocs/06-logging.md:66:再次强调，本条的权威表述是：避免在热路径拼接大对象，日志参数采用惰性求值。\ndocs/06-logging.md:68:## 日志轮转\ndocs/06-logging.md:70:日志文件按大小与时间轮转，保留策略与归档必须可配置。 本条适用于 日志，涉及「日志轮转」的实现必须遵守，不允许例外或临时绕开。\ndocs/06-logging.md:75:再次强调，本条的权威表述是：日志文件按大小与时间轮转，保留策略与归档必须可配置。",
+      "find_args": {
+        "scope": "aurora",
+        "query": "trace_id structured logging",
+        "query_local": "trace_id 结构化 日志 链路",
+        "paths": [
+          "docs/01-python-style.md",
+          "docs/11-observability.md",
+          "docs/16-http-client.md",
+          "docs/03-error-handling.md",
+          "docs/14-config.md",
+          "docs/04-database.md",
+          "docs/09-security.md",
+          "docs/06-logging.md"
+        ]
+      },
+      "find_documents": [
+        {
+          "id": "702351cc310ef75c",
+          "path": "docs/06-logging.md",
+          "heading": "trace_id",
+          "score": 17.69938823239654,
+          "snippet": "每个请求贯穿唯一 trace_id，日志必须携带以便链路追踪。 本条适用于 日志，涉及「trace_id」的实现必须遵守，不允许例外或临时绕开。\n先完成主路径，…"
+        },
+        {
+          "id": "61181705b5a89f9c",
+          "path": "docs/03-error-handling.md",
+          "heading": "日志配合",
+          "score": 16.865523445304504,
+          "snippet": "捕获异常后必须记录结构化日志并携带 trace_id，不得静默吞掉异常。 本条适用于 异常处理，涉及「日志配合」的实现必须遵守，不允许例外或临时绕开。\n先完成主…"
+        }
+      ],
+      "find_req_tokens": 93,
+      "find_docs_tokens": 221,
+      "read_files_tokens": 2724,
+      "n_hits": 8,
+      "n_files_matched": 8,
+      "n_files_opened": 2,
+      "opened_files": [
+        "docs/06-logging.md",
+        "docs/03-error-handling.md"
+      ],
+      "used_find_paths": true,
+      "used_find": true,
+      "n_docs": 2,
+      "doc_paths": [
+        "docs/06-logging.md",
+        "docs/03-error-handling.md"
+      ],
+      "doc_headings": [
+        "trace_id",
+        "日志配合"
+      ],
+      "target_file": "docs/06-logging.md",
+      "target_heading": "trace_id",
+      "target_rank": 1,
+      "hit_target": true,
+      "hit_heading": true,
+      "opened_target": true,
+      "too_broad": true,
+      "doc_budget": 3,
+      "total_input_tokens": 4761
+    },
+    {
+      "qid": 7,
+      "query": "pytest test framework coverage",
+      "query_local": "测试 pytest 覆盖率 框架",
+      "text": "测试框架是 pytest 吗，覆盖率要多少？",
+      "search_patterns": [
+        "覆盖率",
+        "测试",
+        "框架"
+      ],
+      "rg_command": "rg -i -l --glob *.md -e 覆盖率 -e 测试 -e 框架 docs",
+      "search_req_tokens": 23,
+      "grep_hits_tokens": 20,
+      "grep_hits_sample": "docs/13-review.md\ndocs/07-testing.md\ndocs/02-architecture.md",
+      "find_args": null,
+      "find_documents": [],
+      "find_req_tokens": 0,
+      "find_docs_tokens": 0,
+      "read_files_tokens": 4124,
+      "n_hits": 3,
+      "n_files_matched": 3,
+      "n_files_opened": 3,
+      "opened_files": [
+        "docs/13-review.md",
+        "docs/07-testing.md",
+        "docs/02-architecture.md"
+      ],
+      "used_find_paths": false,
+      "used_find": false,
+      "n_docs": 0,
+      "doc_paths": [],
+      "doc_headings": [],
+      "target_file": "docs/07-testing.md",
+      "target_heading": "测试框架",
+      "target_rank": null,
+      "hit_target": false,
+      "hit_heading": false,
+      "opened_target": true,
+      "too_broad": false,
+      "doc_budget": 3,
+      "total_input_tokens": 4167
+    },
+    {
+      "qid": 8,
+      "query": "readiness liveness health probe",
+      "query_local": "健康检查 readiness liveness 探针",
+      "text": "readiness 和 liveness 健康检查探针怎么配？",
+      "search_patterns": [
+        "健康检查",
+        "探针",
+        "readiness"
+      ],
+      "rg_command": "rg -i -l --glob *.md -e 健康检查 -e 探针 -e readiness docs",
+      "search_req_tokens": 23,
+      "grep_hits_tokens": 6,
+      "grep_hits_sample": "docs/08-deployment.md",
+      "find_args": null,
+      "find_documents": [],
+      "find_req_tokens": 0,
+      "find_docs_tokens": 0,
+      "read_files_tokens": 1341,
+      "n_hits": 1,
+      "n_files_matched": 1,
+      "n_files_opened": 1,
+      "opened_files": [
+        "docs/08-deployment.md"
+      ],
+      "used_find_paths": false,
+      "used_find": false,
+      "n_docs": 0,
+      "doc_paths": [],
+      "doc_headings": [],
+      "target_file": "docs/08-deployment.md",
+      "target_heading": "健康检查",
+      "target_rank": null,
+      "hit_target": false,
+      "hit_heading": false,
+      "opened_target": true,
+      "too_broad": false,
+      "doc_budget": 3,
+      "total_input_tokens": 1370
+    },
+    {
+      "qid": 9,
+      "query": "CSRF security token",
+      "query_local": "CSRF 安全 令牌 防护",
+      "text": "写接口 CSRF 令牌防护怎么做？",
+      "search_patterns": [
+        "安全",
+        "令牌",
+        "防护"
+      ],
+      "rg_command": "rg -i -l --glob *.md -e 安全 -e 令牌 -e 防护 docs",
+      "search_req_tokens": 24,
+      "grep_hits_tokens": 6,
+      "grep_hits_sample": "docs/09-security.md",
+      "find_args": null,
+      "find_documents": [],
+      "find_req_tokens": 0,
+      "find_docs_tokens": 0,
+      "read_files_tokens": 1352,
+      "n_hits": 1,
+      "n_files_matched": 1,
+      "n_files_opened": 1,
+      "opened_files": [
+        "docs/09-security.md"
+      ],
+      "used_find_paths": false,
+      "used_find": false,
+      "n_docs": 0,
+      "doc_paths": [],
+      "doc_headings": [],
+      "target_file": "docs/09-security.md",
+      "target_heading": "CSRF 防护",
+      "target_rank": null,
+      "hit_target": false,
+      "hit_heading": false,
+      "opened_target": true,
+      "too_broad": false,
+      "doc_budget": 3,
+      "total_input_tokens": 1382
+    },
+    {
+      "qid": 10,
+      "query": "rate limit degradation cache",
+      "query_local": "限流 降级 缓存 性能",
+      "text": "限流了之后怎么降级，能不能走缓存？",
+      "search_patterns": [
+        "限流",
+        "降级",
+        "缓存"
+      ],
+      "rg_command": "rg -i -l --glob *.md -e 限流 -e 降级 -e 缓存 docs",
+      "search_req_tokens": 24,
+      "grep_hits_tokens": 21,
+      "grep_hits_sample": "docs/10-performance.md\ndocs/08-deployment.md\ndocs/12-concurrency.md",
+      "find_args": null,
+      "find_documents": [],
+      "find_req_tokens": 0,
+      "find_docs_tokens": 0,
+      "read_files_tokens": 4015,
+      "n_hits": 3,
+      "n_files_matched": 3,
+      "n_files_opened": 3,
+      "opened_files": [
+        "docs/10-performance.md",
+        "docs/08-deployment.md",
+        "docs/12-concurrency.md"
+      ],
+      "used_find_paths": false,
+      "used_find": false,
+      "n_docs": 0,
+      "doc_paths": [],
+      "doc_headings": [],
+      "target_file": "docs/10-performance.md",
+      "target_heading": "限流降级",
+      "target_rank": null,
+      "hit_target": false,
+      "hit_heading": false,
+      "opened_target": true,
+      "too_broad": false,
+      "doc_budget": 3,
+      "total_input_tokens": 4060
+    },
+    {
+      "qid": 11,
+      "query": "SLO error budget freeze release",
+      "query_local": "SLO 错误预算 冻结发布",
+      "text": "SLO 错误预算烧完了要不要冻结发布？",
+      "search_patterns": [
+        "错误预算",
+        "冻结发布",
+        "SLO"
+      ],
+      "rg_command": "rg -i -l --glob *.md -e 错误预算 -e 冻结发布 -e SLO docs",
+      "search_req_tokens": 26,
+      "grep_hits_tokens": 8,
+      "grep_hits_sample": "docs/11-observability.md",
+      "find_args": null,
+      "find_documents": [],
+      "find_req_tokens": 0,
+      "find_docs_tokens": 0,
+      "read_files_tokens": 1388,
+      "n_hits": 1,
+      "n_files_matched": 1,
+      "n_files_opened": 1,
+      "opened_files": [
+        "docs/11-observability.md"
+      ],
+      "used_find_paths": false,
+      "used_find": false,
+      "n_docs": 0,
+      "doc_paths": [],
+      "doc_headings": [],
+      "target_file": "docs/11-observability.md",
+      "target_heading": "SLO 定义",
+      "target_rank": null,
+      "hit_target": false,
+      "hit_heading": false,
+      "opened_target": true,
+      "too_broad": false,
+      "doc_budget": 3,
+      "total_input_tokens": 1422
+    },
+    {
+      "qid": 12,
+      "query": "RED rate errors duration metrics",
+      "query_local": "RED 方法 错误率 耗时",
+      "text": "RED 方法里错误率和耗时指标怎么采？",
+      "search_patterns": [
+        "错误率",
+        "耗时",
+        "RED"
+      ],
+      "rg_command": "rg -i -l --glob *.md -e 错误率 -e 耗时 -e RED docs",
+      "search_req_tokens": 23,
+      "grep_hits_tokens": 23,
+      "grep_hits_sample": "docs/10-performance.md\ndocs/11-observability.md\ndocs/06-logging.md",
+      "find_args": null,
+      "find_documents": [],
+      "find_req_tokens": 0,
+      "find_docs_tokens": 0,
+      "read_files_tokens": 4058,
+      "n_hits": 3,
+      "n_files_matched": 3,
+      "n_files_opened": 3,
+      "opened_files": [
+        "docs/10-performance.md",
+        "docs/11-observability.md",
+        "docs/06-logging.md"
+      ],
+      "used_find_paths": false,
+      "used_find": false,
+      "n_docs": 0,
+      "doc_paths": [],
+      "doc_headings": [],
+      "target_file": "docs/11-observability.md",
+      "target_heading": "RED 方法",
+      "target_rank": null,
+      "hit_target": false,
+      "hit_heading": false,
+      "opened_target": true,
+      "too_broad": false,
+      "doc_budget": 3,
+      "total_input_tokens": 4104
+    },
+    {
+      "qid": 13,
+      "query": "dead letter queue retry three",
+      "query_local": "死信队列 重试 三次",
+      "text": "失败重试三次还不行，是不是进死信队列？",
+      "search_patterns": [
+        "死信队列",
+        "重试",
+        "三次"
+      ],
+      "rg_command": "rg -i -l --glob *.md -e 死信队列 -e 重试 -e 三次 docs",
+      "search_req_tokens": 25,
+      "grep_hits_tokens": 24,
+      "grep_hits_sample": "docs/03-error-handling.md\ndocs/16-http-client.md\ndocs/12-concurrency.md",
+      "find_args": null,
+      "find_documents": [],
+      "find_req_tokens": 0,
+      "find_docs_tokens": 0,
+      "read_files_tokens": 4064,
+      "n_hits": 3,
+      "n_files_matched": 3,
+      "n_files_opened": 3,
+      "opened_files": [
+        "docs/03-error-handling.md",
+        "docs/16-http-client.md",
+        "docs/12-concurrency.md"
+      ],
+      "used_find_paths": false,
+      "used_find": false,
+      "n_docs": 0,
+      "doc_paths": [],
+      "doc_headings": [],
+      "target_file": "docs/12-concurrency.md",
+      "target_heading": "死信队列",
+      "target_rank": null,
+      "hit_target": false,
+      "hit_heading": false,
+      "opened_target": true,
+      "too_broad": false,
+      "doc_budget": 3,
+      "total_input_tokens": 4113
+    },
+    {
+      "qid": 14,
+      "query": "idempotent consumer message_id",
+      "query_local": "幂等消费 message_id",
+      "text": "消费者怎么按 message_id 做幂等？",
+      "search_patterns": [
+        "message_id",
+        "幂等消费",
+        "idempotent"
+      ],
+      "rg_command": "rg -i -l --glob *.md -e message_id -e 幂等消费 -e idempotent docs",
+      "search_req_tokens": 24,
+      "grep_hits_tokens": 7,
+      "grep_hits_sample": "docs/12-concurrency.md",
+      "find_args": null,
+      "find_documents": [],
+      "find_req_tokens": 0,
+      "find_docs_tokens": 0,
+      "read_files_tokens": 1340,
+      "n_hits": 1,
+      "n_files_matched": 1,
+      "n_files_opened": 1,
+      "opened_files": [
+        "docs/12-concurrency.md"
+      ],
+      "used_find_paths": false,
+      "used_find": false,
+      "n_docs": 0,
+      "doc_paths": [],
+      "doc_headings": [],
+      "target_file": "docs/12-concurrency.md",
+      "target_heading": "幂等消费",
+      "target_rank": null,
+      "hit_target": false,
+      "hit_heading": false,
+      "opened_target": true,
+      "too_broad": false,
+      "doc_budget": 3,
+      "total_input_tokens": 1371
+    },
+    {
+      "qid": 15,
+      "query": "parameterized SQL injection ORM",
+      "query_local": "SQL 注入 参数化 ORM",
+      "text": "防 SQL 注入是不是必须参数化，能不能拼字符串？",
+      "search_patterns": [
+        "参数化",
+        "注入",
+        "SQL"
+      ],
+      "rg_command": "rg -i -l --glob *.md -e 参数化 -e 注入 -e SQL docs",
+      "search_req_tokens": 22,
+      "grep_hits_tokens": 638,
+      "grep_hits_sample": "docs/09-security.md\ndocs/08-deployment.md\ndocs/07-testing.md\ndocs/12-concurrency.md\ndocs/02-architecture.md\n---\ndocs/09-security.md:7:所有外部输入先校验后使用，防止注入与畸形数据进入业务。 本条适用于 安全，涉及「输入验证」的实现必须遵守，不允许例外或临时绕开。\ndocs/09-security.md:12:再次强调，本条的权威表述是：所有外部输入先校验后使用，防止注入与畸形数据进入业务。\ndocs/09-security.md:32:## SQL 注入\ndocs/09-security.md:34:查询一律使用参数化与 ORM，禁止字符串拼接 SQL。 本条适用于 安全，涉及「SQL 注入」的实现必须遵守，不允许例外或临时绕开。\ndocs/09-security.md:39:再次强调，本条的权威表述是：查询一律使用参数化与 ORM，禁止字符串拼接 SQL。\ndocs/08-deployment.md:61:密钥与证书走密钥管理服务注入，禁止写入仓库或镜像。 本条适用于 部署，涉及「密钥管理」的实现必须遵守，不允许例外或临时绕开。\ndocs/08-deployment.md:66:再次强调，本条的权威表述是：密钥与证书走密钥管理服务注入，禁止写入仓库或镜像。\ndocs/07-testing.md:34:共用夹具放在 conftest.py，用例内只声明所需参数化数据。 本条适用于 测试，涉及「夹具管理」的实现必须遵守，不允许例外或临时绕开。\ndocs/07-testing.md:39:再次强调，本条的权威表述是：共用夹具放在 conftest.py，用例内只声明所需参数化数据。\ndocs/12-concurrency.md:34:worker 并发由配置注入，禁止在代码里写死线程数。 本条适用于 并发，涉及「并发上限」的实现必须遵守，不允许例外或临时绕开。\ndocs/12-concurrency.md:39:再次强调，本条的权威表述是：worker 并发由配置注入，禁止在代码里写死线程数。\ndocs/02-architecture.md:59:## 配置注入\ndocs/02-architecture.md:61:环境与密钥通过依赖注入读取，禁止在业务模块内硬编码配置路径。 本条适用于 分层架构，涉及「配置注入」的实现必须遵守，不允许例外或临时绕开。\ndocs/02-architecture.md:66:再次强调，本条的权威表述是：环境与密钥通过依赖注入读取，禁止在业务模块内硬编码配置路径。",
+      "find_args": {
+        "scope": "aurora",
+        "query": "parameterized SQL injection ORM",
+        "query_local": "SQL 注入 参数化 ORM",
+        "paths": [
+          "docs/09-security.md",
+          "docs/08-deployment.md",
+          "docs/07-testing.md",
+          "docs/12-concurrency.md",
+          "docs/02-architecture.md"
+        ]
+      },
+      "find_documents": [
+        {
+          "id": "485e2b8539364c5f",
+          "path": "docs/09-security.md",
+          "heading": "SQL 注入",
+          "score": 16.77476335578148,
+          "snippet": "查询一律使用参数化与 ORM，禁止字符串拼接 SQL。 本条适用于 安全，涉及「SQL 注入」的实现必须遵守，不允许例外或临时绕开。\n先完成主路径，再核对边界与…"
+        }
+      ],
+      "find_req_tokens": 64,
+      "find_docs_tokens": 114,
+      "read_files_tokens": 1352,
+      "n_hits": 5,
+      "n_files_matched": 5,
+      "n_files_opened": 1,
+      "opened_files": [
+        "docs/09-security.md"
+      ],
+      "used_find_paths": true,
+      "used_find": true,
+      "n_docs": 1,
+      "doc_paths": [
+        "docs/09-security.md"
+      ],
+      "doc_headings": [
+        "SQL 注入"
+      ],
+      "target_file": "docs/09-security.md",
+      "target_heading": "SQL 注入",
+      "target_rank": 1,
+      "hit_target": true,
+      "hit_heading": true,
+      "opened_target": true,
+      "too_broad": true,
+      "doc_budget": 3,
+      "total_input_tokens": 2190
+    },
+    {
+      "qid": 16,
+      "query": "soft delete archive physical",
+      "query_local": "软删除 归档 物理删除",
+      "text": "删数据是软删除、归档，还是物理删？",
+      "search_patterns": [
+        "物理删除",
+        "软删除",
+        "归档"
+      ],
+      "rg_command": "rg -i -l --glob *.md -e 物理删除 -e 软删除 -e 归档 docs",
+      "search_req_tokens": 25,
+      "grep_hits_tokens": 14,
+      "grep_hits_sample": "docs/04-database.md\ndocs/06-logging.md",
+      "find_args": null,
+      "find_documents": [],
+      "find_req_tokens": 0,
+      "find_docs_tokens": 0,
+      "read_files_tokens": 2707,
+      "n_hits": 2,
+      "n_files_matched": 2,
+      "n_files_opened": 2,
+      "opened_files": [
+        "docs/04-database.md",
+        "docs/06-logging.md"
+      ],
+      "used_find_paths": false,
+      "used_find": false,
+      "n_docs": 0,
+      "doc_paths": [],
+      "doc_headings": [],
+      "target_file": "docs/04-database.md",
+      "target_heading": "软删除",
+      "target_rank": null,
+      "hit_target": false,
+      "hit_heading": false,
+      "opened_target": true,
+      "too_broad": false,
+      "doc_budget": 3,
+      "total_input_tokens": 2746
+    },
+    {
+      "qid": 17,
+      "query": "public function type annotations",
+      "query_local": "类型注解 公开函数 签名",
+      "text": "公开函数签名要不要写类型注解？",
+      "search_patterns": [
+        "类型注解",
+        "公开函数",
+        "签名"
+      ],
+      "rg_command": "rg -i -l --glob *.md -e 类型注解 -e 公开函数 -e 签名 docs",
+      "search_req_tokens": 26,
+      "grep_hits_tokens": 7,
+      "grep_hits_sample": "docs/01-python-style.md",
+      "find_args": null,
+      "find_documents": [],
+      "find_req_tokens": 0,
+      "find_docs_tokens": 0,
+      "read_files_tokens": 1433,
+      "n_hits": 1,
+      "n_files_matched": 1,
+      "n_files_opened": 1,
+      "opened_files": [
+        "docs/01-python-style.md"
+      ],
+      "used_find_paths": false,
+      "used_find": false,
+      "n_docs": 0,
+      "doc_paths": [],
+      "doc_headings": [],
+      "target_file": "docs/01-python-style.md",
+      "target_heading": "类型注解",
+      "target_rank": null,
+      "hit_target": false,
+      "hit_heading": false,
+      "opened_target": true,
+      "too_broad": false,
+      "doc_budget": 3,
+      "total_input_tokens": 1466
+    },
+    {
+      "qid": 18,
+      "query": "list pagination page_size total",
+      "query_local": "分页 page page_size total",
+      "text": "列表分页 page、page_size、total 怎么约定？",
+      "search_patterns": [
+        "page_size",
+        "分页",
+        "page"
+      ],
+      "rg_command": "rg -i -l --glob *.md -e page_size -e 分页 -e page docs",
+      "search_req_tokens": 21,
+      "grep_hits_tokens": 7,
+      "grep_hits_sample": "docs/05-api-design.md",
+      "find_args": null,
+      "find_documents": [],
+      "find_req_tokens": 0,
+      "find_docs_tokens": 0,
+      "read_files_tokens": 1354,
+      "n_hits": 1,
+      "n_files_matched": 1,
+      "n_files_opened": 1,
+      "opened_files": [
+        "docs/05-api-design.md"
+      ],
+      "used_find_paths": false,
+      "used_find": false,
+      "n_docs": 0,
+      "doc_paths": [],
+      "doc_headings": [],
+      "target_file": "docs/05-api-design.md",
+      "target_heading": "分页约定",
+      "target_rank": null,
+      "hit_target": false,
+      "hit_heading": false,
+      "opened_target": true,
+      "too_broad": false,
+      "doc_budget": 3,
+      "total_input_tokens": 1382
+    },
+    {
+      "qid": 19,
+      "query": "database connection pool timeout",
+      "query_local": "连接池 超时 数据库连接",
+      "text": "数据库连接池超时怎么设？",
+      "search_patterns": [
+        "数据库连接",
+        "连接池",
+        "超时"
+      ],
+      "rg_command": "rg -i -l --glob *.md -e 数据库连接 -e 连接池 -e 超时 docs",
+      "search_req_tokens": 25,
+      "grep_hits_tokens": 768,
+      "grep_hits_sample": "docs/10-performance.md\ndocs/14-config.md\ndocs/11-observability.md\ndocs/04-database.md\ndocs/12-concurrency.md\ndocs/16-http-client.md\n---\ndocs/10-performance.md:34:HTTP 与数据库连接一律复用，禁止每请求新建连接。 本条适用于 性能，涉及「连接复用」的实现必须遵守，不允许例外或临时绕开。\ndocs/10-performance.md:39:再次强调，本条的权威表述是：HTTP 与数据库连接一律复用，禁止每请求新建连接。\ndocs/14-config.md:7:主机、端口、超时一律从环境变量读取，禁止写死在源码。 本条适用于 配置，涉及「环境读取」的实现必须遵守，不允许例外或临时绕开。\ndocs/14-config.md:12:再次强调，本条的权威表述是：主机、端口、超时一律从环境变量读取，禁止写死在源码。\ndocs/11-observability.md:70:CPU 与连接池水位超 70% 必须告警，禁止等打满再处理。 本条适用于 可观测性，涉及「容量水位」的实现必须遵守，不允许例外或临时绕开。\ndocs/11-observability.md:75:再次强调，本条的权威表述是：CPU 与连接池水位超 70% 必须告警，禁止等打满再处理。\ndocs/04-database.md:43:数据库连接使用连接池并设置合理超时，禁止在循环内频繁开关连接。 本条适用于 数据库，涉及「连接管理」的实现必须遵守，不允许例外或临时绕开。\ndocs/04-database.md:48:再次强调，本条的权威表述是：数据库连接使用连接池并设置合理超时，禁止在循环内频繁开关连接。\ndocs/12-concurrency.md:68:## 可见性超时\ndocs/12-concurrency.md:70:任务可见性超时须大于最坏处理时间，避免重复执行。 本条适用于 并发，涉及「可见性超时」的实现必须遵守，不允许例外或临时绕开。\ndocs/12-concurrency.md:75:再次强调，本条的权威表述是：任务可见性超时须大于最坏处理时间，避免重复执行。\ndocs/16-http-client.md:5:## 超时设置\ndocs/16-http-client.md:7:出站调用必须设置连接超时与读取超时，禁止无限等待。 本条适用于 HTTP 客户端，涉及「超时设置」的实现必须遵守，不允许例外或临时绕开。\ndocs/16-http-client.md:12:再次强调，本条的权威表述是：出站调用必须设置连接超时与读取超时，禁止无限等待。\ndocs/16-http-client.md:68:## 连接池\ndocs/16-http-client.md:70:复用 HTTP 连接池，禁止每个请求新建 Client。 本条适用于 HTTP 客户端，涉及「连接池」的实现必须遵守，不允许例外或临时绕开。\ndocs/16-http-client.md:75:再次强调，本条的权威表述是：复用 HTTP 连接池，禁止每个请求新建 Client。",
+      "find_args": {
+        "scope": "aurora",
+        "query": "database connection pool timeout",
+        "query_local": "连接池 超时 数据库连接",
+        "paths": [
+          "docs/10-performance.md",
+          "docs/14-config.md",
+          "docs/11-observability.md",
+          "docs/04-database.md",
+          "docs/12-concurrency.md",
+          "docs/16-http-client.md"
+        ]
+      },
+      "find_documents": [
+        {
+          "id": "a0092289c73b9e2d",
+          "path": "docs/04-database.md",
+          "heading": "连接管理",
+          "score": 13.392399397512559,
+          "snippet": "数据库连接使用连接池并设置合理超时，禁止在循环内频繁开关连接。 本条适用于 数据库，涉及「连接管理」的实现必须遵守，不允许例外或临时绕开。\n先完成主路径，再核对…"
+        }
+      ],
+      "find_req_tokens": 74,
+      "find_docs_tokens": 114,
+      "read_files_tokens": 1371,
+      "n_hits": 6,
+      "n_files_matched": 6,
+      "n_files_opened": 1,
+      "opened_files": [
+        "docs/04-database.md"
+      ],
+      "used_find_paths": true,
+      "used_find": true,
+      "n_docs": 1,
+      "doc_paths": [
+        "docs/04-database.md"
+      ],
+      "doc_headings": [
+        "连接管理"
+      ],
+      "target_file": "docs/04-database.md",
+      "target_heading": "连接管理",
+      "target_rank": 1,
+      "hit_target": true,
+      "hit_heading": true,
+      "opened_target": true,
+      "too_broad": true,
+      "doc_budget": 3,
+      "total_input_tokens": 2352
+    },
+    {
+      "qid": 20,
+      "query": "two reviewers public API contract",
+      "query_local": "公开接口 两名评审 接口负责人",
+      "text": "公开接口是不是要两名评审，还要接口负责人？",
+      "search_patterns": [
+        "接口负责人",
+        "公开接口",
+        "两名评审"
+      ],
+      "rg_command": "rg -i -l --glob *.md -e 接口负责人 -e 公开接口 -e 两名评审 docs",
+      "search_req_tokens": 28,
+      "grep_hits_tokens": 13,
+      "grep_hits_sample": "docs/02-architecture.md\ndocs/13-review.md",
+      "find_args": null,
+      "find_documents": [],
+      "find_req_tokens": 0,
+      "find_docs_tokens": 0,
+      "read_files_tokens": 2763,
+      "n_hits": 2,
+      "n_files_matched": 2,
+      "n_files_opened": 2,
+      "opened_files": [
+        "docs/02-architecture.md",
+        "docs/13-review.md"
+      ],
+      "used_find_paths": false,
+      "used_find": false,
+      "n_docs": 0,
+      "doc_paths": [],
+      "doc_headings": [],
+      "target_file": "docs/13-review.md",
+      "target_heading": "公开接口",
+      "target_rank": null,
+      "hit_target": false,
+      "hit_heading": false,
+      "opened_target": true,
+      "too_broad": false,
+      "doc_budget": 3,
+      "total_input_tokens": 2804
+    },
+    {
+      "qid": 21,
+      "query": "feature flag default off expiry",
+      "query_local": "功能开关 默认关闭 过期",
+      "text": "功能开关默认关着，过期了怎么办？",
+      "search_patterns": [
+        "功能开关",
+        "默认关闭",
+        "过期"
+      ],
+      "rg_command": "rg -i -l --glob *.md -e 功能开关 -e 默认关闭 -e 过期 docs",
+      "search_req_tokens": 25,
+      "grep_hits_tokens": 13,
+      "grep_hits_sample": "docs/10-performance.md\ndocs/14-config.md",
+      "find_args": null,
+      "find_documents": [],
+      "find_req_tokens": 0,
+      "find_docs_tokens": 0,
+      "read_files_tokens": 2654,
+      "n_hits": 2,
+      "n_files_matched": 2,
+      "n_files_opened": 2,
+      "opened_files": [
+        "docs/10-performance.md",
+        "docs/14-config.md"
+      ],
+      "used_find_paths": false,
+      "used_find": false,
+      "n_docs": 0,
+      "doc_paths": [],
+      "doc_headings": [],
+      "target_file": "docs/14-config.md",
+      "target_heading": "功能开关",
+      "target_rank": null,
+      "hit_target": false,
+      "hit_heading": false,
+      "opened_target": true,
+      "too_broad": false,
+      "doc_budget": 3,
+      "total_input_tokens": 2692
+    },
+    {
+      "qid": 22,
+      "query": "i18n message catalog hardcoded string",
+      "query_local": "文案目录 国际化 硬编码",
+      "text": "文案能不能硬编码，国际化目录放哪？",
+      "search_patterns": [
+        "文案目录",
+        "国际化",
+        "硬编码"
+      ],
+      "rg_command": "rg -i -l --glob *.md -e 文案目录 -e 国际化 -e 硬编码 docs",
+      "search_req_tokens": 26,
+      "grep_hits_tokens": 16,
+      "grep_hits_sample": "docs/02-architecture.md\ndocs/15-i18n.md",
+      "find_args": null,
+      "find_documents": [],
+      "find_req_tokens": 0,
+      "find_docs_tokens": 0,
+      "read_files_tokens": 2749,
+      "n_hits": 2,
+      "n_files_matched": 2,
+      "n_files_opened": 2,
+      "opened_files": [
+        "docs/02-architecture.md",
+        "docs/15-i18n.md"
+      ],
+      "used_find_paths": false,
+      "used_find": false,
+      "n_docs": 0,
+      "doc_paths": [],
+      "doc_headings": [],
+      "target_file": "docs/15-i18n.md",
+      "target_heading": "文案目录",
+      "target_rank": null,
+      "hit_target": false,
+      "hit_heading": false,
+      "opened_target": true,
+      "too_broad": false,
+      "doc_budget": 3,
+      "total_input_tokens": 2791
+    },
+    {
+      "qid": 23,
+      "query": "outbound HTTP connect read timeout",
+      "query_local": "出站 连接超时 读取超时",
+      "text": "出站 HTTP 连接超时和读取超时分别设多少？",
+      "search_patterns": [
+        "连接超时",
+        "读取超时",
+        "出站"
+      ],
+      "rg_command": "rg -i -l --glob *.md -e 连接超时 -e 读取超时 -e 出站 docs",
+      "search_req_tokens": 26,
+      "grep_hits_tokens": 7,
+      "grep_hits_sample": "docs/16-http-client.md",
+      "find_args": null,
+      "find_documents": [],
+      "find_req_tokens": 0,
+      "find_docs_tokens": 0,
+      "read_files_tokens": 1336,
+      "n_hits": 1,
+      "n_files_matched": 1,
+      "n_files_opened": 1,
+      "opened_files": [
+        "docs/16-http-client.md"
+      ],
+      "used_find_paths": false,
+      "used_find": false,
+      "n_docs": 0,
+      "doc_paths": [],
+      "doc_headings": [],
+      "target_file": "docs/16-http-client.md",
+      "target_heading": "超时设置",
+      "target_rank": null,
+      "hit_target": false,
+      "hit_heading": false,
+      "opened_target": true,
+      "too_broad": false,
+      "doc_budget": 3,
+      "total_input_tokens": 1369
+    },
+    {
+      "qid": 24,
+      "query": "OpenAPI document drift sync",
+      "query_local": "OpenAPI 文档 同步 漂移",
+      "text": "OpenAPI 文档和实现漂移了怎么同步？",
+      "search_patterns": [
+        "OpenAPI",
+        "文档",
+        "同步"
+      ],
+      "rg_command": "rg -i -l --glob *.md -e OpenAPI -e 文档 -e 同步 docs",
+      "search_req_tokens": 21,
+      "grep_hits_tokens": 14,
+      "grep_hits_sample": "docs/07-testing.md\ndocs/05-api-design.md",
+      "find_args": null,
+      "find_documents": [],
+      "find_req_tokens": 0,
+      "find_docs_tokens": 0,
+      "read_files_tokens": 2715,
+      "n_hits": 2,
+      "n_files_matched": 2,
+      "n_files_opened": 2,
+      "opened_files": [
+        "docs/07-testing.md",
+        "docs/05-api-design.md"
+      ],
+      "used_find_paths": false,
+      "used_find": false,
+      "n_docs": 0,
+      "doc_paths": [],
+      "doc_headings": [],
+      "target_file": "docs/05-api-design.md",
+      "target_heading": "文档同步",
+      "target_rank": null,
+      "hit_target": false,
+      "hit_heading": false,
+      "opened_target": true,
+      "too_broad": false,
+      "doc_budget": 3,
+      "total_input_tokens": 2750
+    },
+    {
+      "qid": 25,
+      "query": "performance cache",
+      "query_local": "性能 缓存",
+      "text": "性能这边缓存策略怎么定？",
+      "search_patterns": [
+        "性能",
+        "缓存",
+        "performance"
+      ],
+      "rg_command": "rg -i -l --glob *.md -e 性能 -e 缓存 -e performance docs",
+      "search_req_tokens": 21,
+      "grep_hits_tokens": 21,
+      "grep_hits_sample": "docs/10-performance.md\ndocs/08-deployment.md\ndocs/06-logging.md",
+      "find_args": null,
+      "find_documents": [],
+      "find_req_tokens": 0,
+      "find_docs_tokens": 0,
+      "read_files_tokens": 4011,
+      "n_hits": 3,
+      "n_files_matched": 3,
+      "n_files_opened": 3,
+      "opened_files": [
+        "docs/10-performance.md",
+        "docs/08-deployment.md",
+        "docs/06-logging.md"
+      ],
+      "used_find_paths": false,
+      "used_find": false,
+      "n_docs": 0,
+      "doc_paths": [],
+      "doc_headings": [],
+      "target_file": "docs/10-performance.md",
+      "target_heading": "缓存策略",
+      "target_rank": null,
+      "hit_target": false,
+      "hit_heading": false,
+      "opened_target": true,
+      "too_broad": false,
+      "doc_budget": 3,
+      "total_input_tokens": 4053
+    },
+    {
+      "qid": 26,
+      "query": "connection pool timeout",
+      "query_local": "连接池 超时",
+      "text": "连接池超时怎么配？",
+      "search_patterns": [
+        "连接池",
+        "超时"
+      ],
+      "rg_command": "rg -i -l --glob *.md -e 连接池 -e 超时 docs",
+      "search_req_tokens": 20,
+      "grep_hits_tokens": 670,
+      "grep_hits_sample": "docs/11-observability.md\ndocs/04-database.md\ndocs/14-config.md\ndocs/12-concurrency.md\ndocs/16-http-client.md\n---\ndocs/11-observability.md:70:CPU 与连接池水位超 70% 必须告警，禁止等打满再处理。 本条适用于 可观测性，涉及「容量水位」的实现必须遵守，不允许例外或临时绕开。\ndocs/11-observability.md:75:再次强调，本条的权威表述是：CPU 与连接池水位超 70% 必须告警，禁止等打满再处理。\ndocs/04-database.md:43:数据库连接使用连接池并设置合理超时，禁止在循环内频繁开关连接。 本条适用于 数据库，涉及「连接管理」的实现必须遵守，不允许例外或临时绕开。\ndocs/04-database.md:48:再次强调，本条的权威表述是：数据库连接使用连接池并设置合理超时，禁止在循环内频繁开关连接。\ndocs/14-config.md:7:主机、端口、超时一律从环境变量读取，禁止写死在源码。 本条适用于 配置，涉及「环境读取」的实现必须遵守，不允许例外或临时绕开。\ndocs/14-config.md:12:再次强调，本条的权威表述是：主机、端口、超时一律从环境变量读取，禁止写死在源码。\ndocs/12-concurrency.md:68:## 可见性超时\ndocs/12-concurrency.md:70:任务可见性超时须大于最坏处理时间，避免重复执行。 本条适用于 并发，涉及「可见性超时」的实现必须遵守，不允许例外或临时绕开。\ndocs/12-concurrency.md:75:再次强调，本条的权威表述是：任务可见性超时须大于最坏处理时间，避免重复执行。\ndocs/16-http-client.md:5:## 超时设置\ndocs/16-http-client.md:7:出站调用必须设置连接超时与读取超时，禁止无限等待。 本条适用于 HTTP 客户端，涉及「超时设置」的实现必须遵守，不允许例外或临时绕开。\ndocs/16-http-client.md:12:再次强调，本条的权威表述是：出站调用必须设置连接超时与读取超时，禁止无限等待。\ndocs/16-http-client.md:68:## 连接池\ndocs/16-http-client.md:70:复用 HTTP 连接池，禁止每个请求新建 Client。 本条适用于 HTTP 客户端，涉及「连接池」的实现必须遵守，不允许例外或临时绕开。\ndocs/16-http-client.md:75:再次强调，本条的权威表述是：复用 HTTP 连接池，禁止每个请求新建 Client。",
+      "find_args": {
+        "scope": "aurora",
+        "query": "connection pool timeout",
+        "query_local": "连接池 超时",
+        "paths": [
+          "docs/11-observability.md",
+          "docs/04-database.md",
+          "docs/14-config.md",
+          "docs/12-concurrency.md",
+          "docs/16-http-client.md"
+        ]
+      },
+      "find_documents": [
+        {
+          "id": "a0092289c73b9e2d",
+          "path": "docs/04-database.md",
+          "heading": "连接管理",
+          "score": 8.362172950423139,
+          "snippet": "数据库连接使用连接池并设置合理超时，禁止在循环内频繁开关连接。 本条适用于 数据库，涉及「连接管理」的实现必须遵守，不允许例外或临时绕开。\n先完成主路径，再核对…"
+        },
+        {
+          "id": "fb9c4dcb77f0013e",
+          "path": "docs/16-http-client.md",
+          "heading": "连接池",
+          "score": 7.629536526634821,
+          "snippet": "复用 HTTP 连接池，禁止每个请求新建 Client。 本条适用于 HTTP 客户端，涉及「连接池」的实现必须遵守，不允许例外或临时绕开。\n先完成主路径，再核…"
+        }
+      ],
+      "find_req_tokens": 63,
+      "find_docs_tokens": 217,
+      "read_files_tokens": 2707,
+      "n_hits": 5,
+      "n_files_matched": 5,
+      "n_files_opened": 2,
+      "opened_files": [
+        "docs/04-database.md",
+        "docs/16-http-client.md"
+      ],
+      "used_find_paths": true,
+      "used_find": true,
+      "n_docs": 2,
+      "doc_paths": [
+        "docs/04-database.md",
+        "docs/16-http-client.md"
+      ],
+      "doc_headings": [
+        "连接管理",
+        "连接池"
+      ],
+      "target_file": "docs/04-database.md",
+      "target_heading": "连接管理",
+      "target_rank": 1,
+      "hit_target": true,
+      "hit_heading": true,
+      "opened_target": true,
+      "too_broad": true,
+      "doc_budget": 3,
+      "total_input_tokens": 3677
+    },
+    {
+      "qid": 27,
+      "query": "canary rollback",
+      "query_local": "灰度发布 回滚",
+      "text": "灰度发布失败了怎么回滚？",
+      "search_patterns": [
+        "canary[\\s_\\-]*rollback",
+        "灰度发布",
+        "回滚"
+      ],
+      "rg_command": "rg -i -l --glob *.md -e canary[\\s_\\-]*rollback -e 灰度发布 -e 回滚 docs",
+      "search_req_tokens": 30,
+      "grep_hits_tokens": 22,
+      "grep_hits_sample": "docs/13-review.md\ndocs/08-deployment.md\ndocs/03-error-handling.md",
+      "find_args": null,
+      "find_documents": [],
+      "find_req_tokens": 0,
+      "find_docs_tokens": 0,
+      "read_files_tokens": 4099,
+      "n_hits": 3,
+      "n_files_matched": 3,
+      "n_files_opened": 3,
+      "opened_files": [
+        "docs/13-review.md",
+        "docs/08-deployment.md",
+        "docs/03-error-handling.md"
+      ],
+      "used_find_paths": false,
+      "used_find": false,
+      "n_docs": 0,
+      "doc_paths": [],
+      "doc_headings": [],
+      "target_file": "docs/08-deployment.md",
+      "target_heading": "灰度发布",
+      "target_rank": null,
+      "hit_target": false,
+      "hit_heading": false,
+      "opened_target": true,
+      "too_broad": false,
+      "doc_budget": 3,
+      "total_input_tokens": 4151
+    },
+    {
+      "qid": 28,
+      "query": "secret plaintext",
+      "query_local": "密钥 明文",
+      "text": "密钥能不能明文进仓库？",
+      "search_patterns": [
+        "secret[\\s_\\-]*plaintext",
+        "密钥",
+        "明文"
+      ],
+      "rg_command": "rg -i -l --glob *.md -e secret[\\s_\\-]*plaintext -e 密钥 -e 明文 docs",
+      "search_req_tokens": 29,
+      "grep_hits_tokens": 541,
+      "grep_hits_sample": "docs/08-deployment.md\ndocs/09-security.md\ndocs/04-database.md\ndocs/14-config.md\ndocs/02-architecture.md\n---\ndocs/04-database.md:70:敏感字段落库前必须加密或脱敏，日志与导出不得明文出现。 本条适用于 数据库，涉及「敏感字段」的实现必须遵守，不允许例外或临时绕开。\ndocs/04-database.md:75:再次强调，本条的权威表述是：敏感字段落库前必须加密或脱敏，日志与导出不得明文出现。\ndocs/09-security.md:23:## 密钥存储\ndocs/09-security.md:25:密钥一律加密存储于密钥管理服务，代码与配置不得明文。 本条适用于 安全，涉及「密钥存储」的实现必须遵守，不允许例外或临时绕开。\ndocs/09-security.md:30:再次强调，本条的权威表述是：密钥一律加密存储于密钥管理服务，代码与配置不得明文。\ndocs/02-architecture.md:61:环境与密钥通过依赖注入读取，禁止在业务模块内硬编码配置路径。 本条适用于 分层架构，涉及「配置注入」的实现必须遵守，不允许例外或临时绕开。\ndocs/02-architecture.md:66:再次强调，本条的权威表述是：环境与密钥通过依赖注入读取，禁止在业务模块内硬编码配置路径。\ndocs/14-config.md:34:仓库只提交 .env.example，真实密钥不得入库。 本条适用于 配置，涉及「样例文件」的实现必须遵守，不允许例外或临时绕开。\ndocs/14-config.md:39:再次强调，本条的权威表述是：仓库只提交 .env.example，真实密钥不得入库。\ndocs/08-deployment.md:59:## 密钥管理\ndocs/08-deployment.md:61:密钥与证书走密钥管理服务注入，禁止写入仓库或镜像。 本条适用于 部署，涉及「密钥管理」的实现必须遵守，不允许例外或临时绕开。\ndocs/08-deployment.md:66:再次强调，本条的权威表述是：密钥与证书走密钥管理服务注入，禁止写入仓库或镜像。",
+      "find_args": {
+        "scope": "aurora",
+        "query": "secret plaintext",
+        "query_local": "密钥 明文",
+        "paths": [
+          "docs/08-deployment.md",
+          "docs/09-security.md",
+          "docs/04-database.md",
+          "docs/14-config.md",
+          "docs/02-architecture.md"
+        ]
+      },
+      "find_documents": [
+        {
+          "id": "015ff29e4e5af2aa",
+          "path": "docs/09-security.md",
+          "heading": "密钥存储",
+          "score": 6.482953799934875,
+          "snippet": "密钥一律加密存储于密钥管理服务，代码与配置不得明文。 本条适用于 安全，涉及「密钥存储」的实现必须遵守，不允许例外或临时绕开。\n先完成主路径，再核对边界与失败分…"
+        }
+      ],
+      "find_req_tokens": 58,
+      "find_docs_tokens": 115,
+      "read_files_tokens": 1352,
+      "n_hits": 5,
+      "n_files_matched": 5,
+      "n_files_opened": 1,
+      "opened_files": [
+        "docs/09-security.md"
+      ],
+      "used_find_paths": true,
+      "used_find": true,
+      "n_docs": 1,
+      "doc_paths": [
+        "docs/09-security.md"
+      ],
+      "doc_headings": [
+        "密钥存储"
+      ],
+      "target_file": "docs/09-security.md",
+      "target_heading": "密钥存储",
+      "target_rank": 1,
+      "hit_target": true,
+      "hit_heading": true,
+      "opened_target": true,
+      "too_broad": true,
+      "doc_budget": 3,
+      "total_input_tokens": 2095
+    },
+    {
+      "qid": 29,
+      "query": "idempotent retry",
+      "query_local": "幂等 重试",
+      "text": "这个操作幂等吗，失败了能不能重试？",
+      "search_patterns": [
+        "幂等",
+        "重试",
+        "idempotent"
+      ],
+      "rg_command": "rg -i -l --glob *.md -e 幂等 -e 重试 -e idempotent docs",
+      "search_req_tokens": 24,
+      "grep_hits_tokens": 616,
+      "grep_hits_sample": "docs/05-api-design.md\ndocs/03-error-handling.md\ndocs/12-concurrency.md\ndocs/16-http-client.md\n---\ndocs/12-concurrency.md:14:## 幂等消费\ndocs/12-concurrency.md:16:消费者必须按 message_id 幂等，重复投递不得产生副作用。 本条适用于 并发，涉及「幂等消费」的实现必须遵守，不允许例外或临时绕开。\ndocs/12-concurrency.md:21:再次强调，本条的权威表述是：消费者必须按 message_id 幂等，重复投递不得产生副作用。\ndocs/12-concurrency.md:25:失败超过三次进入死信队列并告警，禁止无限重试。 本条适用于 并发，涉及「死信队列」的实现必须遵守，不允许例外或临时绕开。\ndocs/12-concurrency.md:30:再次强调，本条的权威表述是：失败超过三次进入死信队列并告警，禁止无限重试。\ndocs/03-error-handling.md:50:## 重试策略\ndocs/03-error-handling.md:52:仅对幂等操作启用重试，重试必须带退避与最大次数，禁止无脑重试。 本条适用于 异常处理，涉及「重试策略」的实现必须遵守，不允许例外或临时绕开。\ndocs/03-error-handling.md:57:再次强调，本条的权威表述是：仅对幂等操作启用重试，重试必须带退避与最大次数，禁止无脑重试。\ndocs/16-http-client.md:14:## 重试边界\ndocs/16-http-client.md:16:仅对幂等 GET 与明确可重试错误码重试，写操作默认不重试。 本条适用于 HTTP 客户端，涉及「重试边界」的实现必须遵守，不允许例外或临时绕开。\ndocs/16-http-client.md:21:再次强调，本条的权威表述是：仅对幂等 GET 与明确可重试错误码重试，写操作默认不重试。\ndocs/05-api-design.md:50:## 幂等设计\ndocs/05-api-design.md:52:写接口使用幂等键避免重复提交，同名键需返回一致结果。 本条适用于 REST API，涉及「幂等设计」的实现必须遵守，不允许例外或临时绕开。\ndocs/05-api-design.md:57:再次强调，本条的权威表述是：写接口使用幂等键避免重复提交，同名键需返回一致结果。",
+      "find_args": {
+        "scope": "aurora",
+        "query": "idempotent retry",
+        "query_local": "幂等 重试",
+        "paths": [
+          "docs/05-api-design.md",
+          "docs/03-error-handling.md",
+          "docs/12-concurrency.md",
+          "docs/16-http-client.md"
+        ]
+      },
+      "find_documents": [
+        {
+          "id": "68afd6247a8ab5bf",
+          "path": "docs/03-error-handling.md",
+          "heading": "重试策略",
+          "score": 7.740917572050394,
+          "snippet": "仅对幂等操作启用重试，重试必须带退避与最大次数，禁止无脑重试。 本条适用于 异常处理，涉及「重试策略」的实现必须遵守，不允许例外或临时绕开。\n先完成主路径，再核…"
+        },
+        {
+          "id": "5397e18de16ae510",
+          "path": "docs/16-http-client.md",
+          "heading": "重试边界",
+          "score": 7.665770093012294,
+          "snippet": "仅对幂等 GET 与明确可重试错误码重试，写操作默认不重试。 本条适用于 HTTP 客户端，涉及「重试边界」的实现必须遵守，不允许例外或临时绕开。\n先完成主路径…"
+        },
+        {
+          "id": "a709c4221fb1e7e8",
+          "path": "docs/12-concurrency.md",
+          "heading": "幂等消费",
+          "score": 6.498253903373432,
+          "snippet": "消费者必须按 message_id 幂等，重复投递不得产生副作用。 本条适用于 并发，涉及「幂等消费」的实现必须遵守，不允许例外或临时绕开。\n先完成主路径，再核…"
+        }
+      ],
+      "find_req_tokens": 59,
+      "find_docs_tokens": 348,
+      "read_files_tokens": 4064,
+      "n_hits": 4,
+      "n_files_matched": 4,
+      "n_files_opened": 3,
+      "opened_files": [
+        "docs/03-error-handling.md",
+        "docs/16-http-client.md",
+        "docs/12-concurrency.md"
+      ],
+      "used_find_paths": true,
+      "used_find": true,
+      "n_docs": 3,
+      "doc_paths": [
+        "docs/03-error-handling.md",
+        "docs/16-http-client.md",
+        "docs/12-concurrency.md"
+      ],
+      "doc_headings": [
+        "重试策略",
+        "重试边界",
+        "幂等消费"
+      ],
+      "target_file": "docs/03-error-handling.md",
+      "target_heading": "重试策略",
+      "target_rank": 1,
+      "hit_target": true,
+      "hit_heading": true,
+      "opened_target": true,
+      "too_broad": true,
+      "doc_budget": 3,
+      "total_input_tokens": 5111
+    },
+    {
+      "qid": 30,
+      "query": "cache expiry",
+      "query_local": "缓存 过期",
+      "text": "缓存过期时间怎么定？",
+      "search_patterns": [
+        "缓存",
+        "过期"
+      ],
+      "rg_command": "rg -i -l --glob *.md -e 缓存 -e 过期 docs",
+      "search_req_tokens": 19,
+      "grep_hits_tokens": 20,
+      "grep_hits_sample": "docs/10-performance.md\ndocs/08-deployment.md\ndocs/14-config.md",
+      "find_args": null,
+      "find_documents": [],
+      "find_req_tokens": 0,
+      "find_docs_tokens": 0,
+      "read_files_tokens": 3995,
+      "n_hits": 3,
+      "n_files_matched": 3,
+      "n_files_opened": 3,
+      "opened_files": [
+        "docs/10-performance.md",
+        "docs/08-deployment.md",
+        "docs/14-config.md"
+      ],
+      "used_find_paths": false,
+      "used_find": false,
+      "n_docs": 0,
+      "doc_paths": [],
+      "doc_headings": [],
+      "target_file": "docs/10-performance.md",
+      "target_heading": "缓存策略",
+      "target_rank": null,
+      "hit_target": false,
+      "hit_heading": false,
+      "opened_target": true,
+      "too_broad": false,
+      "doc_budget": 3,
+      "total_input_tokens": 4034
+    },
+    {
+      "qid": 31,
+      "query": "sampling trace",
+      "query_local": "采样 追踪",
+      "text": "链路追踪采样率怎么设？",
+      "search_patterns": [
+        "sampling[\\s_\\-]*trace",
+        "采样",
+        "追踪"
+      ],
+      "rg_command": "rg -i -l --glob *.md -e sampling[\\s_\\-]*trace -e 采样 -e 追踪 docs",
+      "search_req_tokens": 29,
+      "grep_hits_tokens": 24,
+      "grep_hits_sample": "docs/06-logging.md\ndocs/11-observability.md\ndocs/16-http-client.md",
+      "find_args": null,
+      "find_documents": [],
+      "find_req_tokens": 0,
+      "find_docs_tokens": 0,
+      "read_files_tokens": 4060,
+      "n_hits": 3,
+      "n_files_matched": 3,
+      "n_files_opened": 3,
+      "opened_files": [
+        "docs/06-logging.md",
+        "docs/11-observability.md",
+        "docs/16-http-client.md"
+      ],
+      "used_find_paths": false,
+      "used_find": false,
+      "n_docs": 0,
+      "doc_paths": [],
+      "doc_headings": [],
+      "target_file": "docs/11-observability.md",
+      "target_heading": "链路采样",
+      "target_rank": null,
+      "hit_target": false,
+      "hit_heading": false,
+      "opened_target": true,
+      "too_broad": false,
+      "doc_budget": 3,
+      "total_input_tokens": 4113
+    },
+    {
+      "qid": 32,
+      "query": "SQL concatenation",
+      "query_local": "SQL 拼接",
+      "text": "SQL 能不能字符串拼接？",
+      "search_patterns": [
+        "SQL[\\s_\\-]*concatenation",
+        "拼接",
+        "concatenation"
+      ],
+      "rg_command": "rg -i -l --glob *.md -e SQL[\\s_\\-]*concatenation -e 拼接 -e concatenation docs",
+      "search_req_tokens": 29,
+      "grep_hits_tokens": 513,
+      "grep_hits_sample": "docs/01-python-style.md\ndocs/15-i18n.md\ndocs/09-security.md\ndocs/06-logging.md\n---\ndocs/01-python-style.md:34:优先使用 f-string 进行格式化，禁止在循环内反复拼接字符串。 本条适用于 Python 代码风格，涉及「字符串处理」的实现必须遵守，不允许例外或临时绕开。\ndocs/01-python-style.md:39:再次强调，本条的权威表述是：优先使用 f-string 进行格式化，禁止在循环内反复拼接字符串。\ndocs/15-i18n.md:34:插值使用命名占位符，禁止按位置拼接以免语序错乱。 本条适用于 国际化，涉及「占位符」的实现必须遵守，不允许例外或临时绕开。\ndocs/15-i18n.md:39:再次强调，本条的权威表述是：插值使用命名占位符，禁止按位置拼接以免语序错乱。\ndocs/09-security.md:34:查询一律使用参数化与 ORM，禁止字符串拼接 SQL。 本条适用于 安全，涉及「SQL 注入」的实现必须遵守，不允许例外或临时绕开。\ndocs/09-security.md:39:再次强调，本条的权威表述是：查询一律使用参数化与 ORM，禁止字符串拼接 SQL。\ndocs/06-logging.md:7:日志统一输出结构化 JSON 格式，禁止用 print 与裸文本拼接。 本条适用于 日志，涉及「结构化日志」的实现必须遵守，不允许例外或临时绕开。\ndocs/06-logging.md:12:再次强调，本条的权威表述是：日志统一输出结构化 JSON 格式，禁止用 print 与裸文本拼接。\ndocs/06-logging.md:61:避免在热路径拼接大对象，日志参数采用惰性求值。 本条适用于 日志，涉及「性能开销」的实现必须遵守，不允许例外或临时绕开。\ndocs/06-logging.md:66:再次强调，本条的权威表述是：避免在热路径拼接大对象，日志参数采用惰性求值。",
+      "find_args": {
+        "scope": "aurora",
+        "query": "SQL concatenation",
+        "query_local": "SQL 拼接",
+        "paths": [
+          "docs/01-python-style.md",
+          "docs/15-i18n.md",
+          "docs/09-security.md",
+          "docs/06-logging.md"
+        ]
+      },
+      "find_documents": [
+        {
+          "id": "485e2b8539364c5f",
+          "path": "docs/09-security.md",
+          "heading": "SQL 注入",
+          "score": 6.856006111431492,
+          "snippet": "查询一律使用参数化与 ORM，禁止字符串拼接 SQL。 本条适用于 安全，涉及「SQL 注入」的实现必须遵守，不允许例外或临时绕开。\n先完成主路径，再核对边界与…"
+        }
+      ],
+      "find_req_tokens": 55,
+      "find_docs_tokens": 114,
+      "read_files_tokens": 1352,
+      "n_hits": 4,
+      "n_files_matched": 4,
+      "n_files_opened": 1,
+      "opened_files": [
+        "docs/09-security.md"
+      ],
+      "used_find_paths": true,
+      "used_find": true,
+      "n_docs": 1,
+      "doc_paths": [
+        "docs/09-security.md"
+      ],
+      "doc_headings": [
+        "SQL 注入"
+      ],
+      "target_file": "docs/09-security.md",
+      "target_heading": "SQL 注入",
+      "target_rank": 1,
+      "hit_target": true,
+      "hit_heading": true,
+      "opened_target": true,
+      "too_broad": true,
+      "doc_budget": 3,
+      "total_input_tokens": 2063
+    },
+    {
+      "qid": 33,
+      "query": "image layer cache",
+      "query_local": "镜像 缓存",
+      "text": "镜像构建缓存怎么用？",
+      "search_patterns": [
+        "镜像",
+        "缓存",
+        "image"
+      ],
+      "rg_command": "rg -i -l --glob *.md -e 镜像 -e 缓存 -e image docs",
+      "search_req_tokens": 22,
+      "grep_hits_tokens": 23,
+      "grep_hits_sample": "docs/08-deployment.md\ndocs/15-i18n.md\ndocs/10-performance.md",
+      "find_args": null,
+      "find_documents": [],
+      "find_req_tokens": 0,
+      "find_docs_tokens": 0,
+      "read_files_tokens": 4031,
+      "n_hits": 3,
+      "n_files_matched": 3,
+      "n_files_opened": 3,
+      "opened_files": [
+        "docs/08-deployment.md",
+        "docs/15-i18n.md",
+        "docs/10-performance.md"
+      ],
+      "used_find_paths": false,
+      "used_find": false,
+      "n_docs": 0,
+      "doc_paths": [],
+      "doc_headings": [],
+      "target_file": "docs/08-deployment.md",
+      "target_heading": "构建缓存",
+      "target_rank": null,
+      "hit_target": false,
+      "hit_heading": false,
+      "opened_target": true,
+      "too_broad": false,
+      "doc_budget": 3,
+      "total_input_tokens": 4076
+    },
+    {
+      "qid": 34,
+      "query": "batch loop query",
+      "query_local": "批量 循环",
+      "text": "循环里逐条查库行不行，要不要批量？",
+      "search_patterns": [
+        "batch[\\s_\\-]*loop[\\s_\\-]*query",
+        "批量",
+        "循环"
+      ],
+      "rg_command": "rg -i -l --glob *.md -e batch[\\s_\\-]*loop[\\s_\\-]*query -e 批量 -e 循环 docs",
+      "search_req_tokens": 34,
+      "grep_hits_tokens": 563,
+      "grep_hits_sample": "docs/01-python-style.md\ndocs/10-performance.md\ndocs/04-database.md\ndocs/02-architecture.md\n---\ndocs/01-python-style.md:34:优先使用 f-string 进行格式化，禁止在循环内反复拼接字符串。 本条适用于 Python 代码风格，涉及「字符串处理」的实现必须遵守，不允许例外或临时绕开。\ndocs/01-python-style.md:39:再次强调，本条的权威表述是：优先使用 f-string 进行格式化，禁止在循环内反复拼接字符串。\ndocs/01-python-style.md:43:单层列表推导允许使用，超过一层嵌套必须改写为显式循环以保可读性。 本条适用于 Python 代码风格，涉及「列表推导」的实现必须遵守，不允许例外或临时绕开。\ndocs/01-python-style.md:48:再次强调，本条的权威表述是：单层列表推导允许使用，超过一层嵌套必须改写为显式循环以保可读性。\ndocs/10-performance.md:14:## 批量查询\ndocs/10-performance.md:16:禁止在循环内逐条查询，一律改写为批量或预加载。 本条适用于 性能，涉及「批量查询」的实现必须遵守，不允许例外或临时绕开。\ndocs/10-performance.md:21:再次强调，本条的权威表述是：禁止在循环内逐条查询，一律改写为批量或预加载。\ndocs/04-database.md:43:数据库连接使用连接池并设置合理超时，禁止在循环内频繁开关连接。 本条适用于 数据库，涉及「连接管理」的实现必须遵守，不允许例外或临时绕开。\ndocs/04-database.md:48:再次强调，本条的权威表述是：数据库连接使用连接池并设置合理超时，禁止在循环内频繁开关连接。\ndocs/02-architecture.md:68:## 循环依赖\ndocs/02-architecture.md:70:发现循环 import 必须立即重构，通过依赖倒置或事件解耦打破环路。 本条适用于 分层架构，涉及「循环依赖」的实现必须遵守，不允许例外或临时绕开。\ndocs/02-architecture.md:75:再次强调，本条的权威表述是：发现循环 import 必须立即重构，通过依赖倒置或事件解耦打破环路。",
+      "find_args": {
+        "scope": "aurora",
+        "query": "batch loop query",
+        "query_local": "批量 循环",
+        "paths": [
+          "docs/01-python-style.md",
+          "docs/10-performance.md",
+          "docs/04-database.md",
+          "docs/02-architecture.md"
+        ]
+      },
+      "find_documents": [
+        {
+          "id": "77b10d578cef77a2",
+          "path": "docs/10-performance.md",
+          "heading": "批量查询",
+          "score": 6.913426618042388,
+          "snippet": "禁止在循环内逐条查询，一律改写为批量或预加载。 本条适用于 性能，涉及「批量查询」的实现必须遵守，不允许例外或临时绕开。\n先完成主路径，再核对边界与失败分支，避…"
+        }
+      ],
+      "find_req_tokens": 52,
+      "find_docs_tokens": 118,
+      "read_files_tokens": 1334,
+      "n_hits": 4,
+      "n_files_matched": 4,
+      "n_files_opened": 1,
+      "opened_files": [
+        "docs/10-performance.md"
+      ],
+      "used_find_paths": true,
+      "used_find": true,
+      "n_docs": 1,
+      "doc_paths": [
+        "docs/10-performance.md"
+      ],
+      "doc_headings": [
+        "批量查询"
+      ],
+      "target_file": "docs/10-performance.md",
+      "target_heading": "批量查询",
+      "target_rank": 1,
+      "hit_target": true,
+      "hit_heading": true,
+      "opened_target": true,
+      "too_broad": true,
+      "doc_budget": 3,
+      "total_input_tokens": 2101
+    },
+    {
+      "qid": 35,
+      "query": "trace_id logging",
+      "query_local": "trace_id 日志",
+      "text": "日志里要不要打 trace_id？",
+      "search_patterns": [
+        "trace_id",
+        "日志"
+      ],
+      "rg_command": "rg -i -l --glob *.md -e trace_id -e 日志 docs",
+      "search_req_tokens": 18,
+      "grep_hits_tokens": 1700,
+      "grep_hits_sample": "docs/01-python-style.md\ndocs/06-logging.md\ndocs/16-http-client.md\ndocs/03-error-handling.md\ndocs/09-security.md\ndocs/14-config.md\ndocs/04-database.md\ndocs/11-observability.md\n---\ndocs/06-logging.md:1:# 日志规范\ndocs/06-logging.md:3:下列条文是 aurora 服务（Python FastAPI）在「日志」方面的唯一权威来源，供协作与检索使用。每节首句为结论，后文为展开。\ndocs/06-logging.md:5:## 结构化日志\ndocs/06-logging.md:7:日志统一输出结构化 JSON 格式，禁止用 print 与裸文本拼接。 本条适用于 日志，涉及「结构化日志」的实现必须遵守，不允许例外或临时绕开。\ndocs/06-logging.md:12:再次强调，本条的权威表述是：日志统一输出结构化 JSON 格式，禁止用 print 与裸文本拼接。\ndocs/06-logging.md:14:## 日志级别\ndocs/06-logging.md:16:区分 debug/info/warn/error 四级语义，线上默认只开 info。 本条适用于 日志，涉及「日志级别」的实现必须遵守，不允许例外或临时绕开。\ndocs/06-logging.md:23:## trace_id\ndocs/06-logging.md:25:每个请求贯穿唯一 trace_id，日志必须携带以便链路追踪。 本条适用于 日志，涉及「trace_id」的实现必须遵守，不允许例外或临时绕开。\ndocs/06-logging.md:30:再次强调，本条的权威表述是：每个请求贯穿唯一 trace_id，日志必须携带以便链路追踪。\ndocs/06-logging.md:34:日志严禁输出密码、token、身份证等敏感字段，需先脱敏。 本条适用于 日志，涉及「敏感信息」的实现必须遵守，不允许例外或临时绕开。\ndocs/06-logging.md:39:再次强调，本条的权威表述是：日志严禁输出密码、token、身份证等敏感字段，需先脱敏。\ndocs/06-logging.md:43:关键业务动作与外部调用必须留痕，包含入参摘要与耗时。 本条适用于 日志，涉及「关键事件」的实现必须遵守，不允许例外或临时绕开。\ndocs/06-logging.md:50:## 异常日志\ndocs/06-logging.md:52:异常必须带完整堆栈与上下文，禁止只打印错误消息。 本条适用于 日志，涉及「异常日志」的实现必须遵守，不允许例外或临时绕开。\ndocs/06-logging.md:61:避免在热路径拼接大对象，日志参数采用惰性求值。 本条适用于 日志，涉及「性能开销」的实现必须遵守，不允许例外或临时绕开。\ndocs/06-logging.md:66:再次强调，本条的权威表述是：避免在热路径拼接大对象，日志参数采用惰性求值。\ndocs/06-logging.md:68:## 日志轮转\ndocs/06-logging.md:70:日志文件按大小与时间轮转，保留策略与归档必须可配置。 本条适用于 日志，涉及「日志轮转」的实现必须遵守，不允许例外或临时绕开。\ndocs/06-logging.md:75:再次强调，本条的权威表述是：日志文件按大小与时间轮转，保留策略与归档必须可配置。\ndocs/01-python-style.md:61:自定义对象尽量实现 __repr__ 而非 __str__，保证调试与日志输出一致。 本条适用于 Python 代码风格，涉及「魔法方法」的实现必须遵守，不允许例外或临时绕开。\ndocs/01-python-style.md:66:再次强调，本条的权威表述是：自定义对象尽量实现 __repr__ 而非 __str__，保证调试与日志输出一致。\ndocs/11-observability.md:59:## 日志关联\ndocs/11-observability.md:61:指标、日志、追踪必须能用 trace_id 互相跳转。 本条适用于 可观测性，涉及「日志关联」的实现必须遵守，不允许例外或临时绕开。\ndocs/11-observability.md:66:再次强调，本条的权威表述是：指标、日志、追踪必须能用 trace_id 互相跳转。\ndocs/03-error-handling.md:32:## 日志配合\ndocs/03-error-handling.md:34:捕获异常后必须记录结构化日志并携带 trace_id，不得静默吞掉异常。 本条适用于 异常处理，涉及「日志配合」的实现必须遵守，不允许例外或临时绕开。\ndocs/03-error-handling.md:39:再次强调，本条的权威表述是：捕获异常后必须记录结构化日志并携带 trace_id，不得静默吞掉异常。\ndocs/03-error-handling.md:61:面向用户返回友好提示，内部堆栈与敏感信息一律只进日志不出接口。 本条适用于 异常处理，涉及「用户可见」的实现必须遵守，不允许例外或临时绕开。\ndocs/03-error-handling.md:66:再次强调，本条的权威表述是：面向用户返回友好提示，内部堆栈与敏感信息一律只进日志不出接口。\ndocs/04-database.md:70:敏感字段落库前必须加密或脱敏，日志与导出不得明文出现。 本条适用于 数据库，涉及「敏感字段」的实现必须遵守，不允许例外或临时绕开。\ndocs/04-database.md:75:再次强调，本条的权威表述是：敏感字段落库前必须加密或脱敏，日志与导出不得明文出现。\ndocs/09-security.md:68:## 审计日志\ndocs/09-security.md:70:敏感操作写审计日志，包含操作者、时间与对象记录。 本条适用于 安全，涉及「审计日志」的实现必须遵守，不允许例外或临时绕开。\ndocs/09-security.md:75:再次强调，本条的权威表述是：敏感操作写审计日志，包含操作者、时间与对象记录。\ndocs/16-http-client.md:43:出站请求传播 trace_id，禁止另起互不相干的请求标识。 本条适用于 HTTP 客户端，涉及「追踪头」的实现必须遵守，不允许例外或临时绕开。\ndocs/16-http-client.md:48:再次强调，本条的权威表述是：出站请求传播 trace_id，禁止另起互不相干的请求标识。\ndocs/14-config.md:61:生产配置变更写审计日志，包含操作者与前后值摘要。 本条适用于 配置，涉及「配置审计」的实现必须遵守，不允许例外或临时绕开。\ndocs/14-config.md:66:再次强调，本条的权威表述是：生产配置变更写审计日志，包含操作者与前后值摘要。",
+      "find_args": {
+        "scope": "aurora",
+        "query": "trace_id logging",
+        "query_local": "trace_id 日志",
+        "paths": [
+          "docs/01-python-style.md",
+          "docs/06-logging.md",
+          "docs/16-http-client.md",
+          "docs/03-error-handling.md",
+          "docs/09-security.md",
+          "docs/14-config.md",
+          "docs/04-database.md",
+          "docs/11-observability.md"
+        ]
+      },
+      "find_documents": [
+        {
+          "id": "702351cc310ef75c",
+          "path": "docs/06-logging.md",
+          "heading": "trace_id",
+          "score": 14.410157378162182,
+          "snippet": "每个请求贯穿唯一 trace_id，日志必须携带以便链路追踪。 本条适用于 日志，涉及「trace_id」的实现必须遵守，不允许例外或临时绕开。\n先完成主路径，…"
+        }
+      ],
+      "find_req_tokens": 86,
+      "find_docs_tokens": 109,
+      "read_files_tokens": 1336,
+      "n_hits": 8,
+      "n_files_matched": 8,
+      "n_files_opened": 1,
+      "opened_files": [
+        "docs/06-logging.md"
+      ],
+      "used_find_paths": true,
+      "used_find": true,
+      "n_docs": 1,
+      "doc_paths": [
+        "docs/06-logging.md"
+      ],
+      "doc_headings": [
+        "trace_id"
+      ],
+      "target_file": "docs/06-logging.md",
+      "target_heading": "trace_id",
+      "target_rank": 1,
+      "hit_target": true,
+      "hit_heading": true,
+      "opened_target": true,
+      "too_broad": true,
+      "doc_budget": 3,
+      "total_input_tokens": 3249
+    },
+    {
+      "qid": 36,
+      "query": "ISO8601 storage",
+      "query_local": "ISO8601 存储",
+      "text": "时间字段存储要用 ISO8601 吗？",
+      "search_patterns": [
+        "ISO8601",
+        "存储"
+      ],
+      "rg_command": "rg -i -l --glob *.md -e ISO8601 -e 存储 docs",
+      "search_req_tokens": 21,
+      "grep_hits_tokens": 460,
+      "grep_hits_sample": "docs/15-i18n.md\ndocs/09-security.md\ndocs/04-database.md\ndocs/05-api-design.md\n---\ndocs/15-i18n.md:43:日期时间按用户 locale 格式化，存储仍为 UTC ISO8601。 本条适用于 国际化，涉及「日期格式」的实现必须遵守，不允许例外或临时绕开。\ndocs/15-i18n.md:48:再次强调，本条的权威表述是：日期时间按用户 locale 格式化，存储仍为 UTC ISO8601。\ndocs/09-security.md:23:## 密钥存储\ndocs/09-security.md:25:密钥一律加密存储于密钥管理服务，代码与配置不得明文。 本条适用于 安全，涉及「密钥存储」的实现必须遵守，不允许例外或临时绕开。\ndocs/09-security.md:30:再次强调，本条的权威表述是：密钥一律加密存储于密钥管理服务，代码与配置不得明文。\ndocs/04-database.md:5:## 时间戳存储\ndocs/04-database.md:7:所有时间戳字段统一存 UTC 的 ISO8601 字符串，禁止存本地时间或整数。 本条适用于 数据库，涉及「时间戳存储」的实现必须遵守，不允许例外或临时绕开。\ndocs/04-database.md:12:再次强调，本条的权威表述是：所有时间戳字段统一存 UTC 的 ISO8601 字符串，禁止存本地时间或整数。\ndocs/05-api-design.md:61:接口层时间统一输出 ISO8601 UTC 字符串，与数据库存储保持一致。 本条适用于 REST API，涉及「时间格式」的实现必须遵守，不允许例外或临时绕开。\ndocs/05-api-design.md:66:再次强调，本条的权威表述是：接口层时间统一输出 ISO8601 UTC 字符串，与数据库存储保持一致。",
+      "find_args": {
+        "scope": "aurora",
+        "query": "ISO8601 storage",
+        "query_local": "ISO8601 存储",
+        "paths": [
+          "docs/15-i18n.md",
+          "docs/09-security.md",
+          "docs/04-database.md",
+          "docs/05-api-design.md"
+        ]
+      },
+      "find_documents": [
+        {
+          "id": "eeddee939b59f844",
+          "path": "docs/04-database.md",
+          "heading": "时间戳存储",
+          "score": 9.935150732966589,
+          "snippet": "所有时间戳字段统一存 UTC 的 ISO8601 字符串，禁止存本地时间或整数。 本条适用于 数据库，涉及「时间戳存储」的实现必须遵守，不允许例外或临时绕开。\n…"
+        },
+        {
+          "id": "b416a202f94ddd56",
+          "path": "docs/15-i18n.md",
+          "heading": "日期格式",
+          "score": 8.9157323669056,
+          "snippet": "日期时间按用户 locale 格式化，存储仍为 UTC ISO8601。 本条适用于 国际化，涉及「日期格式」的实现必须遵守，不允许例外或临时绕开。\n先完成主路…"
+        },
+        {
+          "id": "4a6bb2aa58974d9d",
+          "path": "docs/05-api-design.md",
+          "heading": "时间格式",
+          "score": 8.696637158819634,
+          "snippet": "接口层时间统一输出 ISO8601 UTC 字符串，与数据库存储保持一致。 本条适用于 REST API，涉及「时间格式」的实现必须遵守，不允许例外或临时绕开。…"
+        }
+      ],
+      "find_req_tokens": 61,
+      "find_docs_tokens": 316,
+      "read_files_tokens": 4081,
+      "n_hits": 4,
+      "n_files_matched": 4,
+      "n_files_opened": 3,
+      "opened_files": [
+        "docs/04-database.md",
+        "docs/15-i18n.md",
+        "docs/05-api-design.md"
+      ],
+      "used_find_paths": true,
+      "used_find": true,
+      "n_docs": 3,
+      "doc_paths": [
+        "docs/04-database.md",
+        "docs/15-i18n.md",
+        "docs/05-api-design.md"
+      ],
+      "doc_headings": [
+        "时间戳存储",
+        "日期格式",
+        "时间格式"
+      ],
+      "target_file": "docs/04-database.md",
+      "target_heading": "时间戳存储",
+      "target_rank": 1,
+      "hit_target": true,
+      "hit_heading": true,
+      "opened_target": true,
+      "too_broad": true,
+      "doc_budget": 3,
+      "total_input_tokens": 4939
+    }
+  ]
+}

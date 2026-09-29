@@ -1,0 +1,6 @@
+# Experiment Python deps (token counts + report generation).
+tokenizers>=0.20
+huggingface_hub>=0.20
+tiktoken>=0.7
+# optional: xai-sdk   # IMPRINT_TOKENIZER=grok46 时需要
+

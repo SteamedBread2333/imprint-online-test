@@ -1,0 +1,27 @@
+# Team convention — commit this file.
+# Paths are relative to the repo root unless absolute.
+# Private runtime lives in gitignored .imprint/ (vault.db, state/, export/).
+
+host:
+  listen: 127.0.0.1:9470
+
+telemetry:
+  enabled: true
+  retention_days: 30
+
+supersede:
+  inheritance_alpha: 0.20   # 0=copy old (no decay), 1=drop to 0.6 baseline
+
+shelves:
+  enabled: true
+  config:
+    roots:
+      - docs
+    find_top_k: 3
+
+plugins:
+  desk:
+    enabled: false
+    config:
+      port: 4173
+      hostUrl: http://127.0.0.1:9470
