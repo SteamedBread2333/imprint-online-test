@@ -16,6 +16,9 @@ sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
 import tokenizer
 from mcp_client import MCPClient
 from paths import DATA, PROJECT, LINK_VAULT, imprint_mcp, public_bin
+
+# Populated when main() finishes §3–§4; used by seed_record_vault hook.
+BENCH_LOGICAL_IDS: dict[str, str] = {}
 from measure_retrieval import read_hit_files, _norm_path
 from measure import extract_rules, extract_shelves, compact, extract_add_out
 import agent_search
@@ -347,7 +350,31 @@ def run_scenario(client, sc, rule_id):
     }
 
 
+def _bench_logical_ids(seeded, vault_rows) -> dict[str, str]:
+    out: dict[str, str] = {}
+    for s in seeded:
+        if s.get("rule_id"):
+            out[f"bench:{s['scenario']}"] = s["rule_id"]
+    for row in vault_rows:
+        lid = row.get("linked") or {}
+        if row["id"] == "v1_supersede":
+            if lid.get("dormant_rule_id"):
+                out["bench:v1_supersede:old"] = lid["dormant_rule_id"]
+            if lid.get("active_rule_id"):
+                out["bench:v1_supersede:new"] = lid["active_rule_id"]
+                out["bench:v1_supersede:new:active"] = lid["active_rule_id"]
+        elif row["id"] == "v2_conflicts":
+            ids = lid.get("rule_ids") or []
+            if len(ids) >= 2:
+                out["bench:v2_conflicts:a"] = ids[0]
+                out["bench:v2_conflicts:b"] = ids[1]
+        elif row["id"] == "v3_related" and lid.get("rule_id"):
+            out["bench:v3_related:quality"] = lid["rule_id"]
+    return out
+
+
 def main():
+    global BENCH_LOGICAL_IDS
     vault_dir = os.path.join(PROJECT, LINK_VAULT)
     if os.path.isdir(vault_dir):
         shutil.rmtree(vault_dir)
@@ -360,6 +387,7 @@ def main():
     client.initialize()
     seeded = []
     rows = []
+    vault_rows = []
     try:
         for sc in SCENARIOS:
             sd = sc["seed"]
@@ -377,22 +405,21 @@ def main():
                 raise RuntimeError(f"add failed {sc['id']}: {out['error']}")
             seeded.append({"scenario": sc["id"], "rule_id": rid, "add_args": add_args})
             rows.append(run_scenario(client, sc, rid))
+        # §4 on the same vault — do not wipe between §3 and §4.
+        vault_rows = run_vault_graph(client)
     finally:
         client.close()
 
-    if os.path.isdir(vault_dir):
-        shutil.rmtree(vault_dir)
-    client2 = MCPClient(
-        imprint_mcp(),
-        ["--project", PROJECT, "--vault", LINK_VAULT],
-        cwd=PROJECT,
+    BENCH_LOGICAL_IDS = _bench_logical_ids(seeded, vault_rows)
+
+    from seed_record_vault import merge_bench_state, seed_vault
+
+    merge_bench_state(LINK_VAULT, BENCH_LOGICAL_IDS)
+    seed_vault(
+        LINK_VAULT,
+        include_bench_scenarios=False,
+        include_vault_extras=False,
     )
-    client2.initialize()
-    vault_rows = []
-    try:
-        vault_rows = run_vault_graph(client2)
-    finally:
-        client2.close()
 
     total_control = sum(r["control"]["tokens"] for r in rows)
     total_linked = sum(r["linked"]["tokens"] for r in rows)

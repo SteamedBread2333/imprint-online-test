@@ -186,9 +186,17 @@ def _bend_slots(edges):
     return slots
 
 
-def _node_tip_attr(n: dict) -> str:
+def _vault_rule_id(case_id: str, n: dict, id_map: dict[str, str] | None) -> str | None:
+    if not id_map or n.get("kind") == "document":
+        return None
+    from record_vault_map import rule_key
+
+    return id_map.get(rule_key(case_id, n["id"]))
+
+
+def _node_tip_attr(n: dict, vault_id: str | None = None) -> str:
     payload = {
-        "id": n.get("id"),
+        "id": vault_id or n.get("id"),
         "kind": n.get("kind", "rule"),
         "label": n.get("label"),
         "claim": n.get("claim"),
@@ -198,11 +206,13 @@ def _node_tip_attr(n: dict) -> str:
         "path": n.get("path"),
         "heading": n.get("heading"),
     }
+    if vault_id and n.get("label"):
+        payload["alias"] = n.get("label")
     cleaned = {k: v for k, v in payload.items() if v}
     return html.escape(json.dumps(cleaned, ensure_ascii=False), quote=True)
 
 
-def render_case(case_id: str) -> str:
+def render_case(case_id: str, id_map: dict[str, str] | None = None) -> str:
     spec = CASE_GRAPHS[case_id]
     nodes = spec["nodes"]
     edges = spec["edges"]
@@ -215,7 +225,11 @@ def render_case(case_id: str) -> str:
     circles = []
     for n in nodes:
         x, y = pos.get(n["id"], (W / 2, h / 2))
-        label = html.escape((n.get("label") or n["id"])[:16])
+        vault_id = _vault_rule_id(case_id, n, id_map)
+        if vault_id:
+            label = html.escape(vault_id)
+        else:
+            label = html.escape((n.get("label") or n["id"])[:16])
         r = _node_r(n)
         superseded = n.get("status") == "superseded"
         if n.get("kind") == "document":
@@ -227,7 +241,7 @@ def render_case(case_id: str) -> str:
             stroke = STATUS_STROKE.get(n.get("status"), "#9a9084")
             dash = ""
             fill_op = ' fill-opacity="0.55"' if superseded else ""
-        tip = _node_tip_attr(n)
+        tip = _node_tip_attr(n, vault_id)
         hit = r + 8
         label_y = y + r + 12
         extra_cls = ""

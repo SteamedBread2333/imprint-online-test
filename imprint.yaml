@@ -1,6 +1,7 @@
 # Team convention — commit this file.
 # Paths are relative to the repo root unless absolute.
-# Private runtime lives in gitignored .imprint/ (vault.db, state/, export/).
+# Private runtime: vault + state under .imprint-link-bench/ (规则关联 §3–§5 + desk).
+vault: .imprint-link-bench
 
 host:
   listen: 127.0.0.1:9470
@@ -21,7 +22,8 @@ shelves:
 
 plugins:
   desk:
-    enabled: false
+    enabled: true
+    package: ../../Documents/GitHub/imprint-desk-plugin
     config:
       port: 4173
       hostUrl: http://127.0.0.1:9470

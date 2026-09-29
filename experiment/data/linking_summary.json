@@ -1,6 +1,6 @@
 {
   "meta": {
-    "created_at": "2026-09-29T03:56:07Z",
+    "created_at": "2026-09-29T05:57:14Z",
     "tokenizer": "grok-2-tokenizer（Grok 家族公开编码器；Grok 4.6 官方词表未公开）",
     "imprint_mcp": "imprint-mcp",
     "vault": ".imprint-link-bench",
@@ -146,8 +146,8 @@
       "control": {
         "paths": [
           "docs/10-performance.md",
-          "docs/06-logging.md",
-          "docs/08-deployment.md"
+          "docs/08-deployment.md",
+          "docs/06-logging.md"
         ],
         "tokens": 4018,
         "read_tokens": 4011
@@ -342,32 +342,45 @@
       },
       "linked": {
         "description": "supersede 后单次 find",
-        "tokens": 96,
-        "active_rule_id": "r-2026-09-29-002",
-        "dormant_rule_id": "r-2026-09-29-001",
+        "tokens": 166,
+        "active_rule_id": "r-2026-09-29-005",
+        "dormant_rule_id": "r-2026-09-29-004",
         "old_recalled": false,
         "new_recalled": true,
         "get_supersedes": [
-          "r-2026-09-29-001"
+          "r-2026-09-29-004"
         ],
         "rules_sample": [
           {
-            "id": "r-2026-09-29-002",
+            "id": "r-2026-09-29-005",
             "claim": "Use snake_case for functions/variables and PascalCase for classes",
             "scope": [
               "aurora",
               "python"
             ],
             "confidence": 0.6,
-            "score": 0.8803,
+            "score": 0.8534,
             "status": "active",
             "evidence_count": 2
+          },
+          {
+            "id": "r-2026-09-29-001",
+            "claim": "Use snake_case for functions/variables and PascalCase for classes",
+            "scope": [
+              "aurora",
+              "python"
+            ],
+            "confidence": 0.6,
+            "score": 0.8516,
+            "status": "active",
+            "sources_count": 1,
+            "evidence_count": 1
           }
         ]
       },
       "checks_passed": true,
-      "saved_tokens": -59,
-      "saving_pct": -159.46
+      "saved_tokens": -129,
+      "saving_pct": -348.65
     },
     {
       "id": "v2_conflicts",
@@ -388,22 +401,22 @@
         "description": "add(conflicts) 后 find",
         "tokens": 200,
         "rule_ids": [
-          "r-2026-09-29-003",
-          "r-2026-09-29-004"
+          "r-2026-09-29-006",
+          "r-2026-09-29-007"
         ],
         "conflict_set": [
           {
-            "a": "r-2026-09-29-004",
-            "b": "r-2026-09-29-003"
+            "a": "r-2026-09-29-007",
+            "b": "r-2026-09-29-006"
           }
         ],
         "get_a_conflicts": [],
         "get_b_conflicts": [
-          "r-2026-09-29-003"
+          "r-2026-09-29-006"
         ],
         "rules_sample": [
           {
-            "id": "r-2026-09-29-004",
+            "id": "r-2026-09-29-007",
             "claim": "Never retry non-idempotent POST requests",
             "scope": [
               "aurora",
@@ -415,7 +428,7 @@
             "evidence_count": 1
           },
           {
-            "id": "r-2026-09-29-003",
+            "id": "r-2026-09-29-006",
             "claim": "Retry failed outbound HTTP calls up to three times",
             "scope": [
               "aurora",
@@ -446,9 +459,9 @@
       "linked": {
         "description": "link related 后 get",
         "tokens": 106,
-        "rule_id": "r-2026-09-29-005",
+        "rule_id": "r-2026-09-29-008",
         "get_related": [
-          "r-2026-09-29-003"
+          "r-2026-09-29-006"
         ]
       },
       "checks_passed": true,

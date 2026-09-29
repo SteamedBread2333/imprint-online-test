@@ -429,7 +429,7 @@ a { color: var(--ink); }
 <body>
 <div class="wrap">
 <header class="mast">
-  <p class="meta-row"><span>imprint 对照实验 · 规则关联</span><span>2026-09-29 03:56</span></p>
+  <p class="meta-row"><span>imprint 对照实验 · 规则关联</span><span>2026-09-29 05:57</span></p>
   <nav class="report-tabs" aria-label="实验报告"><a href="report.html">规范记忆</a><a href="retrieval.html">文档检索</a><a href="record.html" class="on">规则关联</a></nav>
   <h1>Vault 关联：文档与规则图</h1>
   <p class="lede">§3 规则↔文档（sources）；§4 规则↔规则（supersedes / conflicts_with / related）。与纯 BM25 检索、无 graph 的 prompt 堆叠对照。</p>
@@ -493,7 +493,7 @@ a { color: var(--ink); }
     <td>实验（vault+find）</td>
     <td class="num">263</td>
     <td>（仅 find，无 Read）</td>
-    <td>规则 r-2026-09-29-001 · links 1（<code>sources</code>）· 召回 是</td>
+    <td>规则 <code>r-2026-09-29-001</code> · links 1（<code>sources</code>）· 召回 是</td>
   </tr>
   </tbody>
   </table>
@@ -551,14 +551,14 @@ a { color: var(--ink); }
   <tr>
     <td>对照（无关联）</td>
     <td class="num">4,018</td>
-    <td>10-performance.md, 06-logging.md, 08-deployment.md</td>
+    <td>10-performance.md, 08-deployment.md, 06-logging.md</td>
     <td>—</td>
   </tr>
   <tr>
     <td>实验（vault+find）</td>
     <td class="num">1,783</td>
     <td>10-performance.md</td>
-    <td>规则 r-2026-09-29-002 · links 3（<code>co_search</code>, <code>sources</code>）· 召回 是</td>
+    <td>规则 <code>r-2026-09-29-002</code> · links 3（<code>co_search</code>, <code>sources</code>）· 召回 是</td>
   </tr>
   </tbody>
   </table>
@@ -648,7 +648,7 @@ a { color: var(--ink); }
     <td>实验（vault+find）</td>
     <td class="num">1,638</td>
     <td>03-error-handling.md</td>
-    <td>规则 r-2026-09-29-003 · links 1（<code>sources</code>）· 召回 是</td>
+    <td>规则 <code>r-2026-09-29-003</code> · links 1（<code>sources</code>）· 召回 是</td>
   </tr>
   </tbody>
   </table>
@@ -728,9 +728,9 @@ a { color: var(--ink); }
   <tr><td>对照</td><td>未 supersede：旧+新两条 user text 同时进 prompt</td>
       <td class="num">37 tok</td></tr>
   <tr><td>实验</td><td>supersede 后单次 find</td>
-      <td class="num">96 tok</td></tr>
+      <td class="num">166 tok</td></tr>
   </table>
-  <p class="meta">断言 通过 · 旧规则进 find：否 · 新规则进 find：是 · get.supersedes → [&#x27;r-2026-09-29-001&#x27;]</p>
+  <p class="meta">断言 通过 · desk 旧 <code>r-2026-09-29-004</code> · 新 <code>r-2026-09-29-005</code> · 旧进 find：否 · 新进 find：是</p>
   <details class="sample"><summary>JSON</summary><pre class="sample-pre">{
   &quot;find_args&quot;: {
     &quot;scope&quot;: &quot;aurora,python&quot;,
@@ -739,26 +739,39 @@ a { color: var(--ink); }
   },
   &quot;linked&quot;: {
     &quot;description&quot;: &quot;supersede 后单次 find&quot;,
-    &quot;tokens&quot;: 96,
-    &quot;active_rule_id&quot;: &quot;r-2026-09-29-002&quot;,
-    &quot;dormant_rule_id&quot;: &quot;r-2026-09-29-001&quot;,
+    &quot;tokens&quot;: 166,
+    &quot;active_rule_id&quot;: &quot;r-2026-09-29-005&quot;,
+    &quot;dormant_rule_id&quot;: &quot;r-2026-09-29-004&quot;,
     &quot;old_recalled&quot;: false,
     &quot;new_recalled&quot;: true,
     &quot;get_supersedes&quot;: [
-      &quot;r-2026-09-29-001&quot;
+      &quot;r-2026-09-29-004&quot;
     ],
     &quot;rules_sample&quot;: [
       {
-        &quot;id&quot;: &quot;r-2026-09-29-002&quot;,
+        &quot;id&quot;: &quot;r-2026-09-29-005&quot;,
         &quot;claim&quot;: &quot;Use snake_case for functions/variables and PascalCase for classes&quot;,
         &quot;scope&quot;: [
           &quot;aurora&quot;,
           &quot;python&quot;
         ],
         &quot;confidence&quot;: 0.6,
-        &quot;score&quot;: 0.8803,
+        &quot;score&quot;: 0.8534,
         &quot;status&quot;: &quot;active&quot;,
         &quot;evidence_count&quot;: 2
+      },
+      {
+        &quot;id&quot;: &quot;r-2026-09-29-001&quot;,
+        &quot;claim&quot;: &quot;Use snake_case for functions/variables and PascalCase for classes&quot;,
+        &quot;scope&quot;: [
+          &quot;aurora&quot;,
+          &quot;python&quot;
+        ],
+        &quot;confidence&quot;: 0.6,
+        &quot;score&quot;: 0.8516,
+        &quot;status&quot;: &quot;active&quot;,
+        &quot;sources_count&quot;: 1,
+        &quot;evidence_count&quot;: 1
       }
     ]
   }
@@ -774,7 +787,7 @@ a { color: var(--ink); }
   <tr><td>实验</td><td>add(conflicts) 后 find</td>
       <td class="num">200 tok</td></tr>
   </table>
-  <p class="meta">断言 通过 · conflict_set 条数 1 · A.conflicts_with []</p>
+  <p class="meta">断言 通过 · <code>r-2026-09-29-006</code> ↔ <code>r-2026-09-29-007</code> · conflict_set 1 条</p>
   <details class="sample"><summary>JSON</summary><pre class="sample-pre">{
   &quot;find_args&quot;: {
     &quot;scope&quot;: &quot;aurora,http&quot;,
@@ -785,22 +798,22 @@ a { color: var(--ink); }
     &quot;description&quot;: &quot;add(conflicts) 后 find&quot;,
     &quot;tokens&quot;: 200,
     &quot;rule_ids&quot;: [
-      &quot;r-2026-09-29-003&quot;,
-      &quot;r-2026-09-29-004&quot;
+      &quot;r-2026-09-29-006&quot;,
+      &quot;r-2026-09-29-007&quot;
     ],
     &quot;conflict_set&quot;: [
       {
-        &quot;a&quot;: &quot;r-2026-09-29-004&quot;,
-        &quot;b&quot;: &quot;r-2026-09-29-003&quot;
+        &quot;a&quot;: &quot;r-2026-09-29-007&quot;,
+        &quot;b&quot;: &quot;r-2026-09-29-006&quot;
       }
     ],
     &quot;get_a_conflicts&quot;: [],
     &quot;get_b_conflicts&quot;: [
-      &quot;r-2026-09-29-003&quot;
+      &quot;r-2026-09-29-006&quot;
     ],
     &quot;rules_sample&quot;: [
       {
-        &quot;id&quot;: &quot;r-2026-09-29-004&quot;,
+        &quot;id&quot;: &quot;r-2026-09-29-007&quot;,
         &quot;claim&quot;: &quot;Never retry non-idempotent POST requests&quot;,
         &quot;scope&quot;: [
           &quot;aurora&quot;,
@@ -812,7 +825,7 @@ a { color: var(--ink); }
         &quot;evidence_count&quot;: 1
       },
       {
-        &quot;id&quot;: &quot;r-2026-09-29-003&quot;,
+        &quot;id&quot;: &quot;r-2026-09-29-006&quot;,
         &quot;claim&quot;: &quot;Retry failed outbound HTTP calls up to three times&quot;,
         &quot;scope&quot;: [
           &quot;aurora&quot;,
@@ -837,36 +850,43 @@ a { color: var(--ink); }
   <tr><td>实验</td><td>link related 后 get</td>
       <td class="num">106 tok</td></tr>
   </table>
-  <p class="meta">断言 通过 · get.related → [&#x27;r-2026-09-29-003&#x27;]</p>
+  <p class="meta">断言 通过 · desk related · <code>r-2026-09-29-008</code></p>
   <details class="sample"><summary>JSON</summary><pre class="sample-pre">{
   &quot;find_args&quot;: null,
   &quot;linked&quot;: {
     &quot;description&quot;: &quot;link related 后 get&quot;,
     &quot;tokens&quot;: 106,
-    &quot;rule_id&quot;: &quot;r-2026-09-29-005&quot;,
+    &quot;rule_id&quot;: &quot;r-2026-09-29-008&quot;,
     &quot;get_related&quot;: [
-      &quot;r-2026-09-29-003&quot;
+      &quot;r-2026-09-29-006&quot;
     ]
   }
 }</pre></details>
 </section>
 
 <h2>5. 复杂实际案例（叙事 + desk 关系图）</h2>
-<p class="meta">静态 SVG，边样式与 <code>imprint desk open → 统一</code> 一致（离线 / 直接打开 html 即可）。示意节点，非 live vault。自动化断言见 §3–§4。</p>
+
+<p class="meta">节点标签与 hover 中的 <code>id</code> 为 <code>.imprint-link-bench</code> 内真实规则 id（与 desk / §3–§4 一致）；别名为叙事用名。</p>
+<table class="data comp-table">
+<thead><tr><th>案例</th><th>别名</th><th>vault id（desk）</th></tr></thead>
+<tbody>
+<tr><td>case_a</td><td>r-canary-v2</td><td><code>r-2026-09-29-010</code></td></tr><tr><td>case_a</td><td>r-canary-v1</td><td><code>r-2026-09-29-009</code></td></tr><tr><td>case_b</td><td>r-http-retry</td><td><code>r-2026-09-29-006</code></td></tr><tr><td>case_b</td><td>r-no-post-retry</td><td><code>r-2026-09-29-007</code></td></tr><tr><td>case_b</td><td>r-dlq</td><td><code>r-2026-09-29-011</code></td></tr><tr><td>case_c</td><td>r-ts-tz</td><td><code>r-2026-09-29-013</code></td></tr><tr><td>case_c</td><td>r-ts-iso</td><td><code>r-2026-09-29-012</code></td></tr><tr><td>case_d</td><td>r-cache-auth</td><td><code>r-2026-09-29-002</code></td></tr><tr><td>case_d</td><td>r-feature-exp</td><td><code>r-2026-09-29-014</code></td></tr><tr><td>case_e</td><td>命名</td><td><code>r-2026-09-29-001</code></td></tr><tr><td>case_e</td><td>ruff-mypy</td><td><code>r-2026-09-29-008</code></td></tr><tr><td>case_e</td><td>log-redact</td><td><code>r-2026-09-29-015</code></td></tr><tr><td>case_e</td><td>capacity-70</td><td><code>r-2026-09-29-016</code></td></tr><tr><td>case_e</td><td>rate-limit</td><td><code>r-2026-09-29-017</code></td></tr>
+</tbody>
+</table>
 
 <article class="scenario">
   <h3>案例 A · 事故后改灰度政策（supersedes + sources + 宽 grep）</h3>
   
 <div class="desk-graph-block">
-  <p class="graph-caption">imprint desk 统一视图风格 · 仅 deployment 有 sources；error/review 为 grep 宽命中、图中无 vault 边</p>
-  <div class="desk-graph-stage"><svg class="desk-graph-svg" viewBox="0 0 560 280" width="100%" height="100%" preserveAspectRatio="xMidYMid meet" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="关联图 case_a" data-graph-h="280" data-graph-rev="5" data-graph-built="2026-09-29T05:34Z">
+  <p class="graph-caption">节点圆上文字 = vault 规则 id（与 imprint desk 相同）· 文档仍为 path 文件名 · 仅 deployment 有 sources</p>
+  <div class="desk-graph-stage"><svg class="desk-graph-svg" viewBox="0 0 560 280" width="100%" height="100%" preserveAspectRatio="xMidYMid meet" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="关联图 case_a" data-graph-h="280" data-graph-rev="5" data-graph-built="2026-09-29T05:57Z">
   <defs>
     <marker id="arrow-super-case-a" viewBox="0 -4 8 8" refX="8" refY="0" markerWidth="6" markerHeight="6" orient="auto">
       <path d="M0,-4L8,0L0,4" fill="#e07060"/>
     </marker>
   </defs>
-  <g class="d3-node" data-node-tip="{&quot;id&quot;: &quot;r-new&quot;, &quot;kind&quot;: &quot;rule&quot;, &quot;label&quot;: &quot;r-canary-v2&quot;, &quot;claim&quot;: &quot;Define canary rollback auto-triggers and approval per deployment gray-release section&quot;, &quot;text&quot;: &quot;上次灰度拖了四十分钟才回滚。以后失败必须自动回滚，触发条件和审批写清楚；权威出处只认 deployment 灰度发布节。&quot;, &quot;status&quot;: &quot;active&quot;, &quot;scope&quot;: [&quot;aurora&quot;, &quot;ops&quot;]}"><circle class="d3-hit" cx="156.8" cy="65.0" r="22.0" fill="transparent" tabindex="0" role="button" aria-label="r-canary-v2"/><circle cx="156.8" cy="65.0" r="14.0" fill="#e8c99a" stroke="#e8c99a" stroke-width="2" pointer-events="none"/><text class="d3-label" x="156.8" y="91.0" text-anchor="middle" pointer-events="none">r-canary-v2</text></g>
-<g class="d3-node superseded" data-node-tip="{&quot;id&quot;: &quot;r-old&quot;, &quot;kind&quot;: &quot;rule&quot;, &quot;label&quot;: &quot;r-canary-v1&quot;, &quot;claim&quot;: &quot;Roll back canary manually via review checklist (superseded)&quot;, &quot;text&quot;: &quot;灰度出问题就人工回滚，在 review 清单里勾一下就行。&quot;, &quot;status&quot;: &quot;superseded&quot;, &quot;scope&quot;: [&quot;aurora&quot;, &quot;ops&quot;]}"><circle class="d3-hit" cx="258.9" cy="61.8" r="22.0" fill="transparent" tabindex="0" role="button" aria-label="r-canary-v1"/><circle cx="258.9" cy="61.8" r="14.0" fill="#e8c99a" stroke="#7aa0c8" stroke-width="2" fill-opacity="0.55" pointer-events="none"/><text class="d3-label" x="258.9" y="87.8" text-anchor="middle" pointer-events="none">r-canary-v1</text></g>
+  <g class="d3-node" data-node-tip="{&quot;id&quot;: &quot;r-2026-09-29-010&quot;, &quot;kind&quot;: &quot;rule&quot;, &quot;label&quot;: &quot;r-canary-v2&quot;, &quot;claim&quot;: &quot;Define canary rollback auto-triggers and approval per deployment gray-release section&quot;, &quot;text&quot;: &quot;上次灰度拖了四十分钟才回滚。以后失败必须自动回滚，触发条件和审批写清楚；权威出处只认 deployment 灰度发布节。&quot;, &quot;status&quot;: &quot;active&quot;, &quot;scope&quot;: [&quot;aurora&quot;, &quot;ops&quot;], &quot;alias&quot;: &quot;r-canary-v2&quot;}"><circle class="d3-hit" cx="156.8" cy="65.0" r="22.0" fill="transparent" tabindex="0" role="button" aria-label="r-canary-v2"/><circle cx="156.8" cy="65.0" r="14.0" fill="#e8c99a" stroke="#e8c99a" stroke-width="2" pointer-events="none"/><text class="d3-label" x="156.8" y="91.0" text-anchor="middle" pointer-events="none">r-2026-09-29-010</text></g>
+<g class="d3-node superseded" data-node-tip="{&quot;id&quot;: &quot;r-2026-09-29-009&quot;, &quot;kind&quot;: &quot;rule&quot;, &quot;label&quot;: &quot;r-canary-v1&quot;, &quot;claim&quot;: &quot;Roll back canary manually via review checklist (superseded)&quot;, &quot;text&quot;: &quot;灰度出问题就人工回滚，在 review 清单里勾一下就行。&quot;, &quot;status&quot;: &quot;superseded&quot;, &quot;scope&quot;: [&quot;aurora&quot;, &quot;ops&quot;], &quot;alias&quot;: &quot;r-canary-v1&quot;}"><circle class="d3-hit" cx="258.9" cy="61.8" r="22.0" fill="transparent" tabindex="0" role="button" aria-label="r-canary-v1"/><circle cx="258.9" cy="61.8" r="14.0" fill="#e8c99a" stroke="#7aa0c8" stroke-width="2" fill-opacity="0.55" pointer-events="none"/><text class="d3-label" x="258.9" y="87.8" text-anchor="middle" pointer-events="none">r-2026-09-29-009</text></g>
 <g class="d3-node doc-node" data-node-tip="{&quot;id&quot;: &quot;doc-dep&quot;, &quot;kind&quot;: &quot;document&quot;, &quot;label&quot;: &quot;08-deployment&quot;, &quot;path&quot;: &quot;docs/08-deployment.md&quot;, &quot;heading&quot;: &quot;灰度发布&quot;}"><circle class="d3-hit" cx="44.0" cy="214.8" r="19.0" fill="transparent" tabindex="0" role="button" aria-label="08-deployment"/><circle cx="44.0" cy="214.8" r="11.0" fill="#141a19" stroke="#6ec4c0" stroke-width="2" stroke-dasharray="3 2" pointer-events="none"/><text class="d3-label" x="44.0" y="237.8" text-anchor="middle" pointer-events="none">08-deployment</text></g>
 <g class="d3-node doc-node" data-node-tip="{&quot;id&quot;: &quot;doc-err&quot;, &quot;kind&quot;: &quot;document&quot;, &quot;label&quot;: &quot;03-error-handling&quot;, &quot;path&quot;: &quot;docs/03-error-handling.md&quot;}"><circle class="d3-hit" cx="243.9" cy="218.2" r="19.0" fill="transparent" tabindex="0" role="button" aria-label="03-error-handling"/><circle cx="243.9" cy="218.2" r="11.0" fill="#141a19" stroke="#6ec4c0" stroke-width="2" stroke-dasharray="3 2" pointer-events="none"/><text class="d3-label" x="243.9" y="241.2" text-anchor="middle" pointer-events="none">03-error-handlin</text></g>
 <g class="d3-node doc-node" data-node-tip="{&quot;id&quot;: &quot;doc-rev&quot;, &quot;kind&quot;: &quot;document&quot;, &quot;label&quot;: &quot;13-review&quot;, &quot;path&quot;: &quot;docs/13-review.md&quot;}"><circle class="d3-hit" cx="516.0" cy="218.2" r="19.0" fill="transparent" tabindex="0" role="button" aria-label="13-review"/><circle cx="516.0" cy="218.2" r="11.0" fill="#141a19" stroke="#6ec4c0" stroke-width="2" stroke-dasharray="3 2" pointer-events="none"/><text class="d3-label" x="516.0" y="241.2" text-anchor="middle" pointer-events="none">13-review</text></g>
@@ -883,26 +903,25 @@ a { color: var(--ink); }
 </div>
 </div>
   <p><strong>背景</strong> 线上一次灰度回滚拖了 40 分钟。事后口头约定变了，但 <code>docs/08-deployment.md</code>、<code>docs/03-error-handling.md</code>、<code>docs/13-review.md</code> 里仍都能搜到「灰度」「回滚」。</p>
-  <p><strong>写入</strong> 对旧规则 <code>r-…-canary-v1</code> 做 <code>supersede</code>，新 claim 写清「自动回滚触发条件与审批」；<code>sources</code> 只钉 <code>08-deployment.md#灰度发布</code>（不是 review 里的 checklist）。</p>
-  <p><strong>编码前</strong> 用户：「灰度失败现在到底怎么回滚？」→ grep 3 篇 → indexed &gt; k → <code>find(paths, query=canary rollback, query_local=灰度发布 回滚)</code>。</p>
-  <p><strong>imprint 行为</strong> find 召回<strong>现行</strong>规则（旧 v1 已 dormant 不进 top）；<code>links.sources</code> 指向 deployment chunk；Read 交集往往只需 deployment 一篇。agent 按 claim 写流水线，细节以 <code>get r-…</code> 的 <code>resolved_sources</code> 核对，不必三篇全文进 context。</p>
-  <p><strong>若无关联</strong> 要么三篇全 Read，要么 BM25 把 review 放第一导致 checklist 当权威 — 和真实「部署节唯一来源」不一致。</p>
+  <p><strong>写入</strong> 对旧规则 <code>r-2026-09-29-009</code> 做 <code>supersede</code> → 现行 <code>r-2026-09-29-010</code>；<code>sources</code> 只钉 <code>08-deployment.md#灰度发布</code>。</p>
+  <p><strong>编码前</strong> 用户：「灰度失败现在到底怎么回滚？」→ grep 3 篇 → indexed &gt; k → <code>find(paths, …)</code>。</p>
+  <p><strong>imprint 行为</strong> find 召回现行规则；<code>get r-2026-09-29-010</code> 看 <code>resolved_sources</code>。</p>
 </article>
 
 <article class="scenario">
-  <h3>案例 B · 下单链路：HTTP 重试 vs POST 幂等 vs 队列死信（conflicts + related + 多 sources）</h3>
+  <h3>案例 B · 下单链路：HTTP 重试 vs POST 幂等 vs 队列死信</h3>
   
 <div class="desk-graph-block">
-  <p class="graph-caption">desk /unified：conflicts_with 橙实线 · related 金虚线 · 各规则 sources 到 doc</p>
-  <div class="desk-graph-stage"><svg class="desk-graph-svg" viewBox="0 0 560 320" width="100%" height="100%" preserveAspectRatio="xMidYMid meet" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="关联图 case_b" data-graph-h="320" data-graph-rev="5" data-graph-built="2026-09-29T05:34Z">
+  <p class="graph-caption">节点圆上文字 = vault 规则 id（与 imprint desk 相同）· 文档仍为 path 文件名</p>
+  <div class="desk-graph-stage"><svg class="desk-graph-svg" viewBox="0 0 560 320" width="100%" height="100%" preserveAspectRatio="xMidYMid meet" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="关联图 case_b" data-graph-h="320" data-graph-rev="5" data-graph-built="2026-09-29T05:57Z">
   <defs>
     <marker id="arrow-super-case-b" viewBox="0 -4 8 8" refX="8" refY="0" markerWidth="6" markerHeight="6" orient="auto">
       <path d="M0,-4L8,0L0,4" fill="#e07060"/>
     </marker>
   </defs>
-  <g class="d3-node" data-node-tip="{&quot;id&quot;: &quot;r-retry&quot;, &quot;kind&quot;: &quot;rule&quot;, &quot;label&quot;: &quot;r-http-retry&quot;, &quot;claim&quot;: &quot;Retry failed outbound HTTP calls up to three times&quot;, &quot;text&quot;: &quot;出站 HTTP 默认最多重试 3 次，出处按 http-client 规范。&quot;, &quot;status&quot;: &quot;active&quot;, &quot;scope&quot;: [&quot;aurora&quot;, &quot;http&quot;]}"><circle class="d3-hit" cx="407.0" cy="62.2" r="22.0" fill="transparent" tabindex="0" role="button" aria-label="r-http-retry"/><circle cx="407.0" cy="62.2" r="14.0" fill="#e8c99a" stroke="#e8c99a" stroke-width="2" pointer-events="none"/><text class="d3-label" x="407.0" y="88.2" text-anchor="middle" pointer-events="none">r-http-retry</text></g>
-<g class="d3-node" data-node-tip="{&quot;id&quot;: &quot;r-post&quot;, &quot;kind&quot;: &quot;rule&quot;, &quot;label&quot;: &quot;r-no-post-retry&quot;, &quot;claim&quot;: &quot;Never retry non-idempotent POST requests&quot;, &quot;text&quot;: &quot;非幂等 POST 禁止自动重试，和通用重试策略冲突时要先问清楚场景。&quot;, &quot;status&quot;: &quot;active&quot;, &quot;scope&quot;: [&quot;aurora&quot;, &quot;http&quot;]}"><circle class="d3-hit" cx="308.6" cy="65.3" r="22.0" fill="transparent" tabindex="0" role="button" aria-label="r-no-post-retry"/><circle cx="308.6" cy="65.3" r="14.0" fill="#e8c99a" stroke="#e8c99a" stroke-width="2" pointer-events="none"/><text class="d3-label" x="308.6" y="91.3" text-anchor="middle" pointer-events="none">r-no-post-retry</text></g>
-<g class="d3-node" data-node-tip="{&quot;id&quot;: &quot;r-dlq&quot;, &quot;kind&quot;: &quot;rule&quot;, &quot;label&quot;: &quot;r-dlq&quot;, &quot;claim&quot;: &quot;Route async consumer failures to DLQ with visibility timeout above worst-case handler time&quot;, &quot;text&quot;: &quot;异步消费失败进 DLQ，可见性超时必须大于最坏处理时间。&quot;, &quot;status&quot;: &quot;active&quot;, &quot;scope&quot;: [&quot;aurora&quot;, &quot;http&quot;]}"><circle class="d3-hit" cx="232.7" cy="65.7" r="22.0" fill="transparent" tabindex="0" role="button" aria-label="r-dlq"/><circle cx="232.7" cy="65.7" r="14.0" fill="#e8c99a" stroke="#e8c99a" stroke-width="2" pointer-events="none"/><text class="d3-label" x="232.7" y="91.7" text-anchor="middle" pointer-events="none">r-dlq</text></g>
+  <g class="d3-node" data-node-tip="{&quot;id&quot;: &quot;r-2026-09-29-006&quot;, &quot;kind&quot;: &quot;rule&quot;, &quot;label&quot;: &quot;r-http-retry&quot;, &quot;claim&quot;: &quot;Retry failed outbound HTTP calls up to three times&quot;, &quot;text&quot;: &quot;出站 HTTP 默认最多重试 3 次，出处按 http-client 规范。&quot;, &quot;status&quot;: &quot;active&quot;, &quot;scope&quot;: [&quot;aurora&quot;, &quot;http&quot;], &quot;alias&quot;: &quot;r-http-retry&quot;}"><circle class="d3-hit" cx="407.0" cy="62.2" r="22.0" fill="transparent" tabindex="0" role="button" aria-label="r-http-retry"/><circle cx="407.0" cy="62.2" r="14.0" fill="#e8c99a" stroke="#e8c99a" stroke-width="2" pointer-events="none"/><text class="d3-label" x="407.0" y="88.2" text-anchor="middle" pointer-events="none">r-2026-09-29-006</text></g>
+<g class="d3-node" data-node-tip="{&quot;id&quot;: &quot;r-2026-09-29-007&quot;, &quot;kind&quot;: &quot;rule&quot;, &quot;label&quot;: &quot;r-no-post-retry&quot;, &quot;claim&quot;: &quot;Never retry non-idempotent POST requests&quot;, &quot;text&quot;: &quot;非幂等 POST 禁止自动重试，和通用重试策略冲突时要先问清楚场景。&quot;, &quot;status&quot;: &quot;active&quot;, &quot;scope&quot;: [&quot;aurora&quot;, &quot;http&quot;], &quot;alias&quot;: &quot;r-no-post-retry&quot;}"><circle class="d3-hit" cx="308.6" cy="65.3" r="22.0" fill="transparent" tabindex="0" role="button" aria-label="r-no-post-retry"/><circle cx="308.6" cy="65.3" r="14.0" fill="#e8c99a" stroke="#e8c99a" stroke-width="2" pointer-events="none"/><text class="d3-label" x="308.6" y="91.3" text-anchor="middle" pointer-events="none">r-2026-09-29-007</text></g>
+<g class="d3-node" data-node-tip="{&quot;id&quot;: &quot;r-2026-09-29-011&quot;, &quot;kind&quot;: &quot;rule&quot;, &quot;label&quot;: &quot;r-dlq&quot;, &quot;claim&quot;: &quot;Route async consumer failures to DLQ with visibility timeout above worst-case handler time&quot;, &quot;text&quot;: &quot;异步消费失败进 DLQ，可见性超时必须大于最坏处理时间。&quot;, &quot;status&quot;: &quot;active&quot;, &quot;scope&quot;: [&quot;aurora&quot;, &quot;http&quot;], &quot;alias&quot;: &quot;r-dlq&quot;}"><circle class="d3-hit" cx="232.7" cy="65.7" r="22.0" fill="transparent" tabindex="0" role="button" aria-label="r-dlq"/><circle cx="232.7" cy="65.7" r="14.0" fill="#e8c99a" stroke="#e8c99a" stroke-width="2" pointer-events="none"/><text class="d3-label" x="232.7" y="91.7" text-anchor="middle" pointer-events="none">r-2026-09-29-011</text></g>
 <g class="d3-node doc-node" data-node-tip="{&quot;id&quot;: &quot;doc-http&quot;, &quot;kind&quot;: &quot;document&quot;, &quot;label&quot;: &quot;16-http-client&quot;, &quot;path&quot;: &quot;docs/16-http-client.md&quot;}"><circle class="d3-hit" cx="322.6" cy="257.8" r="19.0" fill="transparent" tabindex="0" role="button" aria-label="16-http-client"/><circle cx="322.6" cy="257.8" r="11.0" fill="#141a19" stroke="#6ec4c0" stroke-width="2" stroke-dasharray="3 2" pointer-events="none"/><text class="d3-label" x="322.6" y="280.8" text-anchor="middle" pointer-events="none">16-http-client</text></g>
 <g class="d3-node doc-node" data-node-tip="{&quot;id&quot;: &quot;doc-api&quot;, &quot;kind&quot;: &quot;document&quot;, &quot;label&quot;: &quot;05-api-design&quot;, &quot;path&quot;: &quot;docs/05-api-design.md&quot;}"><circle class="d3-hit" cx="153.0" cy="254.5" r="19.0" fill="transparent" tabindex="0" role="button" aria-label="05-api-design"/><circle cx="153.0" cy="254.5" r="11.0" fill="#141a19" stroke="#6ec4c0" stroke-width="2" stroke-dasharray="3 2" pointer-events="none"/><text class="d3-label" x="153.0" y="277.5" text-anchor="middle" pointer-events="none">05-api-design</text></g>
 <g class="d3-node doc-node" data-node-tip="{&quot;id&quot;: &quot;doc-q&quot;, &quot;kind&quot;: &quot;document&quot;, &quot;label&quot;: &quot;12-concurrency&quot;, &quot;path&quot;: &quot;docs/12-concurrency.md&quot;}"><circle class="d3-hit" cx="396.8" cy="254.0" r="19.0" fill="transparent" tabindex="0" role="button" aria-label="12-concurrency"/><circle cx="396.8" cy="254.0" r="11.0" fill="#141a19" stroke="#6ec4c0" stroke-width="2" stroke-dasharray="3 2" pointer-events="none"/><text class="d3-label" x="396.8" y="277.0" text-anchor="middle" pointer-events="none">12-concurrency</text></g>
@@ -921,31 +940,26 @@ a { color: var(--ink); }
   <span class="edge-key"><span class="swatch line sources"></span>sources</span>
 </div>
 </div>
-  <p><strong>背景</strong> 三条政策同时有效、互相牵制：</p>
   <ul>
-    <li><code>r-http-retry</code>：出站 HTTP 默认最多重试 3 次（出处 <code>16-http-client.md</code>）</li>
-    <li><code>r-no-post-retry</code>：非幂等 POST 禁止自动重试（出处 <code>05-api-design.md</code>），<code>conflicts_with → r-http-retry</code></li>
-    <li><code>r-dlq</code>：异步消费失败进 DLQ、可见性超时 &gt; 最坏处理时间（出处 <code>12-concurrency.md</code>），<code>related → r-no-post-retry</code>（「同步 HTTP 不重试、异步走队列」）</li>
+    <li><code>r-2026-09-29-006</code>：HTTP 重试 ×3 · sources → 16-http-client</li>
+    <li><code>r-2026-09-29-007</code>：禁止 POST 重试 · <code>conflicts_with</code> → r-2026-09-29-006</li>
+    <li><code>r-2026-09-29-011</code>：DLQ · <code>related</code> → r-2026-09-29-007</li>
   </ul>
-  <p><strong>用户</strong> 「支付回调 POST 超时了，客户端要自动重试吗？后台 Job 又怎么兜？」</p>
-  <p><strong>一次 find</strong> <code>scope=aurora,http</code>（或更宽）+ query → 召回 2～3 条 active 规则 + <strong><code>conflict_set</code></strong>（retry  vs no-post-retry）。agent 必须先向用户确认场景：<strong>同步 POST</strong> 走 B，<strong>已进队列</strong> 走 C；不能只看 BM25 第一条。</p>
-  <p><strong>文档</strong> 每条规则自带 <code>sources</code>；需要原文时 Read 1～2 篇金标节，而不是 grep「重试」命中的 5 篇（config / observability / http / api / concurrency）全读。</p>
-  <p><strong>desk</strong> 发版前在 <code>/unified</code> 看三角边 + 文档 cross-edge，评审是否漏链。</p>
 </article>
 
 <article class="scenario">
-  <h3>案例 C · 用户纠错 + 继承（supersede 继承 sources/query_local + 审计链）</h3>
+  <h3>案例 C · 用户纠错 + supersede 继承</h3>
   
 <div class="desk-graph-block">
-  <p class="graph-caption">supersedes 箭头 · 新规则双 sources（database + api）</p>
-  <div class="desk-graph-stage"><svg class="desk-graph-svg" viewBox="0 0 560 280" width="100%" height="100%" preserveAspectRatio="xMidYMid meet" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="关联图 case_c" data-graph-h="280" data-graph-rev="5" data-graph-built="2026-09-29T05:34Z">
+  <p class="graph-caption">节点圆上文字 = vault 规则 id（与 imprint desk 相同）· 文档仍为 path 文件名</p>
+  <div class="desk-graph-stage"><svg class="desk-graph-svg" viewBox="0 0 560 280" width="100%" height="100%" preserveAspectRatio="xMidYMid meet" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="关联图 case_c" data-graph-h="280" data-graph-rev="5" data-graph-built="2026-09-29T05:57Z">
   <defs>
     <marker id="arrow-super-case-c" viewBox="0 -4 8 8" refX="8" refY="0" markerWidth="6" markerHeight="6" orient="auto">
       <path d="M0,-4L8,0L0,4" fill="#e07060"/>
     </marker>
   </defs>
-  <g class="d3-node" data-node-tip="{&quot;id&quot;: &quot;r-new&quot;, &quot;kind&quot;: &quot;rule&quot;, &quot;label&quot;: &quot;r-ts-tz&quot;, &quot;claim&quot;: &quot;Store timestamps as timestamptz in DB; expose UTC ISO8601 in JSON APIs&quot;, &quot;text&quot;: &quot;对外 JSON 仍用 ISO8601，但库内改为 timestamptz + ORM 自动转，别再用字符串字段存时间。&quot;, &quot;status&quot;: &quot;active&quot;, &quot;scope&quot;: [&quot;aurora&quot;, &quot;interface&quot;]}"><circle class="d3-hit" cx="288.6" cy="62.6" r="22.0" fill="transparent" tabindex="0" role="button" aria-label="r-ts-tz"/><circle cx="288.6" cy="62.6" r="14.0" fill="#e8c99a" stroke="#e8c99a" stroke-width="2" pointer-events="none"/><text class="d3-label" x="288.6" y="88.6" text-anchor="middle" pointer-events="none">r-ts-tz</text></g>
-<g class="d3-node superseded" data-node-tip="{&quot;id&quot;: &quot;r-old&quot;, &quot;kind&quot;: &quot;rule&quot;, &quot;label&quot;: &quot;r-ts-iso&quot;, &quot;claim&quot;: &quot;Store timestamps as UTC ISO8601 strings (superseded)&quot;, &quot;text&quot;: &quot;数据库时间戳统一存 UTC 的 ISO8601 字符串，不要存本地时间也不要存整数。&quot;, &quot;status&quot;: &quot;superseded&quot;, &quot;scope&quot;: [&quot;aurora&quot;, &quot;interface&quot;]}"><circle class="d3-hit" cx="393.7" cy="55.0" r="22.0" fill="transparent" tabindex="0" role="button" aria-label="r-ts-iso"/><circle cx="393.7" cy="55.0" r="14.0" fill="#e8c99a" stroke="#7aa0c8" stroke-width="2" fill-opacity="0.55" pointer-events="none"/><text class="d3-label" x="393.7" y="81.0" text-anchor="middle" pointer-events="none">r-ts-iso</text></g>
+  <g class="d3-node" data-node-tip="{&quot;id&quot;: &quot;r-2026-09-29-013&quot;, &quot;kind&quot;: &quot;rule&quot;, &quot;label&quot;: &quot;r-ts-tz&quot;, &quot;claim&quot;: &quot;Store timestamps as timestamptz in DB; expose UTC ISO8601 in JSON APIs&quot;, &quot;text&quot;: &quot;对外 JSON 仍用 ISO8601，但库内改为 timestamptz + ORM 自动转，别再用字符串字段存时间。&quot;, &quot;status&quot;: &quot;active&quot;, &quot;scope&quot;: [&quot;aurora&quot;, &quot;interface&quot;], &quot;alias&quot;: &quot;r-ts-tz&quot;}"><circle class="d3-hit" cx="288.6" cy="62.6" r="22.0" fill="transparent" tabindex="0" role="button" aria-label="r-ts-tz"/><circle cx="288.6" cy="62.6" r="14.0" fill="#e8c99a" stroke="#e8c99a" stroke-width="2" pointer-events="none"/><text class="d3-label" x="288.6" y="88.6" text-anchor="middle" pointer-events="none">r-2026-09-29-013</text></g>
+<g class="d3-node superseded" data-node-tip="{&quot;id&quot;: &quot;r-2026-09-29-012&quot;, &quot;kind&quot;: &quot;rule&quot;, &quot;label&quot;: &quot;r-ts-iso&quot;, &quot;claim&quot;: &quot;Store timestamps as UTC ISO8601 strings (superseded)&quot;, &quot;text&quot;: &quot;数据库时间戳统一存 UTC 的 ISO8601 字符串，不要存本地时间也不要存整数。&quot;, &quot;status&quot;: &quot;superseded&quot;, &quot;scope&quot;: [&quot;aurora&quot;, &quot;interface&quot;], &quot;alias&quot;: &quot;r-ts-iso&quot;}"><circle class="d3-hit" cx="393.7" cy="55.0" r="22.0" fill="transparent" tabindex="0" role="button" aria-label="r-ts-iso"/><circle cx="393.7" cy="55.0" r="14.0" fill="#e8c99a" stroke="#7aa0c8" stroke-width="2" fill-opacity="0.55" pointer-events="none"/><text class="d3-label" x="393.7" y="81.0" text-anchor="middle" pointer-events="none">r-2026-09-29-012</text></g>
 <g class="d3-node doc-node" data-node-tip="{&quot;id&quot;: &quot;doc-db&quot;, &quot;kind&quot;: &quot;document&quot;, &quot;label&quot;: &quot;04-database&quot;, &quot;path&quot;: &quot;docs/04-database.md&quot;}"><circle class="d3-hit" cx="417.1" cy="225.0" r="19.0" fill="transparent" tabindex="0" role="button" aria-label="04-database"/><circle cx="417.1" cy="225.0" r="11.0" fill="#141a19" stroke="#6ec4c0" stroke-width="2" stroke-dasharray="3 2" pointer-events="none"/><text class="d3-label" x="417.1" y="248.0" text-anchor="middle" pointer-events="none">04-database</text></g>
 <g class="d3-node doc-node" data-node-tip="{&quot;id&quot;: &quot;doc-api&quot;, &quot;kind&quot;: &quot;document&quot;, &quot;label&quot;: &quot;05-api-design&quot;, &quot;path&quot;: &quot;docs/05-api-design.md&quot;}"><circle class="d3-hit" cx="142.9" cy="224.1" r="19.0" fill="transparent" tabindex="0" role="button" aria-label="05-api-design"/><circle cx="142.9" cy="224.1" r="11.0" fill="#141a19" stroke="#6ec4c0" stroke-width="2" stroke-dasharray="3 2" pointer-events="none"/><text class="d3-label" x="142.9" y="247.1" text-anchor="middle" pointer-events="none">05-api-design</text></g>
 <path class="d3-link supersedes" d="M303.5,61.6 Q338.4,62.9 372.7,56.5" fill="none" stroke-linecap="round" stroke="#e07060" stroke-width="2" marker-end="url(#arrow-super-case-c)"/>
@@ -961,25 +975,22 @@ a { color: var(--ink); }
   <span class="edge-key"><span class="swatch line sources"></span>sources</span>
 </div>
 </div>
-  <p><strong>背景</strong> 早期规则「时间戳存 UTC ISO8601 字符串」(<code>r-ts-iso</code>)，<code>sources</code> 指向 <code>04-database.md</code> 与 <code>05-api-design.md</code> 两处。用户纠正：「对外 JSON 仍 ISO8601，但<strong>库内改为 timestamptz + ORM 自动转</strong>，别再用字符串字段了。」</p>
-  <p><strong>写入</strong> <code>supersede r-ts-iso</code>，<code>confidence 0.85</code>；未改 <code>sources</code> 时继承旧指针，再<strong>追加</strong> <code>04-database.md#时间存储</code>；<code>query_local</code> 合并 CJK 检索词（如 timestamptz、时区）。</p>
-  <p><strong>召回</strong> 之后 find「订单 created_at 存什么」→ 只应命中<strong>新</strong>规则；<code>get r-new</code> 可见 <code>supersedes: [r-ts-iso]</code> + 合并后的 <code>resolved_sources</code>。旧规则 dormant，避免 agent 仍按字符串方案建表。</p>
-  <p><strong>复杂点</strong> 同一主题跨 interface + database 两篇 doc — sources 是多指针，不是「find 排名第一 doc 即真理」；supersede 解决「政策版本」，sources 解决「出处分散」。</p>
+  <p><strong>写入</strong> <code>supersede r-2026-09-29-012</code> → <code>r-2026-09-29-013</code>；双 <code>sources</code>（database + api）。</p>
 </article>
 
 <article class="scenario">
-  <h3>案例 D · 组合检索噪声 + 规则定锚（co_search 仅辅助）</h3>
+  <h3>案例 D · 组合检索噪声 + 规则定锚</h3>
   
 <div class="desk-graph-block">
-  <p class="graph-caption">sources 锚定 performance · related 连 config 规则 · deployment 仅 grep 噪声（无边）</p>
-  <div class="desk-graph-stage"><svg class="desk-graph-svg" viewBox="0 0 560 280" width="100%" height="100%" preserveAspectRatio="xMidYMid meet" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="关联图 case_d" data-graph-h="280" data-graph-rev="5" data-graph-built="2026-09-29T05:34Z">
+  <p class="graph-caption">节点圆上文字 = vault 规则 id（与 imprint desk 相同）· 文档仍为 path 文件名</p>
+  <div class="desk-graph-stage"><svg class="desk-graph-svg" viewBox="0 0 560 280" width="100%" height="100%" preserveAspectRatio="xMidYMid meet" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="关联图 case_d" data-graph-h="280" data-graph-rev="5" data-graph-built="2026-09-29T05:57Z">
   <defs>
     <marker id="arrow-super-case-d" viewBox="0 -4 8 8" refX="8" refY="0" markerWidth="6" markerHeight="6" orient="auto">
       <path d="M0,-4L8,0L0,4" fill="#e07060"/>
     </marker>
   </defs>
-  <g class="d3-node" data-node-tip="{&quot;id&quot;: &quot;r-cache&quot;, &quot;kind&quot;: &quot;rule&quot;, &quot;label&quot;: &quot;r-cache-auth&quot;, &quot;claim&quot;: &quot;Define hot-data cache TTL and anti-stampede policy per performance doc cache section&quot;, &quot;text&quot;: &quot;热点数据走缓存并设合理过期，避免击穿与雪崩；以性能规范「缓存策略」节为唯一权威。&quot;, &quot;status&quot;: &quot;active&quot;, &quot;scope&quot;: [&quot;aurora&quot;, &quot;performance&quot;]}"><circle class="d3-hit" cx="241.2" cy="55.1" r="22.0" fill="transparent" tabindex="0" role="button" aria-label="r-cache-auth"/><circle cx="241.2" cy="55.1" r="14.0" fill="#e8c99a" stroke="#e8c99a" stroke-width="2" pointer-events="none"/><text class="d3-label" x="241.2" y="81.1" text-anchor="middle" pointer-events="none">r-cache-auth</text></g>
-<g class="d3-node" data-node-tip="{&quot;id&quot;: &quot;r-flag&quot;, &quot;kind&quot;: &quot;rule&quot;, &quot;label&quot;: &quot;r-feature-exp&quot;, &quot;claim&quot;: &quot;Set feature-flag expiry per config doc; relate to performance cache policy&quot;, &quot;text&quot;: &quot;功能开关要设过期日，和性能缓存策略相关但不互相替代。&quot;, &quot;status&quot;: &quot;active&quot;, &quot;scope&quot;: [&quot;aurora&quot;, &quot;config&quot;]}"><circle class="d3-hit" cx="318.5" cy="55.1" r="22.0" fill="transparent" tabindex="0" role="button" aria-label="r-feature-exp"/><circle cx="318.5" cy="55.1" r="14.0" fill="#e8c99a" stroke="#e8c99a" stroke-width="2" pointer-events="none"/><text class="d3-label" x="318.5" y="81.1" text-anchor="middle" pointer-events="none">r-feature-exp</text></g>
+  <g class="d3-node" data-node-tip="{&quot;id&quot;: &quot;r-2026-09-29-002&quot;, &quot;kind&quot;: &quot;rule&quot;, &quot;label&quot;: &quot;r-cache-auth&quot;, &quot;claim&quot;: &quot;Define hot-data cache TTL and anti-stampede policy per performance doc cache section&quot;, &quot;text&quot;: &quot;热点数据走缓存并设合理过期，避免击穿与雪崩；以性能规范「缓存策略」节为唯一权威。&quot;, &quot;status&quot;: &quot;active&quot;, &quot;scope&quot;: [&quot;aurora&quot;, &quot;performance&quot;], &quot;alias&quot;: &quot;r-cache-auth&quot;}"><circle class="d3-hit" cx="241.2" cy="55.1" r="22.0" fill="transparent" tabindex="0" role="button" aria-label="r-cache-auth"/><circle cx="241.2" cy="55.1" r="14.0" fill="#e8c99a" stroke="#e8c99a" stroke-width="2" pointer-events="none"/><text class="d3-label" x="241.2" y="81.1" text-anchor="middle" pointer-events="none">r-2026-09-29-002</text></g>
+<g class="d3-node" data-node-tip="{&quot;id&quot;: &quot;r-2026-09-29-014&quot;, &quot;kind&quot;: &quot;rule&quot;, &quot;label&quot;: &quot;r-feature-exp&quot;, &quot;claim&quot;: &quot;Set feature-flag expiry per config doc; relate to performance cache policy&quot;, &quot;text&quot;: &quot;功能开关要设过期日，和性能缓存策略相关但不互相替代。&quot;, &quot;status&quot;: &quot;active&quot;, &quot;scope&quot;: [&quot;aurora&quot;, &quot;config&quot;], &quot;alias&quot;: &quot;r-feature-exp&quot;}"><circle class="d3-hit" cx="318.5" cy="55.1" r="22.0" fill="transparent" tabindex="0" role="button" aria-label="r-feature-exp"/><circle cx="318.5" cy="55.1" r="14.0" fill="#e8c99a" stroke="#e8c99a" stroke-width="2" pointer-events="none"/><text class="d3-label" x="318.5" y="81.1" text-anchor="middle" pointer-events="none">r-2026-09-29-014</text></g>
 <g class="d3-node doc-node" data-node-tip="{&quot;id&quot;: &quot;doc-perf&quot;, &quot;kind&quot;: &quot;document&quot;, &quot;label&quot;: &quot;10-performance&quot;, &quot;path&quot;: &quot;docs/10-performance.md&quot;, &quot;heading&quot;: &quot;缓存策略&quot;}"><circle class="d3-hit" cx="373.5" cy="221.0" r="19.0" fill="transparent" tabindex="0" role="button" aria-label="10-performance"/><circle cx="373.5" cy="221.0" r="11.0" fill="#141a19" stroke="#6ec4c0" stroke-width="2" stroke-dasharray="3 2" pointer-events="none"/><text class="d3-label" x="373.5" y="244.0" text-anchor="middle" pointer-events="none">10-performance</text></g>
 <g class="d3-node doc-node" data-node-tip="{&quot;id&quot;: &quot;doc-cfg&quot;, &quot;kind&quot;: &quot;document&quot;, &quot;label&quot;: &quot;14-config&quot;, &quot;path&quot;: &quot;docs/14-config.md&quot;}"><circle class="d3-hit" cx="186.5" cy="220.9" r="19.0" fill="transparent" tabindex="0" role="button" aria-label="14-config"/><circle cx="186.5" cy="220.9" r="11.0" fill="#141a19" stroke="#6ec4c0" stroke-width="2" stroke-dasharray="3 2" pointer-events="none"/><text class="d3-label" x="186.5" y="243.9" text-anchor="middle" pointer-events="none">14-config</text></g>
 <g class="d3-node doc-node" data-node-tip="{&quot;id&quot;: &quot;doc-dep&quot;, &quot;kind&quot;: &quot;document&quot;, &quot;label&quot;: &quot;08-deployment&quot;, &quot;path&quot;: &quot;docs/08-deployment.md&quot;}"><circle class="d3-hit" cx="279.9" cy="224.9" r="19.0" fill="transparent" tabindex="0" role="button" aria-label="08-deployment"/><circle cx="279.9" cy="224.9" r="11.0" fill="#141a19" stroke="#6ec4c0" stroke-width="2" stroke-dasharray="3 2" pointer-events="none"/><text class="d3-label" x="279.9" y="247.9" text-anchor="middle" pointer-events="none">08-deployment</text></g>
@@ -996,28 +1007,25 @@ a { color: var(--ink); }
   <span class="edge-key"><span class="swatch line sources"></span>sources</span>
 </div>
 </div>
-  <p><strong>背景</strong> 用户口语：「性能那边缓存和过期怎么配？」grep「性能+缓存+过期」命中 performance、deployment、config 等多篇（实验里类似「性能 缓存」「缓存 过期」组合词 fuzz）。</p>
-  <p><strong>vault</strong> 已有规则「热点缓存策略以 performance 文档缓存策略节为准」，<code>sources</code> → <code>10-performance.md#缓存策略</code>；另有一条「功能开关过期日」在 config，<code>related</code> 到性能规则但不 supersede。</p>
-  <p><strong>find</strong> 同轮返回 documents（多 chunk）+ <code>links.sources</code>（规则已指向 performance chunk）+ 可能 <code>co_search</code>（规则与 config chunk 同屏出现）。协议要求：<strong>行为以 rule claim + sources 为准</strong>，co_search 不 write-back、不单独当政策。</p>
-  <p><strong>Read</strong> grep∩find 非空 → Read 交集中 performance（+ 若 claim 明确涉及开关再 Read config 一节），而不是 fuzz 表里的 3～5 篇全读。</p>
+  <p><strong>vault</strong> <code>r-2026-09-29-002</code> sources → performance；<code>r-2026-09-29-014</code> related → cache。</p>
 </article>
 
 <article class="scenario">
-  <h3>案例 E · 发版门禁：规则图 + 文档交叉（related + 多 scope AND）</h3>
+  <h3>案例 E · 发版门禁（related + 多 sources）</h3>
   
 <div class="desk-graph-block">
-  <p class="graph-caption">发版 related 子图 + 每条规则 sources 到对应 doc</p>
-  <div class="desk-graph-stage"><svg class="desk-graph-svg" viewBox="0 0 560 320" width="100%" height="100%" preserveAspectRatio="xMidYMid meet" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="关联图 case_e" data-graph-h="320" data-graph-rev="5" data-graph-built="2026-09-29T05:34Z">
+  <p class="graph-caption">节点圆上文字 = vault 规则 id（与 imprint desk 相同）· 文档仍为 path 文件名</p>
+  <div class="desk-graph-stage"><svg class="desk-graph-svg" viewBox="0 0 560 320" width="100%" height="100%" preserveAspectRatio="xMidYMid meet" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="关联图 case_e" data-graph-h="320" data-graph-rev="5" data-graph-built="2026-09-29T05:57Z">
   <defs>
     <marker id="arrow-super-case-e" viewBox="0 -4 8 8" refX="8" refY="0" markerWidth="6" markerHeight="6" orient="auto">
       <path d="M0,-4L8,0L0,4" fill="#e07060"/>
     </marker>
   </defs>
-  <g class="d3-node" data-node-tip="{&quot;id&quot;: &quot;r-name&quot;, &quot;kind&quot;: &quot;rule&quot;, &quot;label&quot;: &quot;命名&quot;, &quot;claim&quot;: &quot;Use snake_case for functions/variables and PascalCase for classes&quot;, &quot;text&quot;: &quot;函数和变量统一 snake_case，类名 PascalCase；review 时一眼能分清标识符种类。&quot;, &quot;status&quot;: &quot;active&quot;, &quot;scope&quot;: [&quot;aurora&quot;, &quot;python&quot;]}"><circle class="d3-hit" cx="342.9" cy="68.5" r="22.0" fill="transparent" tabindex="0" role="button" aria-label="命名"/><circle cx="342.9" cy="68.5" r="14.0" fill="#e8c99a" stroke="#e8c99a" stroke-width="2" pointer-events="none"/><text class="d3-label" x="342.9" y="94.5" text-anchor="middle" pointer-events="none">命名</text></g>
-<g class="d3-node" data-node-tip="{&quot;id&quot;: &quot;r-ruff&quot;, &quot;kind&quot;: &quot;rule&quot;, &quot;label&quot;: &quot;ruff-mypy&quot;, &quot;claim&quot;: &quot;Run ruff and mypy clean before every commit&quot;, &quot;text&quot;: &quot;每次提交前 ruff 和 mypy 都要全绿，带 warning 或类型错误的不进主干。&quot;, &quot;status&quot;: &quot;active&quot;, &quot;scope&quot;: [&quot;aurora&quot;, &quot;quality&quot;]}"><circle class="d3-hit" cx="410.4" cy="71.6" r="22.0" fill="transparent" tabindex="0" role="button" aria-label="ruff-mypy"/><circle cx="410.4" cy="71.6" r="14.0" fill="#e8c99a" stroke="#e8c99a" stroke-width="2" pointer-events="none"/><text class="d3-label" x="410.4" y="97.6" text-anchor="middle" pointer-events="none">ruff-mypy</text></g>
-<g class="d3-node" data-node-tip="{&quot;id&quot;: &quot;r-log&quot;, &quot;kind&quot;: &quot;rule&quot;, &quot;label&quot;: &quot;log-redact&quot;, &quot;claim&quot;: &quot;Redact secrets and PII from structured logs&quot;, &quot;text&quot;: &quot;日志里严禁输出密码、token、身份证号；结构化 JSON 统一脱敏。&quot;, &quot;status&quot;: &quot;active&quot;, &quot;scope&quot;: [&quot;aurora&quot;, &quot;logging&quot;]}"><circle class="d3-hit" cx="273.9" cy="74.3" r="22.0" fill="transparent" tabindex="0" role="button" aria-label="log-redact"/><circle cx="273.9" cy="74.3" r="14.0" fill="#e8c99a" stroke="#e8c99a" stroke-width="2" pointer-events="none"/><text class="d3-label" x="273.9" y="100.3" text-anchor="middle" pointer-events="none">log-redact</text></g>
-<g class="d3-node" data-node-tip="{&quot;id&quot;: &quot;r-cap&quot;, &quot;kind&quot;: &quot;rule&quot;, &quot;label&quot;: &quot;capacity-70&quot;, &quot;claim&quot;: &quot;Keep CPU and connection-pool utilization below 70% before release&quot;, &quot;text&quot;: &quot;上生产前 CPU 和连接池水位不能超过 70%，和限流策略一起看。&quot;, &quot;status&quot;: &quot;active&quot;, &quot;scope&quot;: [&quot;aurora&quot;, &quot;ops&quot;]}"><circle class="d3-hit" cx="44.0" cy="72.2" r="22.0" fill="transparent" tabindex="0" role="button" aria-label="capacity-70"/><circle cx="44.0" cy="72.2" r="14.0" fill="#e8c99a" stroke="#e8c99a" stroke-width="2" pointer-events="none"/><text class="d3-label" x="44.0" y="98.2" text-anchor="middle" pointer-events="none">capacity-70</text></g>
-<g class="d3-node" data-node-tip="{&quot;id&quot;: &quot;r-lim&quot;, &quot;kind&quot;: &quot;rule&quot;, &quot;label&quot;: &quot;rate-limit&quot;, &quot;claim&quot;: &quot;Apply rate limits per performance SLO doc&quot;, &quot;text&quot;: &quot;入口限流按性能 SLO 文档来，和水位告警一起审。&quot;, &quot;status&quot;: &quot;active&quot;, &quot;scope&quot;: [&quot;aurora&quot;, &quot;performance&quot;]}"><circle class="d3-hit" cx="124.3" cy="68.6" r="22.0" fill="transparent" tabindex="0" role="button" aria-label="rate-limit"/><circle cx="124.3" cy="68.6" r="14.0" fill="#e8c99a" stroke="#e8c99a" stroke-width="2" pointer-events="none"/><text class="d3-label" x="124.3" y="94.6" text-anchor="middle" pointer-events="none">rate-limit</text></g>
+  <g class="d3-node" data-node-tip="{&quot;id&quot;: &quot;r-2026-09-29-001&quot;, &quot;kind&quot;: &quot;rule&quot;, &quot;label&quot;: &quot;命名&quot;, &quot;claim&quot;: &quot;Use snake_case for functions/variables and PascalCase for classes&quot;, &quot;text&quot;: &quot;函数和变量统一 snake_case，类名 PascalCase；review 时一眼能分清标识符种类。&quot;, &quot;status&quot;: &quot;active&quot;, &quot;scope&quot;: [&quot;aurora&quot;, &quot;python&quot;], &quot;alias&quot;: &quot;命名&quot;}"><circle class="d3-hit" cx="342.9" cy="68.5" r="22.0" fill="transparent" tabindex="0" role="button" aria-label="命名"/><circle cx="342.9" cy="68.5" r="14.0" fill="#e8c99a" stroke="#e8c99a" stroke-width="2" pointer-events="none"/><text class="d3-label" x="342.9" y="94.5" text-anchor="middle" pointer-events="none">r-2026-09-29-001</text></g>
+<g class="d3-node" data-node-tip="{&quot;id&quot;: &quot;r-2026-09-29-008&quot;, &quot;kind&quot;: &quot;rule&quot;, &quot;label&quot;: &quot;ruff-mypy&quot;, &quot;claim&quot;: &quot;Run ruff and mypy clean before every commit&quot;, &quot;text&quot;: &quot;每次提交前 ruff 和 mypy 都要全绿，带 warning 或类型错误的不进主干。&quot;, &quot;status&quot;: &quot;active&quot;, &quot;scope&quot;: [&quot;aurora&quot;, &quot;quality&quot;], &quot;alias&quot;: &quot;ruff-mypy&quot;}"><circle class="d3-hit" cx="410.4" cy="71.6" r="22.0" fill="transparent" tabindex="0" role="button" aria-label="ruff-mypy"/><circle cx="410.4" cy="71.6" r="14.0" fill="#e8c99a" stroke="#e8c99a" stroke-width="2" pointer-events="none"/><text class="d3-label" x="410.4" y="97.6" text-anchor="middle" pointer-events="none">r-2026-09-29-008</text></g>
+<g class="d3-node" data-node-tip="{&quot;id&quot;: &quot;r-2026-09-29-015&quot;, &quot;kind&quot;: &quot;rule&quot;, &quot;label&quot;: &quot;log-redact&quot;, &quot;claim&quot;: &quot;Redact secrets and PII from structured logs&quot;, &quot;text&quot;: &quot;日志里严禁输出密码、token、身份证号；结构化 JSON 统一脱敏。&quot;, &quot;status&quot;: &quot;active&quot;, &quot;scope&quot;: [&quot;aurora&quot;, &quot;logging&quot;], &quot;alias&quot;: &quot;log-redact&quot;}"><circle class="d3-hit" cx="273.9" cy="74.3" r="22.0" fill="transparent" tabindex="0" role="button" aria-label="log-redact"/><circle cx="273.9" cy="74.3" r="14.0" fill="#e8c99a" stroke="#e8c99a" stroke-width="2" pointer-events="none"/><text class="d3-label" x="273.9" y="100.3" text-anchor="middle" pointer-events="none">r-2026-09-29-015</text></g>
+<g class="d3-node" data-node-tip="{&quot;id&quot;: &quot;r-2026-09-29-016&quot;, &quot;kind&quot;: &quot;rule&quot;, &quot;label&quot;: &quot;capacity-70&quot;, &quot;claim&quot;: &quot;Keep CPU and connection-pool utilization below 70% before release&quot;, &quot;text&quot;: &quot;上生产前 CPU 和连接池水位不能超过 70%，和限流策略一起看。&quot;, &quot;status&quot;: &quot;active&quot;, &quot;scope&quot;: [&quot;aurora&quot;, &quot;ops&quot;], &quot;alias&quot;: &quot;capacity-70&quot;}"><circle class="d3-hit" cx="44.0" cy="72.2" r="22.0" fill="transparent" tabindex="0" role="button" aria-label="capacity-70"/><circle cx="44.0" cy="72.2" r="14.0" fill="#e8c99a" stroke="#e8c99a" stroke-width="2" pointer-events="none"/><text class="d3-label" x="44.0" y="98.2" text-anchor="middle" pointer-events="none">r-2026-09-29-016</text></g>
+<g class="d3-node" data-node-tip="{&quot;id&quot;: &quot;r-2026-09-29-017&quot;, &quot;kind&quot;: &quot;rule&quot;, &quot;label&quot;: &quot;rate-limit&quot;, &quot;claim&quot;: &quot;Apply rate limits per performance SLO doc&quot;, &quot;text&quot;: &quot;入口限流按性能 SLO 文档来，和水位告警一起审。&quot;, &quot;status&quot;: &quot;active&quot;, &quot;scope&quot;: [&quot;aurora&quot;, &quot;performance&quot;], &quot;alias&quot;: &quot;rate-limit&quot;}"><circle class="d3-hit" cx="124.3" cy="68.6" r="22.0" fill="transparent" tabindex="0" role="button" aria-label="rate-limit"/><circle cx="124.3" cy="68.6" r="14.0" fill="#e8c99a" stroke="#e8c99a" stroke-width="2" pointer-events="none"/><text class="d3-label" x="124.3" y="94.6" text-anchor="middle" pointer-events="none">r-2026-09-29-017</text></g>
 <g class="d3-node doc-node" data-node-tip="{&quot;id&quot;: &quot;doc-py&quot;, &quot;kind&quot;: &quot;document&quot;, &quot;label&quot;: &quot;01-python-style&quot;, &quot;path&quot;: &quot;docs/01-python-style.md&quot;}"><circle class="d3-hit" cx="352.9" cy="251.5" r="19.0" fill="transparent" tabindex="0" role="button" aria-label="01-python-style"/><circle cx="352.9" cy="251.5" r="11.0" fill="#141a19" stroke="#6ec4c0" stroke-width="2" stroke-dasharray="3 2" pointer-events="none"/><text class="d3-label" x="352.9" y="274.5" text-anchor="middle" pointer-events="none">01-python-style</text></g>
 <g class="d3-node doc-node" data-node-tip="{&quot;id&quot;: &quot;doc-test&quot;, &quot;kind&quot;: &quot;document&quot;, &quot;label&quot;: &quot;07-testing&quot;, &quot;path&quot;: &quot;docs/07-testing.md&quot;}"><circle class="d3-hit" cx="516.0" cy="249.0" r="19.0" fill="transparent" tabindex="0" role="button" aria-label="07-testing"/><circle cx="516.0" cy="249.0" r="11.0" fill="#141a19" stroke="#6ec4c0" stroke-width="2" stroke-dasharray="3 2" pointer-events="none"/><text class="d3-label" x="516.0" y="272.0" text-anchor="middle" pointer-events="none">07-testing</text></g>
 <g class="d3-node doc-node" data-node-tip="{&quot;id&quot;: &quot;doc-log&quot;, &quot;kind&quot;: &quot;document&quot;, &quot;label&quot;: &quot;06-logging&quot;, &quot;path&quot;: &quot;docs/06-logging.md&quot;}"><circle class="d3-hit" cx="102.7" cy="245.8" r="19.0" fill="transparent" tabindex="0" role="button" aria-label="06-logging"/><circle cx="102.7" cy="245.8" r="11.0" fill="#141a19" stroke="#6ec4c0" stroke-width="2" stroke-dasharray="3 2" pointer-events="none"/><text class="d3-label" x="102.7" y="268.8" text-anchor="middle" pointer-events="none">06-logging</text></g>
@@ -1038,17 +1046,13 @@ a { color: var(--ink); }
   <span class="edge-key"><span class="swatch line sources"></span>sources</span>
 </div>
 </div>
-  <p><strong>背景</strong> 发版前 checklist：命名 / 静态检查 / 可观测性水位 / 安全脱敏 — 分属 python、quality、observability、logging 多个 scope。</p>
-  <p><strong>图</strong> <code>r-ruff-mypy</code> <code>related</code> <code>r-log-redact</code>；<code>r-capacity-70</code>（CPU/连接池水位）<code>related</code> 性能限流规则；无 conflicts，但 find 时 <code>scope=aurora,quality,ops</code> AND 收窄。</p>
-  <p><strong>用户</strong> 「这轮要上生产，帮我对一下规范清单。」→ 一次 find 拉回相关 claim 子集；需要条文细节时对每条 <code>get r-…</code> 的 sources 按需 Read，而不是把 16 篇 docs 或 16 条 user text 全文灌进 prompt（对照 <a href="report.html">规范记忆</a> 实验的 baseline 臂）。</p>
-  <p><strong>价值</strong> vault↔vault 表达「一起审」；vault↔doc 表达「每条出处」；与纯 shelves 检索互补。</p>
+  <p><strong>图</strong> <code>r-2026-09-29-008</code> related <code>r-2026-09-29-015</code>；<code>r-2026-09-29-016</code> related <code>r-2026-09-29-017</code>。</p>
 </article>
 
-
 <h2>6. 与另两项实验的关系</h2>
-<p class="meta"><a href="report.html">规范记忆</a> 测 vault 规则复用 token；<a href="retrieval.html">文档检索</a> 测 grep+find 收窄 Read（RETRIEVAL_VAULT 为空）。本页专用 <code>.imprint-link-bench</code>，在 add 时写入 sources，体现<strong>规则—文档双向可追溯</strong>，而非只比 BM25 排序。</p>
+<p class="meta"><a href="report.html">规范记忆</a> 测 vault 规则复用 token；<a href="retrieval.html">文档检索</a> 测 grep+find 收窄 Read。本页 §3–§5 与 desk 共用 <code>.imprint-link-bench</code>（<code>imprint.yaml</code> 的 <code>vault:</code> · 跑 <code>measure_linking.py</code>）。</p>
 
-<p class="footer">由 experiment/scripts/build_record_report.py 生成 · 图 layout rev 5 · 2026-09-29 05:34 UTC</p>
+<p class="footer">由 experiment/scripts/build_record_report.py 生成 · 图 layout rev 5 · 2026-09-29 05:57 UTC</p>
 </div>
 <div id="graph-node-tip" hidden aria-live="polite"></div>
 
