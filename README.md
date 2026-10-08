@@ -45,24 +45,3 @@ python3 experiment/scripts/run_all.py
 - [record.html](https://steamedbread2333.github.io/imprint-online-test/record.html) — vault ↔ 文档关联
 
 原始数据在 `experiment/data/`。
-
-## GitHub Pages
-
-推送 `main` 后，Actions 工作流 **GitHub Pages — experiment reports** 会发布 `experiment/report/`（默认使用仓库内已提交的 HTML，不重新跑实验）。
-
-- 站点根 URL：[https://steamedbread2333.github.io/imprint-online-test/](https://steamedbread2333.github.io/imprint-online-test/)（需在仓库 **Settings → Pages → Build and deployment** 选 **GitHub Actions**）
-- 要 CI 重跑实验再发布：Actions → 该工作流 → **Run workflow**，勾选 **Re-run full experiment before deploy**
-
-本地安装 `imprint-mcp`（不进 git）：
-
-```bash
-bash experiment/scripts/install_imprint_bin.sh
-export IMPRINT_MCP="$PWD/experiment/bin/imprint-mcp"
-python3 experiment/scripts/run_all.py
-```
-
-## 仓库体积
-
-当前体积主要来自 **已 git 跟踪的** `experiment/bin/` 二进制（约 140MB）与各 `.imprint*` 运行时（vault、WAL、telemetry）。`.gitignore` 已排除这些路径；若要从历史中瘦身，对已跟踪文件执行 `git rm -r --cached experiment/bin/imprint experiment/bin/imprint-mcp 'experiment/bin/*.tar.gz' .imprint* …` 后再提交（二进制改由 `install_imprint_bin.sh` 或 CI 下载）。
-
-报表与 `experiment/data/*.json` 的 `meta.imprint_mcp` 只记录二进制**文件名**（如 `imprint-mcp`），不含本机绝对路径。
