@@ -144,10 +144,13 @@ def run_pair_group(
         r2 = imprint_add(vault, workdir, bin_path, b, scope, "second")
         code = r2.get("code")
         similar = r2.get("similar") or []
+        candidates = r2.get("candidates") or []
         row["second_code"] = code
         row["second_id"] = r2.get("id")
         row["similar_count"] = len(similar)
         row["similar_ids"] = [s.get("id") for s in similar if isinstance(s, dict)]
+        row["candidate_count"] = len(candidates)
+        row["candidate_ids"] = [s.get("id") for s in candidates if isinstance(s, dict)]
 
         if mode == "duplicate":
             row["ok"] = code == "duplicate"

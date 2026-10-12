@@ -1,6 +1,6 @@
 {
   "meta": {
-    "created_at": "2026-10-12T04:47:05Z",
+    "created_at": "2026-10-12T06:07:35Z",
     "imprint_bin": "imprint",
     "embed_url": "http://127.0.0.1:4174",
     "sidecar_package": "imprint-embed-sidecar",
@@ -41,6 +41,10 @@
         "second_id": null,
         "similar_count": 0,
         "similar_ids": [],
+        "candidate_count": 1,
+        "candidate_ids": [
+          "r-2026-10-12-001"
+        ],
         "ok": true,
         "outcome": "blocked_duplicate"
       },
@@ -55,6 +59,10 @@
         "second_id": null,
         "similar_count": 0,
         "similar_ids": [],
+        "candidate_count": 1,
+        "candidate_ids": [
+          "r-2026-10-12-002"
+        ],
         "ok": true,
         "outcome": "blocked_duplicate"
       },
@@ -69,6 +77,10 @@
         "second_id": null,
         "similar_count": 0,
         "similar_ids": [],
+        "candidate_count": 1,
+        "candidate_ids": [
+          "r-2026-10-12-003"
+        ],
         "ok": true,
         "outcome": "blocked_duplicate"
       },
@@ -83,6 +95,10 @@
         "second_id": null,
         "similar_count": 0,
         "similar_ids": [],
+        "candidate_count": 1,
+        "candidate_ids": [
+          "r-2026-10-12-004"
+        ],
         "ok": true,
         "outcome": "blocked_duplicate"
       },
@@ -97,6 +113,10 @@
         "second_id": null,
         "similar_count": 0,
         "similar_ids": [],
+        "candidate_count": 1,
+        "candidate_ids": [
+          "r-2026-10-12-005"
+        ],
         "ok": true,
         "outcome": "blocked_duplicate"
       },
@@ -111,6 +131,10 @@
         "second_id": null,
         "similar_count": 0,
         "similar_ids": [],
+        "candidate_count": 1,
+        "candidate_ids": [
+          "r-2026-10-12-006"
+        ],
         "ok": true,
         "outcome": "blocked_duplicate"
       },
@@ -125,6 +149,10 @@
         "second_id": null,
         "similar_count": 0,
         "similar_ids": [],
+        "candidate_count": 1,
+        "candidate_ids": [
+          "r-2026-10-12-007"
+        ],
         "ok": true,
         "outcome": "blocked_duplicate"
       },
@@ -139,6 +167,10 @@
         "second_id": null,
         "similar_count": 0,
         "similar_ids": [],
+        "candidate_count": 1,
+        "candidate_ids": [
+          "r-2026-10-12-008"
+        ],
         "ok": true,
         "outcome": "blocked_duplicate"
       },
@@ -153,6 +185,10 @@
         "second_id": null,
         "similar_count": 0,
         "similar_ids": [],
+        "candidate_count": 1,
+        "candidate_ids": [
+          "r-2026-10-12-009"
+        ],
         "ok": true,
         "outcome": "blocked_duplicate"
       },
@@ -167,6 +203,10 @@
         "second_id": null,
         "similar_count": 0,
         "similar_ids": [],
+        "candidate_count": 1,
+        "candidate_ids": [
+          "r-2026-10-12-010"
+        ],
         "ok": true,
         "outcome": "blocked_duplicate"
       },
@@ -181,6 +221,10 @@
         "second_id": null,
         "similar_count": 0,
         "similar_ids": [],
+        "candidate_count": 1,
+        "candidate_ids": [
+          "r-2026-10-12-011"
+        ],
         "ok": true,
         "outcome": "blocked_duplicate"
       },
@@ -195,6 +239,10 @@
         "second_id": null,
         "similar_count": 0,
         "similar_ids": [],
+        "candidate_count": 1,
+        "candidate_ids": [
+          "r-2026-10-12-012"
+        ],
         "ok": true,
         "outcome": "blocked_duplicate"
       },
@@ -209,6 +257,10 @@
         "second_id": null,
         "similar_count": 0,
         "similar_ids": [],
+        "candidate_count": 1,
+        "candidate_ids": [
+          "r-2026-10-12-013"
+        ],
         "ok": true,
         "outcome": "blocked_duplicate"
       },
@@ -223,6 +275,10 @@
         "second_id": null,
         "similar_count": 0,
         "similar_ids": [],
+        "candidate_count": 1,
+        "candidate_ids": [
+          "r-2026-10-12-014"
+        ],
         "ok": true,
         "outcome": "blocked_duplicate"
       },
@@ -237,6 +293,10 @@
         "second_id": null,
         "similar_count": 0,
         "similar_ids": [],
+        "candidate_count": 1,
+        "candidate_ids": [
+          "r-2026-10-12-015"
+        ],
         "ok": true,
         "outcome": "blocked_duplicate"
       },
@@ -251,6 +311,10 @@
         "second_id": null,
         "similar_count": 0,
         "similar_ids": [],
+        "candidate_count": 1,
+        "candidate_ids": [
+          "r-2026-10-12-016"
+        ],
         "ok": true,
         "outcome": "blocked_duplicate"
       },
@@ -265,6 +329,10 @@
         "second_id": null,
         "similar_count": 0,
         "similar_ids": [],
+        "candidate_count": 1,
+        "candidate_ids": [
+          "r-2026-10-12-017"
+        ],
         "ok": true,
         "outcome": "blocked_duplicate"
       },
@@ -279,6 +347,10 @@
         "second_id": null,
         "similar_count": 0,
         "similar_ids": [],
+        "candidate_count": 1,
+        "candidate_ids": [
+          "r-2026-10-12-018"
+        ],
         "ok": true,
         "outcome": "blocked_duplicate"
       },
@@ -293,6 +365,10 @@
         "second_id": null,
         "similar_count": 0,
         "similar_ids": [],
+        "candidate_count": 1,
+        "candidate_ids": [
+          "r-2026-10-12-019"
+        ],
         "ok": true,
         "outcome": "blocked_duplicate"
       },
@@ -307,6 +383,10 @@
         "second_id": null,
         "similar_count": 0,
         "similar_ids": [],
+        "candidate_count": 1,
+        "candidate_ids": [
+          "r-2026-10-12-020"
+        ],
         "ok": true,
         "outcome": "blocked_duplicate"
       }
@@ -327,6 +407,8 @@
           "r-2026-10-12-021",
           "r-2026-10-12-009"
         ],
+        "candidate_count": 0,
+        "candidate_ids": [],
         "ok": true,
         "outcome": "advisory_similar"
       },
@@ -345,6 +427,8 @@
           "r-2026-10-12-002",
           "r-2026-10-12-011"
         ],
+        "candidate_count": 0,
+        "candidate_ids": [],
         "ok": true,
         "outcome": "advisory_similar"
       },
@@ -363,6 +447,8 @@
           "r-2026-10-12-022",
           "r-2026-10-12-015"
         ],
+        "candidate_count": 0,
+        "candidate_ids": [],
         "ok": true,
         "outcome": "advisory_similar"
       },
@@ -381,6 +467,8 @@
           "r-2026-10-12-022",
           "r-2026-10-12-021"
         ],
+        "candidate_count": 0,
+        "candidate_ids": [],
         "ok": true,
         "outcome": "advisory_similar"
       },
@@ -399,6 +487,8 @@
           "r-2026-10-12-029",
           "r-2026-10-12-028"
         ],
+        "candidate_count": 0,
+        "candidate_ids": [],
         "ok": true,
         "outcome": "advisory_similar"
       },
@@ -415,6 +505,8 @@
         "similar_ids": [
           "r-2026-10-12-010"
         ],
+        "candidate_count": 0,
+        "candidate_ids": [],
         "ok": true,
         "outcome": "advisory_similar"
       },
@@ -433,6 +525,8 @@
           "r-2026-10-12-033",
           "r-2026-10-12-004"
         ],
+        "candidate_count": 0,
+        "candidate_ids": [],
         "ok": true,
         "outcome": "advisory_similar"
       },
@@ -451,6 +545,8 @@
           "r-2026-10-12-035",
           "r-2026-10-12-016"
         ],
+        "candidate_count": 0,
+        "candidate_ids": [],
         "ok": true,
         "outcome": "advisory_similar"
       },
@@ -469,6 +565,8 @@
           "r-2026-10-12-005",
           "r-2026-10-12-006"
         ],
+        "candidate_count": 0,
+        "candidate_ids": [],
         "ok": true,
         "outcome": "advisory_similar"
       },
@@ -486,6 +584,8 @@
           "r-2026-10-12-019",
           "r-2026-10-12-039"
         ],
+        "candidate_count": 0,
+        "candidate_ids": [],
         "ok": true,
         "outcome": "advisory_similar"
       },
@@ -504,6 +604,8 @@
           "r-2026-10-12-024",
           "r-2026-10-12-011"
         ],
+        "candidate_count": 0,
+        "candidate_ids": [],
         "ok": true,
         "outcome": "advisory_similar"
       },
@@ -518,6 +620,8 @@
         "second_id": "r-2026-10-12-044",
         "similar_count": 0,
         "similar_ids": [],
+        "candidate_count": 0,
+        "candidate_ids": [],
         "ok": true,
         "outcome": "added_ok"
       },
@@ -535,6 +639,8 @@
           "r-2026-10-12-018",
           "r-2026-10-12-045"
         ],
+        "candidate_count": 0,
+        "candidate_ids": [],
         "ok": true,
         "outcome": "advisory_similar"
       },
@@ -553,6 +659,8 @@
           "r-2026-10-12-033",
           "r-2026-10-12-034"
         ],
+        "candidate_count": 0,
+        "candidate_ids": [],
         "ok": true,
         "outcome": "advisory_similar"
       },
@@ -571,6 +679,8 @@
           "r-2026-10-12-019",
           "r-2026-10-12-039"
         ],
+        "candidate_count": 0,
+        "candidate_ids": [],
         "ok": true,
         "outcome": "advisory_similar"
       },
@@ -589,6 +699,8 @@
           "r-2026-10-12-051",
           "r-2026-10-12-034"
         ],
+        "candidate_count": 0,
+        "candidate_ids": [],
         "ok": true,
         "outcome": "advisory_similar"
       },
@@ -607,6 +719,8 @@
           "r-2026-10-12-018",
           "r-2026-10-12-045"
         ],
+        "candidate_count": 0,
+        "candidate_ids": [],
         "ok": true,
         "outcome": "advisory_similar"
       },
@@ -625,6 +739,8 @@
           "r-2026-10-12-055",
           "r-2026-10-12-035"
         ],
+        "candidate_count": 0,
+        "candidate_ids": [],
         "ok": true,
         "outcome": "advisory_similar"
       },
@@ -643,6 +759,8 @@
           "r-2026-10-12-029",
           "r-2026-10-12-030"
         ],
+        "candidate_count": 0,
+        "candidate_ids": [],
         "ok": true,
         "outcome": "advisory_similar"
       },
@@ -661,6 +779,8 @@
           "r-2026-10-12-025",
           "r-2026-10-12-026"
         ],
+        "candidate_count": 0,
+        "candidate_ids": [],
         "ok": true,
         "outcome": "advisory_similar"
       }
@@ -681,6 +801,8 @@
           "r-2026-10-12-006",
           "r-2026-10-12-038"
         ],
+        "candidate_count": 0,
+        "candidate_ids": [],
         "ok": true,
         "outcome": "added_ok"
       },
@@ -699,6 +821,8 @@
           "r-2026-10-12-029",
           "r-2026-10-12-030"
         ],
+        "candidate_count": 0,
+        "candidate_ids": [],
         "ok": true,
         "outcome": "added_ok"
       },
@@ -713,6 +837,8 @@
         "second_id": "r-2026-10-12-066",
         "similar_count": 0,
         "similar_ids": [],
+        "candidate_count": 0,
+        "candidate_ids": [],
         "ok": true,
         "outcome": "added_ok"
       },
@@ -730,6 +856,8 @@
           "r-2026-10-12-049",
           "r-2026-10-12-005"
         ],
+        "candidate_count": 0,
+        "candidate_ids": [],
         "ok": true,
         "outcome": "added_ok"
       },
@@ -748,6 +876,8 @@
           "r-2026-10-12-009",
           "r-2026-10-12-029"
         ],
+        "candidate_count": 0,
+        "candidate_ids": [],
         "ok": true,
         "outcome": "added_ok"
       },
@@ -766,6 +896,8 @@
           "r-2026-10-12-029",
           "r-2026-10-12-030"
         ],
+        "candidate_count": 0,
+        "candidate_ids": [],
         "ok": true,
         "outcome": "added_ok"
       },
@@ -782,6 +914,8 @@
         "similar_ids": [
           "r-2026-10-12-028"
         ],
+        "candidate_count": 0,
+        "candidate_ids": [],
         "ok": true,
         "outcome": "added_ok"
       },
@@ -798,6 +932,8 @@
         "similar_ids": [
           "r-2026-10-12-072"
         ],
+        "candidate_count": 0,
+        "candidate_ids": [],
         "ok": true,
         "outcome": "added_ok"
       },
@@ -812,6 +948,8 @@
         "second_id": "r-2026-10-12-078",
         "similar_count": 0,
         "similar_ids": [],
+        "candidate_count": 0,
+        "candidate_ids": [],
         "ok": true,
         "outcome": "added_ok"
       },
@@ -826,6 +964,8 @@
         "second_id": "r-2026-10-12-080",
         "similar_count": 0,
         "similar_ids": [],
+        "candidate_count": 0,
+        "candidate_ids": [],
         "ok": true,
         "outcome": "added_ok"
       },
@@ -840,6 +980,8 @@
         "second_id": "r-2026-10-12-082",
         "similar_count": 0,
         "similar_ids": [],
+        "candidate_count": 0,
+        "candidate_ids": [],
         "ok": true,
         "outcome": "added_ok"
       },
@@ -854,6 +996,8 @@
         "second_id": "r-2026-10-12-084",
         "similar_count": 0,
         "similar_ids": [],
+        "candidate_count": 0,
+        "candidate_ids": [],
         "ok": true,
         "outcome": "added_ok"
       },
@@ -870,6 +1014,8 @@
         "similar_ids": [
           "r-2026-10-12-072"
         ],
+        "candidate_count": 0,
+        "candidate_ids": [],
         "ok": true,
         "outcome": "added_ok"
       },
@@ -888,6 +1034,8 @@
           "r-2026-10-12-019",
           "r-2026-10-12-039"
         ],
+        "candidate_count": 0,
+        "candidate_ids": [],
         "ok": true,
         "outcome": "added_ok"
       },
@@ -902,6 +1050,8 @@
         "second_id": "r-2026-10-12-090",
         "similar_count": 0,
         "similar_ids": [],
+        "candidate_count": 0,
+        "candidate_ids": [],
         "ok": true,
         "outcome": "added_ok"
       },
@@ -916,6 +1066,8 @@
         "second_id": "r-2026-10-12-092",
         "similar_count": 0,
         "similar_ids": [],
+        "candidate_count": 0,
+        "candidate_ids": [],
         "ok": true,
         "outcome": "added_ok"
       },
@@ -930,6 +1082,8 @@
         "second_id": "r-2026-10-12-094",
         "similar_count": 0,
         "similar_ids": [],
+        "candidate_count": 0,
+        "candidate_ids": [],
         "ok": true,
         "outcome": "added_ok"
       },
@@ -946,6 +1100,8 @@
         "similar_ids": [
           "r-2026-10-12-064"
         ],
+        "candidate_count": 0,
+        "candidate_ids": [],
         "ok": true,
         "outcome": "added_ok"
       },
@@ -962,6 +1118,8 @@
         "similar_ids": [
           "r-2026-10-12-086"
         ],
+        "candidate_count": 0,
+        "candidate_ids": [],
         "ok": true,
         "outcome": "added_ok"
       },
@@ -976,6 +1134,8 @@
         "second_id": "r-2026-10-12-100",
         "similar_count": 0,
         "similar_ids": [],
+        "candidate_count": 0,
+        "candidate_ids": [],
         "ok": true,
         "outcome": "added_ok"
       }
