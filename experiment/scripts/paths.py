@@ -43,3 +43,39 @@ def public_bin(path=None):
     """Name only — never write the operator's home directory into artifacts."""
     name = os.path.basename(path or imprint_mcp())
     return name or "imprint-mcp"
+
+
+def imprint_bin() -> str:
+    env = os.environ.get("IMPRINT_BIN", "").strip()
+    if env:
+        return env
+    for candidate in (
+        os.path.join(BASE, "bin", "imprint"),
+        os.path.expanduser("~/go/bin/imprint"),
+    ):
+        if os.path.isfile(candidate):
+            return candidate
+    return "imprint"
+
+
+def embed_url() -> str:
+    return os.environ.get("IMPRINT_EMBED_URL", "http://127.0.0.1:4174").rstrip("/")
+
+
+def sidecar_dir() -> str:
+    """Directory containing samples.py; required for semantic gate experiment."""
+    env = os.environ.get("IMPRINT_EMBED_SIDECAR", "").strip()
+    if env:
+        path = os.path.abspath(env)
+        if os.path.isfile(os.path.join(path, "samples.py")):
+            return path
+        raise FileNotFoundError(f"IMPRINT_EMBED_SIDECAR missing samples.py: {path}")
+    for candidate in (
+        os.path.join(PROJECT, "imprint-embed-sidecar"),
+        os.path.join(os.path.dirname(PROJECT), "imprint-embed-sidecar"),
+    ):
+        if os.path.isfile(os.path.join(candidate, "samples.py")):
+            return os.path.abspath(candidate)
+    raise FileNotFoundError(
+        "imprint-embed-sidecar not found. Clone it next to this repo or set IMPRINT_EMBED_SIDECAR."
+    )

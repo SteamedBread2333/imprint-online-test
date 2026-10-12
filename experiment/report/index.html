@@ -26,7 +26,7 @@ a { color: #111; }
 </style>
 </head>
 <body>
-<p class="meta-row"><span>imprint 对照实验</span><span>2026-09-28 16:12</span></p>
+<p class="meta-row"><span>imprint 对照实验</span><span>2026-10-12 12:39</span></p>
 <h1>实验报告</h1>
 <p class="muted">Grok-2 分词 · 相对比较 · 对照定义与样本见各报告 §2</p>
 <table>
@@ -48,10 +48,16 @@ a { color: #111; }
   <td><a href="record.html">规则关联</a><div class="muted">vault sources · find links · get 双向</div></td>
   <td class="num">3,179</td>
   <td class="num">46.3%</td>
-  <td class="num">3/3 场景规则召回</td>
+  <td class="num">3/3 场景规则召回 · 图 3/3</td>
+</tr>
+<tr>
+  <td><a href="semantic.html">语义写闸</a><div class="muted">sidecar · duplicate / conflict / unrelated</div></td>
+  <td class="num">—</td>
+  <td class="num">100.0%</td>
+  <td class="num">dup 20/20 · conflict 误拦 0 · unrelated 误拦 0</td>
 </tr>
 </tbody>
 </table>
-<p class="muted">原始数据：experiment/data/。复现：python3 experiment/scripts/run_all.py</p>
+<p class="muted">原始数据：experiment/data/。复现：python3 experiment/scripts/run_all.py（需 embed sidecar ready）</p>
 </body>
 </html>

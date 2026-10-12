@@ -1,0 +1,502 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>语义写闸 · imprint 对照实验</title>
+<style>
+:root {
+  --ink: #111111;
+  --muted: #555555;
+  --line: #d0d0d0;
+  --fill: #f6f6f6;
+}
+* { box-sizing: border-box; }
+html { font-size: 15px; }
+body {
+  margin: 0;
+  color: var(--ink);
+  background: #fff;
+  font-family: "Helvetica Neue", Helvetica, Arial, "PingFang SC", "Hiragino Sans GB",
+    "Noto Sans SC", sans-serif;
+  line-height: 1.6;
+}
+.wrap { max-width: 1200px; margin: 0 auto; padding: 56px 40px 80px; }
+.mast {
+  border-bottom: 1px solid var(--ink);
+  padding-bottom: 16px;
+  margin-bottom: 28px;
+}
+.mast .meta-row {
+  display: flex;
+  justify-content: space-between;
+  gap: 16px;
+  font-size: 12px;
+  color: var(--muted);
+  margin: 0 0 10px;
+}
+h1 { font-size: 22px; font-weight: 600; margin: 0 0 8px; line-height: 1.35; }
+.lede { color: var(--muted); font-size: 15px; margin: 0; max-width: 42em; }
+h2 {
+  font-size: 15px;
+  font-weight: 600;
+  margin: 36px 0 12px;
+  padding-top: 16px;
+  border-top: 1px solid var(--line);
+}
+h3 { font-size: 14px; font-weight: 600; margin: 24px 0 8px; }
+p { margin: 0 0 14px; }
+.meta { color: var(--muted); font-size: 13px; }
+.report-tabs {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 4px 20px;
+  margin: 0 0 20px;
+  font-size: 13px;
+  font-weight: 600;
+}
+.report-tabs a {
+  color: var(--muted);
+  text-decoration: none;
+  padding-bottom: 4px;
+  border-bottom: 2px solid transparent;
+}
+.report-tabs a.on {
+  color: var(--ink);
+  border-bottom-color: var(--ink);
+}
+.graph-wrap {
+  margin: 14px 0 18px;
+  padding: 12px 14px;
+  background: var(--fill);
+  border: 1px solid var(--line);
+  overflow-x: auto;
+}
+.graph-wrap .graph-caption {
+  font-size: 12px;
+  color: var(--muted);
+  margin: 0 0 8px;
+}
+.graph-wrap .mermaid {
+  font-size: 13px;
+}
+/* imprint desk–style mini graph (record.html §5) */
+.desk-graph-block { margin: 14px 0 18px; }
+.desk-graph-block .graph-caption { font-size: 12px; color: var(--muted); margin: 0 0 8px; }
+.desk-graph-stage {
+  position: relative; height: 280px; min-height: 280px; border: 1px solid #2a241c;
+  border-radius: 10px; overflow: hidden;
+  background: radial-gradient(900px 500px at 50% 40%, #1b1712 0%, #100e0c 70%);
+}
+.desk-graph-stage:has(svg[data-graph-h="320"]) { height: 320px; }
+.desk-graph-stage::before {
+  content: ""; position: absolute; inset: 0; pointer-events: none; opacity: 0.35;
+  background-image:
+    linear-gradient(rgba(196,165,116,0.05) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(196,165,116,0.05) 1px, transparent 1px);
+  background-size: 48px 48px;
+}
+.desk-graph-stage .desk-graph-svg {
+  position: absolute; inset: 0; z-index: 1;
+  width: 100%; height: 100%; display: block;
+}
+.desk-graph-legend {
+  display: flex; flex-wrap: wrap; gap: 10px 18px; margin-top: 8px;
+  font-size: 11px; color: var(--muted);
+}
+.desk-graph-legend .edge-key { display: flex; align-items: center; gap: 6px; }
+.desk-graph-legend .swatch.line {
+  width: 22px; height: 0; border-top: 2px solid; flex: none;
+}
+.desk-graph-legend .swatch.line.super { border-color: #e07060; }
+.desk-graph-legend .swatch.line.related { border-color: #d4b483; border-top-style: dashed; }
+.desk-graph-legend .swatch.line.conflict { border-color: #e0a04a; border-top-width: 2.2px; }
+.desk-graph-legend .swatch.line.sources { border-color: #6ec4c0; }
+.desk-graph-legend .node-hint { color: var(--muted); }
+.desk-graph-block .d3-link { fill: none; }
+.desk-graph-block .d3-link.related { stroke: #d4b483; stroke-width: 1.35; stroke-dasharray: 5 4; opacity: 0.75; }
+.desk-graph-block .d3-link.supersedes { stroke: #e07060; stroke-width: 2; opacity: 0.9; }
+.desk-graph-block .d3-link.conflicts_with { stroke: #e0a04a; stroke-width: 2.2; opacity: 0.9; }
+.desk-graph-block .d3-link.sources { stroke: #6ec4c0; stroke-width: 1.8; opacity: 0.85; }
+.desk-graph-block .d3-node.doc-node circle:not(.d3-hit) {
+  stroke-dasharray: 3 2; fill: #141a19;
+}
+.desk-graph-block .d3-label {
+  font: 10px "Helvetica Neue", Helvetica, Arial, sans-serif; fill: #f0e7d8;
+  text-anchor: middle; paint-order: stroke; stroke: #100e0c; stroke-width: 3px;
+  pointer-events: none;
+}
+.desk-graph-block .d3-node { cursor: pointer; }
+.desk-graph-block .d3-hit { cursor: pointer; outline: none; }
+.desk-graph-block .d3-hit:focus { outline: none; }
+.desk-graph-block .d3-hit:focus-visible {
+  stroke: rgba(110, 196, 192, 0.85); stroke-width: 2;
+}
+.desk-graph-block .d3-node.is-hot circle:not(.d3-hit) {
+  stroke: #f0e7d8; stroke-width: 3;
+}
+.desk-graph-block .d3-node.superseded .d3-label { fill: #b8c8dc; }
+#graph-node-tip {
+  position: fixed; z-index: 9999; max-width: min(380px, calc(100vw - 24px));
+  padding: 12px 14px; border-radius: 10px;
+  border: 1px solid #3a342c; background: rgba(24, 21, 17, 0.96);
+  color: #f0e7d8; font-size: 13px; line-height: 1.45;
+  box-shadow: 0 8px 28px rgba(0, 0, 0, 0.45);
+  pointer-events: none;
+}
+#graph-node-tip[hidden] { display: none !important; }
+#graph-node-tip:not(.on) { opacity: 0; }
+#graph-node-tip.on { opacity: 1; }
+#graph-node-tip .gt-kicker {
+  font-size: 11px; text-transform: uppercase; letter-spacing: 0.08em;
+  color: #a89f92; margin: 0 0 6px;
+}
+#graph-node-tip .gt-claim {
+  font-family: Georgia, "Times New Roman", serif; font-size: 14px;
+  line-height: 1.35;
+}
+#graph-node-tip .gt-text {
+  font-size: 13px; line-height: 1.45; color: #e8dcc8;
+}
+#graph-node-tip dl {
+  display: grid; grid-template-columns: 72px 1fr; gap: 2px 8px;
+  margin: 0 0 8px; font-size: 12px;
+}
+#graph-node-tip dt { color: #a89f92; margin: 0; }
+#graph-node-tip dd { margin: 0; word-break: break-word; }
+#graph-node-tip .gt-id { margin: 0; font-size: 11px; color: #c4a574; }
+#graph-node-tip code { font-size: 11px; color: #e8c99a; }
+.table-scroll {
+  display: block;
+  overflow-x: auto;
+  max-width: 100%;
+  margin: 12px 0 16px;
+  -webkit-overflow-scrolling: touch;
+  overscroll-behavior-x: contain;
+}
+table.kpi {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 13px;
+  margin: 12px 0 16px;
+}
+table.data {
+  width: max-content;
+  min-width: 100%;
+  border-collapse: separate;
+  border-spacing: 0;
+  font-size: 13px;
+  margin: 0;
+}
+table.kpi th, table.kpi td,
+table.data th, table.data td {
+  text-align: left;
+  padding: 8px 14px 8px 0;
+  border-bottom: 1px solid var(--line);
+  vertical-align: top;
+}
+table.kpi th, table.data th {
+  font-weight: 600;
+  color: var(--muted);
+  font-size: 12px;
+  white-space: nowrap;
+}
+table.kpi td { font-size: 15px; font-weight: 600; }
+table.kpi .sub {
+  display: block;
+  font-size: 12px;
+  font-weight: 400;
+  color: var(--muted);
+  margin-top: 2px;
+}
+table.data td.num, table.data th.num {
+  text-align: right;
+  font-variant-numeric: tabular-nums;
+  padding-left: 16px;
+  white-space: nowrap;
+}
+table.data td.clip {
+  white-space: nowrap;
+}
+table.data td.clip code {
+  white-space: nowrap;
+}
+td.arg {
+  cursor: default;
+}
+td.arg .short {
+  display: block;
+  max-width: 100%;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  border-bottom: 1px dotted var(--ink);
+  padding-bottom: 1px;
+}
+td.arg:hover .short,
+td.arg:focus-within .short {
+  border-bottom-style: solid;
+}
+.pop-src { display: none; }
+.arg-float {
+  position: fixed;
+  z-index: 80;
+  display: none;
+  pointer-events: auto;
+}
+.arg-float.on { display: block; }
+.pop-card {
+  width: 360px;
+  background: #fff;
+  color: var(--ink);
+  border: 1px solid var(--ink);
+  padding: 14px 16px 12px;
+}
+.pop-kicker {
+  margin: 0 0 10px;
+  font-size: 11px;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--muted);
+  font-weight: 600;
+}
+.pop-dl {
+  margin: 0;
+}
+.pop-dl > div {
+  display: grid;
+  grid-template-columns: 72px 1fr;
+  gap: 4px 12px;
+  padding: 7px 0;
+  border-top: 1px solid var(--line);
+  align-items: start;
+}
+.pop-dl dt {
+  margin: 0;
+  font-size: 11px;
+  color: var(--muted);
+  font-weight: 600;
+  padding-top: 2px;
+}
+.pop-dl dd {
+  margin: 0;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 4px;
+}
+.pop-dl dd code {
+  background: var(--fill);
+  padding: 2px 6px;
+  font-size: 12px;
+  line-height: 1.4;
+  white-space: pre-wrap;
+  word-break: break-word;
+}
+.pop-text {
+  margin: 0;
+  font-size: 14px;
+  line-height: 1.55;
+}
+  margin: 10px 0 0;
+  padding-top: 8px;
+  border-top: 1px solid var(--line);
+  font-size: 11px;
+  color: var(--muted);
+  line-height: 1.45;
+}
+.pop-foot code {
+  background: none;
+  padding: 0;
+  color: var(--ink);
+  font-size: 11px;
+  white-space: pre-wrap;
+  word-break: break-word;
+}
+table.data thead th.grp {
+  text-align: center;
+  color: var(--ink);
+  border-bottom: 1px solid var(--ink);
+  padding: 8px 14px 6px 0;
+}
+table.data .sep {
+  border-left: 1px solid var(--ink);
+  padding-left: 16px;
+}
+table.data.pin thead tr:first-child th:nth-child(1),
+table.data.pin tbody td:nth-child(1) {
+  position: sticky;
+  left: 0;
+  z-index: 3;
+  background: #fff;
+  width: 52px;
+  min-width: 52px;
+  max-width: 52px;
+  padding: 8px 8px 8px 0;
+  box-sizing: border-box;
+}
+table.data.pin thead tr:first-child th:nth-child(2),
+table.data.pin tbody td:nth-child(2) {
+  position: sticky;
+  left: 52px;
+  z-index: 3;
+  background: #fff;
+  width: 160px;
+  min-width: 160px;
+  max-width: 160px;
+  padding: 8px 12px 8px 8px;
+  box-sizing: border-box;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  border-right: 1px solid var(--ink);
+}
+table.data.pin thead tr:first-child th:nth-child(3),
+table.data.pin tbody td:nth-child(3) {
+  padding-left: 16px;
+  min-width: 220px;
+  max-width: 280px;
+}
+table.data.pin tbody td:nth-child(2) code {
+  display: inline-block;
+  max-width: 100%;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  vertical-align: bottom;
+}
+code {
+  font-family: "SF Mono", Menlo, Consolas, monospace;
+  font-size: 12px;
+  background: var(--fill);
+  padding: 0 3px;
+}
+.chart { margin: 8px 0 16px; }
+.legend { font-size: 12px; color: var(--muted); margin: 0 0 6px; }
+.legend span { margin-right: 16px; white-space: nowrap; }
+.sw { display: inline-block; width: 16px; height: 2px; vertical-align: middle; margin-right: 6px; }
+.sw-bar { width: 10px; height: 10px; }
+.note, .limits {
+  border-top: 1px solid var(--line);
+  border-bottom: 1px solid var(--line);
+  padding: 12px 0;
+  margin: 12px 0 16px;
+  font-size: 13px;
+}
+ul { margin: 6px 0; padding-left: 18px; }
+li { margin: 4px 0; }
+.formula {
+  font-family: "SF Mono", Menlo, Consolas, monospace;
+  font-size: 12px;
+  background: var(--fill);
+  padding: 12px 14px;
+  white-space: pre-wrap;
+  margin: 8px 0 16px;
+}
+.sample-pre {
+  font-family: "SF Mono", Menlo, Consolas, monospace;
+  font-size: 11px;
+  background: var(--fill);
+  padding: 10px 12px;
+  white-space: pre-wrap;
+  word-break: break-word;
+  margin: 6px 0 12px;
+  max-height: 320px;
+  overflow: auto;
+}
+details.sample {
+  margin: 10px 0 14px;
+  font-size: 13px;
+}
+details.sample > summary {
+  cursor: pointer;
+  font-weight: 600;
+  margin-bottom: 6px;
+}
+.comp-table td:first-child { font-weight: 600; width: 22%; }
+.footer {
+  margin-top: 40px;
+  padding-top: 12px;
+  border-top: 1px solid var(--line);
+  color: var(--muted);
+  font-size: 12px;
+}
+.pos, .neg { font-variant-numeric: tabular-nums; }
+a { color: var(--ink); }
+@media print {
+  .wrap { padding: 0; max-width: none; overflow-x: visible; }
+  .table-scroll { overflow: visible; }
+}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <header class="mast">
+    <p class="meta-row"><span>imprint 对照实验</span><span>2026-10-12 04:47</span></p>
+    <h1>语义写闸（embed + relate）</h1>
+    <p class="lede">隔离 vault 上对 calibration 样本跑真实 <code>imprint add</code>；sidecar 样本见 imprint-embed-sidecar <code>samples.py</code>。总体：通过。</p>
+  </header>
+  <nav class="report-tabs" aria-label="实验报告"><a href="report.html">规范记忆</a><a href="retrieval.html">文档检索</a><a href="record.html">规则关联</a><a href="semantic.html" class="on">语义写闸</a></nav>
+  <h2>§1 汇总</h2>
+  <p class="meta">二进制 imprint · http://127.0.0.1:4174 · duplicate_threshold=0.65 · relate C/E=0.4/0.35 · high_cos_block=0.8</p>
+  
+<table>
+<thead><tr><th>组别</th><th class="num">通过</th><th class="num">说明</th></tr></thead>
+<tbody>
+<tr>
+  <td>duplicate（同政策改述）</td>
+  <td class="num">20/20</td>
+  <td>第二笔 <code>add</code> 应 <code>code: duplicate</code> · recall 100.0%</td>
+</tr>
+<tr>
+  <td>conflict（对立政策）</td>
+  <td class="num">20/20</td>
+  <td>不得误拦 duplicate · 误拦 0 · advisory(similar) 19</td>
+</tr>
+<tr>
+  <td>unrelated（无关主题）</td>
+  <td class="num">20/20</td>
+  <td>不得误拦 duplicate · 误拦 0</td>
+</tr>
+</tbody>
+</table>
+
+  <h2>§2 样本与期望</h2>
+  <ul>
+    <li><strong>duplicate</strong>：同政策不同措辞 → 写闸拒写（duplicate）。</li>
+    <li><strong>conflict</strong>：互斥政策 → 不得当 duplicate；常带 <code>similar</code> advisory。</li>
+    <li><strong>unrelated</strong>：无关句对 → 两次均可入库。</li>
+  </ul>
+  <p class="meta">复现：sidecar <code>ready</code> 后 <code>python3 experiment/scripts/run_all.py</code>（或单独 <code>measure_semantic_gate.py</code>）。</p>
+  <h2>§3 逐对明细</h2>
+  
+<h3>Duplicate · 20 对</h3>
+<p class="meta">词面 Jaccard 常低于 0.82；依赖 embed 余弦 + relate entail 拒写重复规则。</p>
+<table>
+<thead><tr>
+  <th>#</th><th>首条 claim</th><th>第二条 claim</th><th>结果</th><th class="num">similar</th><th class="num">OK</th>
+</tr></thead>
+<tbody>
+<tr><td class="num">0</td><td>Go exported identifiers must use PascalCase</td><td>Exported things use Pascal Case naming</td><td><code>blocked_duplicate</code></td><td class="num">0</td><td class="num">✓</td></tr><tr><td class="num">1</td><td>Wrap errors with fmt.Errorf and %w</td><td>Always wrap errors using %w</td><td><code>blocked_duplicate</code></td><td class="num">0</td><td class="num">✓</td></tr><tr><td class="num">2</td><td>Use table-driven tests in Go</td><td>Go tests should be table driven</td><td><code>blocked_duplicate</code></td><td class="num">0</td><td class="num">✓</td></tr><tr><td class="num">3</td><td>Prefer snake_case for Python functions</td><td>Python function names use snake case</td><td><code>blocked_duplicate</code></td><td class="num">0</td><td class="num">✓</td></tr><tr><td class="num">4</td><td>Never commit secrets to the repo</td><td>Do not commit secrets into the repository</td><td><code>blocked_duplicate</code></td><td class="num">0</td><td class="num">✓</td></tr><tr><td class="num">5</td><td>Run gofmt before committing</td><td>Always run gofmt before you commit</td><td><code>blocked_duplicate</code></td><td class="num">0</td><td class="num">✓</td></tr><tr><td class="num">6</td><td>Keep functions under 50 lines</td><td>Functions should stay shorter than 50 lines</td><td><code>blocked_duplicate</code></td><td class="num">0</td><td class="num">✓</td></tr><tr><td class="num">7</td><td>Use context as the first parameter</td><td>context.Context must be the first argument</td><td><code>blocked_duplicate</code></td><td class="num">0</td><td class="num">✓</td></tr><tr><td class="num">8</td><td>Write comments in English</td><td>Code comments should be written in English</td><td><code>blocked_duplicate</code></td><td class="num">0</td><td class="num">✓</td></tr><tr><td class="num">9</td><td>Avoid global mutable state</td><td>Do not use global mutable variables</td><td><code>blocked_duplicate</code></td><td class="num">0</td><td class="num">✓</td></tr><tr><td class="num">10</td><td>Handle every error explicitly</td><td>Every error must be handled explicitly</td><td><code>blocked_duplicate</code></td><td class="num">0</td><td class="num">✓</td></tr><tr><td class="num">11</td><td>Prefer composition over inheritance</td><td>Use composition instead of inheritance</td><td><code>blocked_duplicate</code></td><td class="num">0</td><td class="num">✓</td></tr><tr><td class="num">12</td><td>Name interfaces by behavior</td><td>Interfaces should be named after their behavior</td><td><code>blocked_duplicate</code></td><td class="num">0</td><td class="num">✓</td></tr><tr><td class="num">13</td><td>Keep imports grouped stdlib first</td><td>Imports must be grouped with stdlib first</td><td><code>blocked_duplicate</code></td><td class="num">0</td><td class="num">✓</td></tr><tr><td class="num">14</td><td>Use tabs for indentation in Go</td><td>Go files are indented with tabs</td><td><code>blocked_duplicate</code></td><td class="num">0</td><td class="num">✓</td></tr><tr><td class="num">15</td><td>Add unit tests for new packages</td><td>New packages need unit tests</td><td><code>blocked_duplicate</code></td><td class="num">0</td><td class="num">✓</td></tr><tr><td class="num">16</td><td>Return early instead of nesting</td><td>Prefer early returns to nested blocks</td><td><code>blocked_duplicate</code></td><td class="num">0</td><td class="num">✓</td></tr><tr><td class="num">17</td><td>Log structured fields not strings</td><td>Use structured logging with fields</td><td><code>blocked_duplicate</code></td><td class="num">0</td><td class="num">✓</td></tr><tr><td class="num">18</td><td>Pin dependency versions</td><td>Dependencies must be version pinned</td><td><code>blocked_duplicate</code></td><td class="num">0</td><td class="num">✓</td></tr><tr><td class="num">19</td><td>Document exported symbols</td><td>Every exported symbol needs documentation</td><td><code>blocked_duplicate</code></td><td class="num">0</td><td class="num">✓</td></tr>
+</tbody>
+</table>
+<h3>Conflict · 20 对（极性 / 对立）</h3>
+<p class="meta">第二笔应写入成功；高 contradiction 时出现在 similar 列表（advisory），供 agent 后续 link --conflicts。</p>
+<table>
+<thead><tr>
+  <th>#</th><th>首条 claim</th><th>第二条 claim</th><th>结果</th><th class="num">similar</th><th class="num">OK</th>
+</tr></thead>
+<tbody>
+<tr><td class="num">0</td><td>Use tabs for indentation</td><td>Use spaces for indentation</td><td><code>advisory_similar</code></td><td class="num">3</td><td class="num">✓</td></tr><tr><td class="num">1</td><td>Always wrap errors with %w</td><td>Return bare errors without wrapping</td><td><code>advisory_similar</code></td><td class="num">3</td><td class="num">✓</td></tr><tr><td class="num">2</td><td>Prefer tabs over spaces in Go</td><td>Prefer spaces over tabs in Go</td><td><code>advisory_similar</code></td><td class="num">3</td><td class="num">✓</td></tr><tr><td class="num">3</td><td>Use snake_case for Python</td><td>Use camelCase for Python</td><td><code>advisory_similar</code></td><td class="num">3</td><td class="num">✓</td></tr><tr><td class="num">4</td><td>Write comments in English</td><td>Write comments in Chinese</td><td><code>advisory_similar</code></td><td class="num">3</td><td class="num">✓</td></tr><tr><td class="num">5</td><td>Avoid global mutable state</td><td>Use a global config singleton</td><td><code>advisory_similar</code></td><td class="num">1</td><td class="num">✓</td></tr><tr><td class="num">6</td><td>Keep functions short</td><td>Long functions are fine when linear</td><td><code>advisory_similar</code></td><td class="num">3</td><td class="num">✓</td></tr><tr><td class="num">7</td><td>Use table-driven tests</td><td>Use assertion libraries instead of table tests</td><td><code>advisory_similar</code></td><td class="num">3</td><td class="num">✓</td></tr><tr><td class="num">8</td><td>Commit directly to main</td><td>Never commit directly to main</td><td><code>advisory_similar</code></td><td class="num">3</td><td class="num">✓</td></tr><tr><td class="num">9</td><td>Pin dependency versions</td><td>Use floating dependency ranges</td><td><code>advisory_similar</code></td><td class="num">2</td><td class="num">✓</td></tr><tr><td class="num">10</td><td>Handle every error explicitly</td><td>Ignore errors from best-effort calls</td><td><code>advisory_similar</code></td><td class="num">3</td><td class="num">✓</td></tr><tr><td class="num">11</td><td>Prefer composition over inheritance</td><td>Prefer deep inheritance hierarchies</td><td><code>added_ok</code></td><td class="num">0</td><td class="num">✓</td></tr><tr><td class="num">12</td><td>Log structured fields not strings</td><td>Log plain formatted strings</td><td><code>advisory_similar</code></td><td class="num">2</td><td class="num">✓</td></tr><tr><td class="num">13</td><td>Return early instead of nesting</td><td>Use a single exit point per function</td><td><code>advisory_similar</code></td><td class="num">3</td><td class="num">✓</td></tr><tr><td class="num">14</td><td>Vendor dependencies into the repo</td><td>Do not vendor dependencies</td><td><code>advisory_similar</code></td><td class="num">3</td><td class="num">✓</td></tr><tr><td class="num">15</td><td>Use context as the first parameter</td><td>Pass context only when needed</td><td><code>advisory_similar</code></td><td class="num">3</td><td class="num">✓</td></tr><tr><td class="num">16</td><td>Name interfaces by behavior</td><td>Name interfaces with an I prefix</td><td><code>advisory_similar</code></td><td class="num">3</td><td class="num">✓</td></tr><tr><td class="num">17</td><td>Add unit tests for new packages</td><td>Skip unit tests for trivial code</td><td><code>advisory_similar</code></td><td class="num">3</td><td class="num">✓</td></tr><tr><td class="num">18</td><td>Document exported symbols</td><td>Self-documenting code needs no comments</td><td><code>advisory_similar</code></td><td class="num">3</td><td class="num">✓</td></tr><tr><td class="num">19</td><td>Use tabs for Go indentation</td><td>Use two-space indentation everywhere</td><td><code>advisory_similar</code></td><td class="num">3</td><td class="num">✓</td></tr>
+</tbody>
+</table>
+<h3>Unrelated · 20 对</h3>
+<p class="meta">不同主题；第二笔应正常 add，且不得 duplicate 误拦。</p>
+<table>
+<thead><tr>
+  <th>#</th><th>首条 claim</th><th>第二条 claim</th><th>结果</th><th class="num">similar</th><th class="num">OK</th>
+</tr></thead>
+<tbody>
+<tr><td class="num">0</td><td>Go exported identifiers must use PascalCase</td><td>Deploy to staging before release</td><td><code>added_ok</code></td><td class="num">3</td><td class="num">✓</td></tr><tr><td class="num">1</td><td>Wrap errors with %w</td><td>Use dark mode in the editor</td><td><code>added_ok</code></td><td class="num">3</td><td class="num">✓</td></tr><tr><td class="num">2</td><td>Use table-driven tests in Go</td><td>Take a coffee break every 90 minutes</td><td><code>added_ok</code></td><td class="num">0</td><td class="num">✓</td></tr><tr><td class="num">3</td><td>Prefer snake_case for Python functions</td><td>Kubernetes pods restart on failure</td><td><code>added_ok</code></td><td class="num">2</td><td class="num">✓</td></tr><tr><td class="num">4</td><td>Never commit secrets to the repo</td><td>Write the changelog in markdown</td><td><code>added_ok</code></td><td class="num">3</td><td class="num">✓</td></tr><tr><td class="num">5</td><td>Run gofmt before committing</td><td>Schedule team meetings on Tuesday</td><td><code>added_ok</code></td><td class="num">3</td><td class="num">✓</td></tr><tr><td class="num">6</td><td>Keep functions under 50 lines</td><td>Use Redis for session storage</td><td><code>added_ok</code></td><td class="num">1</td><td class="num">✓</td></tr><tr><td class="num">7</td><td>Use context as the first parameter</td><td>Board games on Friday night</td><td><code>added_ok</code></td><td class="num">1</td><td class="num">✓</td></tr><tr><td class="num">8</td><td>Write comments in English</td><td>Rotate TLS certificates quarterly</td><td><code>added_ok</code></td><td class="num">0</td><td class="num">✓</td></tr><tr><td class="num">9</td><td>Avoid global mutable state</td><td>Back up photos to an external drive</td><td><code>added_ok</code></td><td class="num">0</td><td class="num">✓</td></tr><tr><td class="num">10</td><td>Handle every error explicitly</td><td>Order lunch before noon</td><td><code>added_ok</code></td><td class="num">0</td><td class="num">✓</td></tr><tr><td class="num">11</td><td>Prefer composition over inheritance</td><td>The train departs at 7am</td><td><code>added_ok</code></td><td class="num">0</td><td class="num">✓</td></tr><tr><td class="num">12</td><td>Name interfaces by behavior</td><td>Water the plants twice a week</td><td><code>added_ok</code></td><td class="num">1</td><td class="num">✓</td></tr><tr><td class="num">13</td><td>Keep imports grouped stdlib first</td><td>Upgrade postgres to version 16</td><td><code>added_ok</code></td><td class="num">3</td><td class="num">✓</td></tr><tr><td class="num">14</td><td>Use tabs for indentation in Go</td><td>Buy a standing desk</td><td><code>added_ok</code></td><td class="num">0</td><td class="num">✓</td></tr><tr><td class="num">15</td><td>Add unit tests for new packages</td><td>Renew the domain registration</td><td><code>added_ok</code></td><td class="num">0</td><td class="num">✓</td></tr><tr><td class="num">16</td><td>Return early instead of nesting</td><td>Archive old invoices monthly</td><td><code>added_ok</code></td><td class="num">0</td><td class="num">✓</td></tr><tr><td class="num">17</td><td>Log structured fields not strings</td><td>Paint the hallway white</td><td><code>added_ok</code></td><td class="num">1</td><td class="num">✓</td></tr><tr><td class="num">18</td><td>Pin dependency versions</td><td>Walk ten thousand steps daily</td><td><code>added_ok</code></td><td class="num">1</td><td class="num">✓</td></tr><tr><td class="num">19</td><td>Document exported symbols</td><td>Use a mechanical keyboard</td><td><code>added_ok</code></td><td class="num">0</td><td class="num">✓</td></tr>
+</tbody>
+</table>
+</div>
+</body>
+</html>

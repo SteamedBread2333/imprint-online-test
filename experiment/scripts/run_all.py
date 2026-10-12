@@ -35,7 +35,16 @@ def write_index():
     link_saved = f"{lf['saved_tokens']:,}" if lf else "—"
     link_pct = f"{lf.get('saving_pct', 0):.1f}%" if lf else "—"
     link_hit = f"{lf.get('rules_recalled', '—')}/3 场景规则召回" if lf else "—"
-    prec = load("retrieval_precision.json")["canonical_precision"]
+    sem_path = os.path.join(DATA, "semantic_gate_summary.json")
+    sem = load("semantic_gate_summary.json") if os.path.isfile(sem_path) else {}
+    sf = sem.get("final") or {}
+    sem_hit = (
+        f"dup {sf.get('duplicate_blocked', '—')}/{sf.get('duplicate_total', '—')} · "
+        f"conflict 误拦 {sf.get('conflict_false_block', '—')} · unrelated 误拦 {sf.get('unrelated_false_block', '—')}"
+        if sf
+        else "—"
+    )
+    sem_recall = f"{sf.get('duplicate_recall_pct', 0):.1f}%" if sf else "—"
     acc = token.get("accuracy") or {}
     tf = token["final"]
     rf = retr["final"]
@@ -93,9 +102,15 @@ a {{ color: #111; }}
   <td class="num">{link_pct}</td>
   <td class="num">{link_hit}{f" · 图 {lf.get('vault_checks_passed', '')}/{lf.get('vault_checks_total', '')}" if lf and lf.get('vault_checks_total') else ""}</td>
 </tr>
+<tr>
+  <td><a href="semantic.html">语义写闸</a><div class="muted">sidecar · duplicate / conflict / unrelated</div></td>
+  <td class="num">—</td>
+  <td class="num">{sem_recall}</td>
+  <td class="num">{sem_hit}</td>
+</tr>
 </tbody>
 </table>
-<p class="muted">原始数据：experiment/data/。复现：python3 experiment/scripts/run_all.py</p>
+<p class="muted">原始数据：experiment/data/。复现：python3 experiment/scripts/run_all.py（需 embed sidecar ready）</p>
 </body>
 </html>
 """
@@ -114,9 +129,11 @@ def main():
     run("measure_retrieval.py")
     run("check_precision.py")
     run("measure_linking.py")
+    run("measure_semantic_gate.py")
     run("build_report.py")
     run("build_retrieval_report.py")
     run("build_record_report.py")
+    run("build_semantic_report.py")
     write_index()
 
 

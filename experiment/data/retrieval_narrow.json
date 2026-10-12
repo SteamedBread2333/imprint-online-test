@@ -15,14 +15,14 @@
       "rg_command": "rg -i -l --glob *.md -e PascalCase -e snake_case -e 命名 docs",
       "search_req_tokens": 22,
       "grep_hits_tokens": 481,
-      "grep_hits_sample": "docs/01-python-style.md\ndocs/15-i18n.md\ndocs/11-observability.md\ndocs/07-testing.md\n---\ndocs/01-python-style.md:5:## 命名约定\ndocs/01-python-style.md:7:函数与变量统一使用 snake_case，类名使用 PascalCase，常量使用全大写 SNAKE_CASE。 本条适用于 Python 代码风格，涉及「命名约定」的实现必须遵守，不允许例外或临时绕开。\ndocs/01-python-style.md:12:再次强调，本条的权威表述是：函数与变量统一使用 snake_case，类名使用 PascalCase，常量使用全大写 SNAKE_CASE。\ndocs/07-testing.md:7:单元测试统一使用 pytest，命名以 test_ 开头并保持可独立运行。 本条适用于 测试，涉及「测试框架」的实现必须遵守，不允许例外或临时绕开。\ndocs/07-testing.md:12:再次强调，本条的权威表述是：单元测试统一使用 pytest，命名以 test_ 开头并保持可独立运行。\ndocs/15-i18n.md:34:插值使用命名占位符，禁止按位置拼接以免语序错乱。 本条适用于 国际化，涉及「占位符」的实现必须遵守，不允许例外或临时绕开。\ndocs/15-i18n.md:39:再次强调，本条的权威表述是：插值使用命名占位符，禁止按位置拼接以免语序错乱。\ndocs/11-observability.md:5:## 指标命名\ndocs/11-observability.md:7:业务指标统一使用 aurora_ 前缀加蛇形命名，禁止临时拼英文缩写。 本条适用于 可观测性，涉及「指标命名」的实现必须遵守，不允许例外或临时绕开。\ndocs/11-observability.md:12:再次强调，本条的权威表述是：业务指标统一使用 aurora_ 前缀加蛇形命名，禁止临时拼英文缩写。",
+      "grep_hits_sample": "docs/15-i18n.md\ndocs/01-python-style.md\ndocs/11-observability.md\ndocs/07-testing.md\n---\ndocs/01-python-style.md:5:## 命名约定\ndocs/01-python-style.md:7:函数与变量统一使用 snake_case，类名使用 PascalCase，常量使用全大写 SNAKE_CASE。 本条适用于 Python 代码风格，涉及「命名约定」的实现必须遵守，不允许例外或临时绕开。\ndocs/01-python-style.md:12:再次强调，本条的权威表述是：函数与变量统一使用 snake_case，类名使用 PascalCase，常量使用全大写 SNAKE_CASE。\ndocs/15-i18n.md:34:插值使用命名占位符，禁止按位置拼接以免语序错乱。 本条适用于 国际化，涉及「占位符」的实现必须遵守，不允许例外或临时绕开。\ndocs/15-i18n.md:39:再次强调，本条的权威表述是：插值使用命名占位符，禁止按位置拼接以免语序错乱。\ndocs/07-testing.md:7:单元测试统一使用 pytest，命名以 test_ 开头并保持可独立运行。 本条适用于 测试，涉及「测试框架」的实现必须遵守，不允许例外或临时绕开。\ndocs/07-testing.md:12:再次强调，本条的权威表述是：单元测试统一使用 pytest，命名以 test_ 开头并保持可独立运行。\ndocs/11-observability.md:5:## 指标命名\ndocs/11-observability.md:7:业务指标统一使用 aurora_ 前缀加蛇形命名，禁止临时拼英文缩写。 本条适用于 可观测性，涉及「指标命名」的实现必须遵守，不允许例外或临时绕开。\ndocs/11-observability.md:12:再次强调，本条的权威表述是：业务指标统一使用 aurora_ 前缀加蛇形命名，禁止临时拼英文缩写。",
       "find_args": {
         "scope": "aurora",
         "query": "snake_case PascalCase naming",
         "query_local": "命名 snake_case PascalCase 函数 变量",
         "paths": [
-          "docs/01-python-style.md",
           "docs/15-i18n.md",
+          "docs/01-python-style.md",
           "docs/11-observability.md",
           "docs/07-testing.md"
         ]
@@ -179,7 +179,7 @@
       "rg_command": "rg -i -l --glob *.md -e 时间戳 -e ISO8601 -e 存储 docs",
       "search_req_tokens": 27,
       "grep_hits_tokens": 477,
-      "grep_hits_sample": "docs/15-i18n.md\ndocs/09-security.md\ndocs/04-database.md\ndocs/05-api-design.md\n---\ndocs/15-i18n.md:43:日期时间按用户 locale 格式化，存储仍为 UTC ISO8601。 本条适用于 国际化，涉及「日期格式」的实现必须遵守，不允许例外或临时绕开。\ndocs/15-i18n.md:48:再次强调，本条的权威表述是：日期时间按用户 locale 格式化，存储仍为 UTC ISO8601。\ndocs/09-security.md:23:## 密钥存储\ndocs/09-security.md:25:密钥一律加密存储于密钥管理服务，代码与配置不得明文。 本条适用于 安全，涉及「密钥存储」的实现必须遵守，不允许例外或临时绕开。\ndocs/09-security.md:30:再次强调，本条的权威表述是：密钥一律加密存储于密钥管理服务，代码与配置不得明文。\ndocs/05-api-design.md:61:接口层时间统一输出 ISO8601 UTC 字符串，与数据库存储保持一致。 本条适用于 REST API，涉及「时间格式」的实现必须遵守，不允许例外或临时绕开。\ndocs/05-api-design.md:66:再次强调，本条的权威表述是：接口层时间统一输出 ISO8601 UTC 字符串，与数据库存储保持一致。\ndocs/04-database.md:1:# 数据库与时间戳规范\ndocs/04-database.md:5:## 时间戳存储\ndocs/04-database.md:7:所有时间戳字段统一存 UTC 的 ISO8601 字符串，禁止存本地时间或整数。 本条适用于 数据库，涉及「时间戳存储」的实现必须遵守，不允许例外或临时绕开。\ndocs/04-database.md:12:再次强调，本条的权威表述是：所有时间戳字段统一存 UTC 的 ISO8601 字符串，禁止存本地时间或整数。",
+      "grep_hits_sample": "docs/15-i18n.md\ndocs/09-security.md\ndocs/04-database.md\ndocs/05-api-design.md\n---\ndocs/15-i18n.md:43:日期时间按用户 locale 格式化，存储仍为 UTC ISO8601。 本条适用于 国际化，涉及「日期格式」的实现必须遵守，不允许例外或临时绕开。\ndocs/15-i18n.md:48:再次强调，本条的权威表述是：日期时间按用户 locale 格式化，存储仍为 UTC ISO8601。\ndocs/09-security.md:23:## 密钥存储\ndocs/09-security.md:25:密钥一律加密存储于密钥管理服务，代码与配置不得明文。 本条适用于 安全，涉及「密钥存储」的实现必须遵守，不允许例外或临时绕开。\ndocs/09-security.md:30:再次强调，本条的权威表述是：密钥一律加密存储于密钥管理服务，代码与配置不得明文。\ndocs/04-database.md:1:# 数据库与时间戳规范\ndocs/04-database.md:5:## 时间戳存储\ndocs/04-database.md:7:所有时间戳字段统一存 UTC 的 ISO8601 字符串，禁止存本地时间或整数。 本条适用于 数据库，涉及「时间戳存储」的实现必须遵守，不允许例外或临时绕开。\ndocs/04-database.md:12:再次强调，本条的权威表述是：所有时间戳字段统一存 UTC 的 ISO8601 字符串，禁止存本地时间或整数。\ndocs/05-api-design.md:61:接口层时间统一输出 ISO8601 UTC 字符串，与数据库存储保持一致。 本条适用于 REST API，涉及「时间格式」的实现必须遵守，不允许例外或临时绕开。\ndocs/05-api-design.md:66:再次强调，本条的权威表述是：接口层时间统一输出 ISO8601 UTC 字符串，与数据库存储保持一致。",
       "find_args": {
         "scope": "aurora",
         "query": "ISO8601 UTC timestamp storage",
@@ -241,7 +241,7 @@
       "rg_command": "rg -i -l --glob *.md -e /api/v1 -e 接口 -e 前缀 docs",
       "search_req_tokens": 24,
       "grep_hits_tokens": 1688,
-      "grep_hits_sample": "docs/10-performance.md\ndocs/09-security.md\ndocs/13-review.md\ndocs/11-observability.md\ndocs/03-error-handling.md\ndocs/04-database.md\ndocs/05-api-design.md\ndocs/02-architecture.md\n---\ndocs/09-security.md:52:状态变更接口启用 CSRF 校验或使用同源令牌。 本条适用于 安全，涉及「CSRF 防护」的实现必须遵守，不允许例外或临时绕开。\ndocs/09-security.md:57:再次强调，本条的权威表述是：状态变更接口启用 CSRF 校验或使用同源令牌。\ndocs/04-database.md:25:高频查询字段必须建立索引，复合索引遵循最左前缀原则。 本条适用于 数据库，涉及「索引设计」的实现必须遵守，不允许例外或临时绕开。\ndocs/04-database.md:30:再次强调，本条的权威表述是：高频查询字段必须建立索引，复合索引遵循最左前缀原则。\ndocs/10-performance.md:52:核心接口统一限流与降级，防止高峰打垮下游。 本条适用于 性能，涉及「限流降级」的实现必须遵守，不允许例外或临时绕开。\ndocs/10-performance.md:57:再次强调，本条的权威表述是：核心接口统一限流与降级，防止高峰打垮下游。\ndocs/10-performance.md:70:关键接口打点采集耗时与吞吐，性能回归纳入告警。 本条适用于 性能，涉及「指标监控」的实现必须遵守，不允许例外或临时绕开。\ndocs/10-performance.md:75:再次强调，本条的权威表述是：关键接口打点采集耗时与吞吐，性能回归纳入告警。\ndocs/11-observability.md:7:业务指标统一使用 aurora_ 前缀加蛇形命名，禁止临时拼英文缩写。 本条适用于 可观测性，涉及「指标命名」的实现必须遵守，不允许例外或临时绕开。\ndocs/11-observability.md:12:再次强调，本条的权威表述是：业务指标统一使用 aurora_ 前缀加蛇形命名，禁止临时拼英文缩写。\ndocs/11-observability.md:16:每个对外接口采集 Rate、Errors、Duration 三件套，缺一不可。 本条适用于 可观测性，涉及「RED 方法」的实现必须遵守，不允许例外或临时绕开。\ndocs/11-observability.md:21:再次强调，本条的权威表述是：每个对外接口采集 Rate、Errors、Duration 三件套，缺一不可。\ndocs/11-observability.md:25:核心接口必须写明 SLO 与错误预算，超预算自动冻结发布。 本条适用于 可观测性，涉及「SLO 定义」的实现必须遵守，不允许例外或临时绕开。\ndocs/11-observability.md:30:再次强调，本条的权威表述是：核心接口必须写明 SLO 与错误预算，超预算自动冻结发布。\ndocs/13-review.md:5:## 公开接口\ndocs/13-review.md:7:对外契约变更须两名评审通过，其中一名为接口负责人。 本条适用于 代码评审，涉及「公开接口」的实现必须遵守，不允许例外或临时绕开。\ndocs/13-review.md:12:再次强调，本条的权威表述是：对外契约变更须两名评审通过，其中一名为接口负责人。\ndocs/02-architecture.md:16:依赖方向始终向内，任何跨层引用都必须经过 domain 的公开接口收敛。 本条适用于 分层架构，涉及「依赖方向」的实现必须遵守，不允许例外或临时绕开。\ndocs/02-architecture.md:21:再次强调，本条的权威表述是：依赖方向始终向内，任何跨层引用都必须经过 domain 的公开接口收敛。\ndocs/02-architecture.md:23:## 接口隔离\ndocs/02-architecture.md:25:模块之间只暴露最小必要接口，内部数据结构严禁泄漏到其它层。 本条适用于 分层架构，涉及「接口隔离」的实现必须遵守，不允许例外或临时绕开。\ndocs/02-architecture.md:30:再次强调，本条的权威表述是：模块之间只暴露最小必要接口，内部数据结构严禁泄漏到其它层。\ndocs/05-api-design.md:5:## 路径前缀\ndocs/05-api-design.md:7:所有 HTTP 接口统一加 /api/v1 前缀，版本升级走整段版本号。 本条适用于 REST API，涉及「路径前缀」的实现必须遵守，不允许例外或临时绕开。\ndocs/05-api-design.md:12:再次强调，本条的权威表述是：所有 HTTP 接口统一加 /api/v1 前缀，版本升级走整段版本号。\ndocs/05-api-design.md:34:列表接口统一支持 page 与 page_size，并返回 total 供前端分页。 本条适用于 REST API，涉及「分页约定」的实现必须遵守，不允许例外或临时绕开。\ndocs/05-api-design.md:39:再次强调，本条的权威表述是：列表接口统一支持 page 与 page_size，并返回 total 供前端分页。\ndocs/05-api-design.md:52:写接口使用幂等键避免重复提交，同名键需返回一致结果。 本条适用于 REST API，涉及「幂等设计」的实现必须遵守，不允许例外或临时绕开。\ndocs/05-api-design.md:57:再次强调，本条的权威表述是：写接口使用幂等键避免重复提交，同名键需返回一致结果。\ndocs/05-api-design.md:61:接口层时间统一输出 ISO8601 UTC 字符串，与数据库存储保持一致。 本条适用于 REST API，涉及「时间格式」的实现必须遵守，不允许例外或临时绕开。\ndocs/05-api-design.md:66:再次强调，本条的权威表述是：接口层时间统一输出 ISO8601 UTC 字符串，与数据库存储保持一致。\ndocs/05-api-design.md:70:接口变更必须同步更新 OpenAPI 文档，禁止代码与文档长期漂移。 本条适用于 REST API，涉及「文档同步」的实现必须遵守，不允许例外或临时绕开。\ndocs/05-api-design.md:75:再次强调，本条的权威表述是：接口变更必须同步更新 OpenAPI 文档，禁止代码与文档长期漂移。\ndocs/03-error-handling.md:61:面向用户返回友好提示，内部堆栈与敏感信息一律只进日志不出接口。 本条适用于 异常处理，涉及「用户可见」的实现必须遵守，不允许例外或临时绕开。\ndocs/03-error-handling.md:66:再次强调，本条的权威表述是：面向用户返回友好提示，内部堆栈与敏感信息一律只进日志不出接口。",
+      "grep_hits_sample": "docs/10-performance.md\ndocs/09-security.md\ndocs/13-review.md\ndocs/11-observability.md\ndocs/03-error-handling.md\ndocs/04-database.md\ndocs/05-api-design.md\ndocs/02-architecture.md\n---\ndocs/10-performance.md:52:核心接口统一限流与降级，防止高峰打垮下游。 本条适用于 性能，涉及「限流降级」的实现必须遵守，不允许例外或临时绕开。\ndocs/10-performance.md:57:再次强调，本条的权威表述是：核心接口统一限流与降级，防止高峰打垮下游。\ndocs/10-performance.md:70:关键接口打点采集耗时与吞吐，性能回归纳入告警。 本条适用于 性能，涉及「指标监控」的实现必须遵守，不允许例外或临时绕开。\ndocs/10-performance.md:75:再次强调，本条的权威表述是：关键接口打点采集耗时与吞吐，性能回归纳入告警。\ndocs/09-security.md:52:状态变更接口启用 CSRF 校验或使用同源令牌。 本条适用于 安全，涉及「CSRF 防护」的实现必须遵守，不允许例外或临时绕开。\ndocs/09-security.md:57:再次强调，本条的权威表述是：状态变更接口启用 CSRF 校验或使用同源令牌。\ndocs/13-review.md:5:## 公开接口\ndocs/13-review.md:7:对外契约变更须两名评审通过，其中一名为接口负责人。 本条适用于 代码评审，涉及「公开接口」的实现必须遵守，不允许例外或临时绕开。\ndocs/13-review.md:12:再次强调，本条的权威表述是：对外契约变更须两名评审通过，其中一名为接口负责人。\ndocs/11-observability.md:7:业务指标统一使用 aurora_ 前缀加蛇形命名，禁止临时拼英文缩写。 本条适用于 可观测性，涉及「指标命名」的实现必须遵守，不允许例外或临时绕开。\ndocs/11-observability.md:12:再次强调，本条的权威表述是：业务指标统一使用 aurora_ 前缀加蛇形命名，禁止临时拼英文缩写。\ndocs/11-observability.md:16:每个对外接口采集 Rate、Errors、Duration 三件套，缺一不可。 本条适用于 可观测性，涉及「RED 方法」的实现必须遵守，不允许例外或临时绕开。\ndocs/11-observability.md:21:再次强调，本条的权威表述是：每个对外接口采集 Rate、Errors、Duration 三件套，缺一不可。\ndocs/11-observability.md:25:核心接口必须写明 SLO 与错误预算，超预算自动冻结发布。 本条适用于 可观测性，涉及「SLO 定义」的实现必须遵守，不允许例外或临时绕开。\ndocs/11-observability.md:30:再次强调，本条的权威表述是：核心接口必须写明 SLO 与错误预算，超预算自动冻结发布。\ndocs/03-error-handling.md:61:面向用户返回友好提示，内部堆栈与敏感信息一律只进日志不出接口。 本条适用于 异常处理，涉及「用户可见」的实现必须遵守，不允许例外或临时绕开。\ndocs/03-error-handling.md:66:再次强调，本条的权威表述是：面向用户返回友好提示，内部堆栈与敏感信息一律只进日志不出接口。\ndocs/04-database.md:25:高频查询字段必须建立索引，复合索引遵循最左前缀原则。 本条适用于 数据库，涉及「索引设计」的实现必须遵守，不允许例外或临时绕开。\ndocs/04-database.md:30:再次强调，本条的权威表述是：高频查询字段必须建立索引，复合索引遵循最左前缀原则。\ndocs/05-api-design.md:5:## 路径前缀\ndocs/05-api-design.md:7:所有 HTTP 接口统一加 /api/v1 前缀，版本升级走整段版本号。 本条适用于 REST API，涉及「路径前缀」的实现必须遵守，不允许例外或临时绕开。\ndocs/05-api-design.md:12:再次强调，本条的权威表述是：所有 HTTP 接口统一加 /api/v1 前缀，版本升级走整段版本号。\ndocs/05-api-design.md:34:列表接口统一支持 page 与 page_size，并返回 total 供前端分页。 本条适用于 REST API，涉及「分页约定」的实现必须遵守，不允许例外或临时绕开。\ndocs/05-api-design.md:39:再次强调，本条的权威表述是：列表接口统一支持 page 与 page_size，并返回 total 供前端分页。\ndocs/05-api-design.md:52:写接口使用幂等键避免重复提交，同名键需返回一致结果。 本条适用于 REST API，涉及「幂等设计」的实现必须遵守，不允许例外或临时绕开。\ndocs/05-api-design.md:57:再次强调，本条的权威表述是：写接口使用幂等键避免重复提交，同名键需返回一致结果。\ndocs/05-api-design.md:61:接口层时间统一输出 ISO8601 UTC 字符串，与数据库存储保持一致。 本条适用于 REST API，涉及「时间格式」的实现必须遵守，不允许例外或临时绕开。\ndocs/05-api-design.md:66:再次强调，本条的权威表述是：接口层时间统一输出 ISO8601 UTC 字符串，与数据库存储保持一致。\ndocs/05-api-design.md:70:接口变更必须同步更新 OpenAPI 文档，禁止代码与文档长期漂移。 本条适用于 REST API，涉及「文档同步」的实现必须遵守，不允许例外或临时绕开。\ndocs/05-api-design.md:75:再次强调，本条的权威表述是：接口变更必须同步更新 OpenAPI 文档，禁止代码与文档长期漂移。\ndocs/02-architecture.md:16:依赖方向始终向内，任何跨层引用都必须经过 domain 的公开接口收敛。 本条适用于 分层架构，涉及「依赖方向」的实现必须遵守，不允许例外或临时绕开。\ndocs/02-architecture.md:21:再次强调，本条的权威表述是：依赖方向始终向内，任何跨层引用都必须经过 domain 的公开接口收敛。\ndocs/02-architecture.md:23:## 接口隔离\ndocs/02-architecture.md:25:模块之间只暴露最小必要接口，内部数据结构严禁泄漏到其它层。 本条适用于 分层架构，涉及「接口隔离」的实现必须遵守，不允许例外或临时绕开。\ndocs/02-architecture.md:30:再次强调，本条的权威表述是：模块之间只暴露最小必要接口，内部数据结构严禁泄漏到其它层。",
       "find_args": {
         "scope": "aurora",
         "query": "REST api prefix version",
@@ -307,19 +307,19 @@
       "rg_command": "rg -i -l --glob *.md -e trace_id -e 结构化 -e 日志 docs",
       "search_req_tokens": 23,
       "grep_hits_tokens": 1700,
-      "grep_hits_sample": "docs/01-python-style.md\ndocs/11-observability.md\ndocs/16-http-client.md\ndocs/03-error-handling.md\ndocs/14-config.md\ndocs/04-database.md\ndocs/09-security.md\ndocs/06-logging.md\n---\ndocs/01-python-style.md:61:自定义对象尽量实现 __repr__ 而非 __str__，保证调试与日志输出一致。 本条适用于 Python 代码风格，涉及「魔法方法」的实现必须遵守，不允许例外或临时绕开。\ndocs/01-python-style.md:66:再次强调，本条的权威表述是：自定义对象尽量实现 __repr__ 而非 __str__，保证调试与日志输出一致。\ndocs/09-security.md:68:## 审计日志\ndocs/09-security.md:70:敏感操作写审计日志，包含操作者、时间与对象记录。 本条适用于 安全，涉及「审计日志」的实现必须遵守，不允许例外或临时绕开。\ndocs/09-security.md:75:再次强调，本条的权威表述是：敏感操作写审计日志，包含操作者、时间与对象记录。\ndocs/14-config.md:61:生产配置变更写审计日志，包含操作者与前后值摘要。 本条适用于 配置，涉及「配置审计」的实现必须遵守，不允许例外或临时绕开。\ndocs/14-config.md:66:再次强调，本条的权威表述是：生产配置变更写审计日志，包含操作者与前后值摘要。\ndocs/11-observability.md:59:## 日志关联\ndocs/11-observability.md:61:指标、日志、追踪必须能用 trace_id 互相跳转。 本条适用于 可观测性，涉及「日志关联」的实现必须遵守，不允许例外或临时绕开。\ndocs/11-observability.md:66:再次强调，本条的权威表述是：指标、日志、追踪必须能用 trace_id 互相跳转。\ndocs/03-error-handling.md:32:## 日志配合\ndocs/03-error-handling.md:34:捕获异常后必须记录结构化日志并携带 trace_id，不得静默吞掉异常。 本条适用于 异常处理，涉及「日志配合」的实现必须遵守，不允许例外或临时绕开。\ndocs/03-error-handling.md:39:再次强调，本条的权威表述是：捕获异常后必须记录结构化日志并携带 trace_id，不得静默吞掉异常。\ndocs/03-error-handling.md:61:面向用户返回友好提示，内部堆栈与敏感信息一律只进日志不出接口。 本条适用于 异常处理，涉及「用户可见」的实现必须遵守，不允许例外或临时绕开。\ndocs/03-error-handling.md:66:再次强调，本条的权威表述是：面向用户返回友好提示，内部堆栈与敏感信息一律只进日志不出接口。\ndocs/04-database.md:70:敏感字段落库前必须加密或脱敏，日志与导出不得明文出现。 本条适用于 数据库，涉及「敏感字段」的实现必须遵守，不允许例外或临时绕开。\ndocs/04-database.md:75:再次强调，本条的权威表述是：敏感字段落库前必须加密或脱敏，日志与导出不得明文出现。\ndocs/16-http-client.md:43:出站请求传播 trace_id，禁止另起互不相干的请求标识。 本条适用于 HTTP 客户端，涉及「追踪头」的实现必须遵守，不允许例外或临时绕开。\ndocs/16-http-client.md:48:再次强调，本条的权威表述是：出站请求传播 trace_id，禁止另起互不相干的请求标识。\ndocs/06-logging.md:1:# 日志规范\ndocs/06-logging.md:3:下列条文是 aurora 服务（Python FastAPI）在「日志」方面的唯一权威来源，供协作与检索使用。每节首句为结论，后文为展开。\ndocs/06-logging.md:5:## 结构化日志\ndocs/06-logging.md:7:日志统一输出结构化 JSON 格式，禁止用 print 与裸文本拼接。 本条适用于 日志，涉及「结构化日志」的实现必须遵守，不允许例外或临时绕开。\ndocs/06-logging.md:12:再次强调，本条的权威表述是：日志统一输出结构化 JSON 格式，禁止用 print 与裸文本拼接。\ndocs/06-logging.md:14:## 日志级别\ndocs/06-logging.md:16:区分 debug/info/warn/error 四级语义，线上默认只开 info。 本条适用于 日志，涉及「日志级别」的实现必须遵守，不允许例外或临时绕开。\ndocs/06-logging.md:23:## trace_id\ndocs/06-logging.md:25:每个请求贯穿唯一 trace_id，日志必须携带以便链路追踪。 本条适用于 日志，涉及「trace_id」的实现必须遵守，不允许例外或临时绕开。\ndocs/06-logging.md:30:再次强调，本条的权威表述是：每个请求贯穿唯一 trace_id，日志必须携带以便链路追踪。\ndocs/06-logging.md:34:日志严禁输出密码、token、身份证等敏感字段，需先脱敏。 本条适用于 日志，涉及「敏感信息」的实现必须遵守，不允许例外或临时绕开。\ndocs/06-logging.md:39:再次强调，本条的权威表述是：日志严禁输出密码、token、身份证等敏感字段，需先脱敏。\ndocs/06-logging.md:43:关键业务动作与外部调用必须留痕，包含入参摘要与耗时。 本条适用于 日志，涉及「关键事件」的实现必须遵守，不允许例外或临时绕开。\ndocs/06-logging.md:50:## 异常日志\ndocs/06-logging.md:52:异常必须带完整堆栈与上下文，禁止只打印错误消息。 本条适用于 日志，涉及「异常日志」的实现必须遵守，不允许例外或临时绕开。\ndocs/06-logging.md:61:避免在热路径拼接大对象，日志参数采用惰性求值。 本条适用于 日志，涉及「性能开销」的实现必须遵守，不允许例外或临时绕开。\ndocs/06-logging.md:66:再次强调，本条的权威表述是：避免在热路径拼接大对象，日志参数采用惰性求值。\ndocs/06-logging.md:68:## 日志轮转\ndocs/06-logging.md:70:日志文件按大小与时间轮转，保留策略与归档必须可配置。 本条适用于 日志，涉及「日志轮转」的实现必须遵守，不允许例外或临时绕开。\ndocs/06-logging.md:75:再次强调，本条的权威表述是：日志文件按大小与时间轮转，保留策略与归档必须可配置。",
+      "grep_hits_sample": "docs/01-python-style.md\ndocs/09-security.md\ndocs/14-config.md\ndocs/11-observability.md\ndocs/03-error-handling.md\ndocs/04-database.md\ndocs/16-http-client.md\ndocs/06-logging.md\n---\ndocs/01-python-style.md:61:自定义对象尽量实现 __repr__ 而非 __str__，保证调试与日志输出一致。 本条适用于 Python 代码风格，涉及「魔法方法」的实现必须遵守，不允许例外或临时绕开。\ndocs/01-python-style.md:66:再次强调，本条的权威表述是：自定义对象尽量实现 __repr__ 而非 __str__，保证调试与日志输出一致。\ndocs/09-security.md:68:## 审计日志\ndocs/09-security.md:70:敏感操作写审计日志，包含操作者、时间与对象记录。 本条适用于 安全，涉及「审计日志」的实现必须遵守，不允许例外或临时绕开。\ndocs/09-security.md:75:再次强调，本条的权威表述是：敏感操作写审计日志，包含操作者、时间与对象记录。\ndocs/14-config.md:61:生产配置变更写审计日志，包含操作者与前后值摘要。 本条适用于 配置，涉及「配置审计」的实现必须遵守，不允许例外或临时绕开。\ndocs/14-config.md:66:再次强调，本条的权威表述是：生产配置变更写审计日志，包含操作者与前后值摘要。\ndocs/11-observability.md:59:## 日志关联\ndocs/11-observability.md:61:指标、日志、追踪必须能用 trace_id 互相跳转。 本条适用于 可观测性，涉及「日志关联」的实现必须遵守，不允许例外或临时绕开。\ndocs/11-observability.md:66:再次强调，本条的权威表述是：指标、日志、追踪必须能用 trace_id 互相跳转。\ndocs/03-error-handling.md:32:## 日志配合\ndocs/03-error-handling.md:34:捕获异常后必须记录结构化日志并携带 trace_id，不得静默吞掉异常。 本条适用于 异常处理，涉及「日志配合」的实现必须遵守，不允许例外或临时绕开。\ndocs/03-error-handling.md:39:再次强调，本条的权威表述是：捕获异常后必须记录结构化日志并携带 trace_id，不得静默吞掉异常。\ndocs/03-error-handling.md:61:面向用户返回友好提示，内部堆栈与敏感信息一律只进日志不出接口。 本条适用于 异常处理，涉及「用户可见」的实现必须遵守，不允许例外或临时绕开。\ndocs/03-error-handling.md:66:再次强调，本条的权威表述是：面向用户返回友好提示，内部堆栈与敏感信息一律只进日志不出接口。\ndocs/04-database.md:70:敏感字段落库前必须加密或脱敏，日志与导出不得明文出现。 本条适用于 数据库，涉及「敏感字段」的实现必须遵守，不允许例外或临时绕开。\ndocs/04-database.md:75:再次强调，本条的权威表述是：敏感字段落库前必须加密或脱敏，日志与导出不得明文出现。\ndocs/16-http-client.md:43:出站请求传播 trace_id，禁止另起互不相干的请求标识。 本条适用于 HTTP 客户端，涉及「追踪头」的实现必须遵守，不允许例外或临时绕开。\ndocs/16-http-client.md:48:再次强调，本条的权威表述是：出站请求传播 trace_id，禁止另起互不相干的请求标识。\ndocs/06-logging.md:1:# 日志规范\ndocs/06-logging.md:3:下列条文是 aurora 服务（Python FastAPI）在「日志」方面的唯一权威来源，供协作与检索使用。每节首句为结论，后文为展开。\ndocs/06-logging.md:5:## 结构化日志\ndocs/06-logging.md:7:日志统一输出结构化 JSON 格式，禁止用 print 与裸文本拼接。 本条适用于 日志，涉及「结构化日志」的实现必须遵守，不允许例外或临时绕开。\ndocs/06-logging.md:12:再次强调，本条的权威表述是：日志统一输出结构化 JSON 格式，禁止用 print 与裸文本拼接。\ndocs/06-logging.md:14:## 日志级别\ndocs/06-logging.md:16:区分 debug/info/warn/error 四级语义，线上默认只开 info。 本条适用于 日志，涉及「日志级别」的实现必须遵守，不允许例外或临时绕开。\ndocs/06-logging.md:23:## trace_id\ndocs/06-logging.md:25:每个请求贯穿唯一 trace_id，日志必须携带以便链路追踪。 本条适用于 日志，涉及「trace_id」的实现必须遵守，不允许例外或临时绕开。\ndocs/06-logging.md:30:再次强调，本条的权威表述是：每个请求贯穿唯一 trace_id，日志必须携带以便链路追踪。\ndocs/06-logging.md:34:日志严禁输出密码、token、身份证等敏感字段，需先脱敏。 本条适用于 日志，涉及「敏感信息」的实现必须遵守，不允许例外或临时绕开。\ndocs/06-logging.md:39:再次强调，本条的权威表述是：日志严禁输出密码、token、身份证等敏感字段，需先脱敏。\ndocs/06-logging.md:43:关键业务动作与外部调用必须留痕，包含入参摘要与耗时。 本条适用于 日志，涉及「关键事件」的实现必须遵守，不允许例外或临时绕开。\ndocs/06-logging.md:50:## 异常日志\ndocs/06-logging.md:52:异常必须带完整堆栈与上下文，禁止只打印错误消息。 本条适用于 日志，涉及「异常日志」的实现必须遵守，不允许例外或临时绕开。\ndocs/06-logging.md:61:避免在热路径拼接大对象，日志参数采用惰性求值。 本条适用于 日志，涉及「性能开销」的实现必须遵守，不允许例外或临时绕开。\ndocs/06-logging.md:66:再次强调，本条的权威表述是：避免在热路径拼接大对象，日志参数采用惰性求值。\ndocs/06-logging.md:68:## 日志轮转\ndocs/06-logging.md:70:日志文件按大小与时间轮转，保留策略与归档必须可配置。 本条适用于 日志，涉及「日志轮转」的实现必须遵守，不允许例外或临时绕开。\ndocs/06-logging.md:75:再次强调，本条的权威表述是：日志文件按大小与时间轮转，保留策略与归档必须可配置。",
       "find_args": {
         "scope": "aurora",
         "query": "trace_id structured logging",
         "query_local": "trace_id 结构化 日志 链路",
         "paths": [
           "docs/01-python-style.md",
-          "docs/11-observability.md",
-          "docs/16-http-client.md",
-          "docs/03-error-handling.md",
-          "docs/14-config.md",
-          "docs/04-database.md",
           "docs/09-security.md",
+          "docs/14-config.md",
+          "docs/11-observability.md",
+          "docs/03-error-handling.md",
+          "docs/04-database.md",
+          "docs/16-http-client.md",
           "docs/06-logging.md"
         ]
       },
@@ -629,7 +629,7 @@
       "rg_command": "rg -i -l --glob *.md -e 死信队列 -e 重试 -e 三次 docs",
       "search_req_tokens": 25,
       "grep_hits_tokens": 24,
-      "grep_hits_sample": "docs/03-error-handling.md\ndocs/16-http-client.md\ndocs/12-concurrency.md",
+      "grep_hits_sample": "docs/03-error-handling.md\ndocs/12-concurrency.md\ndocs/16-http-client.md",
       "find_args": null,
       "find_documents": [],
       "find_req_tokens": 0,
@@ -640,8 +640,8 @@
       "n_files_opened": 3,
       "opened_files": [
         "docs/03-error-handling.md",
-        "docs/16-http-client.md",
-        "docs/12-concurrency.md"
+        "docs/12-concurrency.md",
+        "docs/16-http-client.md"
       ],
       "used_find_paths": false,
       "used_find": false,
@@ -959,7 +959,7 @@
       "rg_command": "rg -i -l --glob *.md -e 接口负责人 -e 公开接口 -e 两名评审 docs",
       "search_req_tokens": 28,
       "grep_hits_tokens": 13,
-      "grep_hits_sample": "docs/02-architecture.md\ndocs/13-review.md",
+      "grep_hits_sample": "docs/13-review.md\ndocs/02-architecture.md",
       "find_args": null,
       "find_documents": [],
       "find_req_tokens": 0,
@@ -969,8 +969,8 @@
       "n_files_matched": 2,
       "n_files_opened": 2,
       "opened_files": [
-        "docs/02-architecture.md",
-        "docs/13-review.md"
+        "docs/13-review.md",
+        "docs/02-architecture.md"
       ],
       "used_find_paths": false,
       "used_find": false,
@@ -1041,7 +1041,7 @@
       "rg_command": "rg -i -l --glob *.md -e 文案目录 -e 国际化 -e 硬编码 docs",
       "search_req_tokens": 26,
       "grep_hits_tokens": 16,
-      "grep_hits_sample": "docs/02-architecture.md\ndocs/15-i18n.md",
+      "grep_hits_sample": "docs/15-i18n.md\ndocs/02-architecture.md",
       "find_args": null,
       "find_documents": [],
       "find_req_tokens": 0,
@@ -1051,8 +1051,8 @@
       "n_files_matched": 2,
       "n_files_opened": 2,
       "opened_files": [
-        "docs/02-architecture.md",
-        "docs/15-i18n.md"
+        "docs/15-i18n.md",
+        "docs/02-architecture.md"
       ],
       "used_find_paths": false,
       "used_find": false,
@@ -1204,15 +1204,15 @@
       "rg_command": "rg -i -l --glob *.md -e 连接池 -e 超时 docs",
       "search_req_tokens": 20,
       "grep_hits_tokens": 670,
-      "grep_hits_sample": "docs/11-observability.md\ndocs/04-database.md\ndocs/14-config.md\ndocs/12-concurrency.md\ndocs/16-http-client.md\n---\ndocs/11-observability.md:70:CPU 与连接池水位超 70% 必须告警，禁止等打满再处理。 本条适用于 可观测性，涉及「容量水位」的实现必须遵守，不允许例外或临时绕开。\ndocs/11-observability.md:75:再次强调，本条的权威表述是：CPU 与连接池水位超 70% 必须告警，禁止等打满再处理。\ndocs/04-database.md:43:数据库连接使用连接池并设置合理超时，禁止在循环内频繁开关连接。 本条适用于 数据库，涉及「连接管理」的实现必须遵守，不允许例外或临时绕开。\ndocs/04-database.md:48:再次强调，本条的权威表述是：数据库连接使用连接池并设置合理超时，禁止在循环内频繁开关连接。\ndocs/14-config.md:7:主机、端口、超时一律从环境变量读取，禁止写死在源码。 本条适用于 配置，涉及「环境读取」的实现必须遵守，不允许例外或临时绕开。\ndocs/14-config.md:12:再次强调，本条的权威表述是：主机、端口、超时一律从环境变量读取，禁止写死在源码。\ndocs/12-concurrency.md:68:## 可见性超时\ndocs/12-concurrency.md:70:任务可见性超时须大于最坏处理时间，避免重复执行。 本条适用于 并发，涉及「可见性超时」的实现必须遵守，不允许例外或临时绕开。\ndocs/12-concurrency.md:75:再次强调，本条的权威表述是：任务可见性超时须大于最坏处理时间，避免重复执行。\ndocs/16-http-client.md:5:## 超时设置\ndocs/16-http-client.md:7:出站调用必须设置连接超时与读取超时，禁止无限等待。 本条适用于 HTTP 客户端，涉及「超时设置」的实现必须遵守，不允许例外或临时绕开。\ndocs/16-http-client.md:12:再次强调，本条的权威表述是：出站调用必须设置连接超时与读取超时，禁止无限等待。\ndocs/16-http-client.md:68:## 连接池\ndocs/16-http-client.md:70:复用 HTTP 连接池，禁止每个请求新建 Client。 本条适用于 HTTP 客户端，涉及「连接池」的实现必须遵守，不允许例外或临时绕开。\ndocs/16-http-client.md:75:再次强调，本条的权威表述是：复用 HTTP 连接池，禁止每个请求新建 Client。",
+      "grep_hits_sample": "docs/14-config.md\ndocs/11-observability.md\ndocs/04-database.md\ndocs/12-concurrency.md\ndocs/16-http-client.md\n---\ndocs/14-config.md:7:主机、端口、超时一律从环境变量读取，禁止写死在源码。 本条适用于 配置，涉及「环境读取」的实现必须遵守，不允许例外或临时绕开。\ndocs/14-config.md:12:再次强调，本条的权威表述是：主机、端口、超时一律从环境变量读取，禁止写死在源码。\ndocs/11-observability.md:70:CPU 与连接池水位超 70% 必须告警，禁止等打满再处理。 本条适用于 可观测性，涉及「容量水位」的实现必须遵守，不允许例外或临时绕开。\ndocs/11-observability.md:75:再次强调，本条的权威表述是：CPU 与连接池水位超 70% 必须告警，禁止等打满再处理。\ndocs/04-database.md:43:数据库连接使用连接池并设置合理超时，禁止在循环内频繁开关连接。 本条适用于 数据库，涉及「连接管理」的实现必须遵守，不允许例外或临时绕开。\ndocs/04-database.md:48:再次强调，本条的权威表述是：数据库连接使用连接池并设置合理超时，禁止在循环内频繁开关连接。\ndocs/12-concurrency.md:68:## 可见性超时\ndocs/12-concurrency.md:70:任务可见性超时须大于最坏处理时间，避免重复执行。 本条适用于 并发，涉及「可见性超时」的实现必须遵守，不允许例外或临时绕开。\ndocs/12-concurrency.md:75:再次强调，本条的权威表述是：任务可见性超时须大于最坏处理时间，避免重复执行。\ndocs/16-http-client.md:5:## 超时设置\ndocs/16-http-client.md:7:出站调用必须设置连接超时与读取超时，禁止无限等待。 本条适用于 HTTP 客户端，涉及「超时设置」的实现必须遵守，不允许例外或临时绕开。\ndocs/16-http-client.md:12:再次强调，本条的权威表述是：出站调用必须设置连接超时与读取超时，禁止无限等待。\ndocs/16-http-client.md:68:## 连接池\ndocs/16-http-client.md:70:复用 HTTP 连接池，禁止每个请求新建 Client。 本条适用于 HTTP 客户端，涉及「连接池」的实现必须遵守，不允许例外或临时绕开。\ndocs/16-http-client.md:75:再次强调，本条的权威表述是：复用 HTTP 连接池，禁止每个请求新建 Client。",
       "find_args": {
         "scope": "aurora",
         "query": "connection pool timeout",
         "query_local": "连接池 超时",
         "paths": [
+          "docs/14-config.md",
           "docs/11-observability.md",
           "docs/04-database.md",
-          "docs/14-config.md",
           "docs/12-concurrency.md",
           "docs/16-http-client.md"
         ]
@@ -1319,16 +1319,16 @@
       "rg_command": "rg -i -l --glob *.md -e secret[\\s_\\-]*plaintext -e 密钥 -e 明文 docs",
       "search_req_tokens": 29,
       "grep_hits_tokens": 541,
-      "grep_hits_sample": "docs/08-deployment.md\ndocs/09-security.md\ndocs/04-database.md\ndocs/14-config.md\ndocs/02-architecture.md\n---\ndocs/04-database.md:70:敏感字段落库前必须加密或脱敏，日志与导出不得明文出现。 本条适用于 数据库，涉及「敏感字段」的实现必须遵守，不允许例外或临时绕开。\ndocs/04-database.md:75:再次强调，本条的权威表述是：敏感字段落库前必须加密或脱敏，日志与导出不得明文出现。\ndocs/09-security.md:23:## 密钥存储\ndocs/09-security.md:25:密钥一律加密存储于密钥管理服务，代码与配置不得明文。 本条适用于 安全，涉及「密钥存储」的实现必须遵守，不允许例外或临时绕开。\ndocs/09-security.md:30:再次强调，本条的权威表述是：密钥一律加密存储于密钥管理服务，代码与配置不得明文。\ndocs/02-architecture.md:61:环境与密钥通过依赖注入读取，禁止在业务模块内硬编码配置路径。 本条适用于 分层架构，涉及「配置注入」的实现必须遵守，不允许例外或临时绕开。\ndocs/02-architecture.md:66:再次强调，本条的权威表述是：环境与密钥通过依赖注入读取，禁止在业务模块内硬编码配置路径。\ndocs/14-config.md:34:仓库只提交 .env.example，真实密钥不得入库。 本条适用于 配置，涉及「样例文件」的实现必须遵守，不允许例外或临时绕开。\ndocs/14-config.md:39:再次强调，本条的权威表述是：仓库只提交 .env.example，真实密钥不得入库。\ndocs/08-deployment.md:59:## 密钥管理\ndocs/08-deployment.md:61:密钥与证书走密钥管理服务注入，禁止写入仓库或镜像。 本条适用于 部署，涉及「密钥管理」的实现必须遵守，不允许例外或临时绕开。\ndocs/08-deployment.md:66:再次强调，本条的权威表述是：密钥与证书走密钥管理服务注入，禁止写入仓库或镜像。",
+      "grep_hits_sample": "docs/09-security.md\ndocs/08-deployment.md\ndocs/14-config.md\ndocs/04-database.md\ndocs/02-architecture.md\n---\ndocs/09-security.md:23:## 密钥存储\ndocs/09-security.md:25:密钥一律加密存储于密钥管理服务，代码与配置不得明文。 本条适用于 安全，涉及「密钥存储」的实现必须遵守，不允许例外或临时绕开。\ndocs/09-security.md:30:再次强调，本条的权威表述是：密钥一律加密存储于密钥管理服务，代码与配置不得明文。\ndocs/08-deployment.md:59:## 密钥管理\ndocs/08-deployment.md:61:密钥与证书走密钥管理服务注入，禁止写入仓库或镜像。 本条适用于 部署，涉及「密钥管理」的实现必须遵守，不允许例外或临时绕开。\ndocs/08-deployment.md:66:再次强调，本条的权威表述是：密钥与证书走密钥管理服务注入，禁止写入仓库或镜像。\ndocs/14-config.md:34:仓库只提交 .env.example，真实密钥不得入库。 本条适用于 配置，涉及「样例文件」的实现必须遵守，不允许例外或临时绕开。\ndocs/14-config.md:39:再次强调，本条的权威表述是：仓库只提交 .env.example，真实密钥不得入库。\ndocs/04-database.md:70:敏感字段落库前必须加密或脱敏，日志与导出不得明文出现。 本条适用于 数据库，涉及「敏感字段」的实现必须遵守，不允许例外或临时绕开。\ndocs/04-database.md:75:再次强调，本条的权威表述是：敏感字段落库前必须加密或脱敏，日志与导出不得明文出现。\ndocs/02-architecture.md:61:环境与密钥通过依赖注入读取，禁止在业务模块内硬编码配置路径。 本条适用于 分层架构，涉及「配置注入」的实现必须遵守，不允许例外或临时绕开。\ndocs/02-architecture.md:66:再次强调，本条的权威表述是：环境与密钥通过依赖注入读取，禁止在业务模块内硬编码配置路径。",
       "find_args": {
         "scope": "aurora",
         "query": "secret plaintext",
         "query_local": "密钥 明文",
         "paths": [
-          "docs/08-deployment.md",
           "docs/09-security.md",
-          "docs/04-database.md",
+          "docs/08-deployment.md",
           "docs/14-config.md",
+          "docs/04-database.md",
           "docs/02-architecture.md"
         ]
       },
@@ -1382,16 +1382,16 @@
       "rg_command": "rg -i -l --glob *.md -e 幂等 -e 重试 -e idempotent docs",
       "search_req_tokens": 24,
       "grep_hits_tokens": 616,
-      "grep_hits_sample": "docs/05-api-design.md\ndocs/03-error-handling.md\ndocs/12-concurrency.md\ndocs/16-http-client.md\n---\ndocs/12-concurrency.md:14:## 幂等消费\ndocs/12-concurrency.md:16:消费者必须按 message_id 幂等，重复投递不得产生副作用。 本条适用于 并发，涉及「幂等消费」的实现必须遵守，不允许例外或临时绕开。\ndocs/12-concurrency.md:21:再次强调，本条的权威表述是：消费者必须按 message_id 幂等，重复投递不得产生副作用。\ndocs/12-concurrency.md:25:失败超过三次进入死信队列并告警，禁止无限重试。 本条适用于 并发，涉及「死信队列」的实现必须遵守，不允许例外或临时绕开。\ndocs/12-concurrency.md:30:再次强调，本条的权威表述是：失败超过三次进入死信队列并告警，禁止无限重试。\ndocs/03-error-handling.md:50:## 重试策略\ndocs/03-error-handling.md:52:仅对幂等操作启用重试，重试必须带退避与最大次数，禁止无脑重试。 本条适用于 异常处理，涉及「重试策略」的实现必须遵守，不允许例外或临时绕开。\ndocs/03-error-handling.md:57:再次强调，本条的权威表述是：仅对幂等操作启用重试，重试必须带退避与最大次数，禁止无脑重试。\ndocs/16-http-client.md:14:## 重试边界\ndocs/16-http-client.md:16:仅对幂等 GET 与明确可重试错误码重试，写操作默认不重试。 本条适用于 HTTP 客户端，涉及「重试边界」的实现必须遵守，不允许例外或临时绕开。\ndocs/16-http-client.md:21:再次强调，本条的权威表述是：仅对幂等 GET 与明确可重试错误码重试，写操作默认不重试。\ndocs/05-api-design.md:50:## 幂等设计\ndocs/05-api-design.md:52:写接口使用幂等键避免重复提交，同名键需返回一致结果。 本条适用于 REST API，涉及「幂等设计」的实现必须遵守，不允许例外或临时绕开。\ndocs/05-api-design.md:57:再次强调，本条的权威表述是：写接口使用幂等键避免重复提交，同名键需返回一致结果。",
+      "grep_hits_sample": "docs/03-error-handling.md\ndocs/12-concurrency.md\ndocs/16-http-client.md\ndocs/05-api-design.md\n---\ndocs/03-error-handling.md:50:## 重试策略\ndocs/03-error-handling.md:52:仅对幂等操作启用重试，重试必须带退避与最大次数，禁止无脑重试。 本条适用于 异常处理，涉及「重试策略」的实现必须遵守，不允许例外或临时绕开。\ndocs/03-error-handling.md:57:再次强调，本条的权威表述是：仅对幂等操作启用重试，重试必须带退避与最大次数，禁止无脑重试。\ndocs/12-concurrency.md:14:## 幂等消费\ndocs/12-concurrency.md:16:消费者必须按 message_id 幂等，重复投递不得产生副作用。 本条适用于 并发，涉及「幂等消费」的实现必须遵守，不允许例外或临时绕开。\ndocs/12-concurrency.md:21:再次强调，本条的权威表述是：消费者必须按 message_id 幂等，重复投递不得产生副作用。\ndocs/12-concurrency.md:25:失败超过三次进入死信队列并告警，禁止无限重试。 本条适用于 并发，涉及「死信队列」的实现必须遵守，不允许例外或临时绕开。\ndocs/12-concurrency.md:30:再次强调，本条的权威表述是：失败超过三次进入死信队列并告警，禁止无限重试。\ndocs/16-http-client.md:14:## 重试边界\ndocs/16-http-client.md:16:仅对幂等 GET 与明确可重试错误码重试，写操作默认不重试。 本条适用于 HTTP 客户端，涉及「重试边界」的实现必须遵守，不允许例外或临时绕开。\ndocs/16-http-client.md:21:再次强调，本条的权威表述是：仅对幂等 GET 与明确可重试错误码重试，写操作默认不重试。\ndocs/05-api-design.md:50:## 幂等设计\ndocs/05-api-design.md:52:写接口使用幂等键避免重复提交，同名键需返回一致结果。 本条适用于 REST API，涉及「幂等设计」的实现必须遵守，不允许例外或临时绕开。\ndocs/05-api-design.md:57:再次强调，本条的权威表述是：写接口使用幂等键避免重复提交，同名键需返回一致结果。",
       "find_args": {
         "scope": "aurora",
         "query": "idempotent retry",
         "query_local": "幂等 重试",
         "paths": [
-          "docs/05-api-design.md",
           "docs/03-error-handling.md",
           "docs/12-concurrency.md",
-          "docs/16-http-client.md"
+          "docs/16-http-client.md",
+          "docs/05-api-design.md"
         ]
       },
       "find_documents": [
@@ -1505,7 +1505,7 @@
       "rg_command": "rg -i -l --glob *.md -e sampling[\\s_\\-]*trace -e 采样 -e 追踪 docs",
       "search_req_tokens": 29,
       "grep_hits_tokens": 24,
-      "grep_hits_sample": "docs/06-logging.md\ndocs/11-observability.md\ndocs/16-http-client.md",
+      "grep_hits_sample": "docs/11-observability.md\ndocs/16-http-client.md\ndocs/06-logging.md",
       "find_args": null,
       "find_documents": [],
       "find_req_tokens": 0,
@@ -1515,9 +1515,9 @@
       "n_files_matched": 3,
       "n_files_opened": 3,
       "opened_files": [
-        "docs/06-logging.md",
         "docs/11-observability.md",
-        "docs/16-http-client.md"
+        "docs/16-http-client.md",
+        "docs/06-logging.md"
       ],
       "used_find_paths": false,
       "used_find": false,
@@ -1609,7 +1609,7 @@
       "rg_command": "rg -i -l --glob *.md -e 镜像 -e 缓存 -e image docs",
       "search_req_tokens": 22,
       "grep_hits_tokens": 23,
-      "grep_hits_sample": "docs/08-deployment.md\ndocs/15-i18n.md\ndocs/10-performance.md",
+      "grep_hits_sample": "docs/15-i18n.md\ndocs/10-performance.md\ndocs/08-deployment.md",
       "find_args": null,
       "find_documents": [],
       "find_req_tokens": 0,
@@ -1619,9 +1619,9 @@
       "n_files_matched": 3,
       "n_files_opened": 3,
       "opened_files": [
-        "docs/08-deployment.md",
         "docs/15-i18n.md",
-        "docs/10-performance.md"
+        "docs/10-performance.md",
+        "docs/08-deployment.md"
       ],
       "used_find_paths": false,
       "used_find": false,
@@ -1712,20 +1712,20 @@
       "rg_command": "rg -i -l --glob *.md -e trace_id -e 日志 docs",
       "search_req_tokens": 18,
       "grep_hits_tokens": 1700,
-      "grep_hits_sample": "docs/01-python-style.md\ndocs/06-logging.md\ndocs/16-http-client.md\ndocs/03-error-handling.md\ndocs/09-security.md\ndocs/14-config.md\ndocs/04-database.md\ndocs/11-observability.md\n---\ndocs/06-logging.md:1:# 日志规范\ndocs/06-logging.md:3:下列条文是 aurora 服务（Python FastAPI）在「日志」方面的唯一权威来源，供协作与检索使用。每节首句为结论，后文为展开。\ndocs/06-logging.md:5:## 结构化日志\ndocs/06-logging.md:7:日志统一输出结构化 JSON 格式，禁止用 print 与裸文本拼接。 本条适用于 日志，涉及「结构化日志」的实现必须遵守，不允许例外或临时绕开。\ndocs/06-logging.md:12:再次强调，本条的权威表述是：日志统一输出结构化 JSON 格式，禁止用 print 与裸文本拼接。\ndocs/06-logging.md:14:## 日志级别\ndocs/06-logging.md:16:区分 debug/info/warn/error 四级语义，线上默认只开 info。 本条适用于 日志，涉及「日志级别」的实现必须遵守，不允许例外或临时绕开。\ndocs/06-logging.md:23:## trace_id\ndocs/06-logging.md:25:每个请求贯穿唯一 trace_id，日志必须携带以便链路追踪。 本条适用于 日志，涉及「trace_id」的实现必须遵守，不允许例外或临时绕开。\ndocs/06-logging.md:30:再次强调，本条的权威表述是：每个请求贯穿唯一 trace_id，日志必须携带以便链路追踪。\ndocs/06-logging.md:34:日志严禁输出密码、token、身份证等敏感字段，需先脱敏。 本条适用于 日志，涉及「敏感信息」的实现必须遵守，不允许例外或临时绕开。\ndocs/06-logging.md:39:再次强调，本条的权威表述是：日志严禁输出密码、token、身份证等敏感字段，需先脱敏。\ndocs/06-logging.md:43:关键业务动作与外部调用必须留痕，包含入参摘要与耗时。 本条适用于 日志，涉及「关键事件」的实现必须遵守，不允许例外或临时绕开。\ndocs/06-logging.md:50:## 异常日志\ndocs/06-logging.md:52:异常必须带完整堆栈与上下文，禁止只打印错误消息。 本条适用于 日志，涉及「异常日志」的实现必须遵守，不允许例外或临时绕开。\ndocs/06-logging.md:61:避免在热路径拼接大对象，日志参数采用惰性求值。 本条适用于 日志，涉及「性能开销」的实现必须遵守，不允许例外或临时绕开。\ndocs/06-logging.md:66:再次强调，本条的权威表述是：避免在热路径拼接大对象，日志参数采用惰性求值。\ndocs/06-logging.md:68:## 日志轮转\ndocs/06-logging.md:70:日志文件按大小与时间轮转，保留策略与归档必须可配置。 本条适用于 日志，涉及「日志轮转」的实现必须遵守，不允许例外或临时绕开。\ndocs/06-logging.md:75:再次强调，本条的权威表述是：日志文件按大小与时间轮转，保留策略与归档必须可配置。\ndocs/01-python-style.md:61:自定义对象尽量实现 __repr__ 而非 __str__，保证调试与日志输出一致。 本条适用于 Python 代码风格，涉及「魔法方法」的实现必须遵守，不允许例外或临时绕开。\ndocs/01-python-style.md:66:再次强调，本条的权威表述是：自定义对象尽量实现 __repr__ 而非 __str__，保证调试与日志输出一致。\ndocs/11-observability.md:59:## 日志关联\ndocs/11-observability.md:61:指标、日志、追踪必须能用 trace_id 互相跳转。 本条适用于 可观测性，涉及「日志关联」的实现必须遵守，不允许例外或临时绕开。\ndocs/11-observability.md:66:再次强调，本条的权威表述是：指标、日志、追踪必须能用 trace_id 互相跳转。\ndocs/03-error-handling.md:32:## 日志配合\ndocs/03-error-handling.md:34:捕获异常后必须记录结构化日志并携带 trace_id，不得静默吞掉异常。 本条适用于 异常处理，涉及「日志配合」的实现必须遵守，不允许例外或临时绕开。\ndocs/03-error-handling.md:39:再次强调，本条的权威表述是：捕获异常后必须记录结构化日志并携带 trace_id，不得静默吞掉异常。\ndocs/03-error-handling.md:61:面向用户返回友好提示，内部堆栈与敏感信息一律只进日志不出接口。 本条适用于 异常处理，涉及「用户可见」的实现必须遵守，不允许例外或临时绕开。\ndocs/03-error-handling.md:66:再次强调，本条的权威表述是：面向用户返回友好提示，内部堆栈与敏感信息一律只进日志不出接口。\ndocs/04-database.md:70:敏感字段落库前必须加密或脱敏，日志与导出不得明文出现。 本条适用于 数据库，涉及「敏感字段」的实现必须遵守，不允许例外或临时绕开。\ndocs/04-database.md:75:再次强调，本条的权威表述是：敏感字段落库前必须加密或脱敏，日志与导出不得明文出现。\ndocs/09-security.md:68:## 审计日志\ndocs/09-security.md:70:敏感操作写审计日志，包含操作者、时间与对象记录。 本条适用于 安全，涉及「审计日志」的实现必须遵守，不允许例外或临时绕开。\ndocs/09-security.md:75:再次强调，本条的权威表述是：敏感操作写审计日志，包含操作者、时间与对象记录。\ndocs/16-http-client.md:43:出站请求传播 trace_id，禁止另起互不相干的请求标识。 本条适用于 HTTP 客户端，涉及「追踪头」的实现必须遵守，不允许例外或临时绕开。\ndocs/16-http-client.md:48:再次强调，本条的权威表述是：出站请求传播 trace_id，禁止另起互不相干的请求标识。\ndocs/14-config.md:61:生产配置变更写审计日志，包含操作者与前后值摘要。 本条适用于 配置，涉及「配置审计」的实现必须遵守，不允许例外或临时绕开。\ndocs/14-config.md:66:再次强调，本条的权威表述是：生产配置变更写审计日志，包含操作者与前后值摘要。",
+      "grep_hits_sample": "docs/01-python-style.md\ndocs/09-security.md\ndocs/14-config.md\ndocs/11-observability.md\ndocs/03-error-handling.md\ndocs/04-database.md\ndocs/16-http-client.md\ndocs/06-logging.md\n---\ndocs/01-python-style.md:61:自定义对象尽量实现 __repr__ 而非 __str__，保证调试与日志输出一致。 本条适用于 Python 代码风格，涉及「魔法方法」的实现必须遵守，不允许例外或临时绕开。\ndocs/01-python-style.md:66:再次强调，本条的权威表述是：自定义对象尽量实现 __repr__ 而非 __str__，保证调试与日志输出一致。\ndocs/09-security.md:68:## 审计日志\ndocs/09-security.md:70:敏感操作写审计日志，包含操作者、时间与对象记录。 本条适用于 安全，涉及「审计日志」的实现必须遵守，不允许例外或临时绕开。\ndocs/09-security.md:75:再次强调，本条的权威表述是：敏感操作写审计日志，包含操作者、时间与对象记录。\ndocs/14-config.md:61:生产配置变更写审计日志，包含操作者与前后值摘要。 本条适用于 配置，涉及「配置审计」的实现必须遵守，不允许例外或临时绕开。\ndocs/14-config.md:66:再次强调，本条的权威表述是：生产配置变更写审计日志，包含操作者与前后值摘要。\ndocs/11-observability.md:59:## 日志关联\ndocs/11-observability.md:61:指标、日志、追踪必须能用 trace_id 互相跳转。 本条适用于 可观测性，涉及「日志关联」的实现必须遵守，不允许例外或临时绕开。\ndocs/11-observability.md:66:再次强调，本条的权威表述是：指标、日志、追踪必须能用 trace_id 互相跳转。\ndocs/03-error-handling.md:32:## 日志配合\ndocs/03-error-handling.md:34:捕获异常后必须记录结构化日志并携带 trace_id，不得静默吞掉异常。 本条适用于 异常处理，涉及「日志配合」的实现必须遵守，不允许例外或临时绕开。\ndocs/03-error-handling.md:39:再次强调，本条的权威表述是：捕获异常后必须记录结构化日志并携带 trace_id，不得静默吞掉异常。\ndocs/03-error-handling.md:61:面向用户返回友好提示，内部堆栈与敏感信息一律只进日志不出接口。 本条适用于 异常处理，涉及「用户可见」的实现必须遵守，不允许例外或临时绕开。\ndocs/03-error-handling.md:66:再次强调，本条的权威表述是：面向用户返回友好提示，内部堆栈与敏感信息一律只进日志不出接口。\ndocs/04-database.md:70:敏感字段落库前必须加密或脱敏，日志与导出不得明文出现。 本条适用于 数据库，涉及「敏感字段」的实现必须遵守，不允许例外或临时绕开。\ndocs/04-database.md:75:再次强调，本条的权威表述是：敏感字段落库前必须加密或脱敏，日志与导出不得明文出现。\ndocs/16-http-client.md:43:出站请求传播 trace_id，禁止另起互不相干的请求标识。 本条适用于 HTTP 客户端，涉及「追踪头」的实现必须遵守，不允许例外或临时绕开。\ndocs/16-http-client.md:48:再次强调，本条的权威表述是：出站请求传播 trace_id，禁止另起互不相干的请求标识。\ndocs/06-logging.md:1:# 日志规范\ndocs/06-logging.md:3:下列条文是 aurora 服务（Python FastAPI）在「日志」方面的唯一权威来源，供协作与检索使用。每节首句为结论，后文为展开。\ndocs/06-logging.md:5:## 结构化日志\ndocs/06-logging.md:7:日志统一输出结构化 JSON 格式，禁止用 print 与裸文本拼接。 本条适用于 日志，涉及「结构化日志」的实现必须遵守，不允许例外或临时绕开。\ndocs/06-logging.md:12:再次强调，本条的权威表述是：日志统一输出结构化 JSON 格式，禁止用 print 与裸文本拼接。\ndocs/06-logging.md:14:## 日志级别\ndocs/06-logging.md:16:区分 debug/info/warn/error 四级语义，线上默认只开 info。 本条适用于 日志，涉及「日志级别」的实现必须遵守，不允许例外或临时绕开。\ndocs/06-logging.md:23:## trace_id\ndocs/06-logging.md:25:每个请求贯穿唯一 trace_id，日志必须携带以便链路追踪。 本条适用于 日志，涉及「trace_id」的实现必须遵守，不允许例外或临时绕开。\ndocs/06-logging.md:30:再次强调，本条的权威表述是：每个请求贯穿唯一 trace_id，日志必须携带以便链路追踪。\ndocs/06-logging.md:34:日志严禁输出密码、token、身份证等敏感字段，需先脱敏。 本条适用于 日志，涉及「敏感信息」的实现必须遵守，不允许例外或临时绕开。\ndocs/06-logging.md:39:再次强调，本条的权威表述是：日志严禁输出密码、token、身份证等敏感字段，需先脱敏。\ndocs/06-logging.md:43:关键业务动作与外部调用必须留痕，包含入参摘要与耗时。 本条适用于 日志，涉及「关键事件」的实现必须遵守，不允许例外或临时绕开。\ndocs/06-logging.md:50:## 异常日志\ndocs/06-logging.md:52:异常必须带完整堆栈与上下文，禁止只打印错误消息。 本条适用于 日志，涉及「异常日志」的实现必须遵守，不允许例外或临时绕开。\ndocs/06-logging.md:61:避免在热路径拼接大对象，日志参数采用惰性求值。 本条适用于 日志，涉及「性能开销」的实现必须遵守，不允许例外或临时绕开。\ndocs/06-logging.md:66:再次强调，本条的权威表述是：避免在热路径拼接大对象，日志参数采用惰性求值。\ndocs/06-logging.md:68:## 日志轮转\ndocs/06-logging.md:70:日志文件按大小与时间轮转，保留策略与归档必须可配置。 本条适用于 日志，涉及「日志轮转」的实现必须遵守，不允许例外或临时绕开。\ndocs/06-logging.md:75:再次强调，本条的权威表述是：日志文件按大小与时间轮转，保留策略与归档必须可配置。",
       "find_args": {
         "scope": "aurora",
         "query": "trace_id logging",
         "query_local": "trace_id 日志",
         "paths": [
           "docs/01-python-style.md",
-          "docs/06-logging.md",
-          "docs/16-http-client.md",
-          "docs/03-error-handling.md",
           "docs/09-security.md",
           "docs/14-config.md",
+          "docs/11-observability.md",
+          "docs/03-error-handling.md",
           "docs/04-database.md",
-          "docs/11-observability.md"
+          "docs/16-http-client.md",
+          "docs/06-logging.md"
         ]
       },
       "find_documents": [

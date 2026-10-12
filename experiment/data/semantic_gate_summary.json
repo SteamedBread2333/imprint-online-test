@@ -1,0 +1,984 @@
+{
+  "meta": {
+    "created_at": "2026-10-12T04:47:05Z",
+    "imprint_bin": "imprint",
+    "embed_url": "http://127.0.0.1:4174",
+    "sidecar_package": "imprint-embed-sidecar",
+    "thresholds": {
+      "duplicate_threshold": 0.65,
+      "relate_contradiction_min": 0.4,
+      "relate_entailment_min": 0.35,
+      "relate_bidirectional": true,
+      "duplicate_high_cosine_block": 0.8,
+      "timeout_seconds": 8,
+      "model": "BAAI/bge-small-zh-v1.5",
+      "relate_model": "cross-encoder/nli-deberta-v3-base"
+    }
+  },
+  "final": {
+    "duplicate_total": 20,
+    "duplicate_blocked": 20,
+    "duplicate_recall_pct": 100.0,
+    "conflict_total": 20,
+    "conflict_passed": 20,
+    "conflict_false_block": 0,
+    "conflict_advisory": 19,
+    "unrelated_total": 20,
+    "unrelated_passed": 20,
+    "unrelated_false_block": 0,
+    "passed": true
+  },
+  "groups": {
+    "duplicate": [
+      {
+        "index": 0,
+        "group": "duplicate",
+        "claim_a": "Go exported identifiers must use PascalCase",
+        "claim_b": "Exported things use Pascal Case naming",
+        "seed_ok": true,
+        "seed_id": "r-2026-10-12-001",
+        "second_code": "duplicate",
+        "second_id": null,
+        "similar_count": 0,
+        "similar_ids": [],
+        "ok": true,
+        "outcome": "blocked_duplicate"
+      },
+      {
+        "index": 1,
+        "group": "duplicate",
+        "claim_a": "Wrap errors with fmt.Errorf and %w",
+        "claim_b": "Always wrap errors using %w",
+        "seed_ok": true,
+        "seed_id": "r-2026-10-12-002",
+        "second_code": "duplicate",
+        "second_id": null,
+        "similar_count": 0,
+        "similar_ids": [],
+        "ok": true,
+        "outcome": "blocked_duplicate"
+      },
+      {
+        "index": 2,
+        "group": "duplicate",
+        "claim_a": "Use table-driven tests in Go",
+        "claim_b": "Go tests should be table driven",
+        "seed_ok": true,
+        "seed_id": "r-2026-10-12-003",
+        "second_code": "duplicate",
+        "second_id": null,
+        "similar_count": 0,
+        "similar_ids": [],
+        "ok": true,
+        "outcome": "blocked_duplicate"
+      },
+      {
+        "index": 3,
+        "group": "duplicate",
+        "claim_a": "Prefer snake_case for Python functions",
+        "claim_b": "Python function names use snake case",
+        "seed_ok": true,
+        "seed_id": "r-2026-10-12-004",
+        "second_code": "duplicate",
+        "second_id": null,
+        "similar_count": 0,
+        "similar_ids": [],
+        "ok": true,
+        "outcome": "blocked_duplicate"
+      },
+      {
+        "index": 4,
+        "group": "duplicate",
+        "claim_a": "Never commit secrets to the repo",
+        "claim_b": "Do not commit secrets into the repository",
+        "seed_ok": true,
+        "seed_id": "r-2026-10-12-005",
+        "second_code": "duplicate",
+        "second_id": null,
+        "similar_count": 0,
+        "similar_ids": [],
+        "ok": true,
+        "outcome": "blocked_duplicate"
+      },
+      {
+        "index": 5,
+        "group": "duplicate",
+        "claim_a": "Run gofmt before committing",
+        "claim_b": "Always run gofmt before you commit",
+        "seed_ok": true,
+        "seed_id": "r-2026-10-12-006",
+        "second_code": "duplicate",
+        "second_id": null,
+        "similar_count": 0,
+        "similar_ids": [],
+        "ok": true,
+        "outcome": "blocked_duplicate"
+      },
+      {
+        "index": 6,
+        "group": "duplicate",
+        "claim_a": "Keep functions under 50 lines",
+        "claim_b": "Functions should stay shorter than 50 lines",
+        "seed_ok": true,
+        "seed_id": "r-2026-10-12-007",
+        "second_code": "duplicate",
+        "second_id": null,
+        "similar_count": 0,
+        "similar_ids": [],
+        "ok": true,
+        "outcome": "blocked_duplicate"
+      },
+      {
+        "index": 7,
+        "group": "duplicate",
+        "claim_a": "Use context as the first parameter",
+        "claim_b": "context.Context must be the first argument",
+        "seed_ok": true,
+        "seed_id": "r-2026-10-12-008",
+        "second_code": "duplicate",
+        "second_id": null,
+        "similar_count": 0,
+        "similar_ids": [],
+        "ok": true,
+        "outcome": "blocked_duplicate"
+      },
+      {
+        "index": 8,
+        "group": "duplicate",
+        "claim_a": "Write comments in English",
+        "claim_b": "Code comments should be written in English",
+        "seed_ok": true,
+        "seed_id": "r-2026-10-12-009",
+        "second_code": "duplicate",
+        "second_id": null,
+        "similar_count": 0,
+        "similar_ids": [],
+        "ok": true,
+        "outcome": "blocked_duplicate"
+      },
+      {
+        "index": 9,
+        "group": "duplicate",
+        "claim_a": "Avoid global mutable state",
+        "claim_b": "Do not use global mutable variables",
+        "seed_ok": true,
+        "seed_id": "r-2026-10-12-010",
+        "second_code": "duplicate",
+        "second_id": null,
+        "similar_count": 0,
+        "similar_ids": [],
+        "ok": true,
+        "outcome": "blocked_duplicate"
+      },
+      {
+        "index": 10,
+        "group": "duplicate",
+        "claim_a": "Handle every error explicitly",
+        "claim_b": "Every error must be handled explicitly",
+        "seed_ok": true,
+        "seed_id": "r-2026-10-12-011",
+        "second_code": "duplicate",
+        "second_id": null,
+        "similar_count": 0,
+        "similar_ids": [],
+        "ok": true,
+        "outcome": "blocked_duplicate"
+      },
+      {
+        "index": 11,
+        "group": "duplicate",
+        "claim_a": "Prefer composition over inheritance",
+        "claim_b": "Use composition instead of inheritance",
+        "seed_ok": true,
+        "seed_id": "r-2026-10-12-012",
+        "second_code": "duplicate",
+        "second_id": null,
+        "similar_count": 0,
+        "similar_ids": [],
+        "ok": true,
+        "outcome": "blocked_duplicate"
+      },
+      {
+        "index": 12,
+        "group": "duplicate",
+        "claim_a": "Name interfaces by behavior",
+        "claim_b": "Interfaces should be named after their behavior",
+        "seed_ok": true,
+        "seed_id": "r-2026-10-12-013",
+        "second_code": "duplicate",
+        "second_id": null,
+        "similar_count": 0,
+        "similar_ids": [],
+        "ok": true,
+        "outcome": "blocked_duplicate"
+      },
+      {
+        "index": 13,
+        "group": "duplicate",
+        "claim_a": "Keep imports grouped stdlib first",
+        "claim_b": "Imports must be grouped with stdlib first",
+        "seed_ok": true,
+        "seed_id": "r-2026-10-12-014",
+        "second_code": "duplicate",
+        "second_id": null,
+        "similar_count": 0,
+        "similar_ids": [],
+        "ok": true,
+        "outcome": "blocked_duplicate"
+      },
+      {
+        "index": 14,
+        "group": "duplicate",
+        "claim_a": "Use tabs for indentation in Go",
+        "claim_b": "Go files are indented with tabs",
+        "seed_ok": true,
+        "seed_id": "r-2026-10-12-015",
+        "second_code": "duplicate",
+        "second_id": null,
+        "similar_count": 0,
+        "similar_ids": [],
+        "ok": true,
+        "outcome": "blocked_duplicate"
+      },
+      {
+        "index": 15,
+        "group": "duplicate",
+        "claim_a": "Add unit tests for new packages",
+        "claim_b": "New packages need unit tests",
+        "seed_ok": true,
+        "seed_id": "r-2026-10-12-016",
+        "second_code": "duplicate",
+        "second_id": null,
+        "similar_count": 0,
+        "similar_ids": [],
+        "ok": true,
+        "outcome": "blocked_duplicate"
+      },
+      {
+        "index": 16,
+        "group": "duplicate",
+        "claim_a": "Return early instead of nesting",
+        "claim_b": "Prefer early returns to nested blocks",
+        "seed_ok": true,
+        "seed_id": "r-2026-10-12-017",
+        "second_code": "duplicate",
+        "second_id": null,
+        "similar_count": 0,
+        "similar_ids": [],
+        "ok": true,
+        "outcome": "blocked_duplicate"
+      },
+      {
+        "index": 17,
+        "group": "duplicate",
+        "claim_a": "Log structured fields not strings",
+        "claim_b": "Use structured logging with fields",
+        "seed_ok": true,
+        "seed_id": "r-2026-10-12-018",
+        "second_code": "duplicate",
+        "second_id": null,
+        "similar_count": 0,
+        "similar_ids": [],
+        "ok": true,
+        "outcome": "blocked_duplicate"
+      },
+      {
+        "index": 18,
+        "group": "duplicate",
+        "claim_a": "Pin dependency versions",
+        "claim_b": "Dependencies must be version pinned",
+        "seed_ok": true,
+        "seed_id": "r-2026-10-12-019",
+        "second_code": "duplicate",
+        "second_id": null,
+        "similar_count": 0,
+        "similar_ids": [],
+        "ok": true,
+        "outcome": "blocked_duplicate"
+      },
+      {
+        "index": 19,
+        "group": "duplicate",
+        "claim_a": "Document exported symbols",
+        "claim_b": "Every exported symbol needs documentation",
+        "seed_ok": true,
+        "seed_id": "r-2026-10-12-020",
+        "second_code": "duplicate",
+        "second_id": null,
+        "similar_count": 0,
+        "similar_ids": [],
+        "ok": true,
+        "outcome": "blocked_duplicate"
+      }
+    ],
+    "conflict": [
+      {
+        "index": 0,
+        "group": "conflict",
+        "claim_a": "Use tabs for indentation",
+        "claim_b": "Use spaces for indentation",
+        "seed_ok": true,
+        "seed_id": "r-2026-10-12-021",
+        "second_code": null,
+        "second_id": "r-2026-10-12-022",
+        "similar_count": 3,
+        "similar_ids": [
+          "r-2026-10-12-015",
+          "r-2026-10-12-021",
+          "r-2026-10-12-009"
+        ],
+        "ok": true,
+        "outcome": "advisory_similar"
+      },
+      {
+        "index": 1,
+        "group": "conflict",
+        "claim_a": "Always wrap errors with %w",
+        "claim_b": "Return bare errors without wrapping",
+        "seed_ok": true,
+        "seed_id": "r-2026-10-12-023",
+        "second_code": null,
+        "second_id": "r-2026-10-12-024",
+        "similar_count": 3,
+        "similar_ids": [
+          "r-2026-10-12-023",
+          "r-2026-10-12-002",
+          "r-2026-10-12-011"
+        ],
+        "ok": true,
+        "outcome": "advisory_similar"
+      },
+      {
+        "index": 2,
+        "group": "conflict",
+        "claim_a": "Prefer tabs over spaces in Go",
+        "claim_b": "Prefer spaces over tabs in Go",
+        "seed_ok": true,
+        "seed_id": "r-2026-10-12-025",
+        "second_code": null,
+        "second_id": "r-2026-10-12-026",
+        "similar_count": 3,
+        "similar_ids": [
+          "r-2026-10-12-025",
+          "r-2026-10-12-022",
+          "r-2026-10-12-015"
+        ],
+        "ok": true,
+        "outcome": "advisory_similar"
+      },
+      {
+        "index": 3,
+        "group": "conflict",
+        "claim_a": "Use snake_case for Python",
+        "claim_b": "Use camelCase for Python",
+        "seed_ok": true,
+        "seed_id": "r-2026-10-12-027",
+        "second_code": null,
+        "second_id": "r-2026-10-12-028",
+        "similar_count": 3,
+        "similar_ids": [
+          "r-2026-10-12-009",
+          "r-2026-10-12-022",
+          "r-2026-10-12-021"
+        ],
+        "ok": true,
+        "outcome": "advisory_similar"
+      },
+      {
+        "index": 4,
+        "group": "conflict",
+        "claim_a": "Write comments in English",
+        "claim_b": "Write comments in Chinese",
+        "seed_ok": true,
+        "seed_id": "r-2026-10-12-029",
+        "second_code": null,
+        "second_id": "r-2026-10-12-030",
+        "similar_count": 3,
+        "similar_ids": [
+          "r-2026-10-12-009",
+          "r-2026-10-12-029",
+          "r-2026-10-12-028"
+        ],
+        "ok": true,
+        "outcome": "advisory_similar"
+      },
+      {
+        "index": 5,
+        "group": "conflict",
+        "claim_a": "Avoid global mutable state",
+        "claim_b": "Use a global config singleton",
+        "seed_ok": true,
+        "seed_id": "r-2026-10-12-031",
+        "second_code": null,
+        "second_id": "r-2026-10-12-032",
+        "similar_count": 1,
+        "similar_ids": [
+          "r-2026-10-12-010"
+        ],
+        "ok": true,
+        "outcome": "advisory_similar"
+      },
+      {
+        "index": 6,
+        "group": "conflict",
+        "claim_a": "Keep functions short",
+        "claim_b": "Long functions are fine when linear",
+        "seed_ok": true,
+        "seed_id": "r-2026-10-12-033",
+        "second_code": null,
+        "second_id": "r-2026-10-12-034",
+        "similar_count": 3,
+        "similar_ids": [
+          "r-2026-10-12-007",
+          "r-2026-10-12-033",
+          "r-2026-10-12-004"
+        ],
+        "ok": true,
+        "outcome": "advisory_similar"
+      },
+      {
+        "index": 7,
+        "group": "conflict",
+        "claim_a": "Use table-driven tests",
+        "claim_b": "Use assertion libraries instead of table tests",
+        "seed_ok": true,
+        "seed_id": "r-2026-10-12-035",
+        "second_code": null,
+        "second_id": "r-2026-10-12-036",
+        "similar_count": 3,
+        "similar_ids": [
+          "r-2026-10-12-003",
+          "r-2026-10-12-035",
+          "r-2026-10-12-016"
+        ],
+        "ok": true,
+        "outcome": "advisory_similar"
+      },
+      {
+        "index": 8,
+        "group": "conflict",
+        "claim_a": "Commit directly to main",
+        "claim_b": "Never commit directly to main",
+        "seed_ok": true,
+        "seed_id": "r-2026-10-12-037",
+        "second_code": null,
+        "second_id": "r-2026-10-12-038",
+        "similar_count": 3,
+        "similar_ids": [
+          "r-2026-10-12-037",
+          "r-2026-10-12-005",
+          "r-2026-10-12-006"
+        ],
+        "ok": true,
+        "outcome": "advisory_similar"
+      },
+      {
+        "index": 9,
+        "group": "conflict",
+        "claim_a": "Pin dependency versions",
+        "claim_b": "Use floating dependency ranges",
+        "seed_ok": true,
+        "seed_id": "r-2026-10-12-039",
+        "second_code": null,
+        "second_id": "r-2026-10-12-040",
+        "similar_count": 2,
+        "similar_ids": [
+          "r-2026-10-12-019",
+          "r-2026-10-12-039"
+        ],
+        "ok": true,
+        "outcome": "advisory_similar"
+      },
+      {
+        "index": 10,
+        "group": "conflict",
+        "claim_a": "Handle every error explicitly",
+        "claim_b": "Ignore errors from best-effort calls",
+        "seed_ok": true,
+        "seed_id": "r-2026-10-12-041",
+        "second_code": null,
+        "second_id": "r-2026-10-12-042",
+        "similar_count": 3,
+        "similar_ids": [
+          "r-2026-10-12-002",
+          "r-2026-10-12-024",
+          "r-2026-10-12-011"
+        ],
+        "ok": true,
+        "outcome": "advisory_similar"
+      },
+      {
+        "index": 11,
+        "group": "conflict",
+        "claim_a": "Prefer composition over inheritance",
+        "claim_b": "Prefer deep inheritance hierarchies",
+        "seed_ok": true,
+        "seed_id": "r-2026-10-12-043",
+        "second_code": null,
+        "second_id": "r-2026-10-12-044",
+        "similar_count": 0,
+        "similar_ids": [],
+        "ok": true,
+        "outcome": "added_ok"
+      },
+      {
+        "index": 12,
+        "group": "conflict",
+        "claim_a": "Log structured fields not strings",
+        "claim_b": "Log plain formatted strings",
+        "seed_ok": true,
+        "seed_id": "r-2026-10-12-045",
+        "second_code": null,
+        "second_id": "r-2026-10-12-046",
+        "similar_count": 2,
+        "similar_ids": [
+          "r-2026-10-12-018",
+          "r-2026-10-12-045"
+        ],
+        "ok": true,
+        "outcome": "advisory_similar"
+      },
+      {
+        "index": 13,
+        "group": "conflict",
+        "claim_a": "Return early instead of nesting",
+        "claim_b": "Use a single exit point per function",
+        "seed_ok": true,
+        "seed_id": "r-2026-10-12-047",
+        "second_code": null,
+        "second_id": "r-2026-10-12-048",
+        "similar_count": 3,
+        "similar_ids": [
+          "r-2026-10-12-007",
+          "r-2026-10-12-033",
+          "r-2026-10-12-034"
+        ],
+        "ok": true,
+        "outcome": "advisory_similar"
+      },
+      {
+        "index": 14,
+        "group": "conflict",
+        "claim_a": "Vendor dependencies into the repo",
+        "claim_b": "Do not vendor dependencies",
+        "seed_ok": true,
+        "seed_id": "r-2026-10-12-049",
+        "second_code": null,
+        "second_id": "r-2026-10-12-050",
+        "similar_count": 3,
+        "similar_ids": [
+          "r-2026-10-12-049",
+          "r-2026-10-12-019",
+          "r-2026-10-12-039"
+        ],
+        "ok": true,
+        "outcome": "advisory_similar"
+      },
+      {
+        "index": 15,
+        "group": "conflict",
+        "claim_a": "Use context as the first parameter",
+        "claim_b": "Pass context only when needed",
+        "seed_ok": true,
+        "seed_id": "r-2026-10-12-051",
+        "second_code": null,
+        "second_id": "r-2026-10-12-052",
+        "similar_count": 3,
+        "similar_ids": [
+          "r-2026-10-12-008",
+          "r-2026-10-12-051",
+          "r-2026-10-12-034"
+        ],
+        "ok": true,
+        "outcome": "advisory_similar"
+      },
+      {
+        "index": 16,
+        "group": "conflict",
+        "claim_a": "Name interfaces by behavior",
+        "claim_b": "Name interfaces with an I prefix",
+        "seed_ok": true,
+        "seed_id": "r-2026-10-12-053",
+        "second_code": null,
+        "second_id": "r-2026-10-12-054",
+        "similar_count": 3,
+        "similar_ids": [
+          "r-2026-10-12-013",
+          "r-2026-10-12-018",
+          "r-2026-10-12-045"
+        ],
+        "ok": true,
+        "outcome": "advisory_similar"
+      },
+      {
+        "index": 17,
+        "group": "conflict",
+        "claim_a": "Add unit tests for new packages",
+        "claim_b": "Skip unit tests for trivial code",
+        "seed_ok": true,
+        "seed_id": "r-2026-10-12-055",
+        "second_code": null,
+        "second_id": "r-2026-10-12-056",
+        "similar_count": 3,
+        "similar_ids": [
+          "r-2026-10-12-016",
+          "r-2026-10-12-055",
+          "r-2026-10-12-035"
+        ],
+        "ok": true,
+        "outcome": "advisory_similar"
+      },
+      {
+        "index": 18,
+        "group": "conflict",
+        "claim_a": "Document exported symbols",
+        "claim_b": "Self-documenting code needs no comments",
+        "seed_ok": true,
+        "seed_id": "r-2026-10-12-057",
+        "second_code": null,
+        "second_id": "r-2026-10-12-058",
+        "similar_count": 3,
+        "similar_ids": [
+          "r-2026-10-12-009",
+          "r-2026-10-12-029",
+          "r-2026-10-12-030"
+        ],
+        "ok": true,
+        "outcome": "advisory_similar"
+      },
+      {
+        "index": 19,
+        "group": "conflict",
+        "claim_a": "Use tabs for Go indentation",
+        "claim_b": "Use two-space indentation everywhere",
+        "seed_ok": true,
+        "seed_id": "r-2026-10-12-059",
+        "second_code": null,
+        "second_id": "r-2026-10-12-060",
+        "similar_count": 3,
+        "similar_ids": [
+          "r-2026-10-12-022",
+          "r-2026-10-12-025",
+          "r-2026-10-12-026"
+        ],
+        "ok": true,
+        "outcome": "advisory_similar"
+      }
+    ],
+    "unrelated": [
+      {
+        "index": 0,
+        "group": "unrelated",
+        "claim_a": "Go exported identifiers must use PascalCase",
+        "claim_b": "Deploy to staging before release",
+        "seed_ok": true,
+        "seed_id": "r-2026-10-12-061",
+        "second_code": null,
+        "second_id": "r-2026-10-12-062",
+        "similar_count": 3,
+        "similar_ids": [
+          "r-2026-10-12-037",
+          "r-2026-10-12-006",
+          "r-2026-10-12-038"
+        ],
+        "ok": true,
+        "outcome": "added_ok"
+      },
+      {
+        "index": 1,
+        "group": "unrelated",
+        "claim_a": "Wrap errors with %w",
+        "claim_b": "Use dark mode in the editor",
+        "seed_ok": true,
+        "seed_id": "r-2026-10-12-063",
+        "second_code": null,
+        "second_id": "r-2026-10-12-064",
+        "similar_count": 3,
+        "similar_ids": [
+          "r-2026-10-12-009",
+          "r-2026-10-12-029",
+          "r-2026-10-12-030"
+        ],
+        "ok": true,
+        "outcome": "added_ok"
+      },
+      {
+        "index": 2,
+        "group": "unrelated",
+        "claim_a": "Use table-driven tests in Go",
+        "claim_b": "Take a coffee break every 90 minutes",
+        "seed_ok": true,
+        "seed_id": "r-2026-10-12-065",
+        "second_code": null,
+        "second_id": "r-2026-10-12-066",
+        "similar_count": 0,
+        "similar_ids": [],
+        "ok": true,
+        "outcome": "added_ok"
+      },
+      {
+        "index": 3,
+        "group": "unrelated",
+        "claim_a": "Prefer snake_case for Python functions",
+        "claim_b": "Kubernetes pods restart on failure",
+        "seed_ok": true,
+        "seed_id": "r-2026-10-12-067",
+        "second_code": null,
+        "second_id": "r-2026-10-12-068",
+        "similar_count": 2,
+        "similar_ids": [
+          "r-2026-10-12-049",
+          "r-2026-10-12-005"
+        ],
+        "ok": true,
+        "outcome": "added_ok"
+      },
+      {
+        "index": 4,
+        "group": "unrelated",
+        "claim_a": "Never commit secrets to the repo",
+        "claim_b": "Write the changelog in markdown",
+        "seed_ok": true,
+        "seed_id": "r-2026-10-12-069",
+        "second_code": null,
+        "second_id": "r-2026-10-12-070",
+        "similar_count": 3,
+        "similar_ids": [
+          "r-2026-10-12-064",
+          "r-2026-10-12-009",
+          "r-2026-10-12-029"
+        ],
+        "ok": true,
+        "outcome": "added_ok"
+      },
+      {
+        "index": 5,
+        "group": "unrelated",
+        "claim_a": "Run gofmt before committing",
+        "claim_b": "Schedule team meetings on Tuesday",
+        "seed_ok": true,
+        "seed_id": "r-2026-10-12-071",
+        "second_code": null,
+        "second_id": "r-2026-10-12-072",
+        "similar_count": 3,
+        "similar_ids": [
+          "r-2026-10-12-009",
+          "r-2026-10-12-029",
+          "r-2026-10-12-030"
+        ],
+        "ok": true,
+        "outcome": "added_ok"
+      },
+      {
+        "index": 6,
+        "group": "unrelated",
+        "claim_a": "Keep functions under 50 lines",
+        "claim_b": "Use Redis for session storage",
+        "seed_ok": true,
+        "seed_id": "r-2026-10-12-073",
+        "second_code": null,
+        "second_id": "r-2026-10-12-074",
+        "similar_count": 1,
+        "similar_ids": [
+          "r-2026-10-12-028"
+        ],
+        "ok": true,
+        "outcome": "added_ok"
+      },
+      {
+        "index": 7,
+        "group": "unrelated",
+        "claim_a": "Use context as the first parameter",
+        "claim_b": "Board games on Friday night",
+        "seed_ok": true,
+        "seed_id": "r-2026-10-12-075",
+        "second_code": null,
+        "second_id": "r-2026-10-12-076",
+        "similar_count": 1,
+        "similar_ids": [
+          "r-2026-10-12-072"
+        ],
+        "ok": true,
+        "outcome": "added_ok"
+      },
+      {
+        "index": 8,
+        "group": "unrelated",
+        "claim_a": "Write comments in English",
+        "claim_b": "Rotate TLS certificates quarterly",
+        "seed_ok": true,
+        "seed_id": "r-2026-10-12-077",
+        "second_code": null,
+        "second_id": "r-2026-10-12-078",
+        "similar_count": 0,
+        "similar_ids": [],
+        "ok": true,
+        "outcome": "added_ok"
+      },
+      {
+        "index": 9,
+        "group": "unrelated",
+        "claim_a": "Avoid global mutable state",
+        "claim_b": "Back up photos to an external drive",
+        "seed_ok": true,
+        "seed_id": "r-2026-10-12-079",
+        "second_code": null,
+        "second_id": "r-2026-10-12-080",
+        "similar_count": 0,
+        "similar_ids": [],
+        "ok": true,
+        "outcome": "added_ok"
+      },
+      {
+        "index": 10,
+        "group": "unrelated",
+        "claim_a": "Handle every error explicitly",
+        "claim_b": "Order lunch before noon",
+        "seed_ok": true,
+        "seed_id": "r-2026-10-12-081",
+        "second_code": null,
+        "second_id": "r-2026-10-12-082",
+        "similar_count": 0,
+        "similar_ids": [],
+        "ok": true,
+        "outcome": "added_ok"
+      },
+      {
+        "index": 11,
+        "group": "unrelated",
+        "claim_a": "Prefer composition over inheritance",
+        "claim_b": "The train departs at 7am",
+        "seed_ok": true,
+        "seed_id": "r-2026-10-12-083",
+        "second_code": null,
+        "second_id": "r-2026-10-12-084",
+        "similar_count": 0,
+        "similar_ids": [],
+        "ok": true,
+        "outcome": "added_ok"
+      },
+      {
+        "index": 12,
+        "group": "unrelated",
+        "claim_a": "Name interfaces by behavior",
+        "claim_b": "Water the plants twice a week",
+        "seed_ok": true,
+        "seed_id": "r-2026-10-12-085",
+        "second_code": null,
+        "second_id": "r-2026-10-12-086",
+        "similar_count": 1,
+        "similar_ids": [
+          "r-2026-10-12-072"
+        ],
+        "ok": true,
+        "outcome": "added_ok"
+      },
+      {
+        "index": 13,
+        "group": "unrelated",
+        "claim_a": "Keep imports grouped stdlib first",
+        "claim_b": "Upgrade postgres to version 16",
+        "seed_ok": true,
+        "seed_id": "r-2026-10-12-087",
+        "second_code": null,
+        "second_id": "r-2026-10-12-088",
+        "similar_count": 3,
+        "similar_ids": [
+          "r-2026-10-12-062",
+          "r-2026-10-12-019",
+          "r-2026-10-12-039"
+        ],
+        "ok": true,
+        "outcome": "added_ok"
+      },
+      {
+        "index": 14,
+        "group": "unrelated",
+        "claim_a": "Use tabs for indentation in Go",
+        "claim_b": "Buy a standing desk",
+        "seed_ok": true,
+        "seed_id": "r-2026-10-12-089",
+        "second_code": null,
+        "second_id": "r-2026-10-12-090",
+        "similar_count": 0,
+        "similar_ids": [],
+        "ok": true,
+        "outcome": "added_ok"
+      },
+      {
+        "index": 15,
+        "group": "unrelated",
+        "claim_a": "Add unit tests for new packages",
+        "claim_b": "Renew the domain registration",
+        "seed_ok": true,
+        "seed_id": "r-2026-10-12-091",
+        "second_code": null,
+        "second_id": "r-2026-10-12-092",
+        "similar_count": 0,
+        "similar_ids": [],
+        "ok": true,
+        "outcome": "added_ok"
+      },
+      {
+        "index": 16,
+        "group": "unrelated",
+        "claim_a": "Return early instead of nesting",
+        "claim_b": "Archive old invoices monthly",
+        "seed_ok": true,
+        "seed_id": "r-2026-10-12-093",
+        "second_code": null,
+        "second_id": "r-2026-10-12-094",
+        "similar_count": 0,
+        "similar_ids": [],
+        "ok": true,
+        "outcome": "added_ok"
+      },
+      {
+        "index": 17,
+        "group": "unrelated",
+        "claim_a": "Log structured fields not strings",
+        "claim_b": "Paint the hallway white",
+        "seed_ok": true,
+        "seed_id": "r-2026-10-12-095",
+        "second_code": null,
+        "second_id": "r-2026-10-12-096",
+        "similar_count": 1,
+        "similar_ids": [
+          "r-2026-10-12-064"
+        ],
+        "ok": true,
+        "outcome": "added_ok"
+      },
+      {
+        "index": 18,
+        "group": "unrelated",
+        "claim_a": "Pin dependency versions",
+        "claim_b": "Walk ten thousand steps daily",
+        "seed_ok": true,
+        "seed_id": "r-2026-10-12-097",
+        "second_code": null,
+        "second_id": "r-2026-10-12-098",
+        "similar_count": 1,
+        "similar_ids": [
+          "r-2026-10-12-086"
+        ],
+        "ok": true,
+        "outcome": "added_ok"
+      },
+      {
+        "index": 19,
+        "group": "unrelated",
+        "claim_a": "Document exported symbols",
+        "claim_b": "Use a mechanical keyboard",
+        "seed_ok": true,
+        "seed_id": "r-2026-10-12-099",
+        "second_code": null,
+        "second_id": "r-2026-10-12-100",
+        "similar_count": 0,
+        "similar_ids": [],
+        "ok": true,
+        "outcome": "added_ok"
+      }
+    ]
+  }
+}

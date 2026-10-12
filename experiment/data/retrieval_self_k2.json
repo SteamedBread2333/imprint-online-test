@@ -108,7 +108,7 @@
       "rg_command": "rg -i -l --glob *.md -e 时间戳 -e ISO8601 -e 存储 docs",
       "search_req_tokens": 27,
       "grep_hits_tokens": 477,
-      "grep_hits_sample": "docs/15-i18n.md\ndocs/09-security.md\ndocs/05-api-design.md\ndocs/04-database.md\n---\ndocs/15-i18n.md:43:日期时间按用户 locale 格式化，存储仍为 UTC ISO8601。 本条适用于 国际化，涉及「日期格式」的实现必须遵守，不允许例外或临时绕开。\ndocs/15-i18n.md:48:再次强调，本条的权威表述是：日期时间按用户 locale 格式化，存储仍为 UTC ISO8601。\ndocs/04-database.md:1:# 数据库与时间戳规范\ndocs/04-database.md:5:## 时间戳存储\ndocs/04-database.md:7:所有时间戳字段统一存 UTC 的 ISO8601 字符串，禁止存本地时间或整数。 本条适用于 数据库，涉及「时间戳存储」的实现必须遵守，不允许例外或临时绕开。\ndocs/04-database.md:12:再次强调，本条的权威表述是：所有时间戳字段统一存 UTC 的 ISO8601 字符串，禁止存本地时间或整数。\ndocs/09-security.md:23:## 密钥存储\ndocs/09-security.md:25:密钥一律加密存储于密钥管理服务，代码与配置不得明文。 本条适用于 安全，涉及「密钥存储」的实现必须遵守，不允许例外或临时绕开。\ndocs/09-security.md:30:再次强调，本条的权威表述是：密钥一律加密存储于密钥管理服务，代码与配置不得明文。\ndocs/05-api-design.md:61:接口层时间统一输出 ISO8601 UTC 字符串，与数据库存储保持一致。 本条适用于 REST API，涉及「时间格式」的实现必须遵守，不允许例外或临时绕开。\ndocs/05-api-design.md:66:再次强调，本条的权威表述是：接口层时间统一输出 ISO8601 UTC 字符串，与数据库存储保持一致。",
+      "grep_hits_sample": "docs/15-i18n.md\ndocs/09-security.md\ndocs/04-database.md\ndocs/05-api-design.md\n---\ndocs/15-i18n.md:43:日期时间按用户 locale 格式化，存储仍为 UTC ISO8601。 本条适用于 国际化，涉及「日期格式」的实现必须遵守，不允许例外或临时绕开。\ndocs/15-i18n.md:48:再次强调，本条的权威表述是：日期时间按用户 locale 格式化，存储仍为 UTC ISO8601。\ndocs/09-security.md:23:## 密钥存储\ndocs/09-security.md:25:密钥一律加密存储于密钥管理服务，代码与配置不得明文。 本条适用于 安全，涉及「密钥存储」的实现必须遵守，不允许例外或临时绕开。\ndocs/09-security.md:30:再次强调，本条的权威表述是：密钥一律加密存储于密钥管理服务，代码与配置不得明文。\ndocs/04-database.md:1:# 数据库与时间戳规范\ndocs/04-database.md:5:## 时间戳存储\ndocs/04-database.md:7:所有时间戳字段统一存 UTC 的 ISO8601 字符串，禁止存本地时间或整数。 本条适用于 数据库，涉及「时间戳存储」的实现必须遵守，不允许例外或临时绕开。\ndocs/04-database.md:12:再次强调，本条的权威表述是：所有时间戳字段统一存 UTC 的 ISO8601 字符串，禁止存本地时间或整数。\ndocs/05-api-design.md:61:接口层时间统一输出 ISO8601 UTC 字符串，与数据库存储保持一致。 本条适用于 REST API，涉及「时间格式」的实现必须遵守，不允许例外或临时绕开。\ndocs/05-api-design.md:66:再次强调，本条的权威表述是：接口层时间统一输出 ISO8601 UTC 字符串，与数据库存储保持一致。",
       "read_files_tokens": 5433,
       "n_hits": 11,
       "n_files_matched": 4,
@@ -116,8 +116,8 @@
       "opened_files": [
         "docs/15-i18n.md",
         "docs/09-security.md",
-        "docs/05-api-design.md",
-        "docs/04-database.md"
+        "docs/04-database.md",
+        "docs/05-api-design.md"
       ],
       "target_file": "docs/04-database.md",
       "target_heading": "时间戳存储",
@@ -301,15 +301,15 @@
       "rg_command": "rg -i -l --glob *.md -e 限流 -e 降级 -e 缓存 docs",
       "search_req_tokens": 24,
       "grep_hits_tokens": 437,
-      "grep_hits_sample": "docs/10-performance.md\ndocs/12-concurrency.md\ndocs/08-deployment.md\n---\ndocs/10-performance.md:5:## 缓存策略\ndocs/10-performance.md:7:热点数据优先走缓存并设合理过期，避免缓存击穿与雪崩。 本条适用于 性能，涉及「缓存策略」的实现必须遵守，不允许例外或临时绕开。\ndocs/10-performance.md:12:再次强调，本条的权威表述是：热点数据优先走缓存并设合理过期，避免缓存击穿与雪崩。\ndocs/10-performance.md:50:## 限流降级\ndocs/10-performance.md:52:核心接口统一限流与降级，防止高峰打垮下游。 本条适用于 性能，涉及「限流降级」的实现必须遵守，不允许例外或临时绕开。\ndocs/10-performance.md:57:再次强调，本条的权威表述是：核心接口统一限流与降级，防止高峰打垮下游。\ndocs/08-deployment.md:50:## 构建缓存\ndocs/08-deployment.md:52:依赖安装层做缓存分层，利用镜像层缓存加速构建。 本条适用于 部署，涉及「构建缓存」的实现必须遵守，不允许例外或临时绕开。\ndocs/08-deployment.md:57:再次强调，本条的权威表述是：依赖安装层做缓存分层，利用镜像层缓存加速构建。\ndocs/12-concurrency.md:61:队列堆积超阈值时拒绝新任务并触发降级。 本条适用于 并发，涉及「背压」的实现必须遵守，不允许例外或临时绕开。\ndocs/12-concurrency.md:66:再次强调，本条的权威表述是：队列堆积超阈值时拒绝新任务并触发降级。",
+      "grep_hits_sample": "docs/10-performance.md\ndocs/08-deployment.md\ndocs/12-concurrency.md\n---\ndocs/10-performance.md:5:## 缓存策略\ndocs/10-performance.md:7:热点数据优先走缓存并设合理过期，避免缓存击穿与雪崩。 本条适用于 性能，涉及「缓存策略」的实现必须遵守，不允许例外或临时绕开。\ndocs/10-performance.md:12:再次强调，本条的权威表述是：热点数据优先走缓存并设合理过期，避免缓存击穿与雪崩。\ndocs/10-performance.md:50:## 限流降级\ndocs/10-performance.md:52:核心接口统一限流与降级，防止高峰打垮下游。 本条适用于 性能，涉及「限流降级」的实现必须遵守，不允许例外或临时绕开。\ndocs/10-performance.md:57:再次强调，本条的权威表述是：核心接口统一限流与降级，防止高峰打垮下游。\ndocs/08-deployment.md:50:## 构建缓存\ndocs/08-deployment.md:52:依赖安装层做缓存分层，利用镜像层缓存加速构建。 本条适用于 部署，涉及「构建缓存」的实现必须遵守，不允许例外或临时绕开。\ndocs/08-deployment.md:57:再次强调，本条的权威表述是：依赖安装层做缓存分层，利用镜像层缓存加速构建。\ndocs/12-concurrency.md:61:队列堆积超阈值时拒绝新任务并触发降级。 本条适用于 并发，涉及「背压」的实现必须遵守，不允许例外或临时绕开。\ndocs/12-concurrency.md:66:再次强调，本条的权威表述是：队列堆积超阈值时拒绝新任务并触发降级。",
       "read_files_tokens": 4015,
       "n_hits": 11,
       "n_files_matched": 3,
       "n_files_opened": 3,
       "opened_files": [
         "docs/10-performance.md",
-        "docs/12-concurrency.md",
-        "docs/08-deployment.md"
+        "docs/08-deployment.md",
+        "docs/12-concurrency.md"
       ],
       "target_file": "docs/10-performance.md",
       "target_heading": "限流降级",
@@ -786,7 +786,7 @@
       "rg_command": "rg -i -l --glob *.md -e 连接池 -e 超时 docs",
       "search_req_tokens": 20,
       "grep_hits_tokens": 670,
-      "grep_hits_sample": "docs/14-config.md\ndocs/11-observability.md\ndocs/04-database.md\ndocs/12-concurrency.md\ndocs/16-http-client.md\n---\ndocs/14-config.md:7:主机、端口、超时一律从环境变量读取，禁止写死在源码。 本条适用于 配置，涉及「环境读取」的实现必须遵守，不允许例外或临时绕开。\ndocs/14-config.md:12:再次强调，本条的权威表述是：主机、端口、超时一律从环境变量读取，禁止写死在源码。\ndocs/11-observability.md:70:CPU 与连接池水位超 70% 必须告警，禁止等打满再处理。 本条适用于 可观测性，涉及「容量水位」的实现必须遵守，不允许例外或临时绕开。\ndocs/11-observability.md:75:再次强调，本条的权威表述是：CPU 与连接池水位超 70% 必须告警，禁止等打满再处理。\ndocs/04-database.md:43:数据库连接使用连接池并设置合理超时，禁止在循环内频繁开关连接。 本条适用于 数据库，涉及「连接管理」的实现必须遵守，不允许例外或临时绕开。\ndocs/04-database.md:48:再次强调，本条的权威表述是：数据库连接使用连接池并设置合理超时，禁止在循环内频繁开关连接。\ndocs/12-concurrency.md:68:## 可见性超时\ndocs/12-concurrency.md:70:任务可见性超时须大于最坏处理时间，避免重复执行。 本条适用于 并发，涉及「可见性超时」的实现必须遵守，不允许例外或临时绕开。\ndocs/12-concurrency.md:75:再次强调，本条的权威表述是：任务可见性超时须大于最坏处理时间，避免重复执行。\ndocs/16-http-client.md:5:## 超时设置\ndocs/16-http-client.md:7:出站调用必须设置连接超时与读取超时，禁止无限等待。 本条适用于 HTTP 客户端，涉及「超时设置」的实现必须遵守，不允许例外或临时绕开。\ndocs/16-http-client.md:12:再次强调，本条的权威表述是：出站调用必须设置连接超时与读取超时，禁止无限等待。\ndocs/16-http-client.md:68:## 连接池\ndocs/16-http-client.md:70:复用 HTTP 连接池，禁止每个请求新建 Client。 本条适用于 HTTP 客户端，涉及「连接池」的实现必须遵守，不允许例外或临时绕开。\ndocs/16-http-client.md:75:再次强调，本条的权威表述是：复用 HTTP 连接池，禁止每个请求新建 Client。",
+      "grep_hits_sample": "docs/14-config.md\ndocs/11-observability.md\ndocs/12-concurrency.md\ndocs/16-http-client.md\ndocs/04-database.md\n---\ndocs/14-config.md:7:主机、端口、超时一律从环境变量读取，禁止写死在源码。 本条适用于 配置，涉及「环境读取」的实现必须遵守，不允许例外或临时绕开。\ndocs/14-config.md:12:再次强调，本条的权威表述是：主机、端口、超时一律从环境变量读取，禁止写死在源码。\ndocs/11-observability.md:70:CPU 与连接池水位超 70% 必须告警，禁止等打满再处理。 本条适用于 可观测性，涉及「容量水位」的实现必须遵守，不允许例外或临时绕开。\ndocs/11-observability.md:75:再次强调，本条的权威表述是：CPU 与连接池水位超 70% 必须告警，禁止等打满再处理。\ndocs/04-database.md:43:数据库连接使用连接池并设置合理超时，禁止在循环内频繁开关连接。 本条适用于 数据库，涉及「连接管理」的实现必须遵守，不允许例外或临时绕开。\ndocs/04-database.md:48:再次强调，本条的权威表述是：数据库连接使用连接池并设置合理超时，禁止在循环内频繁开关连接。\ndocs/12-concurrency.md:68:## 可见性超时\ndocs/12-concurrency.md:70:任务可见性超时须大于最坏处理时间，避免重复执行。 本条适用于 并发，涉及「可见性超时」的实现必须遵守，不允许例外或临时绕开。\ndocs/12-concurrency.md:75:再次强调，本条的权威表述是：任务可见性超时须大于最坏处理时间，避免重复执行。\ndocs/16-http-client.md:5:## 超时设置\ndocs/16-http-client.md:7:出站调用必须设置连接超时与读取超时，禁止无限等待。 本条适用于 HTTP 客户端，涉及「超时设置」的实现必须遵守，不允许例外或临时绕开。\ndocs/16-http-client.md:12:再次强调，本条的权威表述是：出站调用必须设置连接超时与读取超时，禁止无限等待。\ndocs/16-http-client.md:68:## 连接池\ndocs/16-http-client.md:70:复用 HTTP 连接池，禁止每个请求新建 Client。 本条适用于 HTTP 客户端，涉及「连接池」的实现必须遵守，不允许例外或临时绕开。\ndocs/16-http-client.md:75:再次强调，本条的权威表述是：复用 HTTP 连接池，禁止每个请求新建 Client。",
       "read_files_tokens": 6755,
       "n_hits": 15,
       "n_files_matched": 5,
@@ -794,9 +794,9 @@
       "opened_files": [
         "docs/14-config.md",
         "docs/11-observability.md",
-        "docs/04-database.md",
         "docs/12-concurrency.md",
-        "docs/16-http-client.md"
+        "docs/16-http-client.md",
+        "docs/04-database.md"
       ],
       "target_file": "docs/04-database.md",
       "target_heading": "连接管理",
@@ -819,7 +819,7 @@
       "rg_command": "rg -i -l --glob *.md -e canary[\\s_\\-]*rollback -e 灰度发布 -e 回滚 docs",
       "search_req_tokens": 30,
       "grep_hits_tokens": 409,
-      "grep_hits_sample": "docs/13-review.md\ndocs/08-deployment.md\ndocs/03-error-handling.md\n---\ndocs/03-error-handling.md:68:## 事务回滚\ndocs/03-error-handling.md:70:异常触发时事务必须回滚，禁止留下半写状态的脏数据。 本条适用于 异常处理，涉及「事务回滚」的实现必须遵守，不允许例外或临时绕开。\ndocs/03-error-handling.md:75:再次强调，本条的权威表述是：异常触发时事务必须回滚，禁止留下半写状态的脏数据。\ndocs/13-review.md:16:每个 PR 必须写明风险、灰度步骤与一键回滚办法。 本条适用于 代码评审，涉及「PR 描述」的实现必须遵守，不允许例外或临时绕开。\ndocs/13-review.md:21:再次强调，本条的权威表述是：每个 PR 必须写明风险、灰度步骤与一键回滚办法。\ndocs/08-deployment.md:23:## 灰度发布\ndocs/08-deployment.md:25:变更必须走灰度策略，先用小流量验证再逐步放量。 本条适用于 部署，涉及「灰度发布」的实现必须遵守，不允许例外或临时绕开。\ndocs/08-deployment.md:32:## 回滚预案\ndocs/08-deployment.md:34:每次发布前准备一键回滚方案，保留上一个稳定版本。 本条适用于 部署，涉及「回滚预案」的实现必须遵守，不允许例外或临时绕开。\ndocs/08-deployment.md:39:再次强调，本条的权威表述是：每次发布前准备一键回滚方案，保留上一个稳定版本。",
+      "grep_hits_sample": "docs/13-review.md\ndocs/08-deployment.md\ndocs/03-error-handling.md\n---\ndocs/13-review.md:16:每个 PR 必须写明风险、灰度步骤与一键回滚办法。 本条适用于 代码评审，涉及「PR 描述」的实现必须遵守，不允许例外或临时绕开。\ndocs/13-review.md:21:再次强调，本条的权威表述是：每个 PR 必须写明风险、灰度步骤与一键回滚办法。\ndocs/08-deployment.md:23:## 灰度发布\ndocs/08-deployment.md:25:变更必须走灰度策略，先用小流量验证再逐步放量。 本条适用于 部署，涉及「灰度发布」的实现必须遵守，不允许例外或临时绕开。\ndocs/08-deployment.md:32:## 回滚预案\ndocs/08-deployment.md:34:每次发布前准备一键回滚方案，保留上一个稳定版本。 本条适用于 部署，涉及「回滚预案」的实现必须遵守，不允许例外或临时绕开。\ndocs/08-deployment.md:39:再次强调，本条的权威表述是：每次发布前准备一键回滚方案，保留上一个稳定版本。\ndocs/03-error-handling.md:68:## 事务回滚\ndocs/03-error-handling.md:70:异常触发时事务必须回滚，禁止留下半写状态的脏数据。 本条适用于 异常处理，涉及「事务回滚」的实现必须遵守，不允许例外或临时绕开。\ndocs/03-error-handling.md:75:再次强调，本条的权威表述是：异常触发时事务必须回滚，禁止留下半写状态的脏数据。",
       "read_files_tokens": 4099,
       "n_hits": 10,
       "n_files_matched": 3,
@@ -976,7 +976,7 @@
       "rg_command": "rg -i -l --glob *.md -e SQL[\\s_\\-]*concatenation -e 拼接 -e concatenation docs",
       "search_req_tokens": 29,
       "grep_hits_tokens": 513,
-      "grep_hits_sample": "docs/01-python-style.md\ndocs/15-i18n.md\ndocs/09-security.md\ndocs/06-logging.md\n---\ndocs/01-python-style.md:34:优先使用 f-string 进行格式化，禁止在循环内反复拼接字符串。 本条适用于 Python 代码风格，涉及「字符串处理」的实现必须遵守，不允许例外或临时绕开。\ndocs/01-python-style.md:39:再次强调，本条的权威表述是：优先使用 f-string 进行格式化，禁止在循环内反复拼接字符串。\ndocs/15-i18n.md:34:插值使用命名占位符，禁止按位置拼接以免语序错乱。 本条适用于 国际化，涉及「占位符」的实现必须遵守，不允许例外或临时绕开。\ndocs/15-i18n.md:39:再次强调，本条的权威表述是：插值使用命名占位符，禁止按位置拼接以免语序错乱。\ndocs/06-logging.md:7:日志统一输出结构化 JSON 格式，禁止用 print 与裸文本拼接。 本条适用于 日志，涉及「结构化日志」的实现必须遵守，不允许例外或临时绕开。\ndocs/06-logging.md:12:再次强调，本条的权威表述是：日志统一输出结构化 JSON 格式，禁止用 print 与裸文本拼接。\ndocs/06-logging.md:61:避免在热路径拼接大对象，日志参数采用惰性求值。 本条适用于 日志，涉及「性能开销」的实现必须遵守，不允许例外或临时绕开。\ndocs/06-logging.md:66:再次强调，本条的权威表述是：避免在热路径拼接大对象，日志参数采用惰性求值。\ndocs/09-security.md:34:查询一律使用参数化与 ORM，禁止字符串拼接 SQL。 本条适用于 安全，涉及「SQL 注入」的实现必须遵守，不允许例外或临时绕开。\ndocs/09-security.md:39:再次强调，本条的权威表述是：查询一律使用参数化与 ORM，禁止字符串拼接 SQL。",
+      "grep_hits_sample": "docs/01-python-style.md\ndocs/15-i18n.md\ndocs/09-security.md\ndocs/06-logging.md\n---\ndocs/01-python-style.md:34:优先使用 f-string 进行格式化，禁止在循环内反复拼接字符串。 本条适用于 Python 代码风格，涉及「字符串处理」的实现必须遵守，不允许例外或临时绕开。\ndocs/01-python-style.md:39:再次强调，本条的权威表述是：优先使用 f-string 进行格式化，禁止在循环内反复拼接字符串。\ndocs/15-i18n.md:34:插值使用命名占位符，禁止按位置拼接以免语序错乱。 本条适用于 国际化，涉及「占位符」的实现必须遵守，不允许例外或临时绕开。\ndocs/15-i18n.md:39:再次强调，本条的权威表述是：插值使用命名占位符，禁止按位置拼接以免语序错乱。\ndocs/09-security.md:34:查询一律使用参数化与 ORM，禁止字符串拼接 SQL。 本条适用于 安全，涉及「SQL 注入」的实现必须遵守，不允许例外或临时绕开。\ndocs/09-security.md:39:再次强调，本条的权威表述是：查询一律使用参数化与 ORM，禁止字符串拼接 SQL。\ndocs/06-logging.md:7:日志统一输出结构化 JSON 格式，禁止用 print 与裸文本拼接。 本条适用于 日志，涉及「结构化日志」的实现必须遵守，不允许例外或临时绕开。\ndocs/06-logging.md:12:再次强调，本条的权威表述是：日志统一输出结构化 JSON 格式，禁止用 print 与裸文本拼接。\ndocs/06-logging.md:61:避免在热路径拼接大对象，日志参数采用惰性求值。 本条适用于 日志，涉及「性能开销」的实现必须遵守，不允许例外或临时绕开。\ndocs/06-logging.md:66:再次强调，本条的权威表述是：避免在热路径拼接大对象，日志参数采用惰性求值。",
       "read_files_tokens": 5477,
       "n_hits": 10,
       "n_files_matched": 4,

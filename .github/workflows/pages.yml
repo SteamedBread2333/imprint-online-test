@@ -48,10 +48,27 @@ jobs:
         if: github.event_name == 'workflow_dispatch' && inputs.rerun_experiment
         run: bash experiment/scripts/install_imprint_bin.sh
 
+      - name: Checkout embed sidecar
+        if: github.event_name == 'workflow_dispatch' && inputs.rerun_experiment
+        uses: actions/checkout@v4
+        with:
+          repository: SteamedBread2333/imprint-embed-sidecar
+          path: imprint-embed-sidecar
+
+      - name: Prepare embed sidecar
+        if: github.event_name == 'workflow_dispatch' && inputs.rerun_experiment
+        env:
+          IMPRINT_BIN: ${{ github.workspace }}/experiment/bin/imprint
+          IMPRINT_EMBED_SIDECAR: ${{ github.workspace }}/imprint-embed-sidecar
+          HF_HOME: ${{ github.workspace }}/.cache/huggingface
+        run: bash experiment/scripts/ci_prepare_embed.sh
+
       - name: Regenerate HTML reports
         if: github.event_name == 'workflow_dispatch' && inputs.rerun_experiment
         env:
           IMPRINT_MCP: ${{ github.workspace }}/experiment/bin/imprint-mcp
+          IMPRINT_BIN: ${{ github.workspace }}/experiment/bin/imprint
+          IMPRINT_EMBED_SIDECAR: ${{ github.workspace }}/imprint-embed-sidecar
           HF_HOME: ${{ github.workspace }}/.cache/huggingface
         run: python3 experiment/scripts/run_all.py
 
@@ -61,6 +78,8 @@ jobs:
           test -f experiment/report/report.html
           test -f experiment/report/retrieval.html
           test -f experiment/report/record.html
+          test -f experiment/report/semantic.html
+          test -f experiment/data/semantic_gate_summary.json
 
       - name: Upload Pages artifact
         uses: actions/upload-pages-artifact@v3

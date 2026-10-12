@@ -1,6 +1,6 @@
 {
   "meta": {
-    "created_at": "2026-09-29T05:57:14Z",
+    "created_at": "2026-10-12T04:39:51Z",
     "tokenizer": "grok-2-tokenizer（Grok 家族公开编码器；Grok 4.6 官方词表未公开）",
     "imprint_mcp": "imprint-mcp",
     "vault": ".imprint-link-bench",
@@ -16,7 +16,7 @@
   "seeded_rules": [
     {
       "scenario": "s1_rule_first",
-      "rule_id": "r-2026-09-29-001",
+      "rule_id": "r-2026-10-12-001",
       "add_args": {
         "claim": "Use snake_case for functions/variables and PascalCase for classes",
         "scope": "aurora,python",
@@ -32,7 +32,7 @@
     },
     {
       "scenario": "s2_wide_grep",
-      "rule_id": "r-2026-09-29-002",
+      "rule_id": "r-2026-10-12-002",
       "add_args": {
         "claim": "Define hot-data cache TTL and anti-stampede policy per performance doc cache section",
         "scope": "aurora,performance",
@@ -48,7 +48,7 @@
     },
     {
       "scenario": "s3_provenance",
-      "rule_id": "r-2026-09-29-003",
+      "rule_id": "r-2026-10-12-003",
       "add_args": {
         "claim": "Throw AuroraError subclasses for all errors; never bare raise",
         "scope": "aurora,quality",
@@ -69,7 +69,7 @@
       "title": "编码前：规则 claim 替代整篇风格文档",
       "advantage": "一次 find 返回紧凑 claim，足够落地命名；vault sources 指向出处，不必先 Read 全文。",
       "user_message": "新增订单 API 模块，类和函数怎么命名？",
-      "rule_id": "r-2026-09-29-001",
+      "rule_id": "r-2026-10-12-001",
       "find_args": {
         "scope": "aurora,python",
         "query": "PascalCase snake_case naming",
@@ -92,7 +92,7 @@
         "source_link_count": 1,
         "rules_sample": [
           {
-            "id": "r-2026-09-29-001",
+            "id": "r-2026-10-12-001",
             "claim": "Use snake_case for functions/variables and PascalCase for classes",
             "scope": [
               "aurora",
@@ -116,7 +116,7 @@
         ],
         "links_sample": [
           {
-            "rule_id": "r-2026-09-29-001",
+            "rule_id": "r-2026-10-12-001",
             "chunk_id": "1a05967808989c62",
             "kind": "sources",
             "score": 1
@@ -137,7 +137,7 @@
       "title": "宽 grep：规则 + sources 钉住权威文档",
       "advantage": "grep 命中多篇时，规则 claim 说明「缓存策略」权威节；sources 链到 chunk，Read 只需金标一篇。",
       "user_message": "性能这边缓存策略怎么定？",
-      "rule_id": "r-2026-09-29-002",
+      "rule_id": "r-2026-10-12-002",
       "find_args": {
         "scope": "aurora",
         "query": "performance cache",
@@ -163,7 +163,7 @@
         "source_link_count": 2,
         "rules_sample": [
           {
-            "id": "r-2026-09-29-002",
+            "id": "r-2026-10-12-002",
             "claim": "Define hot-data cache TTL and anti-stampede policy per performance doc cache section",
             "scope": [
               "aurora",
@@ -176,7 +176,7 @@
             "evidence_count": 1
           },
           {
-            "id": "r-2026-09-29-001",
+            "id": "r-2026-10-12-001",
             "claim": "Use snake_case for functions/variables and PascalCase for classes",
             "scope": [
               "aurora",
@@ -200,19 +200,19 @@
         ],
         "links_sample": [
           {
-            "rule_id": "r-2026-09-29-002",
+            "rule_id": "r-2026-10-12-002",
             "chunk_id": "151f617d980a9bb0",
             "kind": "sources",
             "score": 1
           },
           {
-            "rule_id": "r-2026-09-29-001",
+            "rule_id": "r-2026-10-12-001",
             "chunk_id": "1a05967808989c62",
             "kind": "sources",
             "score": 1
           },
           {
-            "rule_id": "r-2026-09-29-001",
+            "rule_id": "r-2026-10-12-001",
             "chunk_id": "151f617d980a9bb0",
             "kind": "co_search",
             "score": 4.572283941576186
@@ -235,7 +235,7 @@
       "title": "审计：get 规则 ↔ get chunk 双向关联",
       "advantage": "写入期 sources 持久化；find 带 links；get 规则看 resolved_sources，get chunk 看 referenced_rules。",
       "user_message": "异常必须怎么抛？我要核对原文依据。",
-      "rule_id": "r-2026-09-29-003",
+      "rule_id": "r-2026-10-12-003",
       "find_args": {
         "scope": "aurora,quality",
         "query": "AuroraError exception raise",
@@ -258,7 +258,7 @@
         "source_link_count": 1,
         "rules_sample": [
           {
-            "id": "r-2026-09-29-003",
+            "id": "r-2026-10-12-003",
             "claim": "Throw AuroraError subclasses for all errors; never bare raise",
             "scope": [
               "aurora",
@@ -282,7 +282,7 @@
         ],
         "links_sample": [
           {
-            "rule_id": "r-2026-09-29-003",
+            "rule_id": "r-2026-10-12-003",
             "chunk_id": "edd2ef12bcf8ef1d",
             "kind": "sources",
             "score": 1
@@ -315,7 +315,7 @@
           "heading": "异常基类",
           "referenced_rules": [
             {
-              "id": "r-2026-09-29-003",
+              "id": "r-2026-10-12-003",
               "kind": "sources",
               "claim": "Throw AuroraError subclasses for all errors; never bare raise"
             }
@@ -343,16 +343,16 @@
       "linked": {
         "description": "supersede 后单次 find",
         "tokens": 166,
-        "active_rule_id": "r-2026-09-29-005",
-        "dormant_rule_id": "r-2026-09-29-004",
+        "active_rule_id": "r-2026-10-12-005",
+        "dormant_rule_id": "r-2026-10-12-004",
         "old_recalled": false,
         "new_recalled": true,
         "get_supersedes": [
-          "r-2026-09-29-004"
+          "r-2026-10-12-004"
         ],
         "rules_sample": [
           {
-            "id": "r-2026-09-29-005",
+            "id": "r-2026-10-12-005",
             "claim": "Use snake_case for functions/variables and PascalCase for classes",
             "scope": [
               "aurora",
@@ -364,7 +364,7 @@
             "evidence_count": 2
           },
           {
-            "id": "r-2026-09-29-001",
+            "id": "r-2026-10-12-001",
             "claim": "Use snake_case for functions/variables and PascalCase for classes",
             "scope": [
               "aurora",
@@ -401,22 +401,22 @@
         "description": "add(conflicts) 后 find",
         "tokens": 200,
         "rule_ids": [
-          "r-2026-09-29-006",
-          "r-2026-09-29-007"
+          "r-2026-10-12-006",
+          "r-2026-10-12-007"
         ],
         "conflict_set": [
           {
-            "a": "r-2026-09-29-007",
-            "b": "r-2026-09-29-006"
+            "a": "r-2026-10-12-007",
+            "b": "r-2026-10-12-006"
           }
         ],
         "get_a_conflicts": [],
         "get_b_conflicts": [
-          "r-2026-09-29-006"
+          "r-2026-10-12-006"
         ],
         "rules_sample": [
           {
-            "id": "r-2026-09-29-007",
+            "id": "r-2026-10-12-007",
             "claim": "Never retry non-idempotent POST requests",
             "scope": [
               "aurora",
@@ -428,7 +428,7 @@
             "evidence_count": 1
           },
           {
-            "id": "r-2026-09-29-006",
+            "id": "r-2026-10-12-006",
             "claim": "Retry failed outbound HTTP calls up to three times",
             "scope": [
               "aurora",
@@ -459,9 +459,9 @@
       "linked": {
         "description": "link related 后 get",
         "tokens": 106,
-        "rule_id": "r-2026-09-29-008",
+        "rule_id": "r-2026-10-12-008",
         "get_related": [
-          "r-2026-09-29-006"
+          "r-2026-10-12-006"
         ]
       },
       "checks_passed": true,

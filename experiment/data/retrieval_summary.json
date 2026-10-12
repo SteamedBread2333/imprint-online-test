@@ -15,7 +15,7 @@
     "control_search": "rg -i",
     "queries_with_find_paths": 14,
     "queries_with_find_paths_k2": 23,
-    "created_at": "2026-09-28T16:12:16",
+    "created_at": "2026-10-12T12:39:44",
     "comparison": {
       "question": "文档检索实验在比什么？",
       "baseline_arm": "对照 grep+Read（宿主默认）：rg -i -l 得完整名单；命中 > k 时另计 capped rg -n 行样本；Read grep 命中的全部文件全文。无 vault、无 find。",
@@ -47,12 +47,12 @@
       "user_text": "函数变量用 snake_case、类名用 PascalCase，命名到底怎么定？",
       "rg_command": "rg -i -l --glob *.md -e PascalCase -e snake_case -e 命名 docs",
       "control": {
-        "grep_hits_sample": "docs/11-observability.md\ndocs/01-python-style.md\ndocs/15-i18n.md\ndocs/07-testing.md\n---\ndocs/01-python-style.md:5:## 命名约定\ndocs/01-python-style.md:7:函数与变量统一使用 snake_case，类名使用 PascalCase，常量使用全大写 SNAKE_CASE。 本条适用于 Python 代码风格，涉及「命名约定」的实现必须遵守，不允许例外或临时绕开。\ndocs/01-python-style.md:12:再次强调，本条的权威表述是：函数与变量统一使用 snake_case，类名使用 PascalCase，常量使用全大写 SNAKE_CASE。\ndocs/15-i18n.md:34:插值使用命名占位符，禁止按位置拼接以免语序错乱。 本条适用于 国际化，涉及「占位符」的实现必须遵守，不允许例外或临时绕开。\ndocs/15-i18n.md:39:再次强调，本条的权威表述是：插值使用命名占位符，禁止按位置拼接以免语序错乱。\ndocs/07-testing.md:7:单元测试统一使用 pytest，命名以 test_ 开头并保持可独立运行。 本条适用于 测试，涉及「测试框架」的实现必须遵守，不允许例外或临时绕开。\ndocs/07-testing.md:12:再次强调，本条的权威表述是：单元测试统一使用 pytest，命名以 test_ 开头并保持可独立运行。\ndocs/11-observability.md:5:## 指标命名\ndocs/11-observability.md:7:业务指标统一使用 aurora_ 前缀加蛇形命名，禁止临时拼英文缩写。 本条适用于 可观测性，涉及「指标命名」的实现必须遵守，不允许例外或临时绕开。\ndocs/11-observability.md:12:再次强调，本条的权威表述是：业务指标统一使用 aurora_ 前缀加蛇形命名，禁止临时拼英文缩写。",
+        "grep_hits_sample": "docs/01-python-style.md\ndocs/15-i18n.md\ndocs/07-testing.md\ndocs/11-observability.md\n---\ndocs/01-python-style.md:5:## 命名约定\ndocs/01-python-style.md:7:函数与变量统一使用 snake_case，类名使用 PascalCase，常量使用全大写 SNAKE_CASE。 本条适用于 Python 代码风格，涉及「命名约定」的实现必须遵守，不允许例外或临时绕开。\ndocs/01-python-style.md:12:再次强调，本条的权威表述是：函数与变量统一使用 snake_case，类名使用 PascalCase，常量使用全大写 SNAKE_CASE。\ndocs/15-i18n.md:34:插值使用命名占位符，禁止按位置拼接以免语序错乱。 本条适用于 国际化，涉及「占位符」的实现必须遵守，不允许例外或临时绕开。\ndocs/15-i18n.md:39:再次强调，本条的权威表述是：插值使用命名占位符，禁止按位置拼接以免语序错乱。\ndocs/07-testing.md:7:单元测试统一使用 pytest，命名以 test_ 开头并保持可独立运行。 本条适用于 测试，涉及「测试框架」的实现必须遵守，不允许例外或临时绕开。\ndocs/07-testing.md:12:再次强调，本条的权威表述是：单元测试统一使用 pytest，命名以 test_ 开头并保持可独立运行。\ndocs/11-observability.md:5:## 指标命名\ndocs/11-observability.md:7:业务指标统一使用 aurora_ 前缀加蛇形命名，禁止临时拼英文缩写。 本条适用于 可观测性，涉及「指标命名」的实现必须遵守，不允许例外或临时绕开。\ndocs/11-observability.md:12:再次强调，本条的权威表述是：业务指标统一使用 aurora_ 前缀加蛇形命名，禁止临时拼英文缩写。",
         "opened_files": [
-          "docs/11-observability.md",
           "docs/01-python-style.md",
           "docs/15-i18n.md",
-          "docs/07-testing.md"
+          "docs/07-testing.md",
+          "docs/11-observability.md"
         ],
         "tokens": {
           "rg_cmd": 22,
@@ -62,8 +62,8 @@
         }
       },
       "experiment": {
-        "grep_hits_sample": "docs/01-python-style.md\ndocs/15-i18n.md\ndocs/11-observability.md\ndocs/07-testing.md\n---\ndocs/01-python-style.md:5:## 命名约定\ndocs/01-python-style.md:7:函数与变量统一使用 snake_case，类名使用 PascalCase，常量使用全大写 SNAKE_CASE。 本条适用于 Python 代码风格，涉及「命名约定」的实现必须遵守，不允许例外或临时绕开。\ndocs/01-python-style.md:12:再次强调，本条的权威表述是：函数与变量统一使用 snake_case，类名使用 PascalCase，常量使用全大写 SNAKE_CASE。\ndocs/07-testing.md:7:单元测试统一使用 pytest，命名以 test_ 开头并保持可独立运行。 本条适用于 测试，涉及「测试框架」的实现必须遵守，不允许例外或临时绕开。\ndocs/07-testing.md:12:再次强调，本条的权威表述是：单元测试统一使用 pytest，命名以 test_ 开头并保持可独立运行。\ndocs/15-i18n.md:34:插值使用命名占位符，禁止按位置拼接以免语序错乱。 本条适用于 国际化，涉及「占位符」的实现必须遵守，不允许例外或临时绕开。\ndocs/15-i18n.md:39:再次强调，本条的权威表述是：插值使用命名占位符，禁止按位置拼接以免语序错乱。\ndocs/11-observability.md:5:## 指标命名\ndocs/11-observability.md:7:业务指标统一使用 aurora_ 前缀加蛇形命名，禁止临时拼英文缩写。 本条适用于 可观测性，涉及「指标命名」的实现必须遵守，不允许例外或临时绕开。\ndocs/11-observability.md:12:再次强调，本条的权威表述是：业务指标统一使用 aurora_ 前缀加蛇形命名，禁止临时拼英文缩写。",
-        "find_request_json": "{\"scope\":\"aurora\",\"query\":\"snake_case PascalCase naming\",\"query_local\":\"命名 snake_case PascalCase 函数 变量\",\"paths\":[\"docs/01-python-style.md\",\"docs/15-i18n.md\",\"docs/11-observability.md\",\"docs/07-testing.md\"]}",
+        "grep_hits_sample": "docs/15-i18n.md\ndocs/01-python-style.md\ndocs/11-observability.md\ndocs/07-testing.md\n---\ndocs/01-python-style.md:5:## 命名约定\ndocs/01-python-style.md:7:函数与变量统一使用 snake_case，类名使用 PascalCase，常量使用全大写 SNAKE_CASE。 本条适用于 Python 代码风格，涉及「命名约定」的实现必须遵守，不允许例外或临时绕开。\ndocs/01-python-style.md:12:再次强调，本条的权威表述是：函数与变量统一使用 snake_case，类名使用 PascalCase，常量使用全大写 SNAKE_CASE。\ndocs/15-i18n.md:34:插值使用命名占位符，禁止按位置拼接以免语序错乱。 本条适用于 国际化，涉及「占位符」的实现必须遵守，不允许例外或临时绕开。\ndocs/15-i18n.md:39:再次强调，本条的权威表述是：插值使用命名占位符，禁止按位置拼接以免语序错乱。\ndocs/07-testing.md:7:单元测试统一使用 pytest，命名以 test_ 开头并保持可独立运行。 本条适用于 测试，涉及「测试框架」的实现必须遵守，不允许例外或临时绕开。\ndocs/07-testing.md:12:再次强调，本条的权威表述是：单元测试统一使用 pytest，命名以 test_ 开头并保持可独立运行。\ndocs/11-observability.md:5:## 指标命名\ndocs/11-observability.md:7:业务指标统一使用 aurora_ 前缀加蛇形命名，禁止临时拼英文缩写。 本条适用于 可观测性，涉及「指标命名」的实现必须遵守，不允许例外或临时绕开。\ndocs/11-observability.md:12:再次强调，本条的权威表述是：业务指标统一使用 aurora_ 前缀加蛇形命名，禁止临时拼英文缩写。",
+        "find_request_json": "{\"scope\":\"aurora\",\"query\":\"snake_case PascalCase naming\",\"query_local\":\"命名 snake_case PascalCase 函数 变量\",\"paths\":[\"docs/15-i18n.md\",\"docs/01-python-style.md\",\"docs/11-observability.md\",\"docs/07-testing.md\"]}",
         "find_documents_json": "[{\"id\":\"1a05967808989c62\",\"path\":\"docs/01-python-style.md\",\"heading\":\"命名约定\",\"score\":24.113743417742565,\"snippet\":\"函数与变量统一使用 snake_case，类名使用 PascalCase，常量使用全大写 SNAKE_CASE。 本条适用于 Python 代码风格，涉及「命名…\"}]",
         "opened_files": [
           "docs/01-python-style.md"

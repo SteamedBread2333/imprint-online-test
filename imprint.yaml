@@ -23,7 +23,7 @@ shelves:
 plugins:
   desk:
     enabled: true
-    package: ../../Documents/GitHub/imprint-desk-plugin
+    package: ../imprint-desk-plugin
     config:
       port: 4173
       hostUrl: http://127.0.0.1:9470

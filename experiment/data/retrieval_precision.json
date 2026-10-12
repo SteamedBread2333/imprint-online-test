@@ -527,8 +527,8 @@
       ],
       "grep_files": [
         "docs/10-performance.md",
-        "docs/06-logging.md",
-        "docs/08-deployment.md"
+        "docs/08-deployment.md",
+        "docs/06-logging.md"
       ],
       "grep_hit_target": true,
       "used_find_paths": false,
@@ -537,8 +537,8 @@
       ],
       "read_paths": [
         "docs/10-performance.md",
-        "docs/06-logging.md",
-        "docs/08-deployment.md"
+        "docs/08-deployment.md",
+        "docs/06-logging.md"
       ],
       "find_rank": 1,
       "shelves_paths": [
@@ -695,8 +695,8 @@
       ],
       "grep_files": [
         "docs/10-performance.md",
-        "docs/14-config.md",
-        "docs/08-deployment.md"
+        "docs/08-deployment.md",
+        "docs/14-config.md"
       ],
       "grep_hit_target": true,
       "used_find_paths": false,
@@ -705,8 +705,8 @@
       ],
       "read_paths": [
         "docs/10-performance.md",
-        "docs/14-config.md",
-        "docs/08-deployment.md"
+        "docs/08-deployment.md",
+        "docs/14-config.md"
       ],
       "find_rank": 1,
       "shelves_paths": [

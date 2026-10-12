@@ -5,7 +5,7 @@
     "scenario": "项目约定/规范协作",
     "rounds": 24,
     "vault": ".imprint-token-bench",
-    "created_at": "2026-09-28T16:12:10",
+    "created_at": "2026-10-12T12:39:39",
     "comparison": {
       "question": "vault 实验组相对什么 baseline 省 token？",
       "baseline_arm": "无持久化记忆：每轮把 dialogues.json 里迄今全部 new_rules[].text 以「【项目规范】」编号列表全文塞进 prompt；不调用 imprint。",
@@ -63,7 +63,7 @@
       "memory_core": {
         "shared_prompt": "你是 aurora 项目的资深后端工程师。aurora 是一个 Python FastAPI 微服务。请严格遵循下方提供的项目规范完成每个任务，回答简洁、可直接落地为代码。\n\n【用户消息】\n给 user_service 补类型注解。\n\n【任务】\n给 user_service.py 的所有公开函数补全类型注解。",
         "find_request_json": "{\"scope\":\"aurora,python\",\"query\":\"PascalCase identifiers snake_case helpers\",\"query_local\":\"类名 PascalCase 函数 snake_case 命名\",\"top_k\":5}",
-        "find_rules_json": "[{\"id\":\"r-2026-09-28-001\",\"claim\":\"Use snake_case for functions/variables and PascalCase for classes\",\"scope\":[\"aurora\",\"python\"],\"confidence\":0.6,\"score\":0.9339,\"status\":\"active\",\"evidence_count\":1},{\"id\":\"r-2026-09-28-002\",\"claim\":\"Services layer may only import the domain layer\",\"scope\":[\"aurora\",\"python\"],\"confidence\":0.6,\"score\":0.222,\"status\":\"active\",\"evidence_count\":1}]",
+        "find_rules_json": "[{\"id\":\"r-2026-10-12-001\",\"claim\":\"Use snake_case for functions/variables and PascalCase for classes\",\"scope\":[\"aurora\",\"python\"],\"confidence\":0.6,\"score\":0.9339,\"status\":\"active\",\"evidence_count\":1},{\"id\":\"r-2026-10-12-002\",\"claim\":\"Services layer may only import the domain layer\",\"scope\":[\"aurora\",\"python\"],\"confidence\":0.6,\"score\":0.222,\"status\":\"active\",\"evidence_count\":1}]",
         "tokens": {
           "shared": 79,
           "find_req": 37,

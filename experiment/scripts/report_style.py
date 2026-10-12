@@ -617,11 +617,12 @@ REPORT_TABS = (
     ("report.html", "规范记忆", "memory"),
     ("retrieval.html", "文档检索", "retrieval"),
     ("record.html", "规则关联", "record"),
+    ("semantic.html", "语义写闸", "semantic"),
 )
 
 
 def report_nav(active: str) -> str:
-    """Horizontal nav between experiment report tabs. `active` is memory|retrieval|record."""
+    """Horizontal nav between experiment report tabs. `active` is memory|retrieval|record|semantic."""
     parts = []
     for href, label, key in REPORT_TABS:
         cls = ' class="on"' if key == active else ""

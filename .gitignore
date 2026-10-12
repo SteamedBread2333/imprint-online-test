@@ -17,6 +17,10 @@ venv/
 experiment/accuracy-sandbox/.imprint/
 experiment/roots-empty/.imprint/
 
+# CI / local clone of embed sidecar (optional; default sibling ../imprint-embed-sidecar)
+/imprint-embed-sidecar/
+experiment/.embed-ci/
+
 # Vendored imprint binaries — download via experiment/scripts/install_imprint_bin.sh
 experiment/bin/imprint
 experiment/bin/imprint-mcp
